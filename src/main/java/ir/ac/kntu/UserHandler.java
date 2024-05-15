@@ -6,58 +6,54 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UserHandler {
-    public static void implementTheUserMenu() {
+    public static void implementTheUserMenu(Bank myBank) {
         UserMenu option;
 
         do {
             Menus.getInstance().printTheUserMenu();
             option = Menus.getInstance().getOptionUserMenu();
-            handleTheUserMenu(option);
+            handleTheUserMenu(option, myBank);
         } while (option != UserMenu.RETURN);
     }
-    public static void handleTheUserMenu(UserMenu option) {
+    public static void handleTheUserMenu(UserMenu option, Bank myBank) {
         switch (option) {
-            case LOG_IN -> handleLogIn(myUser, requests);
-            case SIGN_UP -> handleSignUp(myUser, requests);
+            case LOG_IN -> handleLogIn();
+            case SIGN_UP -> handleSignUp(myBank);
             case RETURN -> System.out.println();
             default -> System.out.println("Invalid input");
         }
     }
 
-    public static void handleLogIn(ArrayList<User> myUser, ArrayList<Request> requests) {
-        inputForLogIn(myUser, requests);
+    public static void handleLogIn() {
+
     }
 
-    public static void handleSignUp(ArrayList<User> myUser, ArrayList<Request> requests) {
-        inputNewPerson();
-    }
-
-    public static void inputNewPerson(Scanner scanner, ArrayList<User> myUser, ArrayList<Request> requests) {
+    public static void handleSignUp(Bank myBank) {
         System.out.print("Enter your first name: ");
-        String fName = scanner.next();
+        String fName = ScannerWrapper.getInstance().next();
 
         System.out.print("Enter your last name: ");
-        String lName = scanner.next();
+        String lName = ScannerWrapper.getInstance().next();
 
         System.out.print("Enter your phone number: ");
-        String phoneNumber = scanner.next();
+        String phoneNumber = ScannerWrapper.getInstance().next();
 
         System.out.print("Enter your id: ");
-        String id = scanner.next();
+        String id = ScannerWrapper.getInstance().next();
 
         System.out.print("Enter your password: ");
-        String password = scanner.next();
+        String password = ScannerWrapper.getInstance().next();
 
-        boolean isTrueCondition = checkCondition(phoneNumber, id, password, myUser);
+        boolean isTrueCondition = checkCondition(myBank, phoneNumber, id, password);
         if (isTrueCondition) {
             Request newRequest = new Request(fName, lName, phoneNumber, id, password, "", false, false);
             requests.add(newRequest);
         }
     }
 
-    public static boolean checkCondition(String phoneNumber, String id, String password, ArrayList<User> myUser) {
-        boolean isTherePhoneNumber = checkPhoneNumber(myUser, phoneNumber);
-        boolean isThereId = checkId(myUser, id);
+    public static boolean checkCondition(Bank myBank, String phoneNumber, String id, String password) {
+        boolean isTherePhoneNumber = checkPhoneNumber(myBank, phoneNumber);
+        boolean isThereId = checkId(myBank, id);
         boolean isPasswordSafe = checkPassword(password);
 
         if (isTherePhoneNumber && isThereId && !isPasswordSafe) {
@@ -66,8 +62,8 @@ public class UserHandler {
         return true;
     }
 
-    public static boolean checkPhoneNumber(ArrayList<User> myUser, String phoneNumber) {
-        for (User entry : myUser) {
+    public static boolean checkPhoneNumber(Bank myBank, String phoneNumber) {
+        for (UserAccount entry : myBank.getUserAccounts()) {
             if (entry.getPhoneNumber().equals(phoneNumber)) {
                 System.out.println("There is a same phone number in system!");
                 System.out.println();

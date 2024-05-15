@@ -6,30 +6,26 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        ArrayList<UserAccount> user = new ArrayList<>();
-        ArrayList<Authentication> authentications = new ArrayList<>();
+        Bank myBank = new Bank();
+
         RoleMenu role;
 
         do {
             Menus.getInstance().printTheMainMenu();
             role = Menus.getInstance().getOptionMainMenu();
-            handleTheMainMenu(role, user, authentications);
+            handleTheMainMenu(role, myBank);
         } while (role != RoleMenu.EXIT);
 
         ScannerWrapper.getInstance().close();
     }
 
-    public static void handleTheMainMenu(RoleMenu roles, UserMenu user, Authentication authentication){
+    public static void handleTheMainMenu(RoleMenu roles, Bank myBank){
         switch (roles) {
-            case USER -> handleUserRoles(user, authentication);
+            case USER -> UserHandler.implementTheUserMenu(myBank);
             case SUPPORT -> handleSupportRoles();
             case EXIT -> System.out.println("Exiting the program ...");
             default -> System.out.println("Invalid Input!");
         }
-    }
-
-    public static void handleUserRoles(){
-        UserHandler.implementTheUserMenu();
     }
 
     public static void handleSupportRoles(){
