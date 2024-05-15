@@ -1,5 +1,7 @@
 package ir.ac.kntu;
 
+import java.util.Scanner;
+
 public class Menus {
     private static Menus instance = new Menus();
 
@@ -28,4 +30,26 @@ public class Menus {
         }
         return Role.UNDEFINED;
     }
+
+    public void printTheUserMenu() {
+        System.out.println();
+        System.out.println("***********************");
+        System.out.println("1- Log_in");
+        System.out.println("2- Sign_up");
+        System.out.println("3- Return");
+        System.out.println("***********************");
+        System.out.println();
+        System.out.print("Select the option: ");
+    }
+
+    public UserPage getOptionUserMenu() {
+        UserPage[] options = UserPage.values();
+        int input = ScannerWrapper.getInstance().nextInt();
+        input--;
+        if (input >= 0 && input < options.length) {
+            return options[input];
+        }
+        return UserPage.UNDEFINED;
+    }
+
 }

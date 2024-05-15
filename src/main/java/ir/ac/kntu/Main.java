@@ -27,19 +27,4 @@ public class Main {
             default -> System.out.println("Invalid Input!");
         }
     }
-
-//    public static void main(String[] argv) {
-//        Option option;
-//
-//        Menu.getInstance().printTheMenu();
-//
-//        option = Menu.getInstance().getOption();
-//
-//        while (option != Option.EXIT) {
-//            handleTheOption(option);
-//            Menu.getInstance().printTheMenu();
-//            option = Menu.getInstance().getOption();
-//        }
-//        ScannerWrapper.getInstance().close();
-//    }
 }
