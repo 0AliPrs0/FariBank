@@ -5,19 +5,16 @@ public class User extends Person{
     private String phoneNumber;
     private String id;
     private String password;
-    private int accountNumber;
-    private String creditCard;
     public User(){
 
     }
 
-    public User(String firstName, String lastName, String phoneNumber, String id, String password, int accountNumber) {
+    public User(String firstName, String lastName, String phoneNumber, String id, String password) {
         super(firstName);
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.id = id;
         this.password = password;
-        this.accountNumber = accountNumber;
     }
 
     public String getLastName() {
@@ -51,13 +48,4 @@ public class User extends Person{
     public void setId(String id) {
         this.id = id;
     }
-
-    public int getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(int accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
 }
