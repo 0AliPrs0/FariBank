@@ -1,6 +1,6 @@
 package ir.ac.kntu;
 
-public enum UserPage {
+public enum UserMenu {
     LOG_IN,
     SIGN_UP,
     RETURN,

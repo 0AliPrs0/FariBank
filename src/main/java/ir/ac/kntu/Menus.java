@@ -42,14 +42,14 @@ public class Menus {
         System.out.print("Select the option: ");
     }
 
-    public UserPage getOptionUserMenu() {
-        UserPage[] options = UserPage.values();
+    public UserMenu getOptionUserMenu() {
+        UserMenu[] options = UserMenu.values();
         int input = ScannerWrapper.getInstance().nextInt();
         input--;
         if (input >= 0 && input < options.length) {
             return options[input];
         }
-        return UserPage.UNDEFINED;
+        return UserMenu.UNDEFINED;
     }
 
 }
