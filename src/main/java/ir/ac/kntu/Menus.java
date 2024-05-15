@@ -1,18 +1,16 @@
 package ir.ac.kntu;
 
-import java.util.Scanner;
+public class Menus {
+    private static Menus instance = new Menus();
 
-public class MainMenu {
-    private static MainMenu instance = new MainMenu();
-
-    private MainMenu() {
+    private Menus() {
     }
 
-    public static MainMenu getInstance() {
+    public static Menus getInstance() {
         return instance;
     }
 
-    public void printTheMenu() {
+    public void printTheMainMenu() {
         System.out.println();
         System.out.println("***********************");
         System.out.println("1- User");
@@ -22,9 +20,9 @@ public class MainMenu {
         System.out.println();
         System.out.print("Select your roles: ");
     }
-    public void scanTheInput(Scanner scanner) {
+    public Role getOptionMainMenu() {
         Role[] roles = Role.values();
-        int input = scanTheInput(scanner);
+        int input = ScannerWrapper.getInstance().nextInt();
         if (input >= 0 && input < roles.length) {
             return roles[input];
         }
