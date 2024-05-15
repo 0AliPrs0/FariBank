@@ -11,8 +11,8 @@ public class Main {
         RoleMenu role;
 
         do {
-            Menus.getInstance().printTheMainMenu();
-            role = Menus.getInstance().getOptionMainMenu();
+            MainMenu.getInstance().printTheMenu();
+            role = MainMenu.getInstance().getOption();
             handleTheMainMenu(role, myBank);
         } while (role != RoleMenu.EXIT);
 

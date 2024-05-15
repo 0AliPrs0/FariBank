@@ -1,17 +1,15 @@
 package ir.ac.kntu;
 
-import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.regex.*;
 
 public class UserHandler {
     public static void implementTheUserMenu(Bank myBank) {
         UserMenu option;
 
         do {
-            Menus.getInstance().printTheUserMenu();
-            option = Menus.getInstance().getOptionUserMenu();
+            FirstUserMenu.getInstance().printTheMenu();
+            option = FirstUserMenu.getInstance().getOption();
             handleTheUserMenu(option, myBank);
         } while (option != UserMenu.RETURN);
     }
