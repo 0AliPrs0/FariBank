@@ -25,7 +25,7 @@ public class UserHandler {
     }
 
     public static void handleLogIn(ArrayList<User> myUser, ArrayList<Request> requests) {
-        inputForLogIn(scanner,myUser, requests);
+        inputForLogIn(myUser, requests);
     }
 
     public static void handleSignUp(ArrayList<User> myUser, ArrayList<Request> requests) {

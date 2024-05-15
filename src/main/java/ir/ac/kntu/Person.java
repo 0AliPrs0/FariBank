@@ -1,30 +1,20 @@
 package ir.ac.kntu;
 
 public class Person {
-    private String fName;
-    private String password;
+    private String firstName;
 
     public Person() {
     }
 
-    public Person(String fName, String password) {
-        this.fName = fName;
-        this.password = password;
+    public Person(String fName) {
+        this.firstName = fName;
     }
 
-    public String getFName() {
-        return fName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFName(String fName) {
-        this.fName = fName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setFirstName(String fName) {
+        this.firstName = fName;
     }
 }
