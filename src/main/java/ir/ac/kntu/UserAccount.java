@@ -1,13 +1,15 @@
 package ir.ac.kntu;
 
-public class UserAccount {
+public class UserAccount extends User{
     private int accountNumber;
     private String creditCard;
 
     public UserAccount() {
     }
 
-    public UserAccount(int accountNumber, String creditCard) {
+
+    public UserAccount(String firstName, String lastName, String phoneNumber, String id, String password, int accountNumber) {
+        super(firstName, lastName, phoneNumber, id, password);
         this.accountNumber = accountNumber;
     }
 

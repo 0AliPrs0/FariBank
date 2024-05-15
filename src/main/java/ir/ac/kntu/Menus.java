@@ -25,6 +25,7 @@ public class Menus {
     public RoleMenu getOptionMainMenu() {
         RoleMenu[] roles = RoleMenu.values();
         int input = ScannerWrapper.getInstance().nextInt();
+        input--;
         if (input >= 0 && input < roles.length) {
             return roles[input];
         }
