@@ -1,6 +1,6 @@
 package ir.ac.kntu;
 
-public enum Role {
+public enum RoleMenu {
     USER,
     SUPPORT,
     EXIT,

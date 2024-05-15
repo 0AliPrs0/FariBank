@@ -22,13 +22,13 @@ public class Menus {
         System.out.println();
         System.out.print("Select your roles: ");
     }
-    public Role getOptionMainMenu() {
-        Role[] roles = Role.values();
+    public RoleMenu getOptionMainMenu() {
+        RoleMenu[] roles = RoleMenu.values();
         int input = ScannerWrapper.getInstance().nextInt();
         if (input >= 0 && input < roles.length) {
             return roles[input];
         }
-        return Role.UNDEFINED;
+        return RoleMenu.UNDEFINED;
     }
 
     public void printTheUserMenu() {
