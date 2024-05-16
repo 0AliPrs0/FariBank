@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Bank {
     private ArrayList<UserAccount> userAccounts = new ArrayList<>();
     private ArrayList<Authentication> authentications = new ArrayList<>();
+    private ArrayList<Support> supports = new ArrayList<>();
 
     public Bank() {
     }
@@ -28,5 +29,13 @@ public class Bank {
 
     public void setAuthentications(ArrayList<Authentication> authentications) {
         this.authentications = authentications;
+    }
+
+    public ArrayList<Support> getSupports() {
+        return supports;
+    }
+
+    public void setSupports(ArrayList<Support> supports) {
+        this.supports = supports;
     }
 }

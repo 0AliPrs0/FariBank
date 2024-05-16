@@ -39,4 +39,5 @@ public class MainMenu implements MenuProperty{
         }
         return RoleMenu.UNDEFINED;
     }
+
 }
