@@ -1,7 +1,7 @@
 package ir.ac.kntu;
 
 public class MainMenu implements MenuProperty{
-    public enum RoleMenu {
+    public enum MenuMain {
         USER,
         SUPPORT,
         EXIT,
@@ -30,14 +30,14 @@ public class MainMenu implements MenuProperty{
     }
 
     @Override
-    public RoleMenu getOption() {
-        RoleMenu[] roles = RoleMenu.values();
+    public MenuMain getOption() {
+        MenuMain[] roles = MenuMain.values();
         int input = ScannerWrapper.getInstance().nextInt();
         input--;
         if (input >= 0 && input < roles.length) {
             return roles[input];
         }
-        return RoleMenu.UNDEFINED;
+        return MenuMain.UNDEFINED;
     }
 
 }
