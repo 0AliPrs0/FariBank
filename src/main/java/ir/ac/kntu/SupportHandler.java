@@ -5,7 +5,7 @@ public class SupportHandler {
         addSupports(myBank);
         Support support = logInSupport(myBank);
         if (support != null) {
-            //////menu
+            SupportOptions.handleSupportOptions(myBank, support);
         }
     }
 
