@@ -1,6 +1,6 @@
 package ir.ac.kntu;
 
-public class Support extends Person{
+public class Support extends Person {
     private String userName;
     private String password;
 
