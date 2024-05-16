@@ -5,16 +5,16 @@ import java.util.regex.*;
 
 public class UserHandler {
     public static void implementTheUserMenu(Bank myBank) {
-        UserMenu option;
+        FirstUserMenu.UserMenu option;
 
         do {
             FirstUserMenu.getInstance().printTheMenu();
             option = FirstUserMenu.getInstance().getOption();
             handleTheUserMenu(option, myBank);
-        } while (option != UserMenu.RETURN);
+        } while (option != FirstUserMenu.UserMenu.RETURN);
     }
 
-    public static void handleTheUserMenu(UserMenu option, Bank myBank) {
+    public static void handleTheUserMenu(FirstUserMenu.UserMenu option, Bank myBank) {
         switch (option) {
             case LOG_IN -> handleLogIn(myBank);
             case SIGN_UP -> handleSignUp(myBank);

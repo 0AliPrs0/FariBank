@@ -1,6 +1,13 @@
 package ir.ac.kntu;
 
 public class FirstUserMenu implements MenuProperty{
+    public enum UserMenu {
+        LOG_IN,
+        SIGN_UP,
+        RETURN,
+        UNDEFINED
+    }
+
     private static FirstUserMenu instance = new FirstUserMenu();
 
     private FirstUserMenu() {

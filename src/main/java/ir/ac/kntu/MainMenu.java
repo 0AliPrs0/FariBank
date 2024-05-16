@@ -1,6 +1,13 @@
 package ir.ac.kntu;
 
 public class MainMenu implements MenuProperty{
+    public enum RoleMenu {
+        USER,
+        SUPPORT,
+        EXIT,
+        UNDEFINED
+    }
+
     private static MainMenu instance = new MainMenu();
 
     private MainMenu() {
