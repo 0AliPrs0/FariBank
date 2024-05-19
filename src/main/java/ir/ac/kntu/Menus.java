@@ -100,7 +100,7 @@ public class Menus {
         return UserOptions.UNDEFINED;
     }
 
-    public enum MenuSupport{
+    public enum MenuSupport {
         AUTHENTICATION,
         REQUESTS,
         USERS,
@@ -130,7 +130,7 @@ public class Menus {
         return MenuSupport.UNDEFINED;
     }
 
-    public enum MenuContact{
+    public enum MenuContact {
         ADD_CONTACTS,
         VIEW_INFORMATION_CONTACT,
         RETURN,
@@ -158,7 +158,7 @@ public class Menus {
         return MenuContact.UNDEFINED;
     }
 
-    public enum ContactOption{
+    public enum ContactOption {
         EDIT_INFORMATION,
         VIEW_INFORMATION,
         RETURN,
@@ -184,5 +184,39 @@ public class Menus {
             return options[input];
         }
         return ContactOption.UNDEFINED;
+    }
+
+    public enum SettingOptions {
+        CHANGE_PASSWORD,
+        REGISTER_CARD_PASSWORD,
+        CHANGE_CARD_PASSWORD,
+        ACTIVATION_CONTACT_KEYWORD,
+        INACTIVATION_CONTACT_KEYWORD,
+        RETURN,
+        UNDEFINED
+    }
+
+    public void printTheSettingOption() {
+        System.out.println();
+        System.out.println("***********************");
+        System.out.println("1- Change password");
+        System.out.println("2- Register card password");
+        System.out.println("3- change card password");
+        System.out.println("4- Activation contact keyword");
+        System.out.println("5- Inactivation contact keyword");
+        System.out.println("6- return");
+        System.out.println("***********************");
+        System.out.println();
+        System.out.print("Select the option: ");
+    }
+
+    public Menus.SettingOptions getOptionSettingOption() {
+        SettingOptions[] options = SettingOptions.values();
+        int input = ScannerWrapper.getInstance().nextInt();
+        input--;
+        if (input >= 0 && input < options.length) {
+            return options[input];
+        }
+        return SettingOptions.UNDEFINED;
     }
 }

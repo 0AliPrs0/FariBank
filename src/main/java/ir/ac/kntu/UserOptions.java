@@ -19,13 +19,17 @@ public class UserOptions {
             case CONTACTS -> contacts(me);
 //            case MONEY_TRANSFER -> ;
 //            case SUPPORT -> ;
-//            case SETTINGS -> ;
-//            case RETURN -> System.out.println();
+            case SETTINGS -> settings(me);
+            case RETURN -> System.out.println();
             default -> System.out.println("Invalid Input!");
         }
     }
 
     public static void contacts(UserAccount me) {
+        if (!me.getIsActingContactKeyword()) {
+            System.out.println("The contact keyword is inactive!");
+            return;
+        }
         Menus.MenuContact option;
         do {
             Menus.getInstance().printTheContactMenu();
@@ -93,7 +97,7 @@ public class UserOptions {
         } while (option != Menus.ContactOption.RETURN);
     }
 
-    public static void handleContactsOption(UserAccount me, int numberOfContact, Menus.ContactOption option){
+    public static void handleContactsOption(UserAccount me, int numberOfContact, Menus.ContactOption option) {
         switch (option) {
             case EDIT_INFORMATION -> editContact(me, numberOfContact);
             case VIEW_INFORMATION -> viewInformation(me, numberOfContact);
@@ -102,7 +106,7 @@ public class UserOptions {
         }
     }
 
-    public static void editContact(UserAccount me, int numberOfContact){
+    public static void editContact(UserAccount me, int numberOfContact) {
         System.out.println("Enter the first name of contact: ");
         String fName = ScannerWrapper.getInstance().next();
 
@@ -117,7 +121,78 @@ public class UserOptions {
         System.out.println("The information of contact was changed");
     }
 
-    public static void viewInformation(UserAccount me, int numberOfContact){
+    public static void viewInformation(UserAccount me, int numberOfContact) {
         System.out.println(me.getMyContacts().get(numberOfContact).toString());
     }
+
+    public static void settings(UserAccount me) {
+        Menus.SettingOptions option;
+        do {
+            Menus.getInstance().printTheSettingOption();
+            option = Menus.getInstance().getOptionSettingOption();
+            handleSettingsOption(me, option);
+        } while (option != Menus.SettingOptions.RETURN);
+    }
+
+    public static void handleSettingsOption(UserAccount me, Menus.SettingOptions option) {
+        switch (option) {
+            case CHANGE_PASSWORD -> handleChangePassword(me);
+            case REGISTER_CARD_PASSWORD -> handleRegisterCardPassword(me);
+            case CHANGE_CARD_PASSWORD -> handleChangeCardPassword(me);
+            case ACTIVATION_CONTACT_KEYWORD -> handleActivationContactKeyword(me);
+            case INACTIVATION_CONTACT_KEYWORD -> handleInactivationContactKeyword(me);
+            case RETURN -> System.out.println();
+            default -> System.out.println("Invalid Input!");
+        }
+    }
+
+    public static void handleChangePassword(UserAccount me){
+        System.out.println("Enter new password: ");
+        String password = ScannerWrapper.getInstance().next();
+
+        boolean isSafePassword = UserHandler.checkPassword(password);
+        if (isSafePassword) {
+            me.setPassword(password);
+        }
+    }
+
+    public static void handleRegisterCardPassword(UserAccount me){
+        if (me.getCardPassword() == -1) {
+            System.out.println("Enter your card password: ");
+            int cardPassword = ScannerWrapper.getInstance().nextInt();
+            me.setCardPassword(cardPassword);
+        } else {
+            System.out.println("Your card password is already registered!");
+        }
+    }
+
+    public static void handleChangeCardPassword(UserAccount me){
+        if (me.getCardPassword() != -1) {
+            System.out.println("Enter new card password: ");
+            int cardPassword = ScannerWrapper.getInstance().nextInt();
+            me.setCardPassword(cardPassword);
+        } else {
+            System.out.println("Your card password is not registered!");
+        }
+    }
+
+    public static void handleActivationContactKeyword(UserAccount me){
+        if (!me.getIsActingContactKeyword()) {
+            me.setIsActingContactKeyword(true);
+            System.out.println("Contact keyword is active");
+        } else {
+            System.out.println("Contact keyword already is active!");
+        }
+    }
+
+    public static void handleInactivationContactKeyword(UserAccount me){
+        if (me.getIsActingContactKeyword()) {
+            me.setIsActingContactKeyword(false);
+            System.out.println("Contact keyword is not inactive");
+        } else {
+            System.out.println("Contact keyword already is not active!");
+        }
+    }
+
+
 }

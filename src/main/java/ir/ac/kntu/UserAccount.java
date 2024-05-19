@@ -17,6 +17,7 @@ public class UserAccount extends User {
         super(firstName, lastName, phoneNumber, id, password);
         this.accountNumber = accountNumber;
         this.myContacts = myContacts;
+        this.cardPassword = -1;
         this.isActingContactKeyword = true;
     }
 
@@ -44,11 +45,11 @@ public class UserAccount extends User {
         this.cardPassword = cardPassword;
     }
 
-    public boolean isActingContactKeyword() {
+    public boolean getIsActingContactKeyword() {
         return isActingContactKeyword;
     }
 
-    public void setActingContactKeyword(boolean actingContactKeyword) {
+    public void setIsActingContactKeyword(boolean actingContactKeyword) {
         isActingContactKeyword = actingContactKeyword;
     }
 }

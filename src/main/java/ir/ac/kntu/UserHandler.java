@@ -167,7 +167,7 @@ public class UserHandler {
         if (isThereSmallLetter && isThereCapitalLetter && isThereDigit && isThereSpecialCharacter) {
             return true;
         }
-        System.out.println("Incorrect Password!");
+        System.out.println("Password is unsafe!");
         System.out.println();
         return false;
     }
