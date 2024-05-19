@@ -33,7 +33,7 @@ public class SupportHandler {
 
         boolean isTrueInformation = checkInformation(myBank, name, userName, password);
         if (isTrueInformation) {
-            support.setFirstName(name);
+            support.setName(name);
             support.setUserName(userName);
             support.setPassword(password);
         }
@@ -42,7 +42,7 @@ public class SupportHandler {
 
     public static boolean checkInformation(Bank myBank, String name, String userName, String password) {
         for (Support entry : myBank.getSupports()) {
-            if (entry.getFirstName().equals(name) && entry.getUserName().equals(userName) && entry.getPassword().equals(password)) {
+            if (entry.getName().equals(name) && entry.getUserName().equals(userName) && entry.getPassword().equals(password)) {
                 return true;
             }
         }

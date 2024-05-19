@@ -1,6 +1,7 @@
 package ir.ac.kntu;
 
-public class Contact extends Person{
+public class Contact {
+    private String firstName;
     private String lastName;
     private String phoneNumber;
 
@@ -9,9 +10,17 @@ public class Contact extends Person{
     }
 
     public Contact(String firstName, String lName, String phoneNumber) {
-        super(firstName);
+        this.firstName = firstName;
         this.lastName = lName;
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLName() {
@@ -33,7 +42,7 @@ public class Contact extends Person{
     @Override
     public String toString() {
         return "Contact { " +
-                "firstName = '" + getFirstName() + "\'  " +
+                "firstName = '" + firstName + "\'  " +
                 "lastName = '" + lastName + "\'  " +
                 ", phoneNumber = '" + phoneNumber + '\'' +
                 " }";

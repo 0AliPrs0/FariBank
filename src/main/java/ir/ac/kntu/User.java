@@ -1,6 +1,7 @@
 package ir.ac.kntu;
 
-public class User extends Person{
+public class User {
+    private String firstName;
     private String lastName;
     private String phoneNumber;
     private String id;
@@ -10,11 +11,19 @@ public class User extends Person{
     }
 
     public User(String firstName, String lastName, String phoneNumber, String id, String password) {
-        super(firstName);
+        this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.id = id;
         this.password = password;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
