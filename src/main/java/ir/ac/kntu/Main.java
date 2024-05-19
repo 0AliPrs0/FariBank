@@ -5,18 +5,18 @@ public class Main {
     public static void main(String[] args) {
         Bank myBank = new Bank();
 
-        MainMenu.MenuMain role;
+        Menus.MenuMain role;
 
         do {
-            MainMenu.getInstance().printTheMenu();
-            role = MainMenu.getInstance().getOption();
+            Menus.getInstance().printTheMainMenu();
+            role = Menus.getInstance().getOptionMainMenu();
             handleTheMainMenu(role, myBank);
-        } while (role != MainMenu.MenuMain.EXIT);
+        } while (role != Menus.MenuMain.EXIT);
 
         ScannerWrapper.getInstance().close();
     }
 
-    public static void handleTheMainMenu(MainMenu.MenuMain roles, Bank myBank){
+    public static void handleTheMainMenu(Menus.MenuMain roles, Bank myBank){
         switch (roles) {
             case USER -> UserHandler.implementTheUserMenu(myBank);
             case SUPPORT -> SupportHandler.implementTheSupportMenu(myBank);

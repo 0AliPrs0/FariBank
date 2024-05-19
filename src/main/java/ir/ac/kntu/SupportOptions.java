@@ -2,17 +2,17 @@ package ir.ac.kntu;
 
 public class SupportOptions {
     public static void handleSupportOptions(Bank myBank, Support support) {
-        SupportMenu.MenuSupport option;
+        Menus.MenuSupport option;
 
         do {
-            SupportMenu.getInstance().printTheMenu();
-            option = SupportMenu.getInstance().getOption();
+            Menus.getInstance().printTheSupportMenu();
+            option = Menus.getInstance().getOptionSupportMenu();
             handleTheUserMenu(option, myBank, support);
-        } while (option != SupportMenu.MenuSupport.RETURN);
+        } while (option != Menus.MenuSupport.RETURN);
 
     }
 
-    public static void handleTheUserMenu(SupportMenu.MenuSupport options, Bank myBank, Support support) {
+    public static void handleTheUserMenu(Menus.MenuSupport options, Bank myBank, Support support) {
         switch (options) {
 //            case ACCOUNT_MANAGEMENT -> ;
 //            case CONTACTS -> ;

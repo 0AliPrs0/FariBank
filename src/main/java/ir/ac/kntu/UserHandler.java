@@ -5,16 +5,16 @@ import java.util.regex.*;
 
 public class UserHandler {
     public static void implementTheUserMenu(Bank myBank) {
-        FirstUserMenu.UserMenu option;
+        Menus.UserMenu option;
 
         do {
-            FirstUserMenu.getInstance().printTheMenu();
-            option = FirstUserMenu.getInstance().getOption();
+            Menus.getInstance().printTheMainMenu();
+            option = Menus.getInstance().getOptionFirstUserMenu();
             handleTheUserMenu(option, myBank);
-        } while (option != FirstUserMenu.UserMenu.RETURN);
+        } while (option != Menus.UserMenu.RETURN);
     }
 
-    public static void handleTheUserMenu(FirstUserMenu.UserMenu option, Bank myBank) {
+    public static void handleTheUserMenu(Menus.UserMenu option, Bank myBank) {
         switch (option) {
             case LOG_IN -> handleLogIn(myBank);
             case SIGN_UP -> handleSignUp(myBank);
@@ -88,7 +88,7 @@ public class UserHandler {
         int max = 99999999;
         int accountNumber = ThreadLocalRandom.current().nextInt(min, max + 1);
 
-        UserAccount user = new UserAccount(fName, lName, phoneNumber, id, password, accountNumber);
+        UserAccount user = new UserAccount(fName, lName, phoneNumber, id, password, accountNumber, null);
         myBank.getUserAccounts().add(user);
         return user;
     }
