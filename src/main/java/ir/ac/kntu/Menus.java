@@ -129,4 +129,60 @@ public class Menus {
         }
         return MenuSupport.UNDEFINED;
     }
+
+    public enum MenuContact{
+        ADD_CONTACTS,
+        VIEW_INFORMATION_CONTACT,
+        RETURN,
+        UNDEFINED
+    }
+
+    public void printTheContactMenu() {
+        System.out.println();
+        System.out.println("***********************");
+        System.out.println("1- Add contact");
+        System.out.println("2- view information contact");
+        System.out.println("3- return");
+        System.out.println("***********************");
+        System.out.println();
+        System.out.print("Select the option: ");
+    }
+
+    public Menus.MenuContact getOptionContactMenu() {
+        MenuContact[] options = MenuContact.values();
+        int input = ScannerWrapper.getInstance().nextInt();
+        input--;
+        if (input >= 0 && input < options.length) {
+            return options[input];
+        }
+        return MenuContact.UNDEFINED;
+    }
+
+    public enum ContactOption{
+        EDIT_INFORMATION,
+        VIEW_INFORMATION,
+        RETURN,
+        UNDEFINED
+    }
+
+    public void printTheContactOption() {
+        System.out.println();
+        System.out.println("***********************");
+        System.out.println("1- Edit information");
+        System.out.println("2- view information");
+        System.out.println("3- return");
+        System.out.println("***********************");
+        System.out.println();
+        System.out.print("Select the option: ");
+    }
+
+    public Menus.ContactOption getOptionContactOption() {
+        ContactOption[] options = ContactOption.values();
+        int input = ScannerWrapper.getInstance().nextInt();
+        input--;
+        if (input >= 0 && input < options.length) {
+            return options[input];
+        }
+        return ContactOption.UNDEFINED;
+    }
 }

@@ -16,12 +16,108 @@ public class UserOptions {
     public static void handleTheUserMenu(Menus.UserOptions options, Bank myBank, UserAccount me) {
         switch (options) {
 //            case ACCOUNT_MANAGEMENT -> ;
-            case CONTACTS -> contacts();
+            case CONTACTS -> contacts(me);
 //            case MONEY_TRANSFER -> ;
 //            case SUPPORT -> ;
 //            case SETTINGS -> ;
-//            case RETURN -> ;
+//            case RETURN -> System.out.println();
             default -> System.out.println("Invalid Input!");
         }
+    }
+
+    public static void contacts(UserAccount me) {
+        Menus.MenuContact option;
+        do {
+            Menus.getInstance().printTheContactMenu();
+            option = Menus.getInstance().getOptionContactMenu();
+            handleContacts(me, option);
+        } while (option != Menus.MenuContact.RETURN);
+    }
+
+    public static void handleContacts(UserAccount me, Menus.MenuContact options) {
+        switch (options) {
+            case ADD_CONTACTS -> addContact(me);
+            case VIEW_INFORMATION_CONTACT -> viewInformationContact(me);
+            case RETURN -> System.out.println();
+            default -> System.out.println("Invalid Input!");
+        }
+    }
+
+    public static void addContact(UserAccount me) {
+        System.out.println("Enter the first name of contact: ");
+        String fName = ScannerWrapper.getInstance().next();
+
+        System.out.println("Enter the first name of contact: ");
+        String lName = ScannerWrapper.getInstance().next();
+
+        System.out.println("Enter the first name of contact: ");
+        String phoneNumber = ScannerWrapper.getInstance().next();
+
+        boolean isTherePhoneNumber = checkPhoneNumber(me, phoneNumber);
+        if (!isTherePhoneNumber) {
+            Contact newContact = new Contact(fName, lName, phoneNumber);
+            me.getMyContacts().add(newContact);
+        } else {
+            System.out.println("There is same phone number in your contacts");
+        }
+    }
+
+    public static boolean checkPhoneNumber(UserAccount me, String phoneNumber) {
+        for (Contact entry : me.getMyContacts()) {
+            if (entry.getPhoneNumber().equals(phoneNumber)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void viewInformationContact(UserAccount me) {
+        for (int i = 1; i <= me.getMyContacts().size(); i++) {
+            Contact contact = me.getMyContacts().get(i - 1);
+            System.out.println(i + "- " + contact.getFirstName() + " " + contact.getLName());
+        }
+        System.out.println();
+        System.out.println("Chose the contact ( Enter the number of contact ) : ");
+        int numberOfContact = ScannerWrapper.getInstance().nextInt();
+        numberOfContact--;
+
+        handleInformationContact(me, numberOfContact);
+    }
+
+    public static void handleInformationContact(UserAccount me, int numberOfContact) {
+        Menus.ContactOption option;
+        do {
+            Menus.getInstance().printTheContactOption();
+            option = Menus.getInstance().getOptionContactOption();
+            handleContactsOption(me, numberOfContact, option);
+        } while (option != Menus.ContactOption.RETURN);
+    }
+
+    public static void handleContactsOption(UserAccount me, int numberOfContact, Menus.ContactOption option){
+        switch (option) {
+            case EDIT_INFORMATION -> editContact(me, numberOfContact);
+            case VIEW_INFORMATION -> viewInformation(me, numberOfContact);
+            case RETURN -> System.out.println();
+            default -> System.out.println("Invalid Input!");
+        }
+    }
+
+    public static void editContact(UserAccount me, int numberOfContact){
+        System.out.println("Enter the first name of contact: ");
+        String fName = ScannerWrapper.getInstance().next();
+
+        System.out.println("Enter the last name of contact: ");
+        String lName = ScannerWrapper.getInstance().next();
+
+        String phoneNumber = me.getMyContacts().get(numberOfContact).getPhoneNumber();
+
+        Contact editContact = new Contact(fName, lName, phoneNumber);
+
+        me.getMyContacts().set(numberOfContact, editContact);
+        System.out.println("The information of contact was changed");
+    }
+
+    public static void viewInformation(UserAccount me, int numberOfContact){
+        System.out.println(me.getMyContacts().get(numberOfContact).toString());
     }
 }
