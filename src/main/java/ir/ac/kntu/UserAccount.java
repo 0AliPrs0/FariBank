@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class UserAccount extends User {
+    public int balanceAccount;
     private int accountNumber;
     private int cardPassword;
     private String creditCard;
@@ -18,12 +19,21 @@ public class UserAccount extends User {
     }
 
 
-    public UserAccount(String firstName, String lastName, String phoneNumber, String id, String password, int accountNumber, ArrayList<Contact> myContacts) {
+    public UserAccount(String firstName, String lastName, String phoneNumber, String id, String password, int balanceAccount, int accountNumber, ArrayList<Contact> myContacts) {
         super(firstName, lastName, phoneNumber, id, password);
+        this.balanceAccount = balanceAccount;
         this.accountNumber = accountNumber;
         this.myContacts = myContacts;
         this.cardPassword = -1;
         this.isActingContactKeyword = true;
+    }
+
+    public int getBalanceAccount() {
+        return balanceAccount;
+    }
+
+    public void setBalanceAccount(int balanceAccount) {
+        this.balanceAccount = balanceAccount;
     }
 
     public int getAccountNumber() {

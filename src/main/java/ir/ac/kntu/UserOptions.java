@@ -28,7 +28,7 @@ public class UserOptions {
         }
     }
 
-    public static void accountManagement(UserAccount me){
+    public static void accountManagement(UserAccount me) {
         Menus.AccountManagementOption option;
         do {
             Menus.getInstance().printTheAccountManagement();
@@ -37,22 +37,27 @@ public class UserOptions {
         } while (option != Menus.AccountManagementOption.RETURN);
     }
 
-    public static void handleAccountManagement(UserAccount me, Menus.AccountManagementOption option){
+    public static void handleAccountManagement(UserAccount me, Menus.AccountManagementOption option) {
         switch (option) {
             case CHARGED_ACCOUNT -> chargeAccount(me);
+            case BALANCE -> balance(me);
 //            case TRANSACTION -> viewInformationContact(me);
             case RETURN -> System.out.println();
             default -> System.out.println("Invalid Input!");
         }
     }
 
-    public static void chargeAccount(UserAccount me){
+    public static void chargeAccount(UserAccount me) {
         System.out.print("Enter the amount of money: ");
         int amount = ScannerWrapper.getInstance().nextInt();
 
-        me.setAccountNumber(me.getAccountNumber() + amount);
+        me.setBalanceAccount(me.getBalanceAccount() + amount);
 
         System.out.println("Your account increased by " + amount);
+    }
+
+    public static void balance(UserAccount me){
+        System.out.println("Your balance account is: " + me.getBalanceAccount());
     }
 
     public static void contacts(UserAccount me) {
@@ -155,7 +160,7 @@ public class UserOptions {
         System.out.println(me.getMyContacts().get(numberOfContact).toString());
     }
 
-    public static void supportUser(UserAccount me, Bank myBank){
+    public static void supportUser(UserAccount me, Bank myBank) {
         Menus.SupportUser option;
         do {
             Menus.getInstance().printTheSupportUser();
@@ -164,10 +169,10 @@ public class UserOptions {
         } while (option != Menus.SupportUser.RETURN);
     }
 
-    public static void handleSupportUser(Bank myBank, UserAccount me, Menus.SupportUser option){
+    public static void handleSupportUser(Bank myBank, UserAccount me, Menus.SupportUser option) {
         switch (option) {
             case SHOW_MASSAGE -> showSupportUser(me, myBank);
-            case REGISTER_MASSAGE-> registerSupportUser(me, myBank);
+            case REGISTER_MASSAGE -> registerSupportUser(me, myBank);
             case RETURN -> System.out.println();
             default -> System.out.println("Invalid Input!");
         }
@@ -176,20 +181,20 @@ public class UserOptions {
     public static void showSupportUser(UserAccount me, Bank myBank) {
         ArrayList<Requests> myRequest = new ArrayList<>();
         for (Map.Entry<String, Requests> entry : myBank.getRequest().entrySet()) {
-            if(entry.getValue().equals(me.getPhoneNumber())){
+            if (entry.getValue().equals(me.getPhoneNumber())) {
                 myRequest.add(entry.getValue());
             }
         }
         printMassages(myRequest);
     }
 
-    public static void printMassages(ArrayList<Requests> requests){
+    public static void printMassages(ArrayList<Requests> requests) {
         for (int i = 1; i <= requests.size(); i++) {
             System.out.println(i + "- " + requests.get(i - 1).toString());
         }
     }
 
-    public static void registerSupportUser(UserAccount me, Bank myBank){
+    public static void registerSupportUser(UserAccount me, Bank myBank) {
         Menus.RegisterSupportUser option;
         do {
             Menus.getInstance().printTheSupportUser();
@@ -198,9 +203,9 @@ public class UserOptions {
         } while (option != Menus.RegisterSupportUser.RETURN);
     }
 
-    public static void handleRegisterSupportUser(Bank myBank, UserAccount me, Menus.RegisterSupportUser option){
+    public static void handleRegisterSupportUser(Bank myBank, UserAccount me, Menus.RegisterSupportUser option) {
         switch (option) {
-            case REPORT-> handleReportOfSupportUser(myBank, me);
+            case REPORT -> handleReportOfSupportUser(myBank, me);
             case CONTACTS -> handleContactOfSupportUser(myBank, me);
             case TRANSFER -> handleTransferOfSupportUser(myBank, me);
             case SETTING -> handleActivationContactKeyword(me);
@@ -209,36 +214,35 @@ public class UserOptions {
         }
     }
 
-    public static String inputTheMassage(){
+    public static String inputTheMassage() {
         System.out.println("Enter your massage: ");
         String massage = ScannerWrapper.getInstance().next();
         return massage;
     }
 
-    public static void handleReportOfSupportUser(Bank myBank, UserAccount me){
+    public static void handleReportOfSupportUser(Bank myBank, UserAccount me) {
         String massageUser = inputTheMassage();
         Requests requests = new Requests(RequestType.REPORTS, ApplicationStatus.REGISTERED, massageUser, "");
         myBank.addRequest(me.getPhoneNumber(), requests);
     }
 
-    public static void handleContactOfSupportUser(Bank myBank, UserAccount me){
+    public static void handleContactOfSupportUser(Bank myBank, UserAccount me) {
         String massageUser = inputTheMassage();
         Requests requests = new Requests(RequestType.CONTACTS, ApplicationStatus.REGISTERED, massageUser, "");
         myBank.addRequest(me.getPhoneNumber(), requests);
     }
 
-    public static void handleTransferOfSupportUser(Bank myBank, UserAccount me){
+    public static void handleTransferOfSupportUser(Bank myBank, UserAccount me) {
         String massageUser = inputTheMassage();
         Requests requests = new Requests(RequestType.TRANSFER, ApplicationStatus.REGISTERED, massageUser, "");
         myBank.addRequest(me.getPhoneNumber(), requests);
     }
 
-    public static void handleSettingOfSupportUser(Bank myBank, UserAccount me){
+    public static void handleSettingOfSupportUser(Bank myBank, UserAccount me) {
         String massageUser = inputTheMassage();
         Requests requests = new Requests(RequestType.SETTINGS, ApplicationStatus.REGISTERED, massageUser, "");
         myBank.addRequest(me.getPhoneNumber(), requests);
     }
-
 
 
     public static void settings(UserAccount me) {
@@ -262,7 +266,7 @@ public class UserOptions {
         }
     }
 
-    public static void handleChangePassword(UserAccount me){
+    public static void handleChangePassword(UserAccount me) {
         System.out.println("Enter new password: ");
         String password = ScannerWrapper.getInstance().next();
 
@@ -272,7 +276,7 @@ public class UserOptions {
         }
     }
 
-    public static void handleRegisterCardPassword(UserAccount me){
+    public static void handleRegisterCardPassword(UserAccount me) {
         if (me.getCardPassword() == -1) {
             System.out.println("Enter your card password: ");
             int cardPassword = ScannerWrapper.getInstance().nextInt();
@@ -282,7 +286,7 @@ public class UserOptions {
         }
     }
 
-    public static void handleChangeCardPassword(UserAccount me){
+    public static void handleChangeCardPassword(UserAccount me) {
         if (me.getCardPassword() != -1) {
             System.out.println("Enter new card password: ");
             int cardPassword = ScannerWrapper.getInstance().nextInt();
@@ -292,7 +296,7 @@ public class UserOptions {
         }
     }
 
-    public static void handleActivationContactKeyword(UserAccount me){
+    public static void handleActivationContactKeyword(UserAccount me) {
         if (!me.getIsActingContactKeyword()) {
             me.setIsActingContactKeyword(true);
             System.out.println("Contact keyword is active");
@@ -301,7 +305,7 @@ public class UserOptions {
         }
     }
 
-    public static void handleInactivationContactKeyword(UserAccount me){
+    public static void handleInactivationContactKeyword(UserAccount me) {
         if (me.getIsActingContactKeyword()) {
             me.setIsActingContactKeyword(false);
             System.out.println("Contact keyword is not inactive");

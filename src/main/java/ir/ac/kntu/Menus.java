@@ -263,6 +263,7 @@ public class Menus {
 
     public enum AccountManagementOption {
         CHARGED_ACCOUNT,
+        BALANCE,
         TRANSACTION,
         RETURN,
         UNDEFINED
@@ -272,8 +273,9 @@ public class Menus {
         System.out.println();
         System.out.println("***********************");
         System.out.println("1- Change account");
-        System.out.println("2- Transaction");
-        System.out.println("3- Return");
+        System.out.println("2- Balance");
+        System.out.println("3- Transaction");
+        System.out.println("4- Return");
         System.out.println("***********************");
         System.out.println();
         System.out.print("Select the option: ");

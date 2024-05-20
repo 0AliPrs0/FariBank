@@ -16,14 +16,14 @@ public class UserHandler {
 
     public static void handleTheUserMenu(Menus.UserMenu option, Bank myBank) {
         switch (option) {
-            case LOG_IN -> handleLogIn(myBank);
+            case LOG_IN -> handleLogin(myBank);
             case SIGN_UP -> handleSignUp(myBank);
             case RETURN -> System.out.println();
             default -> System.out.println("Invalid input");
         }
     }
 
-    public static void handleLogIn(Bank myBank) {
+    public static void handleLogin(Bank myBank) {
         System.out.println("Enter your phone number: ");
         String phoneNumber = ScannerWrapper.getInstance().next();
 
@@ -33,7 +33,7 @@ public class UserHandler {
         UserAccount newUser = lookForUser(myBank, phoneNumber, password);
         if (newUser == null) {
             Authentication newAuthentication = checkInformationAsRequest(phoneNumber, password, myBank);
-            firstLogIn(newAuthentication, myBank);
+            firstLogin(newAuthentication, myBank);
         } else {
             UserOptions.handleUserOptions(myBank, newUser);
         }
@@ -59,7 +59,7 @@ public class UserHandler {
     }
 
 
-    public static void firstLogIn(Authentication newAuthentication, Bank myBank) {
+    public static void firstLogin(Authentication newAuthentication, Bank myBank) {
         if (newAuthentication == null) {
             return;
         }
@@ -88,7 +88,7 @@ public class UserHandler {
         int max = 99999999;
         int accountNumber = ThreadLocalRandom.current().nextInt(min, max + 1);
 
-        UserAccount user = new UserAccount(fName, lName, phoneNumber, id, password, accountNumber, null);
+        UserAccount user = new UserAccount(fName, lName, phoneNumber, id, password, 0, accountNumber, null);
         myBank.getUserAccounts().add(user);
         return user;
     }
