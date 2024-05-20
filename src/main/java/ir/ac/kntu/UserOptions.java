@@ -1,7 +1,8 @@
 package ir.ac.kntu;
 
-import java.util.ArrayList;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class UserOptions {
 
@@ -41,7 +42,8 @@ public class UserOptions {
         switch (option) {
             case CHARGED_ACCOUNT -> chargeAccount(me);
             case BALANCE -> balance(me);
-//            case TRANSACTION -> viewInformationContact(me);
+            case TRANSACTION -> transaction(me.getChargeAccounts(), me.getTransfers());
+            case TIME_FILTER_TRANSACTION -> timeFilterTransaction(me);
             case RETURN -> System.out.println();
             default -> System.out.println("Invalid Input!");
         }
@@ -52,11 +54,17 @@ public class UserOptions {
         int amount = ScannerWrapper.getInstance().nextInt();
 
         me.setBalanceAccount(me.getBalanceAccount() + amount);
-
         System.out.println("Your account increased by " + amount);
+
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
+        String dateNow = simpleDateFormat.format(date);
+        ChargeAccount newCharge = new ChargeAccount(amount, dateNow);
+        me.addChargeAccount(newCharge);
+
     }
 
-    public static void balance(UserAccount me){
+    public static void balance(UserAccount me) {
         System.out.println("Your balance account is: " + me.getBalanceAccount());
     }
 
@@ -73,6 +81,104 @@ public class UserOptions {
         } while (option != Menus.MenuContact.RETURN);
     }
 
+    public static void transaction(LinkedList<ChargeAccount> chargeAccounts, LinkedList<Transfer> transfers) {
+        int index = 1;
+        System.out.println("List of charge account: ");
+        for (int i = chargeAccounts.size() - 1; i >= 0; i--) {
+            System.out.println(index + "- " +chargeAccounts.get(i).getChargeAmount());
+            index++;
+        }
+
+        System.out.println("-------------------------------------");
+        System.out.println("List of transfer: ");
+        for (int i = transfers.size() - 1; i >= 0; i--) {
+            System.out.println(index + "- " + transfers.get(i).getAmountTransfer());
+            index++;
+        }
+        showTransactionDetail(chargeAccounts, transfers);
+    }
+
+    public static void showTransactionDetail(LinkedList<ChargeAccount> chargeAccounts, LinkedList<Transfer> transfers) {
+        System.out.println("Enter the number of transaction: ");
+        int index = ScannerWrapper.getInstance().nextInt();
+
+        if (index <= chargeAccounts.size()) {
+            System.out.println(chargeAccounts.get(index - 1).toString());
+        } else {
+            System.out.println(transfers.get(index - chargeAccounts.size() - 1).toString());
+        }
+    }
+
+
+    public static void viewInformationContact(UserAccount me) {
+        for (int i = 1; i <= me.getMyContacts().size(); i++) {
+            Contact contact = me.getMyContacts().get(i - 1);
+            System.out.println(i + "- " + contact.getFirstName() + " " + contact.getLName());
+        }
+        System.out.println();
+        System.out.println("Chose the contact (Enter the number of contact) : ");
+        int numberOfContact = ScannerWrapper.getInstance().nextInt();
+        numberOfContact--;
+
+        handleInformationContact(me, numberOfContact);
+    }
+
+    public static void timeFilterTransaction(UserAccount me) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+        System.out.println("Enter the start date like this structure year.month.day hour:minute:second(yyyy.MM.dd HH:mm:ss)");
+        String startDate = ScannerWrapper.getInstance().nextLine();
+        Date date1;
+        try {
+            date1 = simpleDateFormat.parse(startDate);
+        } catch (Exception e) {
+            System.out.println("invalid input");
+            return;
+        }
+
+        System.out.println("Enter the end date like this structure year.month.day hour:minute:second(yyyy.MM.dd HH:mm:ss)");
+        String endDate = ScannerWrapper.getInstance().nextLine();
+        Date date2;
+        try {
+            date2 = simpleDateFormat.parse(endDate);
+        } catch (Exception e) {
+            System.out.println("invalid input");
+            return;
+        }
+
+        handleTimeFilterTransaction(me, date1, date2);
+    }
+
+    public static void handleTimeFilterTransaction(UserAccount me, Date startDate, Date endDate) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
+        LinkedList<ChargeAccount> newChargeAccount = new LinkedList<ChargeAccount>();
+        LinkedList<Transfer> newTransfer = new LinkedList<Transfer>();
+
+        for (int i = me.getChargeAccounts().size() - 1; i >= 0; i--) {
+            Date date;
+            try {
+                date = simpleDateFormat.parse(me.getChargeAccounts().get(i).getDateOfChargeAccount());
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+            if (startDate.getTime() <= date.getTime() && endDate.getTime() >= date.getTime()) {
+                newChargeAccount.add(me.getChargeAccounts().get(i));
+            }
+        }
+
+        for (int i = me.getTransfers().size() - 1; i >= 0; i--) {
+            Date date;
+            try {
+                date = simpleDateFormat.parse(me.getTransfers().get(i).getDateOfTransfer());
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+            if (startDate.getTime() <= date.getTime() && endDate.getTime() >= date.getTime()) {
+                newTransfer.add(me.getTransfers().get(i));
+            }
+        }
+        transaction(newChargeAccount, newTransfer);
+    }
+
     public static void handleContacts(UserAccount me, Menus.MenuContact options) {
         switch (options) {
             case ADD_CONTACTS -> addContact(me);
@@ -86,10 +192,10 @@ public class UserOptions {
         System.out.println("Enter the first name of contact: ");
         String fName = ScannerWrapper.getInstance().next();
 
-        System.out.println("Enter the first name of contact: ");
+        System.out.println("Enter the last name of contact: ");
         String lName = ScannerWrapper.getInstance().next();
 
-        System.out.println("Enter the first name of contact: ");
+        System.out.println("Enter the phone number name of contact: ");
         String phoneNumber = ScannerWrapper.getInstance().next();
 
         boolean isTherePhoneNumber = checkPhoneNumber(me, phoneNumber);
@@ -110,18 +216,6 @@ public class UserOptions {
         return false;
     }
 
-    public static void viewInformationContact(UserAccount me) {
-        for (int i = 1; i <= me.getMyContacts().size(); i++) {
-            Contact contact = me.getMyContacts().get(i - 1);
-            System.out.println(i + "- " + contact.getFirstName() + " " + contact.getLName());
-        }
-        System.out.println();
-        System.out.println("Chose the contact ( Enter the number of contact ) : ");
-        int numberOfContact = ScannerWrapper.getInstance().nextInt();
-        numberOfContact--;
-
-        handleInformationContact(me, numberOfContact);
-    }
 
     public static void handleInformationContact(UserAccount me, int numberOfContact) {
         Menus.ContactOption option;

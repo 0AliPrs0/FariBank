@@ -70,4 +70,12 @@ public class UserAccount extends User {
     public LinkedList<ChargeAccount> getChargeAccounts() {
         return new LinkedList<>(chargeAccounts);
     }
+
+    public void addChargeAccount(ChargeAccount charge){
+        chargeAccounts.add(charge);
+    }
+
+    public void addTransfer(Transfer transfer){
+        transfers.add(transfer);
+    }
 }

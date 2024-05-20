@@ -265,6 +265,7 @@ public class Menus {
         CHARGED_ACCOUNT,
         BALANCE,
         TRANSACTION,
+        TIME_FILTER_TRANSACTION,
         RETURN,
         UNDEFINED
     }
@@ -272,10 +273,11 @@ public class Menus {
     public void printTheAccountManagement() {
         System.out.println();
         System.out.println("***********************");
-        System.out.println("1- Change account");
+        System.out.println("1- Charge account");
         System.out.println("2- Balance");
         System.out.println("3- Transaction");
-        System.out.println("4- Return");
+        System.out.println("4- Time filter transaction");
+        System.out.println("5- Return");
         System.out.println("***********************");
         System.out.println();
         System.out.print("Select the option: ");

@@ -1,6 +1,7 @@
 package ir.ac.kntu;
 
 public class Transfer {
+    private int amountTransfer;
     private int beginningAccountNumber;
     private int destinationAccountNumber;
     private String nameOfDestinationAccountOwner;
@@ -9,11 +10,20 @@ public class Transfer {
     public Transfer() {
     }
 
-    public Transfer(int beginningAccountNumber, int destinationAccountNumber, String nameOfDestinationAccountOwner, String dateOfTransfer) {
+    public Transfer(int amountTransfer, int beginningAccountNumber, int destinationAccountNumber, String nameOfDestinationAccountOwner, String dateOfTransfer) {
+        this.amountTransfer = amountTransfer;
         this.beginningAccountNumber = beginningAccountNumber;
         this.destinationAccountNumber = destinationAccountNumber;
         this.nameOfDestinationAccountOwner = nameOfDestinationAccountOwner;
         this.dateOfTransfer = dateOfTransfer;
+    }
+
+    public int getAmountTransfer() {
+        return amountTransfer;
+    }
+
+    public void setAmountTransfer(int amountTransfer) {
+        this.amountTransfer = amountTransfer;
     }
 
     public int getBeginningAccountNumber() {
