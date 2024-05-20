@@ -1,41 +1,26 @@
 package ir.ac.kntu;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Bank {
-    private ArrayList<UserAccount> userAccounts = new ArrayList<>();
-    private ArrayList<Authentication> authentications = new ArrayList<>();
-    private ArrayList<Support> supports = new ArrayList<>();
+    private List<UserAccount> userAccounts = new ArrayList<>();
+    private List<Authentication> authentications = new ArrayList<>();
+    private List<Support> supports = new ArrayList<>();
 
     public Bank() {
     }
 
-    public Bank(ArrayList<UserAccount> userAccounts, ArrayList<Authentication> authentications) {
-        this.userAccounts = userAccounts;
-        this.authentications = authentications;
-    }
-
     public ArrayList<UserAccount> getUserAccounts() {
-        return userAccounts;
-    }
-
-    public void setUserAccounts(ArrayList<UserAccount> userAccounts) {
-        this.userAccounts = userAccounts;
+        return new ArrayList<>(userAccounts);
     }
 
     public ArrayList<Authentication> getAuthentications() {
-        return authentications;
+        return new ArrayList<>(authentications);
     }
 
-    public void setAuthentications(ArrayList<Authentication> authentications) {
-        this.authentications = authentications;
-    }
 
     public ArrayList<Support> getSupports() {
-        return supports;
-    }
-
-    public void setSupports(ArrayList<Support> supports) {
-        this.supports = supports;
+        return new ArrayList<>(supports);
     }
 }

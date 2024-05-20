@@ -84,7 +84,7 @@ public class Menus {
         System.out.println("3- Money transfer");
         System.out.println("4- Support");
         System.out.println("5- Settings");
-        System.out.println("6- return");
+        System.out.println("6- Return");
         System.out.println("***********************");
         System.out.println();
         System.out.print("Select your roles: ");
@@ -114,7 +114,7 @@ public class Menus {
         System.out.println("1- Authentication");
         System.out.println("2- Requests");
         System.out.println("3- Users");
-        System.out.println("4- return");
+        System.out.println("4- Return");
         System.out.println("***********************");
         System.out.println();
         System.out.print("Select the option: ");
@@ -142,7 +142,7 @@ public class Menus {
         System.out.println("***********************");
         System.out.println("1- Add contact");
         System.out.println("2- view information contact");
-        System.out.println("3- return");
+        System.out.println("3- Return");
         System.out.println("***********************");
         System.out.println();
         System.out.print("Select the option: ");
@@ -170,7 +170,7 @@ public class Menus {
         System.out.println("***********************");
         System.out.println("1- Edit information");
         System.out.println("2- view information");
-        System.out.println("3- return");
+        System.out.println("3- Return");
         System.out.println("***********************");
         System.out.println();
         System.out.print("Select the option: ");
@@ -204,7 +204,7 @@ public class Menus {
         System.out.println("3- change card password");
         System.out.println("4- Activation contact keyword");
         System.out.println("5- Inactivation contact keyword");
-        System.out.println("6- return");
+        System.out.println("6- Return");
         System.out.println("***********************");
         System.out.println();
         System.out.print("Select the option: ");
@@ -218,5 +218,33 @@ public class Menus {
             return options[input];
         }
         return SettingOptions.UNDEFINED;
+    }
+
+    public enum AccountManagementOption {
+        CHARGED_ACCOUNT,
+        TRANSACTION,
+        RETURN,
+        UNDEFINED
+    }
+
+    public void printTheAccountManagement() {
+        System.out.println();
+        System.out.println("***********************");
+        System.out.println("1- Change account");
+        System.out.println("2- Transaction");
+        System.out.println("3- Return");
+        System.out.println("***********************");
+        System.out.println();
+        System.out.print("Select the option: ");
+    }
+
+    public Menus.AccountManagementOption getOptionAccountManagement() {
+        AccountManagementOption[] options = AccountManagementOption.values();
+        int input = ScannerWrapper.getInstance().nextInt();
+        input--;
+        if (input >= 0 && input < options.length) {
+            return options[input];
+        }
+        return AccountManagementOption.UNDEFINED;
     }
 }

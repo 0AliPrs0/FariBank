@@ -15,7 +15,7 @@ public class UserOptions {
 
     public static void handleTheUserMenu(Menus.UserOptions options, Bank myBank, UserAccount me) {
         switch (options) {
-//            case ACCOUNT_MANAGEMENT -> ;
+            case ACCOUNT_MANAGEMENT -> accountManagement(me);
             case CONTACTS -> contacts(me);
 //            case MONEY_TRANSFER -> ;
 //            case SUPPORT -> ;
@@ -23,6 +23,33 @@ public class UserOptions {
             case RETURN -> System.out.println();
             default -> System.out.println("Invalid Input!");
         }
+    }
+
+    public static void accountManagement(UserAccount me){
+        Menus.AccountManagementOption option;
+        do {
+            Menus.getInstance().printTheAccountManagement();
+            option = Menus.getInstance().getOptionAccountManagement();
+            handleAccountManagement(me, option);
+        } while (option != Menus.AccountManagementOption.RETURN);
+    }
+
+    public static void handleAccountManagement(UserAccount me, Menus.AccountManagementOption option){
+        switch (option) {
+            case CHARGED_ACCOUNT -> chargeAccount(me);
+//            case TRANSACTION -> viewInformationContact(me);
+            case RETURN -> System.out.println();
+            default -> System.out.println("Invalid Input!");
+        }
+    }
+
+    public static void chargeAccount(UserAccount me){
+        System.out.print("Enter the amount of money: ");
+        int amount = ScannerWrapper.getInstance().nextInt();
+
+        me.setAccountNumber(me.getAccountNumber() + amount);
+
+        System.out.println("Your account increased by " + amount);
     }
 
     public static void contacts(UserAccount me) {

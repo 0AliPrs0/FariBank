@@ -1,13 +1,18 @@
 package ir.ac.kntu;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class UserAccount extends User {
     private int accountNumber;
     private int cardPassword;
     private String creditCard;
-    private ArrayList<Contact> myContacts = new ArrayList<>();
+    private List<Contact> myContacts = new ArrayList<>();
     private boolean isActingContactKeyword;
+    private List<Transfer> transfers = new LinkedList<>();
+    private List<ChargeAccount> chargeAccounts = new LinkedList<>();
+
 
     public UserAccount() {
     }
@@ -29,12 +34,7 @@ public class UserAccount extends User {
         this.accountNumber = accountNumber;
     }
 
-    public ArrayList<Contact> getMyContacts() {
-        return myContacts;
-    }
-
-    public void setMyContacts(ArrayList<Contact> myContacts) {
-        this.myContacts = myContacts;
+    public ArrayList<Contact> getMyContacts() {return new ArrayList<>(myContacts);
     }
 
     public int getCardPassword() {
@@ -51,5 +51,13 @@ public class UserAccount extends User {
 
     public void setIsActingContactKeyword(boolean actingContactKeyword) {
         isActingContactKeyword = actingContactKeyword;
+    }
+
+    public LinkedList<Transfer> getTransfers() {
+        return new LinkedList<>(transfers);
+    }
+
+    public LinkedList<ChargeAccount> getChargeAccounts() {
+        return new LinkedList<>(chargeAccounts);
     }
 }
