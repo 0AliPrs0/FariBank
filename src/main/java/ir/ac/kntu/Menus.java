@@ -296,10 +296,8 @@ public class Menus {
     }
 
     public enum SupportUser {
-        REPORT,
-        CONTACTS,
-        TRANSFER,
-        SETTING,
+        REGISTER_MASSAGE,
+        SHOW_MASSAGE,
         RETURN,
         UNDEFINED
     }
@@ -307,11 +305,9 @@ public class Menus {
     public void printTheSupportUser() {
         System.out.println();
         System.out.println("***********************");
-        System.out.println("1- Report");
-        System.out.println("2- Contacts");
-        System.out.println("3- Transfer");
-        System.out.println("4- Setting");
-        System.out.println("5- Return");
+        System.out.println("1- Register massage");
+        System.out.println("2- Show massage");
+        System.out.println("3- Return");
         System.out.println("***********************");
         System.out.println();
         System.out.print("Select the option: ");
@@ -331,6 +327,44 @@ public class Menus {
             return options[input];
         }
         return SupportUser.UNDEFINED;
+    }
+
+    public enum RegisterSupportUser {
+        REPORT,
+        CONTACTS,
+        TRANSFER,
+        SETTING,
+        RETURN,
+        UNDEFINED
+    }
+
+    public void printTheRegisterSupportUser() {
+        System.out.println();
+        System.out.println("***********************");
+        System.out.println("1- Report");
+        System.out.println("2- Contacts");
+        System.out.println("3- Transfer");
+        System.out.println("4- Setting");
+        System.out.println("5- Return");
+        System.out.println("***********************");
+        System.out.println();
+        System.out.print("Select the option: ");
+    }
+
+    public Menus.RegisterSupportUser getOptionRegisterSupportUser() {
+        RegisterSupportUser[] options = RegisterSupportUser.values();
+        String inputStr = ScannerWrapper.getInstance().next();
+        int input;
+        try{
+            input = Integer.parseInt(inputStr);
+        }catch (Exception e){
+            return RegisterSupportUser.UNDEFINED;
+        }
+        input--;
+        if (input >= 0 && input < options.length) {
+            return options[input];
+        }
+        return RegisterSupportUser.UNDEFINED;
     }
 
 }

@@ -1,5 +1,8 @@
 package ir.ac.kntu;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 public class UserOptions {
 
     public static void handleUserOptions(Bank myBank, UserAccount me) {
@@ -155,13 +158,47 @@ public class UserOptions {
     public static void supportUser(UserAccount me, Bank myBank){
         Menus.SupportUser option;
         do {
-            Menus.getInstance().printTheSettingOption();
+            Menus.getInstance().printTheSupportUser();
             option = Menus.getInstance().getOptionSupportUser();
             handleSupportUser(myBank, me, option);
         } while (option != Menus.SupportUser.RETURN);
     }
 
     public static void handleSupportUser(Bank myBank, UserAccount me, Menus.SupportUser option){
+        switch (option) {
+            case SHOW_MASSAGE -> showSupportUser(me, myBank);
+            case REGISTER_MASSAGE-> registerSupportUser(me, myBank);
+            case RETURN -> System.out.println();
+            default -> System.out.println("Invalid Input!");
+        }
+    }
+
+    public static void showSupportUser(UserAccount me, Bank myBank) {
+        ArrayList<Requests> myRequest = new ArrayList<>();
+        for (Map.Entry<String, Requests> entry : myBank.getRequest().entrySet()) {
+            if(entry.getValue().equals(me.getPhoneNumber())){
+                myRequest.add(entry.getValue());
+            }
+        }
+        printMassages(myRequest);
+    }
+
+    public static void printMassages(ArrayList<Requests> requests){
+        for (int i = 1; i <= requests.size(); i++) {
+            System.out.println(i + "- " + requests.get(i - 1).toString());
+        }
+    }
+
+    public static void registerSupportUser(UserAccount me, Bank myBank){
+        Menus.RegisterSupportUser option;
+        do {
+            Menus.getInstance().printTheSupportUser();
+            option = Menus.getInstance().getOptionRegisterSupportUser();
+            handleRegisterSupportUser(myBank, me, option);
+        } while (option != Menus.RegisterSupportUser.RETURN);
+    }
+
+    public static void handleRegisterSupportUser(Bank myBank, UserAccount me, Menus.RegisterSupportUser option){
         switch (option) {
             case REPORT-> handleReportOfSupportUser(myBank, me);
             case CONTACTS -> handleContactOfSupportUser(myBank, me);
@@ -181,25 +218,25 @@ public class UserOptions {
     public static void handleReportOfSupportUser(Bank myBank, UserAccount me){
         String massageUser = inputTheMassage();
         Requests requests = new Requests(RequestType.REPORTS, ApplicationStatus.REGISTERED, massageUser, "");
-        myBank.addRequest(me, requests);
+        myBank.addRequest(me.getPhoneNumber(), requests);
     }
 
     public static void handleContactOfSupportUser(Bank myBank, UserAccount me){
         String massageUser = inputTheMassage();
         Requests requests = new Requests(RequestType.CONTACTS, ApplicationStatus.REGISTERED, massageUser, "");
-        myBank.addRequest(me, requests);
+        myBank.addRequest(me.getPhoneNumber(), requests);
     }
 
     public static void handleTransferOfSupportUser(Bank myBank, UserAccount me){
         String massageUser = inputTheMassage();
         Requests requests = new Requests(RequestType.TRANSFER, ApplicationStatus.REGISTERED, massageUser, "");
-        myBank.addRequest(me, requests);
+        myBank.addRequest(me.getPhoneNumber(), requests);
     }
 
     public static void handleSettingOfSupportUser(Bank myBank, UserAccount me){
         String massageUser = inputTheMassage();
         Requests requests = new Requests(RequestType.SETTINGS, ApplicationStatus.REGISTERED, massageUser, "");
-        myBank.addRequest(me, requests);
+        myBank.addRequest(me.getPhoneNumber(), requests);
     }
 
 
