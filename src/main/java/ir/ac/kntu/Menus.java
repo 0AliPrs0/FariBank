@@ -30,7 +30,13 @@ public class Menus {
 
     public Menus.MenuMain getOptionMainMenu() {
         MenuMain[] roles = MenuMain.values();
-        int input = ScannerWrapper.getInstance().nextInt();
+        String inputStr = ScannerWrapper.getInstance().next();
+        int input;
+        try{
+            input = Integer.parseInt(inputStr);
+        }catch (Exception e){
+            return MenuMain.UNDEFINED;
+        }
         input--;
         if (input >= 0 && input < roles.length) {
             return roles[input];
@@ -58,7 +64,13 @@ public class Menus {
 
     public Menus.UserMenu getOptionFirstUserMenu() {
         UserMenu[] options = UserMenu.values();
-        int input = ScannerWrapper.getInstance().nextInt();
+        String inputStr = ScannerWrapper.getInstance().next();
+        int input;
+        try{
+            input = Integer.parseInt(inputStr);
+        }catch (Exception e){
+            return UserMenu.UNDEFINED;
+        }
         input--;
         if (input >= 0 && input < options.length) {
             return options[input];
@@ -92,7 +104,13 @@ public class Menus {
 
     public Menus.UserOptions getOptionSecondUserMenu() {
         UserOptions[] roles = UserOptions.values();
-        int input = ScannerWrapper.getInstance().nextInt();
+        String inputStr = ScannerWrapper.getInstance().next();
+        int input;
+        try{
+            input = Integer.parseInt(inputStr);
+        }catch (Exception e){
+            return UserOptions.UNDEFINED;
+        }
         input--;
         if (input >= 0 && input < roles.length) {
             return roles[input];
@@ -122,7 +140,13 @@ public class Menus {
 
     public Menus.MenuSupport getOptionSupportMenu() {
         MenuSupport[] options = MenuSupport.values();
-        int input = ScannerWrapper.getInstance().nextInt();
+        String inputStr = ScannerWrapper.getInstance().next();
+        int input;
+        try{
+            input = Integer.parseInt(inputStr);
+        }catch (Exception e){
+            return MenuSupport.RETURN;
+        }
         input--;
         if (input >= 0 && input < options.length) {
             return options[input];
@@ -150,8 +174,13 @@ public class Menus {
 
     public Menus.MenuContact getOptionContactMenu() {
         MenuContact[] options = MenuContact.values();
-        int input = ScannerWrapper.getInstance().nextInt();
-        input--;
+        String inputStr = ScannerWrapper.getInstance().next();
+        int input;
+        try{
+            input = Integer.parseInt(inputStr);
+        }catch (Exception e){
+            return MenuContact.UNDEFINED;
+        }        input--;
         if (input >= 0 && input < options.length) {
             return options[input];
         }
@@ -178,7 +207,13 @@ public class Menus {
 
     public Menus.ContactOption getOptionContactOption() {
         ContactOption[] options = ContactOption.values();
-        int input = ScannerWrapper.getInstance().nextInt();
+        String inputStr = ScannerWrapper.getInstance().next();
+        int input;
+        try{
+            input = Integer.parseInt(inputStr);
+        }catch (Exception e){
+            return ContactOption.UNDEFINED;
+        }
         input--;
         if (input >= 0 && input < options.length) {
             return options[input];
@@ -212,7 +247,13 @@ public class Menus {
 
     public Menus.SettingOptions getOptionSettingOption() {
         SettingOptions[] options = SettingOptions.values();
-        int input = ScannerWrapper.getInstance().nextInt();
+        String inputStr = ScannerWrapper.getInstance().next();
+        int input;
+        try{
+            input = Integer.parseInt(inputStr);
+        }catch (Exception e){
+            return SettingOptions.UNDEFINED;
+        }
         input--;
         if (input >= 0 && input < options.length) {
             return options[input];
@@ -240,11 +281,55 @@ public class Menus {
 
     public Menus.AccountManagementOption getOptionAccountManagement() {
         AccountManagementOption[] options = AccountManagementOption.values();
-        int input = ScannerWrapper.getInstance().nextInt();
+        String inputStr = ScannerWrapper.getInstance().next();
+        int input;
+        try{
+            input = Integer.parseInt(inputStr);
+        }catch (Exception e){
+            return AccountManagementOption.UNDEFINED;
+        }
         input--;
         if (input >= 0 && input < options.length) {
             return options[input];
         }
         return AccountManagementOption.UNDEFINED;
+    }
+
+    public enum SupportUser {
+        REPORT,
+        CONTACTS,
+        TRANSFER,
+        SETTING,
+        RETURN,
+        UNDEFINED
+    }
+
+    public void printTheSupportUser() {
+        System.out.println();
+        System.out.println("***********************");
+        System.out.println("1- Report");
+        System.out.println("2- Contacts");
+        System.out.println("3- Transfer");
+        System.out.println("4- Setting");
+        System.out.println("5- Return");
+        System.out.println("***********************");
+        System.out.println();
+        System.out.print("Select the option: ");
+    }
+
+    public Menus.SupportUser getOptionSupportUser() {
+        SupportUser[] options = SupportUser.values();
+        String inputStr = ScannerWrapper.getInstance().next();
+        int input;
+        try{
+            input = Integer.parseInt(inputStr);
+        }catch (Exception e){
+            return SupportUser.UNDEFINED;
+        }
+        input--;
+        if (input >= 0 && input < options.length) {
+            return options[input];
+        }
+        return SupportUser.UNDEFINED;
     }
 }

@@ -18,7 +18,7 @@ public class UserOptions {
             case ACCOUNT_MANAGEMENT -> accountManagement(me);
             case CONTACTS -> contacts(me);
 //            case MONEY_TRANSFER -> ;
-//            case SUPPORT -> ;
+//            case SUPPORT -> supportUser(me, myBank);
             case SETTINGS -> settings(me);
             case RETURN -> System.out.println();
             default -> System.out.println("Invalid Input!");
