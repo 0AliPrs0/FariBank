@@ -27,6 +27,10 @@ public class ScannerWrapper {
         return scanner.nextInt();
     }
 
+    public String nextLine() {
+        return scanner.nextLine();
+    }
+
     public void close() {
         scanner.close();
     }

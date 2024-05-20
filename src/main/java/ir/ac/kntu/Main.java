@@ -8,6 +8,8 @@ public class Main {
 
 
     public static void main(String[] args) {
+        Date date = new Date();
+        date.getTime();
         Calendar calendar = Calendar.getInstance();
         Date currentDate = calendar.getTime();
 

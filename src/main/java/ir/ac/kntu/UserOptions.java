@@ -153,8 +153,56 @@ public class UserOptions {
     }
 
     public static void supportUser(UserAccount me, Bank myBank){
-
+        Menus.SupportUser option;
+        do {
+            Menus.getInstance().printTheSettingOption();
+            option = Menus.getInstance().getOptionSupportUser();
+            handleSupportUser(myBank, me, option);
+        } while (option != Menus.SupportUser.RETURN);
     }
+
+    public static void handleSupportUser(Bank myBank, UserAccount me, Menus.SupportUser option){
+        switch (option) {
+            case REPORT-> handleReportOfSupportUser(myBank, me);
+            case CONTACTS -> handleContactOfSupportUser(myBank, me);
+            case TRANSFER -> handleTransferOfSupportUser(myBank, me);
+            case SETTING -> handleActivationContactKeyword(me);
+            case RETURN -> System.out.println();
+            default -> System.out.println("Invalid Input!");
+        }
+    }
+
+    public static String inputTheMassage(){
+        System.out.println("Enter your massage: ");
+        String massage = ScannerWrapper.getInstance().next();
+        return massage;
+    }
+
+    public static void handleReportOfSupportUser(Bank myBank, UserAccount me){
+        String massageUser = inputTheMassage();
+        Requests requests = new Requests(RequestType.REPORTS, ApplicationStatus.REGISTERED, massageUser, "");
+        myBank.addRequest(me, requests);
+    }
+
+    public static void handleContactOfSupportUser(Bank myBank, UserAccount me){
+        String massageUser = inputTheMassage();
+        Requests requests = new Requests(RequestType.CONTACTS, ApplicationStatus.REGISTERED, massageUser, "");
+        myBank.addRequest(me, requests);
+    }
+
+    public static void handleTransferOfSupportUser(Bank myBank, UserAccount me){
+        String massageUser = inputTheMassage();
+        Requests requests = new Requests(RequestType.TRANSFER, ApplicationStatus.REGISTERED, massageUser, "");
+        myBank.addRequest(me, requests);
+    }
+
+    public static void handleSettingOfSupportUser(Bank myBank, UserAccount me){
+        String massageUser = inputTheMassage();
+        Requests requests = new Requests(RequestType.SETTINGS, ApplicationStatus.REGISTERED, massageUser, "");
+        myBank.addRequest(me, requests);
+    }
+
+
 
     public static void settings(UserAccount me) {
         Menus.SettingOptions option;

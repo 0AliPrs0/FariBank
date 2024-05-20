@@ -47,4 +47,14 @@ public class Requests {
     public void setSupportMassage(String supportMassage) {
         this.supportMassage = supportMassage;
     }
+
+    @Override
+    public String toString() {
+        return "Requests{" +
+                "requestType=" + requestType +
+                ", applicationStatus=" + applicationStatus +
+                ", userMassage='" + userMassage + '\'' +
+                ", supportMassage='" + supportMassage + '\'' +
+                '}';
+    }
 }

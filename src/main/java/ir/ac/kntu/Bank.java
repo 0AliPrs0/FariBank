@@ -30,4 +30,7 @@ public class Bank {
         return requests.get(user);
     }
 
+    public void addRequest(UserAccount user, Requests newRequest){
+        requests.put(user, newRequest);
+    }
 }
