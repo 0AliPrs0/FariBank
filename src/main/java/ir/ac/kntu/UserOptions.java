@@ -18,7 +18,7 @@ public class UserOptions {
             case ACCOUNT_MANAGEMENT -> accountManagement(me);
             case CONTACTS -> contacts(me);
 //            case MONEY_TRANSFER -> ;
-//            case SUPPORT -> supportUser(me, myBank);
+            case SUPPORT -> supportUser(me, myBank);
             case SETTINGS -> settings(me);
             case RETURN -> System.out.println();
             default -> System.out.println("Invalid Input!");
@@ -150,6 +150,10 @@ public class UserOptions {
 
     public static void viewInformation(UserAccount me, int numberOfContact) {
         System.out.println(me.getMyContacts().get(numberOfContact).toString());
+    }
+
+    public static void supportUser(UserAccount me, Bank myBank){
+
     }
 
     public static void settings(UserAccount me) {
