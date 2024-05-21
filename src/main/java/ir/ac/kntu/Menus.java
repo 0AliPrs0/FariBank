@@ -371,4 +371,39 @@ public class Menus {
         return RegisterSupportUser.UNDEFINED;
     }
 
+    public enum ChoseAccountsForTransfer {
+        SELECT_MANUALLY,
+        SELECT_FROM_RESENT_ACCOUNTS,
+        SELECT_FROM_CONTACTS,
+        UNDEFINED
+    }
+
+    public void printTheChoseAccounts() {
+        System.out.println();
+        System.out.println("***********************");
+        System.out.println("1- Select manually");
+        System.out.println("2- Select from recent accounts");
+        System.out.println("3- Select from contacts");
+        System.out.println("***********************");
+        System.out.println();
+        System.out.print("Select the option: ");
+    }
+
+    public Menus.ChoseAccountsForTransfer getOptionChoseAccounts() {
+        ChoseAccountsForTransfer[] options = ChoseAccountsForTransfer.values();
+        String inputStr = ScannerWrapper.getInstance().next();
+        int input;
+        try{
+            input = Integer.parseInt(inputStr);
+        }catch (Exception e){
+            return ChoseAccountsForTransfer.UNDEFINED;
+        }
+        input--;
+        if (input >= 0 && input < options.length) {
+            return options[input];
+        }
+        return ChoseAccountsForTransfer.UNDEFINED;
+    }
+
+
 }

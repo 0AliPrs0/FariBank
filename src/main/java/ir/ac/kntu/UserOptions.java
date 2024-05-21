@@ -21,7 +21,7 @@ public class UserOptions {
         switch (options) {
             case ACCOUNT_MANAGEMENT -> accountManagement(me);
             case CONTACTS -> contacts(me);
-//            case MONEY_TRANSFER -> ;
+            case MONEY_TRANSFER -> moneyTransfer(me, myBank);
             case SUPPORT -> supportUser(me, myBank);
             case SETTINGS -> settings(me);
             case RETURN -> System.out.println();
@@ -72,7 +72,7 @@ public class UserOptions {
         int index = 1;
         System.out.println("List of charge account: ");
         for (int i = chargeAccounts.size() - 1; i >= 0; i--) {
-            System.out.println(index + "- " +chargeAccounts.get(i).getChargeAmount());
+            System.out.println(index + "- " + chargeAccounts.get(i).getChargeAmount());
             index++;
         }
 
@@ -95,8 +95,6 @@ public class UserOptions {
             System.out.println(transfers.get(index - chargeAccounts.size() - 1).toString());
         }
     }
-
-
 
 
     public static void timeFilterTransaction(UserAccount me) {
@@ -208,7 +206,6 @@ public class UserOptions {
 
         handleInformationContact(me, numberOfContact);
     }
-
 
 
     public static boolean checkPhoneNumber(UserAccount me, String phoneNumber) {
@@ -414,5 +411,77 @@ public class UserOptions {
         }
     }
 
+    public static void moneyTransfer(UserAccount me, Bank myBank) {
+        Menus.ChoseAccountsForTransfer option;
+        Menus.getInstance().printTheChoseAccounts();
+        option = Menus.getInstance().getOptionChoseAccounts();
+        handleTransfer(me, option, myBank);
+    }
 
+    public static void handleTransfer(UserAccount me, Menus.ChoseAccountsForTransfer option, Bank myBank) {
+        switch (option) {
+            case SELECT_MANUALLY -> handleSelectManually(me, myBank);
+            case SELECT_FROM_RESENT_ACCOUNTS -> handleSelectFromResentAccount(me, myBank);
+            case SELECT_FROM_CONTACTS -> handleSelectFromContacts(me, myBank);
+            default -> System.out.println("Invalid Input!");
+        }
+    }
+
+    public static void handleSelectManually(UserAccount me, Bank myBank) {
+        System.out.print("Enter the account number: ");
+        int accountNumber = ScannerWrapper.getInstance().nextInt();
+
+        boolean isThereAccountNumber = checkAccountNumber(accountNumber, myBank);
+        if (isThereAccountNumber) {
+            /////////////
+        }
+    }
+
+    public static boolean checkAccountNumber(int accountNumber, Bank myBank) {
+        for (UserAccount entry : myBank.getUserAccounts()) {
+            if (entry.getAccountNumber() == accountNumber) {
+                return true;
+            }
+        }
+        System.out.println("Account number is not found!");
+        return false;
+    }
+
+    public static void handleSelectFromResentAccount(UserAccount me, Bank myBank) {
+        for (int i = 0; i < me.getRecentlyAccountNumberForTransfer().size(); i++) {
+            System.out.println((i + 1) + "- " + me.getRecentlyAccountNumberForTransfer().get(i).toString());
+        }
+
+        System.out.print("Enter the number of account number: ");
+        int index = ScannerWrapper.getInstance().nextInt();
+
+        int accountNumber = me.getRecentlyAccountNumberForTransfer().get(index - 1).getAccountNumber();
+        //////////////
+    }
+
+    public static void handleSelectFromContacts(UserAccount me, Bank myBank) {
+        Map<Integer, Contact> contacts = new TreeMap<>();
+        for (int i = 0; i < me.getMyContacts().size(); i++) {
+            Contact newContact = me.getMyContacts().get(i);
+
+            for (int j = 0; j < myBank.getUserAccounts().size(); j++) {
+                ArrayList<Contact> contactsOfContact = myBank.getUserAccounts().get(j).getMyContacts();
+
+                for (int k = 0; k < contactsOfContact.size(); k++) {
+                    if (contactsOfContact.get(k).getPhoneNumber().equals(newContact.getPhoneNumber())) {
+                        int accountNumber = myBank.getUserAccounts().get(j).getAccountNumber();
+                        contacts.put(accountNumber, newContact);
+                    }
+                }
+            }
+        }
+        showContactsForTransfer(me, myBank, (TreeMap<Integer, Contact>)contacts);
+    }
+
+    public static void showContactsForTransfer(UserAccount me, Bank myBank, TreeMap<Integer, Contact> contact){
+        Map<Integer, TreeMap> contactsWithIndex = new TreeMap<>();
+        for (int i = 1; i <= contact.size(); i++) {
+            contactsWithIndex.put(i, contact.ge)
+        }
+    }
 }

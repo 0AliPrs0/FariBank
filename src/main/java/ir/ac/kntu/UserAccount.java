@@ -9,7 +9,7 @@ public class UserAccount extends User {
     private int accountNumber;
     private int cardPassword;
     private String creditCard;
-    private List<Integer> recentlyAccountNumberForTransfer = new ArrayList<>();
+    private List<RecentlyAccountForTransfer> recentlyAccountNumberForTransfer = new ArrayList<>();
     private final List<Contact> myContacts = new ArrayList<>();
     private boolean isActingContactKeyword;
     private final List<Transfer> transfers = new LinkedList<>();
@@ -44,7 +44,7 @@ public class UserAccount extends User {
         this.accountNumber = accountNumber;
     }
 
-    public List<Integer> getRecentlyAccountNumberForTransfer() {
+    public List<RecentlyAccountForTransfer> getRecentlyAccountNumberForTransfer() {
         return recentlyAccountNumberForTransfer;
     }
 
