@@ -9,21 +9,21 @@ public class UserAccount extends User {
     private int accountNumber;
     private int cardPassword;
     private String creditCard;
-    private List<Contact> myContacts = new ArrayList<>();
+    private List<Integer> recentlyAccountNumberForTransfer = new ArrayList<>();
+    private final List<Contact> myContacts = new ArrayList<>();
     private boolean isActingContactKeyword;
-    private List<Transfer> transfers = new LinkedList<>();
-    private List<ChargeAccount> chargeAccounts = new LinkedList<>();
+    private final List<Transfer> transfers = new LinkedList<>();
+    private final List<ChargeAccount> chargeAccounts = new LinkedList<>();
 
 
     public UserAccount() {
     }
 
 
-    public UserAccount(String firstName, String lastName, String phoneNumber, String id, String password, int balanceAccount, int accountNumber, ArrayList<Contact> myContacts) {
+    public UserAccount(String firstName, String lastName, String phoneNumber, String id, String password, int balanceAccount, int accountNumber) {
         super(firstName, lastName, phoneNumber, id, password);
         this.balanceAccount = balanceAccount;
         this.accountNumber = accountNumber;
-        this.myContacts = myContacts;
         this.cardPassword = -1;
         this.isActingContactKeyword = true;
     }
@@ -44,7 +44,11 @@ public class UserAccount extends User {
         this.accountNumber = accountNumber;
     }
 
-    public ArrayList<Contact> getMyContacts() {return new ArrayList<>(myContacts);
+    public List<Integer> getRecentlyAccountNumberForTransfer() {
+        return recentlyAccountNumberForTransfer;
+    }
+
+    public ArrayList<Contact> getMyContacts() {return (ArrayList<Contact>) myContacts;
     }
 
     public int getCardPassword() {
@@ -64,11 +68,11 @@ public class UserAccount extends User {
     }
 
     public LinkedList<Transfer> getTransfers() {
-        return new LinkedList<>(transfers);
+        return (LinkedList<Transfer>) transfers;
     }
 
     public LinkedList<ChargeAccount> getChargeAccounts() {
-        return new LinkedList<>(chargeAccounts);
+        return (LinkedList<ChargeAccount>) chargeAccounts;
     }
 
     public void addChargeAccount(ChargeAccount charge){

@@ -8,7 +8,7 @@ public class UserHandler {
         Menus.UserMenu option;
 
         do {
-            Menus.getInstance().printTheMainMenu();
+            Menus.getInstance().printTheFirstUserMenu();
             option = Menus.getInstance().getOptionFirstUserMenu();
             handleTheUserMenu(option, myBank);
         } while (option != Menus.UserMenu.RETURN);
@@ -24,10 +24,10 @@ public class UserHandler {
     }
 
     public static void handleLogin(Bank myBank) {
-        System.out.println("Enter your phone number: ");
+        System.out.print("Enter your phone number: ");
         String phoneNumber = ScannerWrapper.getInstance().next();
 
-        System.out.println("Enter your password: ");
+        System.out.print("Enter your password: ");
         String password = ScannerWrapper.getInstance().next();
 
         UserAccount newUser = lookForUser(myBank, phoneNumber, password);
@@ -41,6 +41,7 @@ public class UserHandler {
 
     public static UserAccount lookForUser(Bank myBank, String phoneNumber, String password) {
         for (UserAccount entry : myBank.getUserAccounts()) {
+            System.out.println(entry);
             if (entry.getPhoneNumber().equals(phoneNumber) && entry.getPassword().equals(password)) {
                 return entry;
             }
@@ -88,7 +89,7 @@ public class UserHandler {
         int max = 99999999;
         int accountNumber = ThreadLocalRandom.current().nextInt(min, max + 1);
 
-        UserAccount user = new UserAccount(fName, lName, phoneNumber, id, password, 0, accountNumber, null);
+        UserAccount user = new UserAccount(fName, lName, phoneNumber, id, password, 0, accountNumber);
         myBank.getUserAccounts().add(user);
         return user;
     }
@@ -111,7 +112,7 @@ public class UserHandler {
 
         boolean isTrueCondition = checkCondition(myBank, phoneNumber, id, password);
         if (isTrueCondition) {
-            Authentication newAuthentication = new Authentication(fName, lName, phoneNumber, id, password, "", false, false);
+            Authentication newAuthentication = new Authentication(fName, lName, phoneNumber, id, password, "", true, true);
             myBank.getAuthentications().add(newAuthentication);
         }
     }

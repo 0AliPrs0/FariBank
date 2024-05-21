@@ -68,19 +68,6 @@ public class UserOptions {
         System.out.println("Your balance account is: " + me.getBalanceAccount());
     }
 
-    public static void contacts(UserAccount me) {
-        if (!me.getIsActingContactKeyword()) {
-            System.out.println("The contact keyword is inactive!");
-            return;
-        }
-        Menus.MenuContact option;
-        do {
-            Menus.getInstance().printTheContactMenu();
-            option = Menus.getInstance().getOptionContactMenu();
-            handleContacts(me, option);
-        } while (option != Menus.MenuContact.RETURN);
-    }
-
     public static void transaction(LinkedList<ChargeAccount> chargeAccounts, LinkedList<Transfer> transfers) {
         int index = 1;
         System.out.println("List of charge account: ");
@@ -110,18 +97,7 @@ public class UserOptions {
     }
 
 
-    public static void viewInformationContact(UserAccount me) {
-        for (int i = 1; i <= me.getMyContacts().size(); i++) {
-            Contact contact = me.getMyContacts().get(i - 1);
-            System.out.println(i + "- " + contact.getFirstName() + " " + contact.getLName());
-        }
-        System.out.println();
-        System.out.println("Chose the contact (Enter the number of contact) : ");
-        int numberOfContact = ScannerWrapper.getInstance().nextInt();
-        numberOfContact--;
 
-        handleInformationContact(me, numberOfContact);
-    }
 
     public static void timeFilterTransaction(UserAccount me) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
@@ -135,7 +111,7 @@ public class UserOptions {
             return;
         }
 
-        System.out.println("Enter the end date like this structure year.month.day hour:minute:second(yyyy.MM.dd HH:mm:ss)");
+        System.out.println("Enter the end date like this structure year.month.day hour:minute:second");
         String endDate = ScannerWrapper.getInstance().nextLine();
         Date date2;
         try {
@@ -179,6 +155,19 @@ public class UserOptions {
         transaction(newChargeAccount, newTransfer);
     }
 
+    public static void contacts(UserAccount me) {
+        if (!me.getIsActingContactKeyword()) {
+            System.out.println("The contact keyword is inactive!");
+            return;
+        }
+        Menus.MenuContact option;
+        do {
+            Menus.getInstance().printTheContactMenu();
+            option = Menus.getInstance().getOptionContactMenu();
+            handleContacts(me, option);
+        } while (option != Menus.MenuContact.RETURN);
+    }
+
     public static void handleContacts(UserAccount me, Menus.MenuContact options) {
         switch (options) {
             case ADD_CONTACTS -> addContact(me);
@@ -206,6 +195,21 @@ public class UserOptions {
             System.out.println("There is same phone number in your contacts");
         }
     }
+
+    public static void viewInformationContact(UserAccount me) {
+        for (int i = 1; i <= me.getMyContacts().size(); i++) {
+            Contact contact = me.getMyContacts().get(i - 1);
+            System.out.println(i + "- " + contact.getFirstName() + " " + contact.getLName());
+        }
+        System.out.println();
+        System.out.println("Chose the contact (Enter the number of contact) : ");
+        int numberOfContact = ScannerWrapper.getInstance().nextInt();
+        numberOfContact--;
+
+        handleInformationContact(me, numberOfContact);
+    }
+
+
 
     public static boolean checkPhoneNumber(UserAccount me, String phoneNumber) {
         for (Contact entry : me.getMyContacts()) {
@@ -275,7 +279,7 @@ public class UserOptions {
     public static void showSupportUser(UserAccount me, Bank myBank) {
         ArrayList<Requests> myRequest = new ArrayList<>();
         for (Map.Entry<String, Requests> entry : myBank.getRequest().entrySet()) {
-            if (entry.getValue().equals(me.getPhoneNumber())) {
+            if (entry.getKey().equals(me.getPhoneNumber())) {
                 myRequest.add(entry.getValue());
             }
         }
@@ -291,7 +295,7 @@ public class UserOptions {
     public static void registerSupportUser(UserAccount me, Bank myBank) {
         Menus.RegisterSupportUser option;
         do {
-            Menus.getInstance().printTheSupportUser();
+            Menus.getInstance().printTheRegisterSupportUser();
             option = Menus.getInstance().getOptionRegisterSupportUser();
             handleRegisterSupportUser(myBank, me, option);
         } while (option != Menus.RegisterSupportUser.RETURN);
@@ -375,6 +379,7 @@ public class UserOptions {
             System.out.println("Enter your card password: ");
             int cardPassword = ScannerWrapper.getInstance().nextInt();
             me.setCardPassword(cardPassword);
+            System.out.println("Your card password was registered");
         } else {
             System.out.println("Your card password is already registered!");
         }
@@ -385,6 +390,7 @@ public class UserOptions {
             System.out.println("Enter new card password: ");
             int cardPassword = ScannerWrapper.getInstance().nextInt();
             me.setCardPassword(cardPassword);
+            System.out.println("Your card password was changed");
         } else {
             System.out.println("Your card password is not registered!");
         }
@@ -393,7 +399,7 @@ public class UserOptions {
     public static void handleActivationContactKeyword(UserAccount me) {
         if (!me.getIsActingContactKeyword()) {
             me.setIsActingContactKeyword(true);
-            System.out.println("Contact keyword is active");
+            System.out.println("Contact keyword has been active");
         } else {
             System.out.println("Contact keyword already is active!");
         }
@@ -402,7 +408,7 @@ public class UserOptions {
     public static void handleInactivationContactKeyword(UserAccount me) {
         if (me.getIsActingContactKeyword()) {
             me.setIsActingContactKeyword(false);
-            System.out.println("Contact keyword is not inactive");
+            System.out.println("Contact keyword has been inactive");
         } else {
             System.out.println("Contact keyword already is not active!");
         }

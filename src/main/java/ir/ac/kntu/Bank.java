@@ -15,15 +15,15 @@ public class Bank {
     }
 
     public ArrayList<UserAccount> getUserAccounts() {
-        return new ArrayList<>(userAccounts);
+        return (ArrayList<UserAccount>) userAccounts;
     }
 
     public ArrayList<Authentication> getAuthentications() {
-        return new ArrayList<>(authentications);
+        return (ArrayList<Authentication>) authentications;
     }
 
     public ArrayList<Support> getSupports() {
-        return new ArrayList<>(supports);
+        return (ArrayList<Support>) supports;
     }
 
     public Map<String, Requests> getRequest(){
