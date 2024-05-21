@@ -3,6 +3,7 @@ package ir.ac.kntu;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class UserOptions {
 
@@ -238,14 +239,23 @@ public class UserOptions {
 
     public static void editContact(UserAccount me, int numberOfContact) {
         System.out.println("Enter the first name of contact: ");
-        String fName = ScannerWrapper.getInstance().next();
+        String newFirstName = ScannerWrapper.getInstance().next();
 
         System.out.println("Enter the last name of contact: ");
-        String lName = ScannerWrapper.getInstance().next();
+        String newLastName = ScannerWrapper.getInstance().next();
 
         String phoneNumber = me.getMyContacts().get(numberOfContact).getPhoneNumber();
+        String oldFirstName = me.getMyContacts().get(numberOfContact).getFirstName();
+        String oldLastName = me.getMyContacts().get(numberOfContact).getLName();
+        String oldName = oldFirstName + oldLastName;
 
-        Contact editContact = new Contact(fName, lName, phoneNumber);
+        Contact editContact = new Contact(newFirstName, newLastName, phoneNumber);
+
+        for (int i = 0; i < me.getTransfers().size(); i++) {
+            if (me.getTransfers().get(i).getNameOfDestinationAccountOwner().equals(oldName)) {
+                me.getTransfers().get(i).setNameOfDestinationAccountOwner(newFirstName + newLastName);
+            }
+        }
 
         me.getMyContacts().set(numberOfContact, editContact);
         System.out.println("The information of contact was changed");
@@ -433,7 +443,7 @@ public class UserOptions {
 
         boolean isThereAccountNumber = checkAccountNumber(accountNumber, myBank);
         if (isThereAccountNumber) {
-            /////////////
+            inputTheMoneyForTransaction(me, myBank, accountNumber);
         }
     }
 
@@ -456,7 +466,7 @@ public class UserOptions {
         int index = ScannerWrapper.getInstance().nextInt();
 
         int accountNumber = me.getRecentlyAccountNumberForTransfer().get(index - 1).getAccountNumber();
-        //////////////
+        inputTheMoneyForTransaction(me, myBank, accountNumber);
     }
 
     public static void handleSelectFromContacts(UserAccount me, Bank myBank) {
@@ -475,13 +485,95 @@ public class UserOptions {
                 }
             }
         }
-        showContactsForTransfer(me, myBank, (TreeMap<Integer, Contact>)contacts);
+        showContactsForTransfer(me, myBank, (TreeMap<Integer, Contact>) contacts);
     }
 
-    public static void showContactsForTransfer(UserAccount me, Bank myBank, TreeMap<Integer, Contact> contact){
-        Map<Integer, TreeMap> contactsWithIndex = new TreeMap<>();
-        for (int i = 1; i <= contact.size(); i++) {
-            contactsWithIndex.put(i, contact.ge)
+    public static void showContactsForTransfer(UserAccount me, Bank myBank, TreeMap<Integer, Contact> contact) {
+        Map<Integer, Integer> accountNumbers = new HashMap<>();
+        List<Contact> contactsList = new ArrayList<>();
+
+        int index = 1;
+        for (Map.Entry<Integer, Contact> entry : contact.entrySet()) {
+            contactsList.add(entry.getValue());
+            accountNumbers.put(index, entry.getKey());
+            index++;
         }
+
+        for (int i = 1; i <= contactsList.size(); i++) {
+            System.out.println(i + "- " + contactsList.get(i - 1).getFirstName() + contactsList.get(i - 1).getLName());
+        }
+
+        System.out.print("Enter the number of account number: ");
+        int indexOfContact = ScannerWrapper.getInstance().nextInt();
+
+        int accountNumber = accountNumbers.get(indexOfContact);
+        inputTheMoneyForTransaction(me, myBank, accountNumber);
+    }
+
+    public static void inputTheMoneyForTransaction(UserAccount me, Bank myBank, int accountNumber) {
+        System.out.println("Enter the amount money: ");
+        int money = ScannerWrapper.getInstance().nextInt();
+
+        int wadge = 1000;
+        boolean isMoneyEnough = checkInventory(me, money + wadge);
+        if (isMoneyEnough) {
+            successTransaction(money, me, myBank, accountNumber);
+        }
+    }
+
+    public static boolean checkInventory(UserAccount me, int money) {
+        if (me.getBalanceAccount() > money) {
+            return true;
+        }
+        System.out.println("Your inventory is not enough");
+        return false;
+    }
+
+    public static void successTransaction(int money, UserAccount me, Bank myBank, int accountNumber2) {
+        UserAccount destinationAccount = new UserAccount();
+        for (int i = 0; i < myBank.getUserAccounts().size(); i++) {
+            if (myBank.getUserAccounts().get(i).getAccountNumber() == accountNumber2) {
+                destinationAccount = myBank.getUserAccounts().get(i);
+            }
+        }
+
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
+        String dateNow = simpleDateFormat.format(date);
+
+        printRecite(money, me, destinationAccount, dateNow);
+        setTransaction(money, me, destinationAccount, dateNow);
+
+    }
+
+    public static void printRecite(int money, UserAccount me, UserAccount destinationAccount, String dateNow) {
+        int min = 100000;
+        int max = 999999;
+        int issueTracking = ThreadLocalRandom.current().nextInt(min, max + 1);
+
+        String nameOfDestinationAccount = destinationAccount.getFirstName() + destinationAccount.getLastName();
+        int originAccountNumber = me.getAccountNumber();
+        int destinationAccountNumber = destinationAccount.getAccountNumber();
+
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println("Amount of money: " + money);
+        System.out.println("Origin accountNumber: " + originAccountNumber);
+        System.out.println("Destination account number: " + destinationAccountNumber);
+        System.out.println("Name of destination account: " + nameOfDestinationAccount);
+        System.out.println("Date of transfer: " + dateNow);
+        System.out.println("Issue tracking: " + issueTracking);
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+    }
+
+    public static void setTransaction(int money, UserAccount me, UserAccount destinationAccount, String dateNow){
+        String nameOfDestinationAccount = destinationAccount.getFirstName() + destinationAccount.getLastName();
+        int accountNumber1 = me.getAccountNumber();
+        int accountNumber2 = destinationAccount.getAccountNumber();
+
+        Transfer newTransfer1 = new Transfer(-money, accountNumber1, accountNumber2, nameOfDestinationAccount, dateNow);
+        me.addTransfer(newTransfer1);
+
+        Transfer newTransfer2 = new Transfer(money, accountNumber1, accountNumber2, nameOfDestinationAccount, dateNow);
+        me.addTransfer(newTransfer2);
     }
 }
