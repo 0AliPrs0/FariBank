@@ -191,23 +191,6 @@ public class UserOptions {
         System.out.println(me.getMyContacts().get(numberOfContact).toString());
     }
 
-    public void supportUser(UserAccount me, Bank myBank) {
-        Menus.SupportUser option;
-        do {
-            Menus.getInstance().printTheSupportUser();
-            option = Menus.getInstance().getOptionSupportUser();
-            handleSupportUser(myBank, me, option);
-        } while (option != Menus.SupportUser.RETURN);
-    }
-
-    public void handleSupportUser(Bank myBank, UserAccount me, Menus.SupportUser option) {
-        switch (option) {
-            case SHOW_MASSAGE -> showSupportUser(me, myBank);
-            case REGISTER_MASSAGE -> registerSupportUser(me, myBank);
-            case RETURN -> System.out.println();
-            default -> System.out.println("Invalid Input!");
-        }
-    }
 
     public void showSupportUser(UserAccount me, Bank myBank) {
         ArrayList<Requests> myRequest = new ArrayList<>();

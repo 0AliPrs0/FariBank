@@ -67,12 +67,14 @@ public class UserMenu implements MenuProperty{
         ContactMenu contactMenu = new ContactMenu();
         AccountManagementMenu accountManagementMenu = new AccountManagementMenu();
         MoneyTransferMenu moneyTransferMenu = new MoneyTransferMenu();
+        SettingMenu settingMenu = new SettingMenu();
+        SupportUserMenu supportUserMenu = new SupportUserMenu();
         switch (options) {
             case ACCOUNT_MANAGEMENT -> accountManagementMenu.implementAccountManagement(me);
             case CONTACTS -> contactMenu.implementContacts(me);
             case MONEY_TRANSFER -> moneyTransferMenu.implementMoneyTransfer(me, myBank);
-//            case SUPPORT -> userOptions.supportUser(me, myBank);
-//            case SETTINGS -> userOptions.settings(me);
+            case SUPPORT -> supportUserMenu.implementSupportUser(me, myBank);
+            case SETTINGS -> settingMenu.implementSettings(me);
             case RETURN -> System.out.println();
             default -> System.out.println("Invalid Input!");
         }
