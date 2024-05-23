@@ -209,25 +209,7 @@ public class UserOptions {
         }
     }
 
-    public void registerSupportUser(UserAccount me, Bank myBank) {
-        Menus.RegisterSupportUser option;
-        do {
-            Menus.getInstance().printTheRegisterSupportUser();
-            option = Menus.getInstance().getOptionRegisterSupportUser();
-            handleRegisterSupportUser(myBank, me, option);
-        } while (option != Menus.RegisterSupportUser.RETURN);
-    }
 
-    public void handleRegisterSupportUser(Bank myBank, UserAccount me, Menus.RegisterSupportUser option) {
-        switch (option) {
-            case REPORT -> handleReportOfSupportUser(myBank, me);
-            case CONTACTS -> handleContactOfSupportUser(myBank, me);
-            case TRANSFER -> handleTransferOfSupportUser(myBank, me);
-            case SETTING -> handleActivationContactKeyword(me);
-            case RETURN -> System.out.println();
-            default -> System.out.println("Invalid Input!");
-        }
-    }
 
     public String inputTheMassage() {
         System.out.println("Enter your massage: ");
