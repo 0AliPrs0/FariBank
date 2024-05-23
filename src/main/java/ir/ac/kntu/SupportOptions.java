@@ -6,26 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class SupportOptions {
-    public static void handleSupportOptions(Bank myBank, Support support) {
-        Menus.MenuSupport option;
 
-        do {
-            Menus.getInstance().printTheSupportMenu();
-            option = Menus.getInstance().getOptionSupportMenu();
-//            handleTheSupportMenu(option, myBank, support);
-        } while (option != Menus.MenuSupport.RETURN);
-
-    }
-
-    public  void handleTheSupportMenu(Menus.MenuSupport options, Bank myBank, Support support) {
-        switch (options) {
-            case AUTHENTICATION -> authentication(myBank);
-            case REQUESTS -> request(myBank);
-            case USERS -> usersInformation(myBank);
-            case RETURN -> System.out.println();
-            default -> System.out.println("Invalid Input!");
-        }
-    }
 
     public static void authentication(Bank myBank) {
         List<Authentication> authentications = new ArrayList<>();
@@ -73,11 +54,11 @@ public class SupportOptions {
     public static void request(Bank myBank) {
         Menus.RequestSupport option;
 
-        do {
-            Menus.getInstance().printTheRequestSupport();
-            option = Menus.getInstance().getOptionRequestSupport();
-            handleRequestSupport(option, myBank);
-        } while (option != Menus.RequestSupport.RETURN);
+//        do {
+//            Menus.getInstance().printTheRequestSupport();
+//            option = Menus.getInstance().getOptionRequestSupport();
+//            handleRequestSupport(option, myBank);
+//        } while (option != Menus.RequestSupport.RETURN);
     }
 
     public static void handleRequestSupport(Menus.RequestSupport option, Bank myBank) {
@@ -170,11 +151,11 @@ public class SupportOptions {
 
     public static void usersInformation(Bank myBank){
         Menus.UserInformation option;
-        do {
-            Menus.getInstance().printTheUserInformationMenu();
-            option = Menus.getInstance().getOptionUserInformation();
-            handleUserInformation(option, myBank);
-        } while (option != Menus.UserInformation.RETURN);
+//        do {
+//            Menus.getInstance().printTheUserInformationMenu();
+//            option = Menus.getInstance().getOptionUserInformation();
+//            handleUserInformation(option, myBank);
+//        } while (option != Menus.UserInformation.RETURN);
     }
 
     public static void handleUserInformation(Menus.UserInformation option, Bank myBank){

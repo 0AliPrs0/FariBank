@@ -3,43 +3,6 @@ package ir.ac.kntu;
 public class Menus {
 
 
-
-    public enum MenuSupport {
-        AUTHENTICATION,
-        REQUESTS,
-        USERS,
-        RETURN,
-        UNDEFINED
-    }
-
-    public void printTheSupportMenu() {
-        System.out.println();
-        System.out.println("***********************");
-        System.out.println("1- Authentication");
-        System.out.println("2- Requests");
-        System.out.println("3- Users");
-        System.out.println("4- Return");
-        System.out.println("***********************");
-        System.out.println();
-        System.out.print("Select the option: ");
-    }
-
-    public Menus.MenuSupport getOptionSupportMenu() {
-        MenuSupport[] options = MenuSupport.values();
-        String inputStr = ScannerWrapper.getInstance().next();
-        int input;
-        try{
-            input = Integer.parseInt(inputStr);
-        }catch (Exception e){
-            return MenuSupport.RETURN;
-        }
-        input--;
-        if (input >= 0 && input < options.length) {
-            return options[input];
-        }
-        return MenuSupport.UNDEFINED;
-    }
-
     public enum MenuContact {
         ADD_CONTACTS,
         VIEW_INFORMATION_CONTACT,
