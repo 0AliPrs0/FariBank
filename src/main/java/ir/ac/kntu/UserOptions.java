@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
 public class UserOptions {
 
 
-
     public void chargeAccount(UserAccount me) {
         System.out.print("Enter the amount of money: ");
         int amount = ScannerWrapper.getInstance().nextInt();
@@ -116,7 +115,6 @@ public class UserOptions {
     }
 
 
-
     public void addContact(UserAccount me) {
         System.out.println("Enter the first name of contact: ");
         String fName = ScannerWrapper.getInstance().next();
@@ -159,8 +157,6 @@ public class UserOptions {
         }
         return false;
     }
-
-
 
 
     public void editContact(UserAccount me, int numberOfContact) {
@@ -210,7 +206,6 @@ public class UserOptions {
     }
 
 
-
     public String inputTheMassage() {
         System.out.println("Enter your massage: ");
         String massage = ScannerWrapper.getInstance().next();
@@ -246,7 +241,7 @@ public class UserOptions {
         System.out.println("Enter new password: ");
         String password = ScannerWrapper.getInstance().next();
 
-        boolean isSafePassword = UserHandler.checkPassword(password);
+        boolean isSafePassword = new UserHandler().checkPassword(password);
         if (isSafePassword) {
             me.setPassword(password);
         }
@@ -325,7 +320,6 @@ public class UserOptions {
             System.out.println("Contact keyword already is not active!");
         }
     }
-
 
 
     public void handleSelectManually(UserAccount me, Bank myBank) {

@@ -20,7 +20,7 @@ public class RegisterSupportUserMenu implements MenuProperty{
         UNDEFINED
     }
 
-    public void registerSupportUser(UserAccount me, Bank myBank) {
+    public void implementRegisterSupportUser(UserAccount me, Bank myBank) {
         RegisterSupportUserField option;
         do {
             printTheMenu();

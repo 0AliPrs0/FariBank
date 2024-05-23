@@ -9,6 +9,7 @@ public class SettingMenu implements MenuProperty{
     public static SettingMenu getInstance() {
         return instance;
     }
+
     public enum SettingOptions {
         CHANGE_PASSWORD,
         REGISTER_CARD_PASSWORD,
