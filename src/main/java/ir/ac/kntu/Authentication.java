@@ -39,4 +39,15 @@ public class Authentication extends User{
     public void setCheckSupport(boolean checkSupport) {
         isCheckSupport = checkSupport;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "firstName='" + getFirstName() + '\'' +
+                ", lastName='" + getLastName() + '\'' +
+                ", phoneNumber='" + getPhoneNumber() + '\'' +
+                ", id='" + getId() + '\'' +
+                ", password='" + getPassword() + '\'' +
+                '}';
+    }
 }

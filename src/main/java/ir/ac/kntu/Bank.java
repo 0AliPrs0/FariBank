@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class Bank {
     private List<UserAccount> userAccounts = new ArrayList<>();
-    private List<Authentication> authentications = new ArrayList<>();
     private List<Support> supports = new ArrayList<>();
+    private List<Authentication> authentications = new ArrayList<>();
     private Map<String, Requests> requests = new HashMap<>();
 
     public Bank() {

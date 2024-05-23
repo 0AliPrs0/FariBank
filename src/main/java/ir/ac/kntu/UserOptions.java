@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UserOptions {
 
@@ -295,7 +297,8 @@ public class UserOptions {
 
     public static void printMassages(ArrayList<Requests> requests) {
         for (int i = 1; i <= requests.size(); i++) {
-            System.out.println(i + "- " + requests.get(i - 1).toString());
+            String supportMassage = requests.get(i).getSupportMassage();
+            System.out.println(i + "- " + '{' + requests.get(i - 1).toString() +" Support massage: " + supportMassage + '}');
         }
     }
 
@@ -384,7 +387,20 @@ public class UserOptions {
     public static void handleRegisterCardPassword(UserAccount me) {
         if (me.getCardPassword() == -1) {
             System.out.println("Enter your card password: ");
-            int cardPassword = ScannerWrapper.getInstance().nextInt();
+            String inputStr = ScannerWrapper.getInstance().next();
+            boolean isValidPassword = checkValidPassword(inputStr);
+            if (!isValidPassword) {
+                System.out.println("invalid password!");
+                return;
+            }
+
+            int cardPassword;
+            try{
+                cardPassword = Integer.parseInt(inputStr);
+            }catch (Exception e){
+                System.out.println("invalid password!");
+                return;
+            }
             me.setCardPassword(cardPassword);
             System.out.println("Your card password was registered");
         } else {
@@ -395,13 +411,37 @@ public class UserOptions {
     public static void handleChangeCardPassword(UserAccount me) {
         if (me.getCardPassword() != -1) {
             System.out.println("Enter new card password: ");
-            int cardPassword = ScannerWrapper.getInstance().nextInt();
+            String inputStr = ScannerWrapper.getInstance().next();
+            boolean isValidPassword = checkValidPassword(inputStr);
+            if (!isValidPassword) {
+                System.out.println("invalid password!");
+                return;
+            }
+
+            int cardPassword;
+            try{
+                cardPassword = Integer.parseInt(inputStr);
+            }catch (Exception e){
+                System.out.println("invalid password!");
+                return;
+            }
             me.setCardPassword(cardPassword);
             System.out.println("Your card password was changed");
         } else {
             System.out.println("Your card password is not registered!");
         }
     }
+
+    public static boolean checkValidPassword(String inputStr){
+        String patternStr = "\\d{4}";
+        Pattern pattern = Pattern.compile(patternStr);
+        Matcher matcher = pattern.matcher(inputStr);
+        if (matcher.matches()){
+            return true;
+        }
+        return false;
+    }
+
 
     public static void handleActivationContactKeyword(UserAccount me) {
         if (!me.getIsActingContactKeyword()) {

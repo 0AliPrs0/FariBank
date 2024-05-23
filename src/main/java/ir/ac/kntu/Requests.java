@@ -1,6 +1,6 @@
 package ir.ac.kntu;
 
-public class Requests {
+public class Requests extends User{
     private RequestType requestType;
     private ApplicationStatus applicationStatus;
     private String userMassage;
@@ -10,6 +10,7 @@ public class Requests {
     }
 
     public Requests(RequestType requestType, ApplicationStatus applicationStatus, String userMassage, String supportMassage) {
+        super();
         this.requestType = requestType;
         this.applicationStatus = applicationStatus;
         this.userMassage = userMassage;
@@ -50,11 +51,8 @@ public class Requests {
 
     @Override
     public String toString() {
-        return "Requests{" +
-                "requestType=" + requestType +
+        return  "requestType=" + requestType +
                 ", applicationStatus=" + applicationStatus +
-                ", userMassage='" + userMassage + '\'' +
-                ", supportMassage='" + supportMassage + '\'' +
-                '}';
+                ", userMassage='" + userMassage;
     }
 }
