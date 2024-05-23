@@ -9,25 +9,7 @@ import java.util.regex.Pattern;
 
 public class UserOptions {
 
-    public void accountManagement(UserAccount me) {
-        Menus.AccountManagementOption option;
-        do {
-            Menus.getInstance().printTheAccountManagement();
-            option = Menus.getInstance().getOptionAccountManagement();
-            handleAccountManagement(me, option);
-        } while (option != Menus.AccountManagementOption.RETURN);
-    }
 
-    public void handleAccountManagement(UserAccount me, Menus.AccountManagementOption option) {
-        switch (option) {
-            case CHARGED_ACCOUNT -> chargeAccount(me);
-            case BALANCE -> balance(me);
-            case TRANSACTION -> transaction(me.getChargeAccounts(), me.getTransfers());
-            case TIME_FILTER_TRANSACTION -> timeFilterTransaction(me);
-            case RETURN -> System.out.println();
-            default -> System.out.println("Invalid Input!");
-        }
-    }
 
     public void chargeAccount(UserAccount me) {
         System.out.print("Enter the amount of money: ");
@@ -133,27 +115,7 @@ public class UserOptions {
         transaction(newChargeAccount, newTransfer);
     }
 
-    public void contacts(UserAccount me) {
-        if (!me.getIsActingContactKeyword()) {
-            System.out.println("The contact keyword is inactive!");
-            return;
-        }
-        Menus.MenuContact option;
-        do {
-            Menus.getInstance().printTheContactMenu();
-            option = Menus.getInstance().getOptionContactMenu();
-            handleContacts(me, option);
-        } while (option != Menus.MenuContact.RETURN);
-    }
 
-    public void handleContacts(UserAccount me, Menus.MenuContact options) {
-        switch (options) {
-            case ADD_CONTACTS -> addContact(me);
-            case VIEW_INFORMATION_CONTACT -> viewInformationContact(me);
-            case RETURN -> System.out.println();
-            default -> System.out.println("Invalid Input!");
-        }
-    }
 
     public void addContact(UserAccount me) {
         System.out.println("Enter the first name of contact: ");

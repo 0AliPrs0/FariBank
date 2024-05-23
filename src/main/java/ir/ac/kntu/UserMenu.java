@@ -63,13 +63,13 @@ public class UserMenu implements MenuProperty{
     }
 
     public static void handleTheUserMenu(UserOptionsField options, Bank myBank, UserAccount me) {
-        UserOptions userOptions = new UserOptions();
+        ContactMenu contactMenu = new ContactMenu();
         switch (options) {
-            case ACCOUNT_MANAGEMENT -> userOptions.accountManagement(me);
-            case CONTACTS -> userOptions.contacts(me);
-            case MONEY_TRANSFER -> userOptions.moneyTransfer(me, myBank);
-            case SUPPORT -> userOptions.supportUser(me, myBank);
-            case SETTINGS -> userOptions.settings(me);
+//            case ACCOUNT_MANAGEMENT -> userOptions.accountManagement(me);
+            case CONTACTS -> contactMenu.implementContacts(me);
+//            case MONEY_TRANSFER -> userOptions.moneyTransfer(me, myBank);
+//            case SUPPORT -> userOptions.supportUser(me, myBank);
+//            case SETTINGS -> userOptions.settings(me);
             case RETURN -> System.out.println();
             default -> System.out.println("Invalid Input!");
         }

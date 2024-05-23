@@ -3,38 +3,6 @@ package ir.ac.kntu;
 public class Menus {
 
 
-    public enum MenuContact {
-        ADD_CONTACTS,
-        VIEW_INFORMATION_CONTACT,
-        RETURN,
-        UNDEFINED
-    }
-
-    public void printTheContactMenu() {
-        System.out.println();
-        System.out.println("***********************");
-        System.out.println("1- Add contact");
-        System.out.println("2- view information contact");
-        System.out.println("3- Return");
-        System.out.println("***********************");
-        System.out.println();
-        System.out.print("Select the option: ");
-    }
-
-    public Menus.MenuContact getOptionContactMenu() {
-        MenuContact[] options = MenuContact.values();
-        String inputStr = ScannerWrapper.getInstance().next();
-        int input;
-        try{
-            input = Integer.parseInt(inputStr);
-        }catch (Exception e){
-            return MenuContact.UNDEFINED;
-        }        input--;
-        if (input >= 0 && input < options.length) {
-            return options[input];
-        }
-        return MenuContact.UNDEFINED;
-    }
 
     public enum ContactOption {
         EDIT_INFORMATION,
