@@ -26,11 +26,11 @@ public class Bank {
         return (ArrayList<Support>) supports;
     }
 
-    public Map<String, Requests> getRequest(){
+    public Map<String, Requests> getRequest() {
         return requests;
     }
 
-    public void addRequest(String phoneNumber, Requests newRequest){
+    public void addRequest(String phoneNumber, Requests newRequest) {
         requests.put(phoneNumber, newRequest);
     }
 }

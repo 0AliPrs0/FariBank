@@ -1,7 +1,6 @@
 package ir.ac.kntu;
 
-public class MainMenu implements MenuProperty
-{
+public class MainMenu implements MenuProperty {
     private static MainMenu instance = new MainMenu();
 
     private MainMenu() {
@@ -18,7 +17,7 @@ public class MainMenu implements MenuProperty
         UNDEFINED
     }
 
-    public void implementMenu(Bank myBank){
+    public void implementMenu(Bank myBank) {
         MenuMainField option;
 
         do {
@@ -47,9 +46,9 @@ public class MainMenu implements MenuProperty
         MenuMainField[] options = MenuMainField.values();
         String inputStr = ScannerWrapper.getInstance().next();
         int input;
-        try{
+        try {
             input = Integer.parseInt(inputStr);
-        }catch (Exception e){
+        } catch (Exception e) {
             return MenuMainField.UNDEFINED;
         }
         input--;
@@ -59,9 +58,9 @@ public class MainMenu implements MenuProperty
         return MenuMainField.UNDEFINED;
     }
 
-    public void handleTheMenu(MenuMainField option, Bank myBank){
-    UserLoginMenu userLoginMenu = new UserLoginMenu();
-    SupportHandler supportHandler = new SupportHandler();
+    public void handleTheMenu(MenuMainField option, Bank myBank) {
+        UserLoginMenu userLoginMenu = new UserLoginMenu();
+        SupportHandler supportHandler = new SupportHandler();
         switch (option) {
             case USER -> userLoginMenu.implementMenu(myBank);
 //            case SUPPORT -> SupportHandler.implementTheSupportMenu(myBank);

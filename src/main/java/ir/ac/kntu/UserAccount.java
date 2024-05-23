@@ -48,7 +48,8 @@ public class UserAccount extends User {
         return recentlyAccountNumberForTransfer;
     }
 
-    public ArrayList<Contact> getMyContacts() {return (ArrayList<Contact>) myContacts;
+    public ArrayList<Contact> getMyContacts() {
+        return (ArrayList<Contact>) myContacts;
     }
 
     public int getCardPassword() {
@@ -75,11 +76,11 @@ public class UserAccount extends User {
         return (LinkedList<ChargeAccount>) chargeAccounts;
     }
 
-    public void addChargeAccount(ChargeAccount charge){
+    public void addChargeAccount(ChargeAccount charge) {
         chargeAccounts.add(charge);
     }
 
-    public void addTransfer(Transfer transfer){
+    public void addTransfer(Transfer transfer) {
         transfers.add(transfer);
     }
 }

@@ -1,6 +1,6 @@
 package ir.ac.kntu;
 
-public class AccountManagementMenu implements MenuProperty{
+public class AccountManagementMenu implements MenuProperty {
 
     public enum AccountManagementOption {
         CHARGED_ACCOUNT,
@@ -11,14 +11,15 @@ public class AccountManagementMenu implements MenuProperty{
         UNDEFINED
     }
 
-        public void implementAccountManagement(UserAccount me) {
-            AccountManagementOption option;
+    public void implementAccountManagement(UserAccount me) {
+        AccountManagementOption option;
         do {
             printTheMenu();
             option = getOption();
             handleAccountManagement(me, option);
         } while (option != AccountManagementOption.RETURN);
     }
+
     public void handleAccountManagement(UserAccount me, AccountManagementOption option) {
         UserOptions userOptions = new UserOptions();
         switch (option) {
@@ -51,9 +52,9 @@ public class AccountManagementMenu implements MenuProperty{
         AccountManagementOption[] options = AccountManagementOption.values();
         String inputStr = ScannerWrapper.getInstance().next();
         int input;
-        try{
+        try {
             input = Integer.parseInt(inputStr);
-        }catch (Exception e){
+        } catch (Exception e) {
             return AccountManagementOption.UNDEFINED;
         }
         input--;

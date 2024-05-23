@@ -1,6 +1,6 @@
 package ir.ac.kntu;
 
-public class ContactMenu implements MenuProperty{
+public class ContactMenu implements MenuProperty {
     private static ContactMenu instance = new ContactMenu();
 
     public ContactMenu() {
@@ -57,11 +57,12 @@ public class ContactMenu implements MenuProperty{
         MenuContactField[] options = MenuContactField.values();
         String inputStr = ScannerWrapper.getInstance().next();
         int input;
-        try{
+        try {
             input = Integer.parseInt(inputStr);
-        }catch (Exception e){
+        } catch (Exception e) {
             return MenuContactField.UNDEFINED;
-        }        input--;
+        }
+        input--;
         if (input >= 0 && input < options.length) {
             return options[input];
         }

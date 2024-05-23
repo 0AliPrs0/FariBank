@@ -30,7 +30,7 @@ public class ChargeAccount {
 
     @Override
     public String toString() {
-        return  "chargeAmount=" + chargeAmount +
+        return "chargeAmount=" + chargeAmount +
                 ", dateOfChargeAccount='" + dateOfChargeAccount;
     }
 }

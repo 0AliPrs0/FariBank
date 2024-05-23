@@ -1,5 +1,7 @@
 package ir.ac.kntu;
 
+import ir.ac.kntu.util.Calendar;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -17,9 +19,7 @@ public class UserOptions {
         me.setBalanceAccount(me.getBalanceAccount() + amount);
         System.out.println("Your account increased by " + amount);
 
-        Date date = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
-        String dateNow = simpleDateFormat.format(date);
+        String dateNow = Calendar.getStringNow();
         ChargeAccount newCharge = new ChargeAccount(amount, dateNow);
         me.addChargeAccount(newCharge);
 
@@ -60,7 +60,8 @@ public class UserOptions {
 
     public void timeFilterTransaction(UserAccount me) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-        System.out.println("Enter the start date like this structure year.month.day hour:minute:second(yyyy.MM.dd HH:mm:ss)");
+        String pattern = "year.month.day hour:minute:second(yyyy.MM.dd HH:mm:ss)";
+        System.out.println("Enter the start date like this structure " + pattern);
         String startDate = ScannerWrapper.getInstance().nextLine();
         Date date1;
         try {
@@ -422,10 +423,7 @@ public class UserOptions {
             }
         }
 
-        Date date = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
-        String dateNow = simpleDateFormat.format(date);
-
+        String dateNow = Calendar.getStringNow();
         printRecite(money, me, destinationAccount, dateNow);
         setTransaction(money, me, destinationAccount, dateNow);
 

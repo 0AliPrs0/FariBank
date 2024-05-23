@@ -1,6 +1,6 @@
 package ir.ac.kntu;
 
-public class RequestSupportMenu implements MenuProperty{
+public class RequestSupportMenu implements MenuProperty {
     private static RequestSupportMenu instance = new RequestSupportMenu();
 
     public RequestSupportMenu() {
@@ -39,6 +39,7 @@ public class RequestSupportMenu implements MenuProperty{
             default -> System.out.println("Invalid Input!");
         }
     }
+
     @Override
     public void printTheMenu() {
         System.out.println();
@@ -58,9 +59,9 @@ public class RequestSupportMenu implements MenuProperty{
         RequestSupportField[] options = RequestSupportField.values();
         String inputStr = ScannerWrapper.getInstance().next();
         int input;
-        try{
+        try {
             input = Integer.parseInt(inputStr);
-        }catch (Exception e){
+        } catch (Exception e) {
             return RequestSupportField.UNDEFINED;
         }
         input--;

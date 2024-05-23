@@ -1,6 +1,6 @@
 package ir.ac.kntu;
 
-public class Requests extends User{
+public class Requests extends User {
     private RequestType requestType;
     private ApplicationStatus applicationStatus;
     private String userMassage;
@@ -51,7 +51,7 @@ public class Requests extends User{
 
     @Override
     public String toString() {
-        return  "requestType=" + requestType +
+        return "requestType=" + requestType +
                 ", applicationStatus=" + applicationStatus +
                 ", userMassage='" + userMassage;
     }

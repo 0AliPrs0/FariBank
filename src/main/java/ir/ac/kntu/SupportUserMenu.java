@@ -1,6 +1,6 @@
 package ir.ac.kntu;
 
-public class SupportUserMenu implements MenuProperty{
+public class SupportUserMenu implements MenuProperty {
     private static SupportUserMenu instance = new SupportUserMenu();
 
     public SupportUserMenu() {
@@ -56,9 +56,9 @@ public class SupportUserMenu implements MenuProperty{
         SupportUserField[] options = SupportUserField.values();
         String inputStr = ScannerWrapper.getInstance().next();
         int input;
-        try{
+        try {
             input = Integer.parseInt(inputStr);
-        }catch (Exception e){
+        } catch (Exception e) {
             return SupportUserField.UNDEFINED;
         }
         input--;

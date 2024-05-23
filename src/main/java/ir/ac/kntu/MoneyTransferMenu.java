@@ -1,6 +1,6 @@
 package ir.ac.kntu;
 
-public class MoneyTransferMenu implements MenuProperty{
+public class MoneyTransferMenu implements MenuProperty {
     private static MoneyTransferMenu instance = new MoneyTransferMenu();
 
     public MoneyTransferMenu() {
@@ -9,6 +9,7 @@ public class MoneyTransferMenu implements MenuProperty{
     public static MoneyTransferMenu getInstance() {
         return instance;
     }
+
     public enum ChoseAccountsForTransfer {
         SELECT_MANUALLY,
         SELECT_FROM_RESENT_ACCOUNTS,
@@ -50,9 +51,9 @@ public class MoneyTransferMenu implements MenuProperty{
         ChoseAccountsForTransfer[] options = ChoseAccountsForTransfer.values();
         String inputStr = ScannerWrapper.getInstance().next();
         int input;
-        try{
+        try {
             input = Integer.parseInt(inputStr);
-        }catch (Exception e){
+        } catch (Exception e) {
             return ChoseAccountsForTransfer.UNDEFINED;
         }
         input--;

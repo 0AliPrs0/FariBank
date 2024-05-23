@@ -1,11 +1,11 @@
 package ir.ac.kntu;
 
-public class Authentication extends User{
+public class Authentication extends User {
     private String supportOpinion;
     private boolean isAcceptRequest;
     private boolean isCheckSupport;
 
-    public Authentication(){
+    public Authentication() {
 
     }
 

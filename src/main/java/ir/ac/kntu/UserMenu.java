@@ -1,6 +1,6 @@
 package ir.ac.kntu;
 
-public class UserMenu implements MenuProperty{
+public class UserMenu implements MenuProperty {
     private static UserMenu instance = new UserMenu();
 
     public UserMenu() {
@@ -50,9 +50,9 @@ public class UserMenu implements MenuProperty{
         UserOptionsField[] option = UserOptionsField.values();
         String inputStr = ScannerWrapper.getInstance().next();
         int input;
-        try{
+        try {
             input = Integer.parseInt(inputStr);
-        }catch (Exception e){
+        } catch (Exception e) {
             return UserOptionsField.UNDEFINED;
         }
         input--;
@@ -79,4 +79,4 @@ public class UserMenu implements MenuProperty{
             default -> System.out.println("Invalid Input!");
         }
     }
-    }
+}
