@@ -146,7 +146,8 @@ public class UserOptions {
         int numberOfContact = ScannerWrapper.getInstance().nextInt();
         numberOfContact--;
 
-        handleInformationContact(me, numberOfContact);
+        ContactInformationContact contactInformationContact = new ContactInformationContact();
+        contactInformationContact.implementInformationContact(me, numberOfContact);
     }
 
 
@@ -160,23 +161,7 @@ public class UserOptions {
     }
 
 
-    public void handleInformationContact(UserAccount me, int numberOfContact) {
-        Menus.ContactOption option;
-        do {
-            Menus.getInstance().printTheContactOption();
-            option = Menus.getInstance().getOptionContactOption();
-            handleContactsOption(me, numberOfContact, option);
-        } while (option != Menus.ContactOption.RETURN);
-    }
 
-    public void handleContactsOption(UserAccount me, int numberOfContact, Menus.ContactOption option) {
-        switch (option) {
-            case EDIT_INFORMATION -> editContact(me, numberOfContact);
-            case VIEW_INFORMATION -> viewInformation(me, numberOfContact);
-            case RETURN -> System.out.println();
-            default -> System.out.println("Invalid Input!");
-        }
-    }
 
     public void editContact(UserAccount me, int numberOfContact) {
         System.out.println("Enter the first name of contact: ");

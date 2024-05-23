@@ -2,39 +2,7 @@ package ir.ac.kntu;
 
 public class Menus {
 
-    public enum ContactOption {
-        EDIT_INFORMATION,
-        VIEW_INFORMATION,
-        RETURN,
-        UNDEFINED
-    }
 
-    public void printTheContactOption() {
-        System.out.println();
-        System.out.println("***********************");
-        System.out.println("1- Edit information");
-        System.out.println("2- view information");
-        System.out.println("3- Return");
-        System.out.println("***********************");
-        System.out.println();
-        System.out.print("Select the option: ");
-    }
-
-    public Menus.ContactOption getOptionContactOption() {
-        ContactOption[] options = ContactOption.values();
-        String inputStr = ScannerWrapper.getInstance().next();
-        int input;
-        try{
-            input = Integer.parseInt(inputStr);
-        }catch (Exception e){
-            return ContactOption.UNDEFINED;
-        }
-        input--;
-        if (input >= 0 && input < options.length) {
-            return options[input];
-        }
-        return ContactOption.UNDEFINED;
-    }
 
     public enum SettingOptions {
         CHANGE_PASSWORD,
