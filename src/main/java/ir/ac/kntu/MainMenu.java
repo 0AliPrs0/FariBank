@@ -61,10 +61,10 @@ public class MainMenu implements MenuProperty
     }
 
     public void handleTheMenu(MenuMainField option, Bank myBank){
-    UserHandler userHandler = new UserHandler();
+    UserLoginMenu userLoginMenu = new UserLoginMenu();
     SupportHandler supportHandler = new SupportHandler();
         switch (option) {
-            case USER -> UserHandler.implementTheUserMenu(myBank);
+            case USER -> userLoginMenu.implementMenu(myBank);
             case SUPPORT -> SupportHandler.implementTheSupportMenu(myBank);
             case EXIT -> System.out.println("Exiting the program ...");
             default -> System.out.println("Invalid Input!");

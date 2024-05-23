@@ -4,26 +4,9 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.regex.*;
 
 public class UserHandler {
-    public static void implementTheUserMenu(Bank myBank) {
-        Menus.UserMenu option;
 
-        do {
-            Menus.getInstance().printTheFirstUserMenu();
-            option = Menus.getInstance().getOptionFirstUserMenu();
-            handleTheUserMenu(option, myBank);
-        } while (option != Menus.UserMenu.RETURN);
-    }
 
-    public static void handleTheUserMenu(Menus.UserMenu option, Bank myBank) {
-        switch (option) {
-            case LOG_IN -> handleLogin(myBank);
-            case SIGN_UP -> handleSignUp(myBank);
-            case RETURN -> System.out.println();
-            default -> System.out.println("Invalid input");
-        }
-    }
-
-    public static void handleLogin(Bank myBank) {
+    public void handleLogin(Bank myBank) {
         System.out.print("Enter your phone number: ");
         String phoneNumber = ScannerWrapper.getInstance().next();
 
@@ -39,7 +22,7 @@ public class UserHandler {
         }
     }
 
-    public static UserAccount lookForUser(Bank myBank, String phoneNumber, String password) {
+    public UserAccount lookForUser(Bank myBank, String phoneNumber, String password) {
         for (UserAccount entry : myBank.getUserAccounts()) {
             System.out.println(entry);
             if (entry.getPhoneNumber().equals(phoneNumber) && entry.getPassword().equals(password)) {
@@ -49,7 +32,7 @@ public class UserHandler {
         return null;
     }
 
-    public static Authentication checkInformationAsRequest(String phoneNumber, String password, Bank myBank) {
+    public Authentication checkInformationAsRequest(String phoneNumber, String password, Bank myBank) {
         for (Authentication entry : myBank.getAuthentications()) {
             if (entry.getPhoneNumber().equals(phoneNumber) && entry.getPassword().equals(password)) {
                 return entry;
@@ -60,7 +43,7 @@ public class UserHandler {
     }
 
 
-    public static void firstLogin(Authentication newAuthentication, Bank myBank) {
+    public void firstLogin(Authentication newAuthentication, Bank myBank) {
         if (newAuthentication == null) {
             return;
         }
@@ -78,7 +61,7 @@ public class UserHandler {
         }
     }
 
-    public static UserAccount addUser(Bank myBank, Authentication newAuthentication) {
+    public UserAccount addUser(Bank myBank, Authentication newAuthentication) {
         String fName = newAuthentication.getFirstName();
         String lName = newAuthentication.getLastName();
         String phoneNumber = newAuthentication.getPhoneNumber();
@@ -94,7 +77,7 @@ public class UserHandler {
         return user;
     }
 
-    public static void handleSignUp(Bank myBank) {
+    public void handleSignUp(Bank myBank) {
         System.out.print("Enter your first name: ");
         String fName = ScannerWrapper.getInstance().next();
 
@@ -117,7 +100,7 @@ public class UserHandler {
         }
     }
 
-    public static boolean checkCondition(Bank myBank, String phoneNumber, String id, String password) {
+    public boolean checkCondition(Bank myBank, String phoneNumber, String id, String password) {
         boolean isTherePhoneNumber = checkPhoneNumber(myBank, phoneNumber);
         boolean isThereId = checkId(myBank, id);
         boolean isPasswordSafe = checkPassword(password);
@@ -130,7 +113,7 @@ public class UserHandler {
         return false;
     }
 
-    public static boolean checkPhoneNumber(Bank myBank, String phoneNumber) {
+    public boolean checkPhoneNumber(Bank myBank, String phoneNumber) {
         for (UserAccount entry : myBank.getUserAccounts()) {
             if (entry.getPhoneNumber().equals(phoneNumber)) {
                 System.out.println("There is a same phone number in system!");
@@ -141,7 +124,7 @@ public class UserHandler {
         return false;
     }
 
-    public static boolean checkId(Bank myBank, String id) {
+    public boolean checkId(Bank myBank, String id) {
         for (UserAccount entry : myBank.getUserAccounts()) {
             if (entry.getId().equals(id)) {
                 System.out.println("There is a same id in system!");
@@ -152,7 +135,7 @@ public class UserHandler {
         return false;
     }
 
-    public static boolean checkPassword(String password) {
+    public boolean checkPassword(String password) {
         String patternSmallLetter = "[a-z]+";
         boolean isThereSmallLetter = findRegex(patternSmallLetter, password);
 
@@ -173,7 +156,7 @@ public class UserHandler {
         return false;
     }
 
-    public static boolean findRegex(String pattern, String password) {
+    public boolean findRegex(String pattern, String password) {
         Pattern p = Pattern.compile(pattern);
         Matcher m = p.matcher(password);
         if (m.find()) {
