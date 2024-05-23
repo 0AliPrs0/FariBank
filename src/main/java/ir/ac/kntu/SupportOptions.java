@@ -21,7 +21,7 @@ public class SupportOptions {
         switch (options) {
             case AUTHENTICATION -> authentication(myBank);
             case REQUESTS -> request(myBank);
-//            case USERS -> ;
+            case USERS -> usersInformation(myBank);
             case RETURN -> System.out.println();
             default -> System.out.println("Invalid Input!");
         }
@@ -166,5 +166,143 @@ public class SupportOptions {
                 entry.getValue().setSupportMassage(massageSupport);
             }
         }
+    }
+
+    public static void usersInformation(Bank myBank){
+        Menus.UserInformation option;
+        do {
+            Menus.getInstance().printTheUserInformationMenu();
+            option = Menus.getInstance().getOptionUserInformation();
+            handleUserInformation(option, myBank);
+        } while (option != Menus.UserInformation.RETURN);
+    }
+
+    public static void handleUserInformation(Menus.UserInformation option, Bank myBank){
+        switch (option) {
+            case ALL_USER -> showAllUser(myBank.getUserAccounts());
+            case SEARCH_ACCORDING_TO_FIRST_NAME -> searchAccordingToFirstName(myBank);
+            case SEARCH_ACCORDING_TO_LAST_NAME -> searchAccordingToLastName(myBank);
+            case SEARCH_ACCORDING_TO_PHONE_NUMBER -> searchAccordingToPhoneNumber(myBank);
+            case SEARCH_ACCORDING_TO_FIRST_NAME_AND_LAST_NAME -> searchAccordingToFirstNameAndLastName(myBank);
+            case SEARCH_ACCORDING_TO_FIRST_NAME_AND_PHONE_NUMBER -> searchAccordingToFirstNameAndPhoneNumber(myBank);
+            case SEARCH_ACCORDING_TO_LAST_NAME_AND_PHONE_NUMBER -> searchAccordingToLastNameAndPhoneNumber(myBank);
+            case RETURN -> System.out.println();
+            default -> System.out.println("Invalid Input!");
+        }
+    }
+
+    public static void showAllUser(List<UserAccount> userAccount){
+        int index = 1;
+        for (UserAccount entry : userAccount){
+            System.out.println(index + "- " + entry.getFirstName() + entry.getLastName());
+            index++;
+        }
+        System.out.println("Enter the index of user: ");
+        int userIndex = ScannerWrapper.getInstance().nextInt();
+        UserAccount user = userAccount.get(userIndex - 1);
+        printTheInformationUser(user);
+    }
+
+    public static void searchAccordingToFirstName(Bank myBank){
+        List<UserAccount> userAccounts = new ArrayList<>();
+        System.out.println("Enter the first name of user: ");
+        String firstNameOfUser = ScannerWrapper.getInstance().nextLine();
+
+        for (UserAccount entry : myBank.getUserAccounts()){
+            if (entry.getFirstName().equals(firstNameOfUser)) {
+                userAccounts.add(entry);
+            }
+        }
+        searchResult(userAccounts);
+    }
+
+    public static void searchAccordingToLastName(Bank myBank){
+        List<UserAccount> userAccounts = new ArrayList<>();
+        System.out.println("Enter the last name of user: ");
+        String lastNameOfUser = ScannerWrapper.getInstance().nextLine();
+
+        for (UserAccount entry : myBank.getUserAccounts()){
+            if (entry.getLastName().equals(lastNameOfUser)) {
+                userAccounts.add(entry);
+            }
+        }
+        searchResult(userAccounts);
+    }
+
+    public static void searchAccordingToPhoneNumber(Bank myBank){
+        List<UserAccount> userAccounts = new ArrayList<>();
+        System.out.println("Enter the phone number of user: ");
+        String phoneNumberOfUser = ScannerWrapper.getInstance().nextLine();
+
+        for (UserAccount entry : myBank.getUserAccounts()){
+            if (entry.getPhoneNumber().equals(phoneNumberOfUser)) {
+                userAccounts.add(entry);
+            }
+        }
+        searchResult(userAccounts);
+    }
+
+    public static void searchAccordingToFirstNameAndLastName(Bank myBank){
+        List<UserAccount> userAccounts = new ArrayList<>();
+        System.out.println("Enter the first name of user: ");
+        String firstNameOfUser = ScannerWrapper.getInstance().nextLine();
+        System.out.println("Enter the last name of user: ");
+        String lastNameOfUser = ScannerWrapper.getInstance().nextLine();
+
+        for (UserAccount entry : myBank.getUserAccounts()){
+            if (entry.getFirstName().equals(firstNameOfUser) && entry.getLastName().equals(lastNameOfUser)) {
+                userAccounts.add(entry);
+            }
+        }
+        searchResult(userAccounts);
+    }
+
+    public static void searchAccordingToFirstNameAndPhoneNumber(Bank myBank){
+        List<UserAccount> userAccounts = new ArrayList<>();
+        System.out.println("Enter the first name of user: ");
+        String firstNameOfUser = ScannerWrapper.getInstance().nextLine();
+        System.out.println("Enter the phone number of user: ");
+        String phoneNumberOfUser = ScannerWrapper.getInstance().nextLine();
+
+        for (UserAccount entry : myBank.getUserAccounts()){
+            if (entry.getFirstName().equals(firstNameOfUser) && entry.getPhoneNumber().equals(phoneNumberOfUser)) {
+                userAccounts.add(entry);
+            }
+        }
+        searchResult(userAccounts);
+    }
+
+    public static void searchAccordingToLastNameAndPhoneNumber(Bank myBank){
+        List<UserAccount> userAccounts = new ArrayList<>();
+        System.out.println("Enter the last name of user: ");
+        String lastNameOfUser = ScannerWrapper.getInstance().nextLine();
+        System.out.println("Enter the phone number of user: ");
+        String phoneNumberOfUser = ScannerWrapper.getInstance().nextLine();
+
+        for (UserAccount entry : myBank.getUserAccounts()){
+            if (entry.getLastName().equals(lastNameOfUser) && entry.getPhoneNumber().equals(phoneNumberOfUser)) {
+                userAccounts.add(entry);
+            }
+        }
+        searchResult(userAccounts);
+    }
+
+    public static void searchResult(List<UserAccount> userAccounts){
+        if (userAccounts.isEmpty()) {
+            System.out.println("Not found user!");
+        } else if (userAccounts.size() == 1) {
+            printTheInformationUser(userAccounts.get(0));
+        }else {
+            showAllUser(userAccounts);
+        }
+    }
+
+    public static void printTheInformationUser(UserAccount user){
+        System.out.println("name: " + user.getFirstName() + user.getLastName());
+        System.out.println("phone number: " + user.getPhoneNumber());
+        System.out.println("account number: " + user.getAccountNumber());
+        System.out.println("transactions :");
+        System.out.println("charge account: " + user.getChargeAccounts());
+        System.out.println("transfers: " + user.getTransfers());
     }
 }

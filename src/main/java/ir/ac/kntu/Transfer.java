@@ -60,11 +60,9 @@ public class Transfer {
 
     @Override
     public String toString() {
-        return "Transfer{" +
-                "beginningAccountNumber=" + beginningAccountNumber +
+        return  "beginningAccountNumber=" + beginningAccountNumber +
                 ", destinationAccountNumber=" + destinationAccountNumber +
                 ", nameOfDestinationAccountOwner='" + nameOfDestinationAccountOwner + '\'' +
-                ", dateOfTransfer='" + dateOfTransfer + '\'' +
-                '}';
+                ", dateOfTransfer='" + dateOfTransfer ;
     }
 }

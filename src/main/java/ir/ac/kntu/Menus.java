@@ -455,7 +455,7 @@ public class Menus {
         UNDEFINED
     }
 
-    public void printTheUserInformation() {
+    public void printTheUserInformationMenu() {
         System.out.println();
         System.out.println("***********************");
         System.out.println("1- All User");
