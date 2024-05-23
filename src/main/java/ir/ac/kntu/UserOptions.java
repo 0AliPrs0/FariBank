@@ -277,27 +277,6 @@ public class UserOptions {
     }
 
 
-    public void settings(UserAccount me) {
-        Menus.SettingOptions option;
-        do {
-            Menus.getInstance().printTheSettingOption();
-            option = Menus.getInstance().getOptionSettingOption();
-            handleSettingsOption(me, option);
-        } while (option != Menus.SettingOptions.RETURN);
-    }
-
-    public void handleSettingsOption(UserAccount me, Menus.SettingOptions option) {
-        switch (option) {
-            case CHANGE_PASSWORD -> handleChangePassword(me);
-            case REGISTER_CARD_PASSWORD -> handleRegisterCardPassword(me);
-            case CHANGE_CARD_PASSWORD -> handleChangeCardPassword(me);
-            case ACTIVATION_CONTACT_KEYWORD -> handleActivationContactKeyword(me);
-            case INACTIVATION_CONTACT_KEYWORD -> handleInactivationContactKeyword(me);
-            case RETURN -> System.out.println();
-            default -> System.out.println("Invalid Input!");
-        }
-    }
-
     public void handleChangePassword(UserAccount me) {
         System.out.println("Enter new password: ");
         String password = ScannerWrapper.getInstance().next();
