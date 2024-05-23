@@ -12,12 +12,12 @@ public class SupportOptions {
         do {
             Menus.getInstance().printTheSupportMenu();
             option = Menus.getInstance().getOptionSupportMenu();
-            handleTheSupportMenu(option, myBank, support);
+//            handleTheSupportMenu(option, myBank, support);
         } while (option != Menus.MenuSupport.RETURN);
 
     }
 
-    public static void handleTheSupportMenu(Menus.MenuSupport options, Bank myBank, Support support) {
+    public  void handleTheSupportMenu(Menus.MenuSupport options, Bank myBank, Support support) {
         switch (options) {
             case AUTHENTICATION -> authentication(myBank);
             case REQUESTS -> request(myBank);
