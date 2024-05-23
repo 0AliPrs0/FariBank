@@ -70,21 +70,3 @@ public class ContactMenu implements MenuProperty{
 
 
 }
-//    public void accountManagement(UserAccount me) {
-//        MenuContactField option;
-//        do {
-//            printTheMenu();
-//            option = getOption();
-//            handleAccountManagement(me, option);
-//        } while (option != Menus.AccountManagementOption.RETURN);
-//    }
-//    public void handleAccountManagement(UserAccount me, Menus.AccountManagementOption option) {
-//        switch (option) {
-//            case CHARGED_ACCOUNT -> chargeAccount(me);
-//            case BALANCE -> balance(me);
-//            case TRANSACTION -> transaction(me.getChargeAccounts(), me.getTransfers());
-//            case TIME_FILTER_TRANSACTION -> timeFilterTransaction(me);
-//            case RETURN -> System.out.println();
-//            default -> System.out.println("Invalid Input!");
-//        }
-//    }

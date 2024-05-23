@@ -2,8 +2,6 @@ package ir.ac.kntu;
 
 public class Menus {
 
-
-
     public enum ContactOption {
         EDIT_INFORMATION,
         VIEW_INFORMATION,
@@ -78,43 +76,7 @@ public class Menus {
         return SettingOptions.UNDEFINED;
     }
 
-    public enum AccountManagementOption {
-        CHARGED_ACCOUNT,
-        BALANCE,
-        TRANSACTION,
-        TIME_FILTER_TRANSACTION,
-        RETURN,
-        UNDEFINED
-    }
 
-    public void printTheAccountManagement() {
-        System.out.println();
-        System.out.println("***********************");
-        System.out.println("1- Charge account");
-        System.out.println("2- Balance");
-        System.out.println("3- Transaction");
-        System.out.println("4- Time filter transaction");
-        System.out.println("5- Return");
-        System.out.println("***********************");
-        System.out.println();
-        System.out.print("Select the option: ");
-    }
-
-    public Menus.AccountManagementOption getOptionAccountManagement() {
-        AccountManagementOption[] options = AccountManagementOption.values();
-        String inputStr = ScannerWrapper.getInstance().next();
-        int input;
-        try{
-            input = Integer.parseInt(inputStr);
-        }catch (Exception e){
-            return AccountManagementOption.UNDEFINED;
-        }
-        input--;
-        if (input >= 0 && input < options.length) {
-            return options[input];
-        }
-        return AccountManagementOption.UNDEFINED;
-    }
 
     public enum SupportUser {
         REGISTER_MASSAGE,
