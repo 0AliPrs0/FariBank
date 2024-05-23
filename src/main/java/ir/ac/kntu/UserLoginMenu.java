@@ -17,7 +17,6 @@ public class UserLoginMenu implements MenuProperty{
         UNDEFINED
     }
 
-    @Override
     public void implementMenu(Bank myBank) {
         UserLoginField option;
         do {

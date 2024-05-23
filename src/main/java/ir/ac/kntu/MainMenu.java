@@ -18,15 +18,14 @@ public class MainMenu implements MenuProperty
         UNDEFINED
     }
 
-    @Override
     public void implementMenu(Bank myBank){
-        MenuMainField role;
+        MenuMainField option;
 
         do {
             printTheMenu();
-            role = getOption();
-            handleTheMenu(role, myBank);
-        } while (role != MenuMainField.EXIT);
+            option = getOption();
+            handleTheMenu(option, myBank);
+        } while (option != MenuMainField.EXIT);
 
         ScannerWrapper.getInstance().close();
     }
@@ -40,12 +39,12 @@ public class MainMenu implements MenuProperty
         System.out.println("3- Exit");
         System.out.println("***********************");
         System.out.println();
-        System.out.print("Select your roles: ");
+        System.out.print("Select your options: ");
     }
 
     @Override
     public MenuMainField getOption() {
-        MenuMainField[] roles = MenuMainField.values();
+        MenuMainField[] options = MenuMainField.values();
         String inputStr = ScannerWrapper.getInstance().next();
         int input;
         try{
@@ -54,8 +53,8 @@ public class MainMenu implements MenuProperty
             return MenuMainField.UNDEFINED;
         }
         input--;
-        if (input >= 0 && input < roles.length) {
-            return roles[input];
+        if (input >= 0 && input < options.length) {
+            return options[input];
         }
         return MenuMainField.UNDEFINED;
     }
@@ -65,7 +64,7 @@ public class MainMenu implements MenuProperty
     SupportHandler supportHandler = new SupportHandler();
         switch (option) {
             case USER -> userLoginMenu.implementMenu(myBank);
-            case SUPPORT -> SupportHandler.implementTheSupportMenu(myBank);
+//            case SUPPORT -> SupportHandler.implementTheSupportMenu(myBank);
             case EXIT -> System.out.println("Exiting the program ...");
             default -> System.out.println("Invalid Input!");
         }

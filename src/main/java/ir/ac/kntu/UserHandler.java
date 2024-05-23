@@ -18,7 +18,8 @@ public class UserHandler {
             Authentication newAuthentication = checkInformationAsRequest(phoneNumber, password, myBank);
             firstLogin(newAuthentication, myBank);
         } else {
-            UserOptions.handleUserOptions(myBank, newUser);
+            UserMenu userMenu = new UserMenu();
+            userMenu.implementMenu(myBank, newUser);
         }
     }
 
@@ -57,7 +58,8 @@ public class UserHandler {
             System.out.println("Support massage: " + newAuthentication.getSupportOpinion());
         } else {
             UserAccount newUser = addUser(myBank, newAuthentication);
-            UserOptions.handleUserOptions(myBank, newUser);
+            UserMenu userMenu = new UserMenu();
+            userMenu.implementMenu(myBank, newUser);
         }
     }
 

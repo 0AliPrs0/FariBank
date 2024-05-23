@@ -3,45 +3,6 @@ package ir.ac.kntu;
 public class Menus {
 
 
-    public enum UserOptions {
-        ACCOUNT_MANAGEMENT,
-        CONTACTS,
-        MONEY_TRANSFER,
-        SUPPORT,
-        SETTINGS,
-        RETURN,
-        UNDEFINED
-    }
-
-    public void printTheSecondUserMenu() {
-        System.out.println();
-        System.out.println("***********************");
-        System.out.println("1- Account management");
-        System.out.println("2- Contacts");
-        System.out.println("3- Money transfer");
-        System.out.println("4- Support");
-        System.out.println("5- Settings");
-        System.out.println("6- Return");
-        System.out.println("***********************");
-        System.out.println();
-        System.out.print("Select your roles: ");
-    }
-
-    public Menus.UserOptions getOptionSecondUserMenu() {
-        UserOptions[] roles = UserOptions.values();
-        String inputStr = ScannerWrapper.getInstance().next();
-        int input;
-        try{
-            input = Integer.parseInt(inputStr);
-        }catch (Exception e){
-            return UserOptions.UNDEFINED;
-        }
-        input--;
-        if (input >= 0 && input < roles.length) {
-            return roles[input];
-        }
-        return UserOptions.UNDEFINED;
-    }
 
     public enum MenuSupport {
         AUTHENTICATION,
