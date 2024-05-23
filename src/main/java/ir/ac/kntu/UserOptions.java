@@ -382,21 +382,7 @@ public class UserOptions {
         }
     }
 
-    public void moneyTransfer(UserAccount me, Bank myBank) {
-        Menus.ChoseAccountsForTransfer option;
-        Menus.getInstance().printTheChoseAccounts();
-        option = Menus.getInstance().getOptionChoseAccounts();
-        handleTransfer(me, option, myBank);
-    }
 
-    public void handleTransfer(UserAccount me, Menus.ChoseAccountsForTransfer option, Bank myBank) {
-        switch (option) {
-            case SELECT_MANUALLY -> handleSelectManually(me, myBank);
-            case SELECT_FROM_RESENT_ACCOUNTS -> handleSelectFromResentAccount(me, myBank);
-            case SELECT_FROM_CONTACTS -> handleSelectFromContacts(me, myBank);
-            default -> System.out.println("Invalid Input!");
-        }
-    }
 
     public void handleSelectManually(UserAccount me, Bank myBank) {
         System.out.print("Enter the account number: ");
