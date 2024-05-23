@@ -51,27 +51,6 @@ public class SupportOptions {
 
     }
 
-    public void request(Bank myBank) {
-        Menus.RequestSupport option;
-
-//        do {
-//            Menus.getInstance().printTheRequestSupport();
-//            option = Menus.getInstance().getOptionRequestSupport();
-//            handleRequestSupport(option, myBank);
-//        } while (option != Menus.RequestSupport.RETURN);
-    }
-
-    public void handleRequestSupport(Menus.RequestSupport option, Bank myBank) {
-        switch (option) {
-            case ALL_REQUEST -> showRequest(myBank, myBank.getRequest());
-            case REQUEST_ACCORDING_TO_REQUEST_TYPE -> requestAccordingToRequestType(myBank);
-            case REQUEST_ACCORDING_TO_APPLICATION_STATUS -> requestAccordingToApplicationStatus(myBank);
-            case REQUEST_ACCORDING_TO_USER -> requestAccordingToUser(myBank);
-            case RETURN -> System.out.println();
-            default -> System.out.println("Invalid Input!");
-        }
-    }
-
     public void requestAccordingToRequestType(Bank myBank) {
         System.out.print("Enter the request type: ");
         String requestType = ScannerWrapper.getInstance().next();
@@ -148,30 +127,6 @@ public class SupportOptions {
             }
         }
     }
-
-    public void usersInformation(Bank myBank) {
-        Menus.UserInformation option;
-//        do {
-//            Menus.getInstance().printTheUserInformationMenu();
-//            option = Menus.getInstance().getOptionUserInformation();
-//            handleUserInformation(option, myBank);
-//        } while (option != Menus.UserInformation.RETURN);
-    }
-
-    public void handleUserInformation(Menus.UserInformation option, Bank myBank) {
-        switch (option) {
-            case ALL_USER -> showAllUser(myBank.getUserAccounts());
-            case SEARCH_ACCORDING_TO_FIRST_NAME -> searchAccordingToFirstName(myBank);
-            case SEARCH_ACCORDING_TO_LAST_NAME -> searchAccordingToLastName(myBank);
-            case SEARCH_ACCORDING_TO_PHONE_NUMBER -> searchAccordingToPhoneNumber(myBank);
-            case SEARCH_ACCORDING_TO_FIRST_NAME_AND_LAST_NAME -> searchAccordingToFirstNameAndLastName(myBank);
-            case SEARCH_ACCORDING_TO_FIRST_NAME_AND_PHONE_NUMBER -> searchAccordingToFirstNameAndPhoneNumber(myBank);
-            case SEARCH_ACCORDING_TO_LAST_NAME_AND_PHONE_NUMBER -> searchAccordingToLastNameAndPhoneNumber(myBank);
-            case RETURN -> System.out.println();
-            default -> System.out.println("Invalid Input!");
-        }
-    }
-
     public void showAllUser(List<UserAccount> userAccount) {
         int index = 1;
         for (UserAccount entry : userAccount) {

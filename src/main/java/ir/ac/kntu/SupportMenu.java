@@ -31,10 +31,12 @@ public class SupportMenu implements MenuProperty {
 
     public void handleTheSupportMenu(MenuSupportField options, Bank myBank) {
         SupportOptions supportOptions = new SupportOptions();
+        RequestSupportMenu requestSupportMenu = new RequestSupportMenu();
+        UserInformationMenu userInformationMenu = new UserInformationMenu();
         switch (options) {
             case AUTHENTICATION -> supportOptions.authentication(myBank);
-            case REQUESTS -> supportOptions.request(myBank);
-            case USERS -> supportOptions.usersInformation(myBank);
+            case REQUESTS -> requestSupportMenu.implementRequestSupport(myBank);
+            case USERS -> userInformationMenu.implementUsersInformation(myBank);
             case RETURN -> System.out.println();
             default -> System.out.println("Invalid Input!");
         }

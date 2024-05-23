@@ -9,6 +9,7 @@ public class RequestSupportMenu implements MenuProperty{
     public static RequestSupportMenu getInstance() {
         return instance;
     }
+
     public enum RequestSupportField {
         ALL_REQUEST,
         REQUEST_ACCORDING_TO_REQUEST_TYPE,
