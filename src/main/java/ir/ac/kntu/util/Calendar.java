@@ -19,7 +19,6 @@ public final class Calendar {
     public static String getStringNow() {
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
-        String dateNow = simpleDateFormat.format(date);
-        return dateNow;
+        return simpleDateFormat.format(date);
     }
 }

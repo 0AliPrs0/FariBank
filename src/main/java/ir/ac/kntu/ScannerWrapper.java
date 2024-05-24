@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class ScannerWrapper {
 
-    private static ScannerWrapper instance = new ScannerWrapper();
-    private Scanner scanner;
+    private static final ScannerWrapper instance = new ScannerWrapper();
+    private final Scanner scanner;
 
     private ScannerWrapper() {
         scanner = new Scanner(System.in);

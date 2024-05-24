@@ -30,9 +30,7 @@ public class RecentlyAccountForTransfer {
 
     @Override
     public String toString() {
-        return "RecentlyAccountForTransfer{" +
-                "name='" + name + '\'' +
-                ", accountNumber=" + accountNumber +
-                '}';
+        return  "name='" + name + '\'' +
+                ", accountNumber=" + accountNumber;
     }
 }

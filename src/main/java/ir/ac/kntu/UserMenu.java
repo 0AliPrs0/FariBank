@@ -63,7 +63,6 @@ public class UserMenu implements MenuProperty {
     }
 
     public static void handleTheUserMenu(UserOptionsField options, Bank myBank, UserAccount me) {
-        UserOptions userOptions = new UserOptions();
         ContactMenu contactMenu = new ContactMenu();
         AccountManagementMenu accountManagementMenu = new AccountManagementMenu();
         MoneyTransferMenu moneyTransferMenu = new MoneyTransferMenu();

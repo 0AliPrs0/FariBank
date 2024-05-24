@@ -1,7 +1,8 @@
 package ir.ac.kntu;
 
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UserHandler {
 
@@ -25,7 +26,6 @@ public class UserHandler {
 
     public UserAccount lookForUser(Bank myBank, String phoneNumber, String password) {
         for (UserAccount entry : myBank.getUserAccounts()) {
-            System.out.println(entry);
             if (entry.getPhoneNumber().equals(phoneNumber) && entry.getPassword().equals(password)) {
                 return entry;
             }
@@ -97,7 +97,7 @@ public class UserHandler {
 
         boolean isTrueCondition = checkCondition(myBank, phoneNumber, id, password);
         if (isTrueCondition) {
-            Authentication newAuthentication = new Authentication(fName, lName, phoneNumber, id, password, "", true, true);
+            Authentication newAuthentication = new Authentication(fName, lName, phoneNumber, id, password, "", false, false);
             myBank.getAuthentications().add(newAuthentication);
         }
     }
@@ -161,9 +161,6 @@ public class UserHandler {
     public boolean findRegex(String pattern, String password) {
         Pattern p = Pattern.compile(pattern);
         Matcher m = p.matcher(password);
-        if (m.find()) {
-            return true;
-        }
-        return false;
+        return m.find();
     }
 }

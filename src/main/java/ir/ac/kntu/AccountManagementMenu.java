@@ -50,7 +50,7 @@ public class AccountManagementMenu implements MenuProperty {
     @Override
     public AccountManagementOption getOption() {
         AccountManagementOption[] options = AccountManagementOption.values();
-        String inputStr = ScannerWrapper.getInstance().next();
+        String inputStr = ScannerWrapper.getInstance().nextLine();
         int input;
         try {
             input = Integer.parseInt(inputStr);

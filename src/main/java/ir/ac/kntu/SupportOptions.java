@@ -11,7 +11,7 @@ public class SupportOptions {
     public void authentication(Bank myBank) {
         List<Authentication> authentications = new ArrayList<>();
         for (int i = 0; i < myBank.getAuthentications().size(); i++) {
-            if (!myBank.getAuthentications().get(0).isCheckSupport()) {
+            if (!myBank.getAuthentications().get(i).isCheckSupport()) {
                 authentications.add(myBank.getAuthentications().get(i));
             }
         }
@@ -88,6 +88,10 @@ public class SupportOptions {
     }
 
     public void showRequest(Bank myBank, Map<String, Requests> requests) {
+        if(requests.isEmpty()){
+            System.out.println("The list is empty");
+            return;
+        }
         List<String> phoneNumbers = new ArrayList<>();
         Map<Integer, Requests> requestsMap = new HashMap<>();
         int index = 1;
@@ -111,8 +115,14 @@ public class SupportOptions {
         System.out.println("If you want fix this problem");
         System.out.println("1- Yes");
         System.out.println("2- No");
-        int input = ScannerWrapper.getInstance().nextInt();
-        if (input == 2) {
+        String input = ScannerWrapper.getInstance().nextLine();
+        int number;
+        try{
+            number = Integer.parseInt(input);
+        }catch (Exception e){
+            return;
+        }
+        if (number == 2) {
             return;
         }
 
@@ -129,6 +139,10 @@ public class SupportOptions {
     }
 
     public void showAllUser(List<UserAccount> userAccount) {
+        if (userAccount.isEmpty()) {
+            System.out.println("The list is empty");
+            return;
+        }
         int index = 1;
         for (UserAccount entry : userAccount) {
             System.out.println(index + "- " + entry.getFirstName() + entry.getLastName());
@@ -143,7 +157,7 @@ public class SupportOptions {
     public void searchAccordingToFirstName(Bank myBank) {
         List<UserAccount> userAccounts = new ArrayList<>();
         System.out.println("Enter the first name of user: ");
-        String firstNameOfUser = ScannerWrapper.getInstance().nextLine();
+        String firstNameOfUser = ScannerWrapper.getInstance().next();
 
         for (UserAccount entry : myBank.getUserAccounts()) {
             if (entry.getFirstName().equals(firstNameOfUser)) {
@@ -156,7 +170,7 @@ public class SupportOptions {
     public void searchAccordingToLastName(Bank myBank) {
         List<UserAccount> userAccounts = new ArrayList<>();
         System.out.println("Enter the last name of user: ");
-        String lastNameOfUser = ScannerWrapper.getInstance().nextLine();
+        String lastNameOfUser = ScannerWrapper.getInstance().next();
 
         for (UserAccount entry : myBank.getUserAccounts()) {
             if (entry.getLastName().equals(lastNameOfUser)) {
@@ -182,9 +196,9 @@ public class SupportOptions {
     public void searchAccordingToFirstNameAndLastName(Bank myBank) {
         List<UserAccount> userAccounts = new ArrayList<>();
         System.out.println("Enter the first name of user: ");
-        String firstNameOfUser = ScannerWrapper.getInstance().nextLine();
+        String firstNameOfUser = ScannerWrapper.getInstance().next();
         System.out.println("Enter the last name of user: ");
-        String lastNameOfUser = ScannerWrapper.getInstance().nextLine();
+        String lastNameOfUser = ScannerWrapper.getInstance().next();
 
         for (UserAccount entry : myBank.getUserAccounts()) {
             if (entry.getFirstName().equals(firstNameOfUser) && entry.getLastName().equals(lastNameOfUser)) {
@@ -197,9 +211,9 @@ public class SupportOptions {
     public void searchAccordingToFirstNameAndPhoneNumber(Bank myBank) {
         List<UserAccount> userAccounts = new ArrayList<>();
         System.out.println("Enter the first name of user: ");
-        String firstNameOfUser = ScannerWrapper.getInstance().nextLine();
+        String firstNameOfUser = ScannerWrapper.getInstance().next();
         System.out.println("Enter the phone number of user: ");
-        String phoneNumberOfUser = ScannerWrapper.getInstance().nextLine();
+        String phoneNumberOfUser = ScannerWrapper.getInstance().next();
 
         for (UserAccount entry : myBank.getUserAccounts()) {
             if (entry.getFirstName().equals(firstNameOfUser) && entry.getPhoneNumber().equals(phoneNumberOfUser)) {
@@ -212,9 +226,9 @@ public class SupportOptions {
     public void searchAccordingToLastNameAndPhoneNumber(Bank myBank) {
         List<UserAccount> userAccounts = new ArrayList<>();
         System.out.println("Enter the last name of user: ");
-        String lastNameOfUser = ScannerWrapper.getInstance().nextLine();
+        String lastNameOfUser = ScannerWrapper.getInstance().next();
         System.out.println("Enter the phone number of user: ");
-        String phoneNumberOfUser = ScannerWrapper.getInstance().nextLine();
+        String phoneNumberOfUser = ScannerWrapper.getInstance().next();
 
         for (UserAccount entry : myBank.getUserAccounts()) {
             if (entry.getLastName().equals(lastNameOfUser) && entry.getPhoneNumber().equals(phoneNumberOfUser)) {
@@ -235,7 +249,7 @@ public class SupportOptions {
     }
 
     public void printTheInformationUser(UserAccount user) {
-        System.out.println("name: " + user.getFirstName() + user.getLastName());
+        System.out.println("name: " + user.getFirstName() + " " + user.getLastName());
         System.out.println("phone number: " + user.getPhoneNumber());
         System.out.println("account number: " + user.getAccountNumber());
         System.out.println("transactions :");

@@ -16,6 +16,7 @@ public class SettingMenu implements MenuProperty{
         CHANGE_CARD_PASSWORD,
         ACTIVATION_CONTACT_KEYWORD,
         INACTIVATION_CONTACT_KEYWORD,
+        SHOW_ACCOUNT_NUMBER,
         RETURN,
         UNDEFINED
     }
@@ -37,6 +38,7 @@ public class SettingMenu implements MenuProperty{
             case CHANGE_CARD_PASSWORD -> userOptions.handleChangeCardPassword(me);
             case ACTIVATION_CONTACT_KEYWORD -> userOptions.handleActivationContactKeyword(me);
             case INACTIVATION_CONTACT_KEYWORD -> userOptions.handleInactivationContactKeyword(me);
+            case SHOW_ACCOUNT_NUMBER -> System.out.println(me.getAccountNumber());
             case RETURN -> System.out.println();
             default -> System.out.println("Invalid Input!");
         }
@@ -50,7 +52,8 @@ public class SettingMenu implements MenuProperty{
         System.out.println("3- change card password");
         System.out.println("4- Activation contact keyword");
         System.out.println("5- Inactivation contact keyword");
-        System.out.println("6- Return");
+        System.out.println("6- Show account number");
+        System.out.println("7- Return");
         System.out.println("***********************");
         System.out.println();
         System.out.print("Select the option: ");

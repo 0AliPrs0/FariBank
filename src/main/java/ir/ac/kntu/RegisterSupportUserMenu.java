@@ -35,7 +35,7 @@ public class RegisterSupportUserMenu implements MenuProperty {
             case REPORT -> userOptions.handleReportOfSupportUser(myBank, me);
             case CONTACTS -> userOptions.handleContactOfSupportUser(myBank, me);
             case TRANSFER -> userOptions.handleTransferOfSupportUser(myBank, me);
-            case SETTING -> userOptions.handleActivationContactKeyword(me);
+            case SETTING -> userOptions.handleSettingOfSupportUser(myBank, me);
             case RETURN -> System.out.println();
             default -> System.out.println("Invalid Input!");
         }
@@ -58,7 +58,7 @@ public class RegisterSupportUserMenu implements MenuProperty {
     @Override
     public RegisterSupportUserField getOption() {
         RegisterSupportUserField[] options = RegisterSupportUserField.values();
-        String inputStr = ScannerWrapper.getInstance().next();
+        String inputStr = ScannerWrapper.getInstance().nextLine();
         int input;
         try {
             input = Integer.parseInt(inputStr);

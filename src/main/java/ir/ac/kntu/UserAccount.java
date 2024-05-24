@@ -44,8 +44,12 @@ public class UserAccount extends User {
         this.accountNumber = accountNumber;
     }
 
-    public List<RecentlyAccountForTransfer> getRecentlyAccountNumberForTransfer() {
-        return recentlyAccountNumberForTransfer;
+    public ArrayList<RecentlyAccountForTransfer> getRecentlyAccountNumberForTransfer() {
+        return (ArrayList<RecentlyAccountForTransfer>)recentlyAccountNumberForTransfer;
+    }
+
+    public void addRecentlyAccountNumberForTransfer(RecentlyAccountForTransfer recentlyAccountForTransfer){
+        recentlyAccountNumberForTransfer.add(recentlyAccountForTransfer);
     }
 
     public ArrayList<Contact> getMyContacts() {

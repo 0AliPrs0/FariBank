@@ -19,27 +19,25 @@ public class SupportHandler {
     public static Support logInSupport(Bank myBank) {
         Support support = new Support();
 
-        System.out.print("Enter your name: ");
-        String name = ScannerWrapper.getInstance().next();
-
         System.out.print("Enter your user name: ");
         String userName = ScannerWrapper.getInstance().next();
 
         System.out.print("Enter your password: ");
         String password = ScannerWrapper.getInstance().next();
 
-        boolean isTrueInformation = checkInformation(myBank, name, userName, password);
+        boolean isTrueInformation = checkInformation(myBank, userName, password);
         if (isTrueInformation) {
-            support.setName(name);
             support.setUserName(userName);
             support.setPassword(password);
+            return support;
         }
-        return support;
+        System.out.println("There is not Admin with this information!");
+        return null;
     }
 
-    public static boolean checkInformation(Bank myBank, String name, String userName, String password) {
+    public static boolean checkInformation(Bank myBank, String userName, String password) {
         for (Support entry : myBank.getSupports()) {
-            if (entry.getName().equals(name) && entry.getUserName().equals(userName) && entry.getPassword().equals(password)) {
+            if (entry.getUserName().equals(userName) && entry.getPassword().equals(password)) {
                 return true;
             }
         }
