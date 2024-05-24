@@ -13,11 +13,11 @@ public class UserOptions {
 
 
     public void chargeAccount(UserAccount myAccount) {
-        System.out.print("Enter the amount of money: ");
+        System.out.print(Color.YELLOW + "Enter the amount of money: ");
         int amount = ScannerWrapper.getInstance().nextInt();
 
         myAccount.setBalanceAccount(myAccount.getBalanceAccount() + amount);
-        System.out.println("Your account increased by " + amount);
+        System.out.println(Color.YELLOW + "Your account increased by " + amount);
 
         String dateNow = Calendar.getStringNow();
         ChargeAccount newCharge = new ChargeAccount(amount, dateNow);
@@ -26,23 +26,22 @@ public class UserOptions {
     }
 
     public void balance(UserAccount myAccount) {
-        System.out.println("Your balance account is: " + myAccount.getBalanceAccount());
+        System.out.println(Color.BLUE + "Your balance account is: " + Color.GREEN + myAccount.getBalanceAccount());
     }
 
     public void transaction(List<ChargeAccount> chargeAccounts, List<Transfer> transfers) {
         int index = 1;
-        System.out.println("List of charge account: ");
+        System.out.println(Color.YELLOW + "List of charge account: ");
         for (int i = chargeAccounts.size() - 1; i >= 0; i--) {
-            System.out.println(index + "- " + chargeAccounts.get(i).getChargeAmount());
+            System.out.println(Color.GREEN + index + "- " + Color.BLUE + chargeAccounts.get(i).getChargeAmount());
             index++;
         }
 
-        System.out.println("-------------------------------------");
-        System.out.println("List of transfer: ");
+        System.out.println(Color.RED + "-------------------------------------");
+        System.out.println(Color.YELLOW + "List of transfer: ");
         for (int i = transfers.size() - 1; i >= 0; i--) {
             int amountTransfer = transfers.get(i).getAmountTransfer();
-            int destinationAccountNumber = transfers.get(i).getDestinationAccountNumber();
-            System.out.println(index + "- " + amountTransfer);
+            System.out.println(Color.GREEN + index + "- " + Color.BLUE + amountTransfer);
             index++;
         }
         showTransactionDetail(chargeAccounts, transfers);
@@ -52,7 +51,7 @@ public class UserOptions {
         if (chargeAccounts.isEmpty() && transfers.isEmpty()) {
             return;
         }
-        System.out.println("Enter the number of transaction: ");
+        System.out.println(Color.YELLOW + "Enter the number of transaction: ");
         int index = ScannerWrapper.getInstance().nextInt();
 
         if (index <= chargeAccounts.size()) {
@@ -66,23 +65,23 @@ public class UserOptions {
     public void timeFilterTransaction(UserAccount myAccount) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
         String pattern = "year.month.day hour:minute:second(yyyy.MM.dd HH:mm:ss)";
-        System.out.println("Enter the start date like this structure " + pattern);
+        System.out.println(Color.YELLOW + "Enter the start date like this structure " + pattern);
         String startDate = ScannerWrapper.getInstance().nextLine();
         Date date1;
         try {
             date1 = simpleDateFormat.parse(startDate);
         } catch (Exception e) {
-            System.out.println("invalid input");
+            System.out.println(Color.RED + "invalid input");
             return;
         }
 
-        System.out.println("Enter the end date like this structure " + pattern);
+        System.out.println(Color.YELLOW + "Enter the end date like this structure " + pattern);
         String endDate = ScannerWrapper.getInstance().nextLine();
         Date date2;
         try {
             date2 = simpleDateFormat.parse(endDate);
         } catch (Exception e) {
-            System.out.println("invalid input");
+            System.out.println(Color.RED + "invalid input");
             return;
         }
 
@@ -122,13 +121,13 @@ public class UserOptions {
 
 
     public void addContact(UserAccount myAccount) {
-        System.out.println("Enter the first name of contact: ");
+        System.out.print(Color.YELLOW + "Enter the first name of contact: ");
         String fName = ScannerWrapper.getInstance().next();
 
-        System.out.println("Enter the last name of contact: ");
+        System.out.print(Color.YELLOW + "Enter the last name of contact: ");
         String lName = ScannerWrapper.getInstance().next();
 
-        System.out.println("Enter the phone number name of contact: ");
+        System.out.print(Color.YELLOW + "Enter the phone number name of contact: ");
         String phoneNumber = ScannerWrapper.getInstance().next();
 
         boolean isTherePhoneNumber = checkPhoneNumber(myAccount, phoneNumber);
@@ -136,17 +135,17 @@ public class UserOptions {
             Contact newContact = new Contact(fName, lName, phoneNumber);
             myAccount.getMyContacts().add(newContact);
         } else {
-            System.out.println("There is samyAccount phone number in your contacts");
+            System.out.println(Color.RED + "There is same phone number in your contacts!");
         }
     }
 
     public void viewInformationContact(UserAccount myAccount) {
         for (int i = 1; i <= myAccount.getMyContacts().size(); i++) {
             Contact contact = myAccount.getMyContacts().get(i - 1);
-            System.out.println(i + "- " + contact.getFirstName() + " " + contact.getLName());
+            System.out.println(Color.GREEN + i + "- " + Color.RED + contact.getFirstName() + " " + contact.getLName());
         }
         System.out.println();
-        System.out.println("Chose the contact (Enter the number of contact) : ");
+        System.out.println(Color.YELLOW + "Chose the contact (Enter the number of contact) : ");
         int numberOfContact = ScannerWrapper.getInstance().nextInt();
         numberOfContact--;
 
@@ -166,10 +165,10 @@ public class UserOptions {
 
 
     public void editContact(UserAccount myAccount, int numberOfContact) {
-        System.out.println("Enter the new first name of contact: ");
+        System.out.print(Color.YELLOW + "Enter the new first name of contact: ");
         String newFirstname = ScannerWrapper.getInstance().next();
 
-        System.out.println("Enter the new last name of contact: ");
+        System.out.print(Color.YELLOW + "Enter the new last name of contact: ");
         String newLastname = ScannerWrapper.getInstance().next();
 
         String phoneNumber = myAccount.getMyContacts().get(numberOfContact).getPhoneNumber();
@@ -186,7 +185,7 @@ public class UserOptions {
         }
 
         myAccount.getMyContacts().set(numberOfContact, editContact);
-        System.out.println("The information of contact was changed");
+        System.out.println(Color.GREEN + "The information of contact was changed");
     }
 
     public void viewInformation(UserAccount myAccount, int numberOfContact) {
@@ -196,7 +195,7 @@ public class UserOptions {
 
     public void showSupportUser(UserAccount myAccount, Bank myBank) {
         if (myBank.getRequest().isEmpty()) {
-            System.out.println("The list is empty");
+            System.out.println(Color.RED + "The list is empty!");
             return;
         }
         List<Requests> myRequest = new ArrayList<>();
@@ -210,7 +209,7 @@ public class UserOptions {
 
     public void printMassages(List<Requests> requests) {
         for (int i = 1; i <= requests.size(); i++) {
-            System.out.print(i + "- " + requests.get(i - 1).toString() + " Support massage: ");
+            System.out.print(Color.GREEN + i + "- " + Color.BLUE + requests.get(i - 1).toString() + " Support massage: ");
             String supportMassage;
             if (requests.get(i).getUserMassage().equals(" ")) {
                 supportMassage = requests.get(i).getSupportMassage();
@@ -222,7 +221,7 @@ public class UserOptions {
 
 
     public String inputTheMassage() {
-        System.out.print("Enter your massage: ");
+        System.out.print(Color.YELLOW + "Enter your massage: ");
         return ScannerWrapper.getInstance().nextLine();
     }
 
@@ -252,23 +251,23 @@ public class UserOptions {
 
 
     public void handleChangePassword(UserAccount myAccount) {
-        System.out.println("Enter new password: ");
+        System.out.println(Color.YELLOW + "Enter new password: ");
         String password = ScannerWrapper.getInstance().next();
 
         boolean isSafePassword = new UserHandler().checkPassword(password);
         if (isSafePassword) {
             myAccount.setPassword(password);
-            System.out.println("Password was changed");
+            System.out.println(Color.GREEN + "Password was changed");
         }
     }
 
     public void handleRegisterCardPassword(UserAccount myAccount) {
         if (myAccount.getCardPassword() == -1) {
-            System.out.println("Enter your card password: ");
+            System.out.println(Color.YELLOW + "Enter your card password: ");
             String inputStr = ScannerWrapper.getInstance().next();
             boolean isValidPassword = checkValidPassword(inputStr);
             if (!isValidPassword) {
-                System.out.println("invalid password!");
+                System.out.println(Color.RED + "invalid password!");
                 return;
             }
 
@@ -276,23 +275,23 @@ public class UserOptions {
             try {
                 cardPassword = Integer.parseInt(inputStr);
             } catch (Exception e) {
-                System.out.println("invalid password!");
+                System.out.println(Color.RED + "invalid password!");
                 return;
             }
             myAccount.setCardPassword(cardPassword);
-            System.out.println("Your card password was registered");
+            System.out.println(Color.GREEN + "Your card password was registered");
         } else {
-            System.out.println("Your card password is already registered!");
+            System.out.println(Color.RED + "Your card password is already registered!");
         }
     }
 
     public void handleChangeCardPassword(UserAccount myAccount) {
         if (myAccount.getCardPassword() != -1) {
-            System.out.println("Enter new card password: ");
+            System.out.print(Color.YELLOW + "Enter new card password: ");
             String inputStr = ScannerWrapper.getInstance().next();
             boolean isValidPassword = checkValidPassword(inputStr);
             if (!isValidPassword) {
-                System.out.println("invalid password!");
+                System.out.println(Color.RED + "invalid password!");
                 return;
             }
 
@@ -300,13 +299,13 @@ public class UserOptions {
             try {
                 cardPassword = Integer.parseInt(inputStr);
             } catch (Exception e) {
-                System.out.println("invalid password!");
+                System.out.println(Color.RED + "invalid password!");
                 return;
             }
             myAccount.setCardPassword(cardPassword);
-            System.out.println("Your card password was changed");
+            System.out.println(Color.GREEN + "Your card password was changed");
         } else {
-            System.out.println("Your card password is not registered!");
+            System.out.println(Color.RED + "Your card password is not registered!");
         }
     }
 
@@ -321,24 +320,24 @@ public class UserOptions {
     public void handleActivationContactKeyword(UserAccount myAccount) {
         if (!myAccount.getIsActingContactKeyword()) {
             myAccount.setIsActingContactKeyword(true);
-            System.out.println("Contact keyword has been active");
+            System.out.println(Color.GREEN + "Contact keyword has been active");
         } else {
-            System.out.println("Contact keyword already is active!");
+            System.out.println(Color.RED + "Contact keyword already is active!");
         }
     }
 
     public void handleInactivationContactKeyword(UserAccount myAccount) {
         if (myAccount.getIsActingContactKeyword()) {
             myAccount.setIsActingContactKeyword(false);
-            System.out.println("Contact keyword has been inactive");
+            System.out.println(Color.GREEN + "Contact keyword has been inactive");
         } else {
-            System.out.println("Contact keyword already is not active!");
+            System.out.println(Color.RED + "Contact keyword already is not active!");
         }
     }
 
 
     public void handleSelectManually(UserAccount myAccount, Bank myBank) {
-        System.out.print("Enter the account number: ");
+        System.out.print(Color.YELLOW + "Enter the account number: ");
         int accountNumber = ScannerWrapper.getInstance().nextInt();
 
         UserAccount user = checkAccountNumber(accountNumber, myBank);
@@ -353,20 +352,20 @@ public class UserOptions {
                 return entry;
             }
         }
-        System.out.println("Account number is not found!");
+        System.out.println(Color.GREEN + "Account number is not found!");
         return null;
     }
 
     public void handleSelectFromResentAccount(UserAccount myAccount, Bank myBank) {
         if (myAccount.getRecentlyAccountNumberForTransfer().isEmpty()) {
-            System.out.println("The list is empty");
+            System.out.println(Color.RED + "The list is empty!");
             return;
         }
         for (int i = 0; i < myAccount.getRecentlyAccountNumberForTransfer().size(); i++) {
             System.out.println((i + 1) + "- " + myAccount.getRecentlyAccountNumberForTransfer().get(i).toString());
         }
 
-        System.out.print("Enter the number of account number: ");
+        System.out.print(Color.YELLOW + "Enter the number of account number: ");
         int index = ScannerWrapper.getInstance().nextInt();
 
         int accountNumber = myAccount.getRecentlyAccountNumberForTransfer().get(index - 1).getAccountNumber();
@@ -377,7 +376,7 @@ public class UserOptions {
 
     public void handleSelectFromContacts(UserAccount myAccount, Bank myBank) {
         if (myAccount.getMyContacts().isEmpty()) {
-            System.out.println("The list is empty");
+            System.out.println(Color.RED + "The list is empty!");
             return;
         }
         Map<Integer, Contact> contacts = new TreeMap<>();
@@ -399,7 +398,7 @@ public class UserOptions {
             }
         }
         if (contacts.isEmpty()) {
-            System.out.println("The list is empty");
+            System.out.println(Color.RED + "The list is empty!");
             return;
         }
         showContactsForTransfer(myAccount, myBank, contacts);
@@ -417,10 +416,10 @@ public class UserOptions {
         }
 
         for (int i = 1; i <= contactsList.size(); i++) {
-            System.out.println(i + "- " + contactsList.get(i - 1).getFirstName() + contactsList.get(i - 1).getLName() + accountNumbers.get(i));
+            System.out.println(Color.GREEN + i + "- " + Color.BLUE + contactsList.get(i - 1).getFirstName() + contactsList.get(i - 1).getLName() + accountNumbers.get(i));
         }
 
-        System.out.print("Enter the number of account number: ");
+        System.out.print(Color.YELLOW + "Enter the number of account number: ");
         int indexOfContact = ScannerWrapper.getInstance().nextInt();
 
         int accountNumber = accountNumbers.get(indexOfContact);
@@ -429,7 +428,7 @@ public class UserOptions {
     }
 
     public void inputTheMoneyForTransaction(UserAccount myAccount, Bank myBank, int accountNumber, String nameOfDestination) {
-        System.out.print("Enter the amount money: ");
+        System.out.print(Color.YELLOW + "Enter the amount money: ");
         int money = ScannerWrapper.getInstance().nextInt();
 
         int wadge = 1000;
@@ -443,7 +442,7 @@ public class UserOptions {
         if (myAccount.getBalanceAccount() > money) {
             return true;
         }
-        System.out.println("Your inventory is not enough");
+        System.out.println(Color.RED + "Your inventory is not enough!");
         return false;
     }
 
@@ -472,14 +471,14 @@ public class UserOptions {
         int originAccountNumber = myAccount.getAccountNumber();
         int destinationAccountNumber = destinationAccount.getAccountNumber();
 
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println("Amount of money: " + money);
-        System.out.println("Origin accountNumber: " + originAccountNumber);
-        System.out.println("Destination account number: " + destinationAccountNumber);
-        System.out.println("name of destination account: " + nameOfDestination);
-        System.out.println("Date of transfer: " + dateNow);
-        System.out.println("Issue tracking: " + issueTracking);
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println(Color.YELLOW + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println(Color.GREEN + "Amount of money: " + Color.BLUE + money);
+        System.out.println(Color.GREEN + "Origin accountNumber: " + Color.BLUE + originAccountNumber);
+        System.out.println(Color.GREEN + "Destination account number: " + Color.BLUE + destinationAccountNumber);
+        System.out.println(Color.GREEN + "name of destination account: " + Color.BLUE + nameOfDestination);
+        System.out.println(Color.GREEN + "Date of transfer: " + Color.BLUE + dateNow);
+        System.out.println(Color.GREEN + "Issue tracking: " + Color.BLUE + issueTracking);
+        System.out.println(Color.YELLOW + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
     }
 
     public void setTransaction(int money, UserAccount myAccount, UserAccount destinationAccount, String dateNow, String nameOfDestination) {

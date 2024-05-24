@@ -32,20 +32,20 @@ public class ContactInformationContact implements MenuProperty {
             case EDIT_INFORMATION -> userOptions.editContact(me, numberOfContact);
             case VIEW_INFORMATION -> userOptions.viewInformation(me, numberOfContact);
             case RETURN -> System.out.println();
-            default -> System.out.println("Invalid Input!");
+            default -> System.out.println(Color.RED + "Invalid Input!");
         }
     }
 
     @Override
     public void printTheMenu() {
         System.out.println();
-        System.out.println("***********************");
-        System.out.println("1- Edit information");
-        System.out.println("2- view information");
-        System.out.println("3- Return");
-        System.out.println("***********************");
+        System.out.println(Color.YELLOW + "***********************");
+        System.out.println(Color.BLUE + "1- Edit information");
+        System.out.println(Color.BLUE + "2- view information");
+        System.out.println(Color.BLUE + "3- Return");
+        System.out.println(Color.YELLOW + "***********************");
         System.out.println();
-        System.out.print("Select the option: ");
+        System.out.print(Color.PURPLE+ "Select the option: ");
     }
 
     @Override

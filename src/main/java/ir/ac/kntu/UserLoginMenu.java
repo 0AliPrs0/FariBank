@@ -29,13 +29,13 @@ public class UserLoginMenu implements MenuProperty{
     @Override
     public void printTheMenu() {
         System.out.println();
-        System.out.println("***********************");
-        System.out.println("1- Log_in");
-        System.out.println("2- Sign_up");
-        System.out.println("3- Return");
-        System.out.println("***********************");
+        System.out.println(Color.YELLOW + "***********************");
+        System.out.println(Color.BLUE + "1- Log_in");
+        System.out.println(Color.BLUE + "2- Sign_up");
+        System.out.println(Color.BLUE + "3- Return");
+        System.out.println(Color.YELLOW + "***********************");
         System.out.println();
-        System.out.print("Select the option: ");
+        System.out.print(Color.PURPLE + "Select the option: ");
     }
 
     public UserLoginField getOption() {
@@ -60,7 +60,7 @@ public class UserLoginMenu implements MenuProperty{
             case LOG_IN -> userHandler.handleLogin(myBank);
             case SIGN_UP -> userHandler.handleSignUp(myBank);
             case RETURN -> System.out.println();
-            default -> System.out.println("Invalid input");
+            default -> System.out.println(Color.RED + "Invalid input");
         }
     }
 

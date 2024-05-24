@@ -40,23 +40,23 @@ public class SettingMenu implements MenuProperty{
             case INACTIVATION_CONTACT_KEYWORD -> userOptions.handleInactivationContactKeyword(me);
             case SHOW_ACCOUNT_NUMBER -> System.out.println(me.getAccountNumber());
             case RETURN -> System.out.println();
-            default -> System.out.println("Invalid Input!");
+            default -> System.out.println(Color.RED + "Invalid Input!");
         }
     }
     @Override
     public void printTheMenu() {
         System.out.println();
-        System.out.println("***********************");
-        System.out.println("1- Change password");
-        System.out.println("2- Register card password");
-        System.out.println("3- change card password");
-        System.out.println("4- Activation contact keyword");
-        System.out.println("5- Inactivation contact keyword");
-        System.out.println("6- Show account number");
-        System.out.println("7- Return");
-        System.out.println("***********************");
+        System.out.println(Color.YELLOW + "***********************");
+        System.out.println(Color.BLUE + "1- Change password");
+        System.out.println(Color.BLUE + "2- Register card password");
+        System.out.println(Color.BLUE + "3- change card password");
+        System.out.println(Color.BLUE + "4- Activation contact keyword");
+        System.out.println(Color.BLUE + "5- Inactivation contact keyword");
+        System.out.println(Color.BLUE + "6- Show account number");
+        System.out.println(Color.BLUE + "7- Return");
+        System.out.println(Color.YELLOW + "***********************");
         System.out.println();
-        System.out.print("Select the option: ");
+        System.out.print(Color.PURPLE + "Select the option: ");
     }
 
     @Override

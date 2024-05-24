@@ -38,21 +38,21 @@ public class SupportMenu implements MenuProperty {
             case REQUESTS -> requestSupportMenu.implementRequestSupport(myBank);
             case USERS -> userInformationMenu.implementUsersInformation(myBank);
             case RETURN -> System.out.println();
-            default -> System.out.println("Invalid Input!");
+            default -> System.out.println(Color.RED + "Invalid Input!");
         }
     }
 
     @Override
     public void printTheMenu() {
         System.out.println();
-        System.out.println("***********************");
-        System.out.println("1- Authentication");
-        System.out.println("2- Requests");
-        System.out.println("3- Users");
-        System.out.println("4- Return");
-        System.out.println("***********************");
+        System.out.println(Color.YELLOW + "***********************");
+        System.out.println(Color.BLUE + "1- Authentication");
+        System.out.println(Color.BLUE + "2- Requests");
+        System.out.println(Color.BLUE + "3- Users");
+        System.out.println(Color.BLUE + "4- Return");
+        System.out.println(Color.YELLOW + "***********************");
         System.out.println();
-        System.out.print("Select the option: ");
+        System.out.print(Color.PURPLE + "Select the option: ");
     }
 
     @Override

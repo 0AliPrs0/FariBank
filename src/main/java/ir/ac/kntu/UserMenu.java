@@ -33,16 +33,16 @@ public class UserMenu implements MenuProperty {
     @Override
     public void printTheMenu() {
         System.out.println();
-        System.out.println("***********************");
-        System.out.println("1- Account management");
-        System.out.println("2- Contacts");
-        System.out.println("3- Money transfer");
-        System.out.println("4- Support");
-        System.out.println("5- Settings");
-        System.out.println("6- Return");
-        System.out.println("***********************");
+        System.out.println(Color.YELLOW + "***********************");
+        System.out.println(Color.BLUE + "1- Account management");
+        System.out.println(Color.BLUE + "2- Contacts");
+        System.out.println(Color.BLUE + "3- Money transfer");
+        System.out.println(Color.BLUE + "4- Support");
+        System.out.println(Color.BLUE + "5- Settings");
+        System.out.println(Color.BLUE + "6- Return");
+        System.out.println(Color.YELLOW + "***********************");
         System.out.println();
-        System.out.print("Select your options: ");
+        System.out.print(Color.PURPLE + "Select your options: ");
     }
 
     @Override
@@ -75,7 +75,7 @@ public class UserMenu implements MenuProperty {
             case SUPPORT -> supportUserMenu.implementSupportUser(me, myBank);
             case SETTINGS -> settingMenu.implementSettings(me);
             case RETURN -> System.out.println();
-            default -> System.out.println("Invalid Input!");
+            default -> System.out.println(Color.RED + "Invalid Input!");
         }
     }
 }

@@ -32,13 +32,13 @@ public class MainMenu implements MenuProperty {
     @Override
     public void printTheMenu() {
         System.out.println();
-        System.out.println("***********************");
-        System.out.println("1- User");
-        System.out.println("2- Support");
-        System.out.println("3- Exit");
-        System.out.println("***********************");
+        System.out.println(Color.YELLOW + "***********************");
+        System.out.println(Color.BLUE + "1- User");
+        System.out.println(Color.BLUE + "2- Support");
+        System.out.println(Color.BLUE + "3- Exit");
+        System.out.println(Color.YELLOW + "***********************");
         System.out.println();
-        System.out.print("Select your options: ");
+        System.out.print(Color.PURPLE + "Select your options: ");
     }
 
     @Override
@@ -64,8 +64,8 @@ public class MainMenu implements MenuProperty {
         switch (option) {
             case USER -> userLoginMenu.implementMenu(myBank);
             case SUPPORT -> SupportHandler.implementTheSupportMenu(myBank);
-            case EXIT -> System.out.println("Exiting the program ...");
-            default -> System.out.println("Invalid Input!");
+            case EXIT -> System.out.println(Color.RED + "Exiting the program ...");
+            default -> System.out.println(Color.RED + "Invalid Input!");
         }
     }
 

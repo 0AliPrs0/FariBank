@@ -35,20 +35,20 @@ public class SupportUserMenu implements MenuProperty {
             case REGISTER_MASSAGE -> registerSupportUserMenu.implementRegisterSupportUser(me, myBank);
             case SHOW_MASSAGE -> userOptions.showSupportUser(me, myBank);
             case RETURN -> System.out.println();
-            default -> System.out.println("Invalid Input!");
+            default -> System.out.println(Color.RED + "Invalid Input!");
         }
     }
 
     @Override
     public void printTheMenu() {
         System.out.println();
-        System.out.println("***********************");
-        System.out.println("1- Register massage");
-        System.out.println("2- Show massage");
-        System.out.println("3- Return");
-        System.out.println("***********************");
+        System.out.println(Color.YELLOW + "***********************");
+        System.out.println(Color.BLUE + "1- Register massage");
+        System.out.println(Color.BLUE + "2- Show massage");
+        System.out.println(Color.BLUE + "3- Return");
+        System.out.println(Color.YELLOW + "***********************");
         System.out.println();
-        System.out.print("Select the option: ");
+        System.out.print(Color.PURPLE + "Select the option: ");
     }
 
     @Override

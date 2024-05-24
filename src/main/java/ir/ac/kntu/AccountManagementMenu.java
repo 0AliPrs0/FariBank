@@ -28,7 +28,7 @@ public class AccountManagementMenu implements MenuProperty {
             case TRANSACTION -> userOptions.transaction(me.getChargeAccounts(), me.getTransfers());
             case TIME_FILTER_TRANSACTION -> userOptions.timeFilterTransaction(me);
             case RETURN -> System.out.println();
-            default -> System.out.println("Invalid Input!");
+            default -> System.out.println(Color.RED + "Invalid Input!");
         }
     }
 
@@ -36,15 +36,15 @@ public class AccountManagementMenu implements MenuProperty {
     @Override
     public void printTheMenu() {
         System.out.println();
-        System.out.println("***********************");
-        System.out.println("1- Charge account");
-        System.out.println("2- Balance");
-        System.out.println("3- Transaction");
-        System.out.println("4- Time filter transaction");
-        System.out.println("5- Return");
-        System.out.println("***********************");
+        System.out.println(Color.YELLOW + "***********************");
+        System.out.println(Color.BLUE + "1- Charge account");
+        System.out.println(Color.BLUE + "2- Balance");
+        System.out.println(Color.BLUE + "3- Transaction");
+        System.out.println(Color.BLUE + "4- Time filter transaction");
+        System.out.println(Color.BLUE + "5- Return");
+        System.out.println(Color.YELLOW + "***********************");
         System.out.println();
-        System.out.print("Select the option: ");
+        System.out.print(Color.PURPLE + "Select the option: ");
     }
 
     @Override

@@ -8,10 +8,10 @@ public class UserHandler {
 
 
     public void handleLogin(Bank myBank) {
-        System.out.print("Enter your phone number: ");
+        System.out.print(Color.YELLOW + "Enter your phone number: ");
         String phoneNumber = ScannerWrapper.getInstance().next();
 
-        System.out.print("Enter your password: ");
+        System.out.print(Color.YELLOW + "Enter your password: ");
         String password = ScannerWrapper.getInstance().next();
 
         UserAccount newUser = lookForUser(myBank, phoneNumber, password);
@@ -39,7 +39,7 @@ public class UserHandler {
                 return entry;
             }
         }
-        System.out.println("Invalid information");
+        System.out.println(Color.RED + "Invalid information");
         return null;
     }
 
@@ -53,9 +53,9 @@ public class UserHandler {
         boolean acceptInformation = newAuthentication.isAcceptRequest();
 
         if (!checkedSupport) {
-            System.out.println("The support has not yet checked the information!");
+            System.out.println(Color.RED + "The support has not yet checked the information!");
         } else if (!acceptInformation) {
-            System.out.println("Support massage: " + newAuthentication.getSupportOpinion());
+            System.out.println(Color.BLUE + "Support massage: " + Color.GREEN + newAuthentication.getSupportOpinion());
         } else {
             UserAccount newUser = addUser(myBank, newAuthentication);
             UserMenu userMenu = new UserMenu();
@@ -80,24 +80,24 @@ public class UserHandler {
     }
 
     public void handleSignUp(Bank myBank) {
-        System.out.print("Enter your first name: ");
+        System.out.print(Color.YELLOW + "Enter your first name: ");
         String fName = ScannerWrapper.getInstance().next();
 
-        System.out.print("Enter your last name: ");
+        System.out.print(Color.YELLOW + "Enter your last name: ");
         String lName = ScannerWrapper.getInstance().next();
 
-        System.out.print("Enter your phone number: ");
+        System.out.print(Color.YELLOW + "Enter your phone number: ");
         String phoneNumber = ScannerWrapper.getInstance().next();
 
-        System.out.print("Enter your id: ");
+        System.out.print(Color.YELLOW + "Enter your id: ");
         String id = ScannerWrapper.getInstance().next();
 
-        System.out.print("Enter your password: ");
+        System.out.print(Color.YELLOW + "Enter your password: ");
         String password = ScannerWrapper.getInstance().next();
 
         boolean isTrueCondition = checkCondition(myBank, phoneNumber, id, password);
         if (isTrueCondition) {
-            Authentication newAuthentication = new Authentication(fName, lName, phoneNumber, id, password, "", false, false);
+            Authentication newAuthentication = new Authentication(fName, lName, phoneNumber, id, password, "", true, true);
             myBank.getAuthentications().add(newAuthentication);
         }
     }
@@ -108,7 +108,7 @@ public class UserHandler {
         boolean isPasswordSafe = checkPassword(password);
 
         if (!isTherePhoneNumber && !isThereId && isPasswordSafe) {
-            System.out.println("Your information has been registered. Please wait until the authentication is confirmed.");
+            System.out.println(Color.GREEN + "Your information has been registered. Please wait until the authentication is confirmed.");
             System.out.println();
             return true;
         }
@@ -118,7 +118,7 @@ public class UserHandler {
     public boolean checkPhoneNumber(Bank myBank, String phoneNumber) {
         for (UserAccount entry : myBank.getUserAccounts()) {
             if (entry.getPhoneNumber().equals(phoneNumber)) {
-                System.out.println("There is a same phone number in system!");
+                System.out.println(Color.RED + "There is a same phone number in system!");
                 System.out.println();
                 return true;
             }
@@ -129,7 +129,7 @@ public class UserHandler {
     public boolean checkId(Bank myBank, String id) {
         for (UserAccount entry : myBank.getUserAccounts()) {
             if (entry.getId().equals(id)) {
-                System.out.println("There is a same id in system!");
+                System.out.println(Color.RED + "There is a same id in system!");
                 System.out.println();
                 return true;
             }
@@ -153,7 +153,7 @@ public class UserHandler {
         if (isThereSmallLetter && isThereCapitalLetter && isThereDigit && isThereSpecialCharacter) {
             return true;
         }
-        System.out.println("Password is unsafe!");
+        System.out.println(Color.RED + "Password is unsafe!");
         System.out.println();
         return false;
     }

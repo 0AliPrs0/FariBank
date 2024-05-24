@@ -19,10 +19,10 @@ public class SupportHandler {
     public static Support logInSupport(Bank myBank) {
         Support support = new Support();
 
-        System.out.print("Enter your user name: ");
+        System.out.print(Color.YELLOW + "Enter your user name: ");
         String userName = ScannerWrapper.getInstance().next();
 
-        System.out.print("Enter your password: ");
+        System.out.print(Color.YELLOW + "Enter your password: ");
         String password = ScannerWrapper.getInstance().next();
 
         boolean isTrueInformation = checkInformation(myBank, userName, password);
@@ -31,7 +31,7 @@ public class SupportHandler {
             support.setPassword(password);
             return support;
         }
-        System.out.println("There is not Admin with this information!");
+        System.out.println(Color.RED + "There is not Admin with this information!");
         return null;
     }
 

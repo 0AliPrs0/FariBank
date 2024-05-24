@@ -26,7 +26,7 @@ public class UserInformationMenu implements MenuProperty {
             case SEARCH_ACCORDING_TO_LAST_NAME_AND_PHONE_NUMBER ->
                     supportOptions.searchAccordingToLastNameAndPhoneNumber(myBank);
             case RETURN -> System.out.println();
-            default -> System.out.println("Invalid Input!");
+            default -> System.out.println(Color.RED + "Invalid Input!");
         }
     }
 
@@ -45,18 +45,18 @@ public class UserInformationMenu implements MenuProperty {
     @Override
     public void printTheMenu() {
         System.out.println();
-        System.out.println("***********************");
-        System.out.println("1- All User");
-        System.out.println("2- Search according to first name");
-        System.out.println("3- Search according to last name");
-        System.out.println("4- Search according to phone number");
-        System.out.println("5- Search according to first name and last name");
-        System.out.println("6- Search according to first name and phoneNumber");
-        System.out.println("7- Search according to last name and phoneNumber");
-        System.out.println("8- Return");
-        System.out.println("***********************");
+        System.out.println(Color.YELLOW + "***********************");
+        System.out.println(Color.BLUE + "1- All User");
+        System.out.println(Color.BLUE + "2- Search according to first name");
+        System.out.println(Color.BLUE + "3- Search according to last name");
+        System.out.println(Color.BLUE + "4- Search according to phone number");
+        System.out.println(Color.BLUE + "5- Search according to first name and last name");
+        System.out.println(Color.BLUE + "6- Search according to first name and phoneNumber");
+        System.out.println(Color.BLUE + "7- Search according to last name and phoneNumber");
+        System.out.println(Color.BLUE + "8- Return");
+        System.out.println(Color.YELLOW + "***********************");
         System.out.println();
-        System.out.print("Select the option: ");
+        System.out.print(Color.PURPLE + "Select the option: ");
     }
 
     @Override

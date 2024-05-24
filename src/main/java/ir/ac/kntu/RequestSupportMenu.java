@@ -36,22 +36,22 @@ public class RequestSupportMenu implements MenuProperty {
             case REQUEST_ACCORDING_TO_APPLICATION_STATUS -> supportOptions.requestAccordingToApplicationStatus(myBank);
             case REQUEST_ACCORDING_TO_USER -> supportOptions.requestAccordingToUser(myBank);
             case RETURN -> System.out.println();
-            default -> System.out.println("Invalid Input!");
+            default -> System.out.println(Color.RED + "Invalid Input!");
         }
     }
 
     @Override
     public void printTheMenu() {
         System.out.println();
-        System.out.println("***********************");
-        System.out.println("1- All request");
-        System.out.println("2- Request according to request type");
-        System.out.println("3- Request according to application status");
-        System.out.println("4- Request according to user");
-        System.out.println("5- Return");
-        System.out.println("***********************");
+        System.out.println(Color.YELLOW + "***********************");
+        System.out.println(Color.BLUE + "1- All request");
+        System.out.println(Color.BLUE + "2- Request according to request type");
+        System.out.println(Color.BLUE + "3- Request according to application status");
+        System.out.println(Color.BLUE + "4- Request according to user");
+        System.out.println(Color.BLUE + "5- Return");
+        System.out.println(Color.YELLOW + "***********************");
         System.out.println();
-        System.out.print("Select the option: ");
+        System.out.print(Color.PURPLE + "Select the option: ");
     }
 
     @Override

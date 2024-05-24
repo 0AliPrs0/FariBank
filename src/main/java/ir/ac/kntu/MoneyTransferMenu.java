@@ -30,20 +30,20 @@ public class MoneyTransferMenu implements MenuProperty {
             case SELECT_MANUALLY -> userOptions.handleSelectManually(me, myBank);
             case SELECT_FROM_RESENT_ACCOUNTS -> userOptions.handleSelectFromResentAccount(me, myBank);
             case SELECT_FROM_CONTACTS -> userOptions.handleSelectFromContacts(me, myBank);
-            default -> System.out.println("Invalid Input!");
+            default -> System.out.println(Color.RED + "Invalid Input!");
         }
     }
 
     @Override
     public void printTheMenu() {
         System.out.println();
-        System.out.println("***********************");
-        System.out.println("1- Select manually");
-        System.out.println("2- Select from recent accounts");
-        System.out.println("3- Select from contacts");
-        System.out.println("***********************");
+        System.out.println(Color.YELLOW + "***********************");
+        System.out.println(Color.BLUE + "1- Select manually");
+        System.out.println(Color.BLUE + "2- Select from recent accounts");
+        System.out.println(Color.BLUE + "3- Select from contacts");
+        System.out.println(Color.YELLOW + "***********************");
         System.out.println();
-        System.out.print("Select the option: ");
+        System.out.print(Color.PURPLE + "Select the option: ");
     }
 
     @Override
