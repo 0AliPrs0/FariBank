@@ -147,7 +147,7 @@ public class UserHandler {
         String patternDigit = "\\d+";
         boolean isThereDigit = findRegex(patternDigit, password);
 
-        String patternSpecialCharacter = "[!#$%^]+";
+        String patternSpecialCharacter = "[@!#$%^]+";
         boolean isThereSpecialCharacter = findRegex(patternSpecialCharacter, password);
 
         if (isThereSmallLetter && isThereCapitalLetter && isThereDigit && isThereSpecialCharacter) {

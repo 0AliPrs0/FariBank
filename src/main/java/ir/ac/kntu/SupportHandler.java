@@ -11,13 +11,9 @@ public class SupportHandler {
     }
 
     public static void addSupports(Bank myBank) {
-        Support newSupport1 = new Support();
-        Support newSupport2 = new Support();
-        Support newSupport3 = new Support();
-
-        myBank.getSupports().add(newSupport1);
-        myBank.getSupports().add(newSupport2);
-        myBank.getSupports().add(newSupport3);
+        myBank.getSupports().add(new Support("ali", "aliprs", "@Ap84"));
+        myBank.getSupports().add(new Support("nima", "nimadan", "#Nd83"));
+        myBank.getSupports().add(new Support("amir", "amirmkh", "&Am85"));
     }
 
     public static Support logInSupport(Bank myBank) {
