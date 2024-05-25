@@ -9,10 +9,10 @@ public class UserHandler {
 
     public void handleLogin(Bank myBank) {
         System.out.print(Color.YELLOW + "Enter your phone number: ");
-        String phoneNumber = ScannerWrapper.getInstance().next();
+        String phoneNumber = ScannerWrapper.getInstance().nextLine();
 
         System.out.print(Color.YELLOW + "Enter your password: ");
-        String password = ScannerWrapper.getInstance().next();
+        String password = ScannerWrapper.getInstance().nextLine();
 
         UserAccount newUser = lookForUser(myBank, phoneNumber, password);
         if (newUser == null) {
@@ -55,6 +55,7 @@ public class UserHandler {
         if (!checkedSupport) {
             System.out.println(Color.RED + "The support has not yet checked the information!");
         } else if (!acceptInformation) {
+            System.out.println(Color.RED + "The support has not verified your information");
             System.out.println(Color.BLUE + "Support massage: " + Color.GREEN + newAuthentication.getSupportOpinion());
         } else {
             UserAccount newUser = addUser(myBank, newAuthentication);
@@ -81,23 +82,23 @@ public class UserHandler {
 
     public void handleSignUp(Bank myBank) {
         System.out.print(Color.YELLOW + "Enter your first name: ");
-        String fName = ScannerWrapper.getInstance().next();
+        String fName = ScannerWrapper.getInstance().nextLine();
 
         System.out.print(Color.YELLOW + "Enter your last name: ");
-        String lName = ScannerWrapper.getInstance().next();
+        String lName = ScannerWrapper.getInstance().nextLine();
 
         System.out.print(Color.YELLOW + "Enter your phone number: ");
-        String phoneNumber = ScannerWrapper.getInstance().next();
+        String phoneNumber = ScannerWrapper.getInstance().nextLine();
 
         System.out.print(Color.YELLOW + "Enter your id: ");
-        String id = ScannerWrapper.getInstance().next();
+        String id = ScannerWrapper.getInstance().nextLine();
 
         System.out.print(Color.YELLOW + "Enter your password: ");
-        String password = ScannerWrapper.getInstance().next();
+        String password = ScannerWrapper.getInstance().nextLine();
 
         boolean isTrueCondition = checkCondition(myBank, phoneNumber, id, password);
         if (isTrueCondition) {
-            Authentication newAuthentication = new Authentication(fName, lName, phoneNumber, id, password, "", true, true);
+            Authentication newAuthentication = new Authentication(fName, lName, phoneNumber, id, password, "", false, false);
             myBank.getAuthentications().add(newAuthentication);
         }
     }
@@ -108,6 +109,7 @@ public class UserHandler {
         boolean isPasswordSafe = checkPassword(password);
 
         if (!isTherePhoneNumber && !isThereId && isPasswordSafe) {
+            System.out.println();
             System.out.println(Color.GREEN + "Your information has been registered. Please wait until the authentication is confirmed.");
             System.out.println();
             return true;

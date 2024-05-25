@@ -58,7 +58,7 @@ public class SupportMenu implements MenuProperty {
     @Override
     public MenuSupportField getOption() {
         MenuSupportField[] options = MenuSupportField.values();
-        String inputStr = ScannerWrapper.getInstance().next();
+        String inputStr = ScannerWrapper.getInstance().nextLine();
         int input;
         try {
             input = Integer.parseInt(inputStr);

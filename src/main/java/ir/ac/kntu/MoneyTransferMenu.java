@@ -49,7 +49,7 @@ public class MoneyTransferMenu implements MenuProperty {
     @Override
     public ChoseAccountsForTransfer getOption() {
         ChoseAccountsForTransfer[] options = ChoseAccountsForTransfer.values();
-        String inputStr = ScannerWrapper.getInstance().next();
+        String inputStr = ScannerWrapper.getInstance().nextLine();
         int input;
         try {
             input = Integer.parseInt(inputStr);

@@ -44,7 +44,7 @@ public class MainMenu implements MenuProperty {
     @Override
     public MenuMainField getOption() {
         MenuMainField[] options = MenuMainField.values();
-        String inputStr = ScannerWrapper.getInstance().next();
+        String inputStr = ScannerWrapper.getInstance().nextLine();
         int input;
         try {
             input = Integer.parseInt(inputStr);

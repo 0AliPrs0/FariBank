@@ -9,7 +9,7 @@ public class Bank {
     private List<UserAccount> userAccounts = new ArrayList<>();
     private List<Support> supports = new ArrayList<>();
     private List<Authentication> authentications = new ArrayList<>();
-    private Map<String, Requests> requests = new HashMap<>();
+    private Map<String, List<Requests>> requests = new HashMap<>();
 
     public Bank() {
     }
@@ -26,11 +26,11 @@ public class Bank {
         return (ArrayList<Support>) supports;
     }
 
-    public Map<String, Requests> getRequest() {
+    public Map<String, List<Requests>> getRequest() {
         return requests;
     }
 
-    public void addRequest(String phoneNumber, Requests newRequest) {
+    public void addRequest(String phoneNumber, List<Requests> newRequest) {
         requests.put(phoneNumber, newRequest);
     }
 }

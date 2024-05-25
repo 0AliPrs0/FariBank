@@ -53,6 +53,6 @@ public class Requests extends User {
     public String toString() {
         return "requestType=" + requestType +
                 ", applicationStatus=" + applicationStatus +
-                ", userMassage='" + userMassage;
+                ", userMassage='" + userMassage + "' ";
     }
 }

@@ -55,7 +55,7 @@ public class ContactMenu implements MenuProperty {
     @Override
     public MenuContactField getOption() {
         MenuContactField[] options = MenuContactField.values();
-        String inputStr = ScannerWrapper.getInstance().next();
+        String inputStr = ScannerWrapper.getInstance().nextLine();
         int input;
         try {
             input = Integer.parseInt(inputStr);

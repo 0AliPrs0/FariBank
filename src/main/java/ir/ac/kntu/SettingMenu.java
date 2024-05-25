@@ -62,7 +62,7 @@ public class SettingMenu implements MenuProperty{
     @Override
     public SettingOptions getOption() {
         SettingOptions[] options = SettingOptions.values();
-        String inputStr = ScannerWrapper.getInstance().next();
+        String inputStr = ScannerWrapper.getInstance().nextLine();
         int input;
         try{
             input = Integer.parseInt(inputStr);

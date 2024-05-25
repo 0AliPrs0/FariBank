@@ -48,7 +48,7 @@ public class UserMenu implements MenuProperty {
     @Override
     public UserOptionsField getOption() {
         UserOptionsField[] option = UserOptionsField.values();
-        String inputStr = ScannerWrapper.getInstance().next();
+        String inputStr = ScannerWrapper.getInstance().nextLine();
         int input;
         try {
             input = Integer.parseInt(inputStr);

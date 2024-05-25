@@ -40,7 +40,7 @@ public class UserLoginMenu implements MenuProperty{
 
     public UserLoginField getOption() {
         UserLoginField[] options = UserLoginField.values();
-        String inputStr = ScannerWrapper.getInstance().next();
+        String inputStr = ScannerWrapper.getInstance().nextLine();
         int input;
         try{
             input = Integer.parseInt(inputStr);

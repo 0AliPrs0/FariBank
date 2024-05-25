@@ -20,10 +20,10 @@ public class SupportHandler {
         Support support = new Support();
 
         System.out.print(Color.YELLOW + "Enter your user name: ");
-        String userName = ScannerWrapper.getInstance().next();
+        String userName = ScannerWrapper.getInstance().nextLine();
 
         System.out.print(Color.YELLOW + "Enter your password: ");
-        String password = ScannerWrapper.getInstance().next();
+        String password = ScannerWrapper.getInstance().nextLine();
 
         boolean isTrueInformation = checkInformation(myBank, userName, password);
         if (isTrueInformation) {

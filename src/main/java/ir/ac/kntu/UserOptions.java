@@ -14,7 +14,8 @@ public class UserOptions {
 
     public void chargeAccount(UserAccount myAccount) {
         System.out.print(Color.YELLOW + "Enter the amount of money: ");
-        int amount = ScannerWrapper.getInstance().nextInt();
+        String input = ScannerWrapper.getInstance().nextLine();
+        int amount = Integer.parseInt(input);
 
         myAccount.setBalanceAccount(myAccount.getBalanceAccount() + amount);
         System.out.println(Color.YELLOW + "Your account increased by " + amount);
@@ -52,12 +53,13 @@ public class UserOptions {
             return;
         }
         System.out.println(Color.YELLOW + "Enter the number of transaction: ");
-        int index = ScannerWrapper.getInstance().nextInt();
+        String input = ScannerWrapper.getInstance().nextLine();
+        int index = Integer.parseInt(input);
 
         if (index <= chargeAccounts.size()) {
-            System.out.println(chargeAccounts.get(index - 1).toString());
+            System.out.println(Color.BLUE + chargeAccounts.get(index - 1).toString());
         } else {
-            System.out.println(transfers.get(index - chargeAccounts.size() - 1).toString());
+            System.out.println(Color.BLUE + transfers.get(index - chargeAccounts.size() - 1).toString());
         }
     }
 
@@ -122,13 +124,13 @@ public class UserOptions {
 
     public void addContact(UserAccount myAccount) {
         System.out.print(Color.YELLOW + "Enter the first name of contact: ");
-        String fName = ScannerWrapper.getInstance().next();
+        String fName = ScannerWrapper.getInstance().nextLine();
 
         System.out.print(Color.YELLOW + "Enter the last name of contact: ");
-        String lName = ScannerWrapper.getInstance().next();
+        String lName = ScannerWrapper.getInstance().nextLine();
 
         System.out.print(Color.YELLOW + "Enter the phone number name of contact: ");
-        String phoneNumber = ScannerWrapper.getInstance().next();
+        String phoneNumber = ScannerWrapper.getInstance().nextLine();
 
         boolean isTherePhoneNumber = checkPhoneNumber(myAccount, phoneNumber);
         if (!isTherePhoneNumber) {
@@ -146,7 +148,8 @@ public class UserOptions {
         }
         System.out.println();
         System.out.println(Color.YELLOW + "Chose the contact (Enter the number of contact) : ");
-        int numberOfContact = ScannerWrapper.getInstance().nextInt();
+        String input = ScannerWrapper.getInstance().nextLine();
+        int numberOfContact = Integer.parseInt(input);
         numberOfContact--;
 
         ContactInformationContact contactInformationContact = new ContactInformationContact();
@@ -166,10 +169,10 @@ public class UserOptions {
 
     public void editContact(UserAccount myAccount, int numberOfContact) {
         System.out.print(Color.YELLOW + "Enter the new first name of contact: ");
-        String newFirstname = ScannerWrapper.getInstance().next();
+        String newFirstname = ScannerWrapper.getInstance().nextLine();
 
         System.out.print(Color.YELLOW + "Enter the new last name of contact: ");
-        String newLastname = ScannerWrapper.getInstance().next();
+        String newLastname = ScannerWrapper.getInstance().nextLine();
 
         String phoneNumber = myAccount.getMyContacts().get(numberOfContact).getPhoneNumber();
         String oldFirstname = myAccount.getMyContacts().get(numberOfContact).getFirstName();
@@ -194,28 +197,23 @@ public class UserOptions {
 
 
     public void showSupportUser(UserAccount myAccount, Bank myBank) {
-        if (myBank.getRequest().isEmpty()) {
-            System.out.println(Color.RED + "The list is empty!");
-            return;
-        }
         List<Requests> myRequest = new ArrayList<>();
-        for (Map.Entry<String, Requests> entry : myBank.getRequest().entrySet()) {
+        for (Map.Entry<String, List<Requests>> entry : myBank.getRequest().entrySet()) {
             if (entry.getKey().equals(myAccount.getPhoneNumber())) {
-                myRequest.add(entry.getValue());
+                myRequest = entry.getValue();
             }
         }
         printMassages(myRequest);
     }
 
     public void printMassages(List<Requests> requests) {
-        for (int i = 1; i <= requests.size(); i++) {
-            System.out.print(Color.GREEN + i + "- " + Color.BLUE + requests.get(i - 1).toString() + " Support massage: ");
-            String supportMassage;
-            if (requests.get(i).getUserMassage().equals(" ")) {
-                supportMassage = requests.get(i).getSupportMassage();
-                System.out.print(supportMassage);
-            }
+        if (requests.isEmpty()) {
+            System.out.println(Color.RED + "The list is empty!");
+            return;
+        }
 
+        for (int i = 1; i <= requests.size(); i++) {
+            System.out.println(Color.GREEN + i + "- " + Color.BLUE + requests.get(i - 1).toString() + " Support massage: " + requests.get(i - 1).getSupportMassage());
         }
     }
 
@@ -227,32 +225,45 @@ public class UserOptions {
 
     public void handleReportOfSupportUser(Bank myBank, UserAccount myAccount) {
         String massageUser = inputTheMassage();
-        Requests requests = new Requests(RequestType.REPORTS, ApplicationStatus.REGISTERED, massageUser, " ");
+        List<Requests> requests = userRequest(myBank.getRequest(), myAccount.getPhoneNumber());
+        requests.add(new Requests(RequestType.REPORTS, ApplicationStatus.REGISTERED, massageUser, " "));
         myBank.addRequest(myAccount.getPhoneNumber(), requests);
     }
 
     public void handleContactOfSupportUser(Bank myBank, UserAccount myAccount) {
         String massageUser = inputTheMassage();
-        Requests requests = new Requests(RequestType.CONTACTS, ApplicationStatus.REGISTERED, massageUser, " ");
+        List<Requests> requests = userRequest(myBank.getRequest(), myAccount.getPhoneNumber());
+        requests.add(new Requests(RequestType.CONTACTS, ApplicationStatus.REGISTERED, massageUser, " "));
         myBank.addRequest(myAccount.getPhoneNumber(), requests);
     }
 
     public void handleTransferOfSupportUser(Bank myBank, UserAccount myAccount) {
         String massageUser = inputTheMassage();
-        Requests requests = new Requests(RequestType.TRANSFER, ApplicationStatus.REGISTERED, massageUser, " ");
+        List<Requests> requests = userRequest(myBank.getRequest(), myAccount.getPhoneNumber());
+        requests.add(new Requests(RequestType.TRANSFER, ApplicationStatus.REGISTERED, massageUser, " "));
         myBank.addRequest(myAccount.getPhoneNumber(), requests);
     }
 
     public void handleSettingOfSupportUser(Bank myBank, UserAccount myAccount) {
         String massageUser = inputTheMassage();
-        Requests requests = new Requests(RequestType.SETTINGS, ApplicationStatus.REGISTERED, massageUser, " ");
+        List<Requests> requests = userRequest(myBank.getRequest(), myAccount.getPhoneNumber());
+        requests.add(new Requests(RequestType.SETTINGS, ApplicationStatus.REGISTERED, massageUser, " "));
         myBank.addRequest(myAccount.getPhoneNumber(), requests);
     }
 
+    public List<Requests> userRequest(Map<String, List<Requests>> requests, String phoneNumber){
+        List<Requests> requestsList = new ArrayList<>();
+        for (Map.Entry<String, List<Requests>> entry : requests.entrySet()){
+            if (entry.getKey().equals(phoneNumber)) {
+                requestsList = entry.getValue();
+            }
+        }
+        return requestsList;
+    }
 
     public void handleChangePassword(UserAccount myAccount) {
         System.out.println(Color.YELLOW + "Enter new password: ");
-        String password = ScannerWrapper.getInstance().next();
+        String password = ScannerWrapper.getInstance().nextLine();
 
         boolean isSafePassword = new UserHandler().checkPassword(password);
         if (isSafePassword) {
@@ -264,7 +275,7 @@ public class UserOptions {
     public void handleRegisterCardPassword(UserAccount myAccount) {
         if (myAccount.getCardPassword() == -1) {
             System.out.println(Color.YELLOW + "Enter your card password: ");
-            String inputStr = ScannerWrapper.getInstance().next();
+            String inputStr = ScannerWrapper.getInstance().nextLine();
             boolean isValidPassword = checkValidPassword(inputStr);
             if (!isValidPassword) {
                 System.out.println(Color.RED + "invalid password!");
@@ -288,7 +299,7 @@ public class UserOptions {
     public void handleChangeCardPassword(UserAccount myAccount) {
         if (myAccount.getCardPassword() != -1) {
             System.out.print(Color.YELLOW + "Enter new card password: ");
-            String inputStr = ScannerWrapper.getInstance().next();
+            String inputStr = ScannerWrapper.getInstance().nextLine();
             boolean isValidPassword = checkValidPassword(inputStr);
             if (!isValidPassword) {
                 System.out.println(Color.RED + "invalid password!");
@@ -338,7 +349,8 @@ public class UserOptions {
 
     public void handleSelectManually(UserAccount myAccount, Bank myBank) {
         System.out.print(Color.YELLOW + "Enter the account number: ");
-        int accountNumber = ScannerWrapper.getInstance().nextInt();
+        String input = ScannerWrapper.getInstance().nextLine();
+        int accountNumber = Integer.parseInt(input);
 
         UserAccount user = checkAccountNumber(accountNumber, myBank);
         if (user != null) {
@@ -366,7 +378,8 @@ public class UserOptions {
         }
 
         System.out.print(Color.YELLOW + "Enter the number of account number: ");
-        int index = ScannerWrapper.getInstance().nextInt();
+        String input = ScannerWrapper.getInstance().nextLine();
+        int index = Integer.parseInt(input);
 
         int accountNumber = myAccount.getRecentlyAccountNumberForTransfer().get(index - 1).getAccountNumber();
         String nameOfDestination = myAccount.getRecentlyAccountNumberForTransfer().get(index - 1).getName();
@@ -420,7 +433,8 @@ public class UserOptions {
         }
 
         System.out.print(Color.YELLOW + "Enter the number of account number: ");
-        int indexOfContact = ScannerWrapper.getInstance().nextInt();
+        String input = ScannerWrapper.getInstance().nextLine();
+        int indexOfContact = Integer.parseInt(input);
 
         int accountNumber = accountNumbers.get(indexOfContact);
         String nameOfDestination = contact.get(accountNumber).getFirstName() + contact.get(accountNumber).getLName();
@@ -429,7 +443,8 @@ public class UserOptions {
 
     public void inputTheMoneyForTransaction(UserAccount myAccount, Bank myBank, int accountNumber, String nameOfDestination) {
         System.out.print(Color.YELLOW + "Enter the amount money: ");
-        int money = ScannerWrapper.getInstance().nextInt();
+        String input = ScannerWrapper.getInstance().nextLine();
+        int money = Integer.parseInt(input);
 
         int wadge = 1000;
         boolean isMoneyEnough = checkInventory(myAccount, money + wadge);

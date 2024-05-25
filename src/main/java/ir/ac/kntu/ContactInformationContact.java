@@ -51,7 +51,7 @@ public class ContactInformationContact implements MenuProperty {
     @Override
     public ContactOption getOption() {
         ContactOption[] options = ContactOption.values();
-        String inputStr = ScannerWrapper.getInstance().next();
+        String inputStr = ScannerWrapper.getInstance().nextLine();
         int input;
         try {
             input = Integer.parseInt(inputStr);

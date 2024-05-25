@@ -57,7 +57,7 @@ public class RequestSupportMenu implements MenuProperty {
     @Override
     public RequestSupportField getOption() {
         RequestSupportField[] options = RequestSupportField.values();
-        String inputStr = ScannerWrapper.getInstance().next();
+        String inputStr = ScannerWrapper.getInstance().nextLine();
         int input;
         try {
             input = Integer.parseInt(inputStr);

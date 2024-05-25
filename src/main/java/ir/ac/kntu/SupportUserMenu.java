@@ -54,7 +54,7 @@ public class SupportUserMenu implements MenuProperty {
     @Override
     public SupportUserField getOption() {
         SupportUserField[] options = SupportUserField.values();
-        String inputStr = ScannerWrapper.getInstance().next();
+        String inputStr = ScannerWrapper.getInstance().nextLine();
         int input;
         try {
             input = Integer.parseInt(inputStr);

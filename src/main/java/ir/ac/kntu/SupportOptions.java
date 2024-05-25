@@ -17,16 +17,16 @@ public class SupportOptions {
         }
 
         for (int i = 0; i < authentications.size(); i++) {
-            String name = authentications.get(i).getFirstName() + authentications.get(i).getLastName();
+            String name = authentications.get(i).getFirstName() + " " + authentications.get(i).getLastName();
             System.out.println(Color.GREEN + (i + 1) + "- " + Color.BLUE + name);
         }
 
         System.out.println(Color.YELLOW + "Enter the number of authentication");
         String input = ScannerWrapper.getInstance().nextLine();
         int numberOfAuthentication;
-        try{
+        try {
             numberOfAuthentication = Integer.parseInt(input);
-        }catch (Exception e){
+        } catch (Exception e) {
             return;
         }
         Authentication authentication = authentications.get(numberOfAuthentication - 1);
@@ -47,9 +47,9 @@ public class SupportOptions {
         System.out.println(Color.BLUE + "2- No");
         String input = ScannerWrapper.getInstance().nextLine();
         int number;
-        try{
+        try {
             number = Integer.parseInt(input);
-        }catch (Exception e){
+        } catch (Exception e) {
             return;
         }
 
@@ -64,68 +64,144 @@ public class SupportOptions {
     }
 
     public void requestAccordingToRequestType(Bank myBank) {
-        System.out.print(Color.YELLOW + "Enter the request type: ");
-        String requestType = ScannerWrapper.getInstance().nextLine();
-        Map<String, Requests> requests = new HashMap<>();
-        for (Map.Entry<String, Requests> entry : myBank.getRequest().entrySet()) {
-            if (entry.getValue().getRequestType().equals(requestType)) {
-                requests.put(entry.getKey(), entry.getValue());
-            }
+        RequestType requestType = findRequestType();
+        if (requestType == null) {
+            System.out.println(Color.RED + "Invalid input!");
+            return;
         }
+
+        Map<String, List<Requests>> requests = new HashMap<>();
+        for (Map.Entry<String, List<Requests>> requestsList : myBank.getRequest().entrySet()) {
+            List<Requests> list = new ArrayList<>();
+
+            for (Requests entry : requestsList.getValue()) {
+                if (entry.getRequestType().equals(requestType)) {
+                    list.add(entry);
+                }
+            }
+            requests.put(requestsList.getKey(), list);
+        }
+
         showRequest(myBank, requests);
     }
 
-    public void requestAccordingToApplicationStatus(Bank myBank) {
-        System.out.print(Color.YELLOW + "Enter the application status: ");
-        String applicationStatus = ScannerWrapper.getInstance().nextLine();
-        Map<String, Requests> requests = new HashMap<>();
-        for (Map.Entry<String, Requests> entry : myBank.getRequest().entrySet()) {
-            if (entry.getValue().getApplicationStatus().equals(applicationStatus)) {
-                requests.put(entry.getKey(), entry.getValue());
+    public RequestType findRequestType() {
+        System.out.println(Color.BLUE + "1- Reports");
+        System.out.println(Color.BLUE + "2- Contacts");
+        System.out.println(Color.BLUE + "3- Transfer");
+        System.out.println(Color.BLUE + "4- Setting");
+        System.out.print(Color.YELLOW + "Enter the request type: ");
+        String input = ScannerWrapper.getInstance().nextLine();
+
+        switch (input) {
+            case "1" -> {
+                return RequestType.REPORTS;
+            }
+            case "2" -> {
+                return RequestType.CONTACTS;
+            }
+            case "3" -> {
+                return RequestType.TRANSFER;
+            }
+            case "4" -> {
+                return RequestType.SETTINGS;
             }
         }
+
+        return null;
+    }
+
+    public void requestAccordingToApplicationStatus(Bank myBank) {
+        ApplicationStatus applicationStatus = findApplicationStatus();
+        if (applicationStatus == null) {
+            System.out.println(Color.RED + "Invalid input!");
+            return;
+        }
+
+        Map<String, List<Requests>> requests = new HashMap<>();
+        for (Map.Entry<String, List<Requests>> requestsList : myBank.getRequest().entrySet()) {
+            List<Requests> list = new ArrayList<>();
+
+            for (Requests entry : requestsList.getValue()) {
+                if (entry.getApplicationStatus().equals(applicationStatus)) {
+                    list.add(entry);
+                }
+            }
+            requests.put(requestsList.getKey(), list);
+        }
+
         showRequest(myBank, requests);
+    }
+
+    public ApplicationStatus findApplicationStatus() {
+        System.out.println(Color.BLUE + "1- Registered");
+        System.out.println(Color.BLUE + "2- In progress");
+        System.out.println(Color.BLUE + "3- In closed");
+        System.out.print(Color.YELLOW + "Enter the application status: ");
+        String applicationStatus = ScannerWrapper.getInstance().nextLine();
+
+        switch (applicationStatus) {
+            case "1" -> {
+                return ApplicationStatus.REGISTERED;
+            }
+            case "2" -> {
+                return ApplicationStatus.IN_PROGRESS;
+            }
+            case "3" -> {
+                return ApplicationStatus.IN_CLOSED;
+            }
+        }
+
+        return null;
     }
 
     public void requestAccordingToUser(Bank myBank) {
         System.out.print(Color.YELLOW + "Enter the phoneNumber of user: ");
         String phoneNumberOfUser = ScannerWrapper.getInstance().nextLine();
-        Map<String, Requests> requests = new HashMap<>();
-        for (Map.Entry<String, Requests> entry : myBank.getRequest().entrySet()) {
+        Map<String, List<Requests>> requests = new HashMap<>();
+
+        for (Map.Entry<String, List<Requests>> entry : myBank.getRequest().entrySet()) {
             if (entry.getKey().equals(phoneNumberOfUser)) {
                 requests.put(entry.getKey(), entry.getValue());
+
             }
         }
+
         showRequest(myBank, requests);
     }
 
-    public void showRequest(Bank myBank, Map<String, Requests> requests) {
-        if(requests.isEmpty()){
+    public void showRequest(Bank myBank, Map<String, List<Requests>> requests) {
+        if (requests.isEmpty()) {
             System.out.println(Color.RED + "The list is empty!");
             return;
         }
         List<String> phoneNumbers = new ArrayList<>();
         Map<Integer, Requests> requestsMap = new HashMap<>();
         int index = 1;
-        for (Map.Entry<String, Requests> entry : requests.entrySet()) {
-            phoneNumbers.add(entry.getKey());
-            requestsMap.put(index, entry.getValue());
-            System.out.println(Color.GREEN + index + "- " + Color.BLUE + entry.getValue().toString());
-            index++;
+        for (Map.Entry<String, List<Requests>> requestList : requests.entrySet()) {
+            for (Requests entry : requestList.getValue()) {
+                phoneNumbers.add(requestList.getKey());
+                requestsMap.put(index, entry);
+                System.out.println(Color.GREEN + index + "- " + Color.BLUE + entry.toString());
+                index++;
+            }
         }
+
         System.out.print(Color.YELLOW + "Chose number of request: ");
         String input = ScannerWrapper.getInstance().nextLine();
         int number;
-        try{
+        try {
             number = Integer.parseInt(input);
-        }catch (Exception e){
+        } catch (Exception e) {
+            return;
+        }
+        if (number >= index) {
             return;
         }
 
         String phoneNumber = phoneNumbers.get(number - 1);
         Requests request = requestsMap.get(number);
         request.setApplicationStatus(ApplicationStatus.IN_PROGRESS);
-
         sendSupportMassage(myBank, phoneNumber, request);
     }
 
@@ -135,12 +211,12 @@ public class SupportOptions {
         System.out.println(Color.BLUE + "2- No");
         String input = ScannerWrapper.getInstance().nextLine();
         int number;
-        try{
+        try {
             number = Integer.parseInt(input);
-        }catch (Exception e){
+        } catch (Exception e) {
             return;
         }
-        if (number == 2) {
+        if (number != 1) {
             return;
         }
 
@@ -149,9 +225,11 @@ public class SupportOptions {
         String userMassage = request.getUserMassage();
         request.setApplicationStatus(ApplicationStatus.IN_CLOSED);
 
-        for (Map.Entry<String, Requests> entry : myBank.getRequest().entrySet()) {
-            if (entry.getKey().equals(phoneNumber) && entry.getValue().getUserMassage().equals(userMassage)) {
-                entry.getValue().setSupportMassage(massageSupport);
+        for (Map.Entry<String, List<Requests>> requestList : myBank.getRequest().entrySet()) {
+            for (Requests entry : requestList.getValue()) {
+                if (requestList.getKey().equals(phoneNumber) && entry.getUserMassage().equals(userMassage)) {
+                    entry.setSupportMassage(massageSupport);
+                }
             }
         }
     }
@@ -169,9 +247,9 @@ public class SupportOptions {
         System.out.println(Color.YELLOW + "Enter the index of user: ");
         String input = ScannerWrapper.getInstance().nextLine();
         int number;
-        try{
+        try {
             number = Integer.parseInt(input);
-        }catch (Exception e){
+        } catch (Exception e) {
             return;
         }
         UserAccount user = userAccount.get(number - 1);
