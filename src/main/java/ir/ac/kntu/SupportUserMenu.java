@@ -3,9 +3,6 @@ package ir.ac.kntu;
 public class SupportUserMenu implements MenuProperty {
     private static SupportUserMenu instance = new SupportUserMenu();
 
-    public SupportUserMenu() {
-    }
-
     public static SupportUserMenu getInstance() {
         return instance;
     }
@@ -19,21 +16,21 @@ public class SupportUserMenu implements MenuProperty {
     }
 
 
-    public void implementSupportUser(UserAccount me, Bank myBank) {
+    public void implementSupportUser(UserAccount myAccount, Bank myBank) {
         SupportUserField option;
         do {
             printTheMenu();
             option = getOption();
-            handleSupportUser(myBank, me, option);
+            handleSupportUser(myBank, myAccount, option);
         } while (option != SupportUserField.RETURN);
     }
 
-    public void handleSupportUser(Bank myBank, UserAccount me, SupportUserField option) {
+    public void handleSupportUser(Bank myBank, UserAccount myAccount, SupportUserField option) {
         UserOptions userOptions = new UserOptions();
-        RegisterSupportUserMenu registerSupportUserMenu = new RegisterSupportUserMenu();
+        RegisterSupportUserMenu registerSupport = new RegisterSupportUserMenu();
         switch (option) {
-            case REGISTER_MASSAGE -> registerSupportUserMenu.implementRegisterSupportUser(me, myBank);
-            case SHOW_MASSAGE -> userOptions.showSupportUser(me, myBank);
+            case REGISTER_MASSAGE -> registerSupport.implementRegisterSupportUser(myAccount, myBank);
+            case SHOW_MASSAGE -> userOptions.showSupportUser(myAccount, myBank);
             case RETURN -> System.out.println();
             default -> System.out.println(Color.RED + "Invalid Input!");
         }

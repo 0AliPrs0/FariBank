@@ -3,9 +3,6 @@ package ir.ac.kntu;
 public class UserLoginMenu implements MenuProperty{
     private static UserLoginMenu instance = new UserLoginMenu();
 
-    public UserLoginMenu() {
-    }
-
     public static UserLoginMenu getInstance() {
         return instance;
     }
@@ -38,6 +35,7 @@ public class UserLoginMenu implements MenuProperty{
         System.out.print(Color.PURPLE + "Select the option: ");
     }
 
+    @Override
     public UserLoginField getOption() {
         UserLoginField[] options = UserLoginField.values();
         String inputStr = ScannerWrapper.getInstance().nextLine();

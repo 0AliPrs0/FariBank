@@ -1,48 +1,35 @@
 package ir.ac.kntu;
 
-public class SettingMenu implements MenuProperty{
+public class SettingMenu implements MenuProperty {
     private static SettingMenu instance = new SettingMenu();
-
-    public SettingMenu() {
-    }
 
     public static SettingMenu getInstance() {
         return instance;
     }
 
-    public enum SettingOptions {
-        CHANGE_PASSWORD,
-        REGISTER_CARD_PASSWORD,
-        CHANGE_CARD_PASSWORD,
-        ACTIVATION_CONTACT_KEYWORD,
-        INACTIVATION_CONTACT_KEYWORD,
-        SHOW_ACCOUNT_NUMBER,
-        RETURN,
-        UNDEFINED
-    }
-
-    public void implementSettings(UserAccount me) {
+    public void implementSettings(UserAccount myAccount) {
         SettingOptions option;
         do {
             printTheMenu();
             option = getOption();
-            handleSettingsOption(me, option);
+            handleSettingsOption(myAccount, option);
         } while (option != SettingOptions.RETURN);
     }
 
-    public void handleSettingsOption(UserAccount me, SettingOptions option) {
+    public void handleSettingsOption(UserAccount myAccount, SettingOptions option) {
         UserOptions userOptions = new UserOptions();
         switch (option) {
-            case CHANGE_PASSWORD -> userOptions.handleChangePassword(me);
-            case REGISTER_CARD_PASSWORD -> userOptions.handleRegisterCardPassword(me);
-            case CHANGE_CARD_PASSWORD -> userOptions.handleChangeCardPassword(me);
-            case ACTIVATION_CONTACT_KEYWORD -> userOptions.handleActivationContactKeyword(me);
-            case INACTIVATION_CONTACT_KEYWORD -> userOptions.handleInactivationContactKeyword(me);
-            case SHOW_ACCOUNT_NUMBER -> System.out.println(me.getAccountNumber());
+            case CHANGE_PASSWORD -> userOptions.handleChangePassword(myAccount);
+            case REGISTER_CARD_PASSWORD -> userOptions.handleRegisterCardPassword(myAccount);
+            case CHANGE_CARD_PASSWORD -> userOptions.handleChangeCardPassword(myAccount);
+            case ACTIVATION_CONTACT_KEYWORD -> userOptions.handleActivationContactKeyword(myAccount);
+            case INACTIVATION_CONTACT_KEYWORD -> userOptions.handleInactivationContactKeyword(myAccount);
+            case SHOW_ACCOUNT_NUMBER -> System.out.println(myAccount.getAccountNumber());
             case RETURN -> System.out.println();
             default -> System.out.println(Color.RED + "Invalid Input!");
         }
     }
+
     @Override
     public void printTheMenu() {
         System.out.println();
@@ -64,9 +51,9 @@ public class SettingMenu implements MenuProperty{
         SettingOptions[] options = SettingOptions.values();
         String inputStr = ScannerWrapper.getInstance().nextLine();
         int input;
-        try{
+        try {
             input = Integer.parseInt(inputStr);
-        }catch (Exception e){
+        } catch (Exception e) {
             return SettingOptions.UNDEFINED;
         }
         input--;
@@ -74,5 +61,16 @@ public class SettingMenu implements MenuProperty{
             return options[input];
         }
         return SettingOptions.UNDEFINED;
+    }
+
+    public enum SettingOptions {
+        CHANGE_PASSWORD,
+        REGISTER_CARD_PASSWORD,
+        CHANGE_CARD_PASSWORD,
+        ACTIVATION_CONTACT_KEYWORD,
+        INACTIVATION_CONTACT_KEYWORD,
+        SHOW_ACCOUNT_NUMBER,
+        RETURN,
+        UNDEFINED
     }
 }

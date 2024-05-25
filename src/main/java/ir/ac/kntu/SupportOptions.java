@@ -23,13 +23,13 @@ public class SupportOptions {
 
         System.out.println(Color.YELLOW + "Enter the number of authentication");
         String input = ScannerWrapper.getInstance().nextLine();
-        int numberOfAuthentication;
+        int numAuthentication;
         try {
-            numberOfAuthentication = Integer.parseInt(input);
+            numAuthentication = Integer.parseInt(input);
         } catch (Exception e) {
             return;
         }
-        Authentication authentication = authentications.get(numberOfAuthentication - 1);
+        Authentication authentication = authentications.get(numAuthentication - 1);
         showUserForAuthentication(authentication, myBank);
     }
 
@@ -106,6 +106,7 @@ public class SupportOptions {
             case "4" -> {
                 return RequestType.SETTINGS;
             }
+            default -> System.out.println(Color.RED + "Invalid input!");
         }
 
         return null;
@@ -150,6 +151,7 @@ public class SupportOptions {
             case "3" -> {
                 return ApplicationStatus.IN_CLOSED;
             }
+            default -> System.out.println(Color.RED + "Invalid input!");
         }
 
         return null;
@@ -166,7 +168,6 @@ public class SupportOptions {
 
             }
         }
-
         showRequest(myBank, requests);
     }
 
@@ -186,7 +187,10 @@ public class SupportOptions {
                 index++;
             }
         }
+        inputRequest(myBank, requestsMap, phoneNumbers, index);
+    }
 
+    public void inputRequest(Bank myBank, Map<Integer, Requests> requestsMap, List<String> phoneNumbers, int index){
         System.out.print(Color.YELLOW + "Chose number of request: ");
         String input = ScannerWrapper.getInstance().nextLine();
         int number;

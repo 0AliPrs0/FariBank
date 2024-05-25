@@ -68,14 +68,14 @@ public class UserHandler {
         String fName = newAuthentication.getFirstName();
         String lName = newAuthentication.getLastName();
         String phoneNumber = newAuthentication.getPhoneNumber();
-        String id = newAuthentication.getId();
+        String nationalId = newAuthentication.getNationalId();
         String password = newAuthentication.getPassword();
 
         int min = 10000000;
         int max = 99999999;
         int accountNumber = ThreadLocalRandom.current().nextInt(min, max + 1);
 
-        UserAccount user = new UserAccount(fName, lName, phoneNumber, id, password, 0, accountNumber);
+        UserAccount user = new UserAccount(fName, lName, phoneNumber, nationalId, password, 0, accountNumber);
         myBank.getUserAccounts().add(user);
         return user;
     }
@@ -91,24 +91,24 @@ public class UserHandler {
         String phoneNumber = ScannerWrapper.getInstance().nextLine();
 
         System.out.print(Color.YELLOW + "Enter your id: ");
-        String id = ScannerWrapper.getInstance().nextLine();
+        String nationalId = ScannerWrapper.getInstance().nextLine();
 
         System.out.print(Color.YELLOW + "Enter your password: ");
         String password = ScannerWrapper.getInstance().nextLine();
 
-        boolean isTrueCondition = checkCondition(myBank, phoneNumber, id, password);
+        boolean isTrueCondition = checkCondition(myBank, phoneNumber, nationalId, password);
         if (isTrueCondition) {
-            Authentication newAuthentication = new Authentication(fName, lName, phoneNumber, id, password, "", false, false);
+            Authentication newAuthentication = new Authentication(fName, lName, phoneNumber, nationalId, password, "", false, false);
             myBank.getAuthentications().add(newAuthentication);
         }
     }
 
-    public boolean checkCondition(Bank myBank, String phoneNumber, String id, String password) {
-        boolean isTherePhoneNumber = checkPhoneNumber(myBank, phoneNumber);
-        boolean isThereId = checkId(myBank, id);
+    public boolean checkCondition(Bank myBank, String phoneNumber, String nationalId, String password) {
+        boolean isPhoneNumber = checkPhoneNumber(myBank, phoneNumber);
+        boolean isThereId = checkId(myBank, nationalId);
         boolean isPasswordSafe = checkPassword(password);
 
-        if (!isTherePhoneNumber && !isThereId && isPasswordSafe) {
+        if (!isPhoneNumber && !isThereId && isPasswordSafe) {
             System.out.println();
             System.out.println(Color.GREEN + "Your information has been registered. Please wait until the authentication is confirmed.");
             System.out.println();
@@ -128,9 +128,9 @@ public class UserHandler {
         return false;
     }
 
-    public boolean checkId(Bank myBank, String id) {
+    public boolean checkId(Bank myBank, String nationalId) {
         for (UserAccount entry : myBank.getUserAccounts()) {
-            if (entry.getId().equals(id)) {
+            if (entry.getNationalId().equals(nationalId)) {
                 System.out.println(Color.RED + "There is a same id in system!");
                 System.out.println();
                 return true;
@@ -140,19 +140,19 @@ public class UserHandler {
     }
 
     public boolean checkPassword(String password) {
-        String patternSmallLetter = "[a-z]+";
-        boolean isThereSmallLetter = findRegex(patternSmallLetter, password);
+        String pSmallLetter = "[a-z]+";
+        boolean isSmallLetter = findRegex(pSmallLetter, password);
 
-        String patternCapitalLetter = "[A-Z]+";
-        boolean isThereCapitalLetter = findRegex(patternCapitalLetter, password);
+        String pCapitalLetter = "[A-Z]+";
+        boolean isCapitalLetter = findRegex(pCapitalLetter, password);
 
-        String patternDigit = "\\d+";
-        boolean isThereDigit = findRegex(patternDigit, password);
+        String pDigit = "\\d+";
+        boolean isDigit = findRegex(pDigit, password);
 
-        String patternSpecialCharacter = "[@!#$%^]+";
-        boolean isThereSpecialCharacter = findRegex(patternSpecialCharacter, password);
+        String pCharacter = "[@!#$%^]+";
+        boolean isCharacter = findRegex(pCharacter, password);
 
-        if (isThereSmallLetter && isThereCapitalLetter && isThereDigit && isThereSpecialCharacter) {
+        if (isSmallLetter && isCapitalLetter && isDigit && isCharacter) {
             return true;
         }
         System.out.println(Color.RED + "Password is unsafe!");
@@ -160,9 +160,9 @@ public class UserHandler {
         return false;
     }
 
-    public boolean findRegex(String pattern, String password) {
-        Pattern p = Pattern.compile(pattern);
-        Matcher m = p.matcher(password);
-        return m.find();
+    public boolean findRegex(String patternStr, String password) {
+        Pattern pattern = Pattern.compile(patternStr);
+        Matcher matcher = pattern.matcher(password);
+        return matcher.find();
     }
 }

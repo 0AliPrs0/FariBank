@@ -11,19 +11,16 @@ public class Bank {
     private List<Authentication> authentications = new ArrayList<>();
     private Map<String, List<Requests>> requests = new HashMap<>();
 
-    public Bank() {
+    public List<UserAccount> getUserAccounts() {
+        return userAccounts;
     }
 
-    public ArrayList<UserAccount> getUserAccounts() {
-        return (ArrayList<UserAccount>) userAccounts;
+    public List<Authentication> getAuthentications() {
+        return authentications;
     }
 
-    public ArrayList<Authentication> getAuthentications() {
-        return (ArrayList<Authentication>) authentications;
-    }
-
-    public ArrayList<Support> getSupports() {
-        return (ArrayList<Support>) supports;
+    public List<Support> getSupports() {
+        return supports;
     }
 
     public Map<String, List<Requests>> getRequest() {

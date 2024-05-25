@@ -3,9 +3,6 @@ package ir.ac.kntu;
 public class ContactMenu implements MenuProperty {
     private static ContactMenu instance = new ContactMenu();
 
-    public ContactMenu() {
-    }
-
     public static ContactMenu getInstance() {
         return instance;
     }
@@ -17,8 +14,8 @@ public class ContactMenu implements MenuProperty {
         UNDEFINED
     }
 
-    public void implementContacts(UserAccount me) {
-        if (!me.getIsActingContactKeyword()) {
+    public void implementContacts(UserAccount myAccount) {
+        if (!myAccount.getIsActingContactKeyword()) {
             System.out.println("The contact keyword is inactive!");
             return;
         }
@@ -26,15 +23,15 @@ public class ContactMenu implements MenuProperty {
         do {
             printTheMenu();
             option = getOption();
-            handleContacts(me, option);
+            handleContacts(myAccount, option);
         } while (option != MenuContactField.RETURN);
     }
 
-    public void handleContacts(UserAccount me, MenuContactField options) {
+    public void handleContacts(UserAccount myAccount, MenuContactField options) {
         UserOptions userOptions = new UserOptions();
         switch (options) {
-            case ADD_CONTACTS -> userOptions.addContact(me);
-            case VIEW_INFORMATION_CONTACT -> userOptions.viewInformationContact(me);
+            case ADD_CONTACTS -> userOptions.addContact(myAccount);
+            case VIEW_INFORMATION_CONTACT -> userOptions.viewInformationContact(myAccount);
             case RETURN -> System.out.println();
             default -> System.out.println(Color.RED + "Invalid Input!");
         }

@@ -3,9 +3,6 @@ package ir.ac.kntu;
 public class SupportMenu implements MenuProperty {
     private static SupportMenu instance = new SupportMenu();
 
-    public SupportMenu() {
-    }
-
     public static SupportMenu getInstance() {
         return instance;
     }
@@ -31,12 +28,12 @@ public class SupportMenu implements MenuProperty {
 
     public void handleTheSupportMenu(MenuSupportField options, Bank myBank) {
         SupportOptions supportOptions = new SupportOptions();
-        RequestSupportMenu requestSupportMenu = new RequestSupportMenu();
-        UserInformationMenu userInformationMenu = new UserInformationMenu();
+        RequestSupportMenu requestSupport = new RequestSupportMenu();
+        UserInformationMenu userInformation = new UserInformationMenu();
         switch (options) {
             case AUTHENTICATION -> supportOptions.authentication(myBank);
-            case REQUESTS -> requestSupportMenu.implementRequestSupport(myBank);
-            case USERS -> userInformationMenu.implementUsersInformation(myBank);
+            case REQUESTS -> requestSupport.implementRequestSupport(myBank);
+            case USERS -> userInformation.implementUsersInformation(myBank);
             case RETURN -> System.out.println();
             default -> System.out.println(Color.RED + "Invalid Input!");
         }

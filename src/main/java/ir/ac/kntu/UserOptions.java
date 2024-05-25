@@ -132,8 +132,8 @@ public class UserOptions {
         System.out.print(Color.YELLOW + "Enter the phone number name of contact: ");
         String phoneNumber = ScannerWrapper.getInstance().nextLine();
 
-        boolean isTherePhoneNumber = checkPhoneNumber(myAccount, phoneNumber);
-        if (!isTherePhoneNumber) {
+        boolean isPhoneNumber = checkPhoneNumber(myAccount, phoneNumber);
+        if (!isPhoneNumber) {
             Contact newContact = new Contact(fName, lName, phoneNumber);
             myAccount.getMyContacts().add(newContact);
         } else {
@@ -152,8 +152,8 @@ public class UserOptions {
         int numberOfContact = Integer.parseInt(input);
         numberOfContact--;
 
-        ContactInformationContact contactInformationContact = new ContactInformationContact();
-        contactInformationContact.implementInformationContact(myAccount, numberOfContact);
+        ContactInformationContact contactInf = new ContactInformationContact();
+        contactInf.implementInformationContact(myAccount, numberOfContact);
     }
 
 
@@ -223,31 +223,10 @@ public class UserOptions {
         return ScannerWrapper.getInstance().nextLine();
     }
 
-    public void handleReportOfSupportUser(Bank myBank, UserAccount myAccount) {
+    public void handleSupportUser(Bank myBank, UserAccount myAccount, RequestType requestType){
         String massageUser = inputTheMassage();
         List<Requests> requests = userRequest(myBank.getRequest(), myAccount.getPhoneNumber());
-        requests.add(new Requests(RequestType.REPORTS, ApplicationStatus.REGISTERED, massageUser, " "));
-        myBank.addRequest(myAccount.getPhoneNumber(), requests);
-    }
-
-    public void handleContactOfSupportUser(Bank myBank, UserAccount myAccount) {
-        String massageUser = inputTheMassage();
-        List<Requests> requests = userRequest(myBank.getRequest(), myAccount.getPhoneNumber());
-        requests.add(new Requests(RequestType.CONTACTS, ApplicationStatus.REGISTERED, massageUser, " "));
-        myBank.addRequest(myAccount.getPhoneNumber(), requests);
-    }
-
-    public void handleTransferOfSupportUser(Bank myBank, UserAccount myAccount) {
-        String massageUser = inputTheMassage();
-        List<Requests> requests = userRequest(myBank.getRequest(), myAccount.getPhoneNumber());
-        requests.add(new Requests(RequestType.TRANSFER, ApplicationStatus.REGISTERED, massageUser, " "));
-        myBank.addRequest(myAccount.getPhoneNumber(), requests);
-    }
-
-    public void handleSettingOfSupportUser(Bank myBank, UserAccount myAccount) {
-        String massageUser = inputTheMassage();
-        List<Requests> requests = userRequest(myBank.getRequest(), myAccount.getPhoneNumber());
-        requests.add(new Requests(RequestType.SETTINGS, ApplicationStatus.REGISTERED, massageUser, " "));
+        requests.add(new Requests(requestType, ApplicationStatus.REGISTERED, massageUser, " "));
         myBank.addRequest(myAccount.getPhoneNumber(), requests);
     }
 
@@ -281,19 +260,25 @@ public class UserOptions {
                 System.out.println(Color.RED + "invalid password!");
                 return;
             }
-
-            int cardPassword;
-            try {
-                cardPassword = Integer.parseInt(inputStr);
-            } catch (Exception e) {
-                System.out.println(Color.RED + "invalid password!");
-                return;
+            int cardPassword = convertStrToInt(inputStr);
+            if (cardPassword != -1) {
+                myAccount.setCardPassword(cardPassword);
+                System.out.println(Color.GREEN + "Your card password was registered");
             }
-            myAccount.setCardPassword(cardPassword);
-            System.out.println(Color.GREEN + "Your card password was registered");
         } else {
             System.out.println(Color.RED + "Your card password is already registered!");
         }
+    }
+
+    public int convertStrToInt(String input){
+        int cardPassword;
+        try {
+            cardPassword = Integer.parseInt(input);
+        } catch (Exception e) {
+            System.out.println(Color.RED + "invalid password!");
+            return -1;
+        }
+        return cardPassword;
     }
 
     public void handleChangeCardPassword(UserAccount myAccount) {
@@ -305,16 +290,11 @@ public class UserOptions {
                 System.out.println(Color.RED + "invalid password!");
                 return;
             }
-
-            int cardPassword;
-            try {
-                cardPassword = Integer.parseInt(inputStr);
-            } catch (Exception e) {
-                System.out.println(Color.RED + "invalid password!");
-                return;
+            int cardPassword = convertStrToInt(inputStr);
+            if (cardPassword != -1) {
+                myAccount.setCardPassword(cardPassword);
+                System.out.println(Color.GREEN + "Your card password was changed");
             }
-            myAccount.setCardPassword(cardPassword);
-            System.out.println(Color.GREEN + "Your card password was changed");
         } else {
             System.out.println(Color.RED + "Your card password is not registered!");
         }
@@ -369,21 +349,20 @@ public class UserOptions {
     }
 
     public void handleSelectFromResentAccount(UserAccount myAccount, Bank myBank) {
-        if (myAccount.getRecentlyAccountNumberForTransfer().isEmpty()) {
+        if (myAccount.getRecentlyAccount().isEmpty()) {
             System.out.println(Color.RED + "The list is empty!");
             return;
         }
-        for (int i = 0; i < myAccount.getRecentlyAccountNumberForTransfer().size(); i++) {
-            System.out.println((i + 1) + "- " + myAccount.getRecentlyAccountNumberForTransfer().get(i).toString());
+        for (int i = 0; i < myAccount.getRecentlyAccount().size(); i++) {
+            System.out.println((i + 1) + "- " + myAccount.getRecentlyAccount().get(i).toString());
         }
 
         System.out.print(Color.YELLOW + "Enter the number of account number: ");
         String input = ScannerWrapper.getInstance().nextLine();
         int index = Integer.parseInt(input);
 
-        int accountNumber = myAccount.getRecentlyAccountNumberForTransfer().get(index - 1).getAccountNumber();
-        String nameOfDestination = myAccount.getRecentlyAccountNumberForTransfer().get(index - 1).getName();
-
+        int accountNumber = myAccount.getRecentlyAccount().get(index - 1).getAccountNumber();
+        String nameOfDestination = myAccount.getRecentlyAccount().get(index - 1).getName();
         inputTheMoneyForTransaction(myAccount, myBank, accountNumber, nameOfDestination);
     }
 
@@ -399,11 +378,11 @@ public class UserOptions {
             for (int j = 0; j < myBank.getUserAccounts().size(); j++) {
                 List<Contact> contactsOfContact = myBank.getUserAccounts().get(j).getMyContacts();
 
-                for (int k = 0; k < contactsOfContact.size(); k++) {
-                    String otherPhoneNumber = contactsOfContact.get(k).getPhoneNumber();
+                for (Contact contact : contactsOfContact) {
+                    String otherPhoneNumber = contact.getPhoneNumber();
                     String myPhoneNumber = newContact.getPhoneNumber();
 
-                    if (newContact.getPhoneNumber().equals(myPhoneNumber) && contactsOfContact.get(k).getPhoneNumber().equals(otherPhoneNumber) && !myPhoneNumber.equals(otherPhoneNumber)) {
+                    if (newContact.getPhoneNumber().equals(myPhoneNumber) && contact.getPhoneNumber().equals(otherPhoneNumber) && !myPhoneNumber.equals(otherPhoneNumber)) {
                         int accountNumber = myBank.getUserAccounts().get(j).getAccountNumber();
                         contacts.put(accountNumber, newContact);
                     }
@@ -445,11 +424,18 @@ public class UserOptions {
         System.out.print(Color.YELLOW + "Enter the amount money: ");
         String input = ScannerWrapper.getInstance().nextLine();
         int money = Integer.parseInt(input);
-
         int wadge = 1000;
+
         boolean isMoneyEnough = checkInventory(myAccount, money + wadge);
         if (isMoneyEnough) {
-            successTransaction(money, myAccount, myBank, accountNumber, nameOfDestination);
+            UserAccount destinAccount = new UserAccount();
+            for (int i = 0; i < myBank.getUserAccounts().size(); i++) {
+                if (myBank.getUserAccounts().get(i).getAccountNumber() == accountNumber) {
+                    destinAccount = myBank.getUserAccounts().get(i);
+                }
+            }
+
+            successTransaction(money, myAccount, nameOfDestination, destinAccount);
         }
     }
 
@@ -461,53 +447,47 @@ public class UserOptions {
         return false;
     }
 
-    public void successTransaction(int money, UserAccount myAccount, Bank myBank, int accountNumber2, String nameOfDestination) {
-        UserAccount destinationAccount = new UserAccount();
-        for (int i = 0; i < myBank.getUserAccounts().size(); i++) {
-            if (myBank.getUserAccounts().get(i).getAccountNumber() == accountNumber2) {
-                destinationAccount = myBank.getUserAccounts().get(i);
-            }
-        }
-
+    public void successTransaction(int money, UserAccount myAccount, String nameOfDestination, UserAccount destinAccount) {
         myAccount.setBalanceAccount(myAccount.getBalanceAccount() - (money + 1000));
-        destinationAccount.setBalanceAccount(destinationAccount.getBalanceAccount() + money);
+        destinAccount.setBalanceAccount(destinAccount.getBalanceAccount() + money);
 
-        String dateNow = Calendar.getStringNow();
-        printRecite(money, myAccount, destinationAccount, dateNow, nameOfDestination);
-        setTransaction(money, myAccount, destinationAccount, dateNow, nameOfDestination);
+        printRecite(money, myAccount, destinAccount, nameOfDestination);
+        setTransaction(money, myAccount, destinAccount, nameOfDestination);
 
     }
 
-    public void printRecite(int money, UserAccount myAccount, UserAccount destinationAccount, String dateNow, String nameOfDestination) {
+    public void printRecite(int money, UserAccount myAccount, UserAccount destinAccount, String nameOfDestination) {
         int min = 100000;
         int max = 999999;
         int issueTracking = ThreadLocalRandom.current().nextInt(min, max + 1);
 
-        int originAccountNumber = myAccount.getAccountNumber();
-        int destinationAccountNumber = destinationAccount.getAccountNumber();
+        int originAccount = myAccount.getAccountNumber();
+        int destination = destinAccount.getAccountNumber();
+        String dateNow = Calendar.getStringNow();
 
         System.out.println(Color.YELLOW + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         System.out.println(Color.GREEN + "Amount of money: " + Color.BLUE + money);
-        System.out.println(Color.GREEN + "Origin accountNumber: " + Color.BLUE + originAccountNumber);
-        System.out.println(Color.GREEN + "Destination account number: " + Color.BLUE + destinationAccountNumber);
+        System.out.println(Color.GREEN + "Origin accountNumber: " + Color.BLUE + originAccount);
+        System.out.println(Color.GREEN + "Destination account number: " + Color.BLUE + destination);
         System.out.println(Color.GREEN + "name of destination account: " + Color.BLUE + nameOfDestination);
         System.out.println(Color.GREEN + "Date of transfer: " + Color.BLUE + dateNow);
         System.out.println(Color.GREEN + "Issue tracking: " + Color.BLUE + issueTracking);
         System.out.println(Color.YELLOW + "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
     }
 
-    public void setTransaction(int money, UserAccount myAccount, UserAccount destinationAccount, String dateNow, String nameOfDestination) {
+    public void setTransaction(int money, UserAccount myAccount, UserAccount destinAccount, String nameOfDestination) {
         int accountNumber1 = myAccount.getAccountNumber();
-        int accountNumber2 = destinationAccount.getAccountNumber();
-        String nameOfDestinationAccount = destinationAccount.getFirstName() + destinationAccount.getLastName();
+        int accountNumber2 = destinAccount.getAccountNumber();
+        String destination = destinAccount.getFirstName() + " " + destinAccount.getLastName();
+        String dateNow = Calendar.getStringNow();
 
         Transfer newTransfer1 = new Transfer(-money, accountNumber1, accountNumber2, nameOfDestination, dateNow);
         myAccount.addTransfer(newTransfer1);
 
-        Transfer newTransfer2 = new Transfer(money, accountNumber1, accountNumber2, nameOfDestinationAccount, dateNow);
-        destinationAccount.addTransfer(newTransfer2);
+        Transfer newTransfer2 = new Transfer(money, accountNumber1, accountNumber2, destination, dateNow);
+        destinAccount.addTransfer(newTransfer2);
 
         RecentlyAccountForTransfer account = new RecentlyAccountForTransfer(nameOfDestination, accountNumber2);
-        myAccount.addRecentlyAccountNumberForTransfer(account);
+        myAccount.addRecentlyAccount(account);
     }
 }

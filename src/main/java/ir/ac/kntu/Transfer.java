@@ -2,19 +2,19 @@ package ir.ac.kntu;
 
 public class Transfer {
     private int amountTransfer;
-    private int beginningAccountNumber;
-    private int destinationAccountNumber;
-    private String nameOfDestinationAccountOwner;
+    private int beginningAccount;
+    private int destinAccount;
+    private String nameOfDestination;
     private String dateOfTransfer;
 
     public Transfer() {
     }
 
-    public Transfer(int amountTransfer, int beginningAccountNumber, int destinationAccountNumber, String nameOfDestinationAccountOwner, String dateOfTransfer) {
+    public Transfer(int amountTransfer, int beginningAccount, int destinAccount, String nameOfDestination, String dateOfTransfer) {
         this.amountTransfer = amountTransfer;
-        this.beginningAccountNumber = beginningAccountNumber;
-        this.destinationAccountNumber = destinationAccountNumber;
-        this.nameOfDestinationAccountOwner = nameOfDestinationAccountOwner;
+        this.beginningAccount = beginningAccount;
+        this.destinAccount = destinAccount;
+        this.nameOfDestination = nameOfDestination;
         this.dateOfTransfer = dateOfTransfer;
     }
 
@@ -27,27 +27,27 @@ public class Transfer {
     }
 
     public int getBeginningAccountNumber() {
-        return beginningAccountNumber;
+        return beginningAccount;
     }
 
-    public void setBeginningAccountNumber(int beginningAccountNumber) {
-        this.beginningAccountNumber = beginningAccountNumber;
+    public void setBeginningAccountNumber(int beginningAccount) {
+        this.beginningAccount = beginningAccount;
     }
 
     public int getDestinationAccountNumber() {
-        return destinationAccountNumber;
+        return destinAccount;
     }
 
-    public void setDestinationAccountNumber(int destinationAccountNumber) {
-        this.destinationAccountNumber = destinationAccountNumber;
+    public void setDestinationAccountNumber(int destinAccount) {
+        this.destinAccount = destinAccount;
     }
 
     public String getNameOfDestinationAccountOwner() {
-        return nameOfDestinationAccountOwner;
+        return nameOfDestination;
     }
 
-    public void setNameOfDestinationAccountOwner(String nameOfDestinationAccountOwner) {
-        this.nameOfDestinationAccountOwner = nameOfDestinationAccountOwner;
+    public void setNameOfDestinationAccountOwner(String nameOfDestination) {
+        this.nameOfDestination = nameOfDestination;
     }
 
     public String getDateOfTransfer() {
@@ -61,9 +61,9 @@ public class Transfer {
     @Override
     public String toString() {
         return  "amount transfer=" + amountTransfer +
-                ", beginning accountNumber=" + beginningAccountNumber +
-                ", destination accountNumber=" + destinationAccountNumber +
-                ", nameOfDestination accountOwner='" + nameOfDestinationAccountOwner + '\'' +
+                ", beginning accountNumber=" + beginningAccount +
+                ", destination accountNumber=" + destinAccount +
+                ", nameOfDestination accountOwner='" + nameOfDestination + '\'' +
                 ", date of transfer='" + dateOfTransfer + '\'';
     }
 }

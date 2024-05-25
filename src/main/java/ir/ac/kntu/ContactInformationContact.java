@@ -3,9 +3,6 @@ package ir.ac.kntu;
 public class ContactInformationContact implements MenuProperty {
     private static ContactInformationContact instance = new ContactInformationContact();
 
-    public ContactInformationContact() {
-    }
-
     public static ContactInformationContact getInstance() {
         return instance;
     }
@@ -17,20 +14,20 @@ public class ContactInformationContact implements MenuProperty {
         UNDEFINED
     }
 
-    public void implementInformationContact(UserAccount me, int numberOfContact) {
+    public void implementInformationContact(UserAccount myAccount, int numberOfContact) {
         ContactOption option;
         do {
             printTheMenu();
             option = getOption();
-            handleContactsOption(me, numberOfContact, option);
+            handleContactsOption(myAccount, numberOfContact, option);
         } while (option != ContactOption.RETURN);
     }
 
-    public void handleContactsOption(UserAccount me, int numberOfContact, ContactOption option) {
+    public void handleContactsOption(UserAccount myAccount, int numberOfContact, ContactOption option) {
         UserOptions userOptions = new UserOptions();
         switch (option) {
-            case EDIT_INFORMATION -> userOptions.editContact(me, numberOfContact);
-            case VIEW_INFORMATION -> userOptions.viewInformation(me, numberOfContact);
+            case EDIT_INFORMATION -> userOptions.editContact(myAccount, numberOfContact);
+            case VIEW_INFORMATION -> userOptions.viewInformation(myAccount, numberOfContact);
             case RETURN -> System.out.println();
             default -> System.out.println(Color.RED + "Invalid Input!");
         }

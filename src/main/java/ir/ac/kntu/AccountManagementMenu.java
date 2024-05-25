@@ -11,22 +11,22 @@ public class AccountManagementMenu implements MenuProperty {
         UNDEFINED
     }
 
-    public void implementAccountManagement(UserAccount me) {
+    public void implementAccountManagement(UserAccount myAccount) {
         AccountManagementOption option;
         do {
             printTheMenu();
             option = getOption();
-            handleAccountManagement(me, option);
+            handleAccountManagement(myAccount, option);
         } while (option != AccountManagementOption.RETURN);
     }
 
-    public void handleAccountManagement(UserAccount me, AccountManagementOption option) {
+    public void handleAccountManagement(UserAccount myAccount, AccountManagementOption option) {
         UserOptions userOptions = new UserOptions();
         switch (option) {
-            case CHARGED_ACCOUNT -> userOptions.chargeAccount(me);
-            case BALANCE -> userOptions.balance(me);
-            case TRANSACTION -> userOptions.transaction(me.getChargeAccounts(), me.getTransfers());
-            case TIME_FILTER_TRANSACTION -> userOptions.timeFilterTransaction(me);
+            case CHARGED_ACCOUNT -> userOptions.chargeAccount(myAccount);
+            case BALANCE -> userOptions.balance(myAccount);
+            case TRANSACTION -> userOptions.transaction(myAccount.getChargeAccounts(), myAccount.getTransfers());
+            case TIME_FILTER_TRANSACTION -> userOptions.timeFilterTransaction(myAccount);
             case RETURN -> System.out.println();
             default -> System.out.println(Color.RED + "Invalid Input!");
         }

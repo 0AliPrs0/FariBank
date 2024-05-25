@@ -4,9 +4,6 @@ public class RegisterSupportUserMenu implements MenuProperty {
 
     private static RegisterSupportUserMenu instance = new RegisterSupportUserMenu();
 
-    public RegisterSupportUserMenu() {
-    }
-
     public static RegisterSupportUserMenu getInstance() {
         return instance;
     }
@@ -20,22 +17,22 @@ public class RegisterSupportUserMenu implements MenuProperty {
         UNDEFINED
     }
 
-    public void implementRegisterSupportUser(UserAccount me, Bank myBank) {
+    public void implementRegisterSupportUser(UserAccount myAccount, Bank myBank) {
         RegisterSupportUserField option;
         do {
             printTheMenu();
             option = getOption();
-            handleRegisterSupportUser(myBank, me, option);
+            handleRegisterSupportUser(myBank, myAccount, option);
         } while (option != RegisterSupportUserField.RETURN);
     }
 
-    public void handleRegisterSupportUser(Bank myBank, UserAccount me, RegisterSupportUserField option) {
+    public void handleRegisterSupportUser(Bank myBank, UserAccount myAccount, RegisterSupportUserField option) {
         UserOptions userOptions = new UserOptions();
         switch (option) {
-            case REPORT -> userOptions.handleReportOfSupportUser(myBank, me);
-            case CONTACTS -> userOptions.handleContactOfSupportUser(myBank, me);
-            case TRANSFER -> userOptions.handleTransferOfSupportUser(myBank, me);
-            case SETTING -> userOptions.handleSettingOfSupportUser(myBank, me);
+            case REPORT -> userOptions.handleSupportUser(myBank, myAccount, RequestType.REPORTS);
+            case CONTACTS -> userOptions.handleSupportUser(myBank, myAccount, RequestType.CONTACTS);
+            case TRANSFER -> userOptions.handleSupportUser(myBank, myAccount, RequestType.TRANSFER);
+            case SETTING -> userOptions.handleSupportUser(myBank, myAccount, RequestType.SETTINGS);
             case RETURN -> System.out.println();
             default -> System.out.println(Color.RED + "Invalid Input!");
         }

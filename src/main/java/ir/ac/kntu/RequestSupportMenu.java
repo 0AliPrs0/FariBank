@@ -3,9 +3,6 @@ package ir.ac.kntu;
 public class RequestSupportMenu implements MenuProperty {
     private static RequestSupportMenu instance = new RequestSupportMenu();
 
-    public RequestSupportMenu() {
-    }
-
     public static RequestSupportMenu getInstance() {
         return instance;
     }

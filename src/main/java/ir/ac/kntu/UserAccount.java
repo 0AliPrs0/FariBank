@@ -5,27 +5,27 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class UserAccount extends User {
-    public int balanceAccount;
-    private int accountNumber;
-    private int cardPassword;
-    private String creditCard;
-    private List<RecentlyAccountForTransfer> recentlyAccountNumberForTransfer = new ArrayList<>();
+    //    private String creditCard;
+    private final List<RecentlyAccountForTransfer> recentlyAccount = new ArrayList<>();
     private final List<Contact> myContacts = new ArrayList<>();
-    private boolean isActingContactKeyword;
     private final List<Transfer> transfers = new LinkedList<>();
     private final List<ChargeAccount> chargeAccounts = new LinkedList<>();
+    private int balanceAccount;
+    private int accountNumber;
+    private int cardPassword;
+    private boolean isActingContact;
 
 
     public UserAccount() {
     }
 
 
-    public UserAccount(String firstName, String lastName, String phoneNumber, String id, String password, int balanceAccount, int accountNumber) {
-        super(firstName, lastName, phoneNumber, id, password);
+    public UserAccount(String firstName, String lastName, String phoneNumber, String nationalId, String password, int balanceAccount, int accountNumber) {
+        super(firstName, lastName, phoneNumber, nationalId, password);
         this.balanceAccount = balanceAccount;
         this.accountNumber = accountNumber;
         this.cardPassword = -1;
-        this.isActingContactKeyword = true;
+        this.isActingContact = true;
     }
 
     public int getBalanceAccount() {
@@ -44,16 +44,16 @@ public class UserAccount extends User {
         this.accountNumber = accountNumber;
     }
 
-    public ArrayList<RecentlyAccountForTransfer> getRecentlyAccountNumberForTransfer() {
-        return (ArrayList<RecentlyAccountForTransfer>)recentlyAccountNumberForTransfer;
+    public List<RecentlyAccountForTransfer> getRecentlyAccount() {
+        return recentlyAccount;
     }
 
-    public void addRecentlyAccountNumberForTransfer(RecentlyAccountForTransfer recentlyAccountForTransfer){
-        recentlyAccountNumberForTransfer.add(recentlyAccountForTransfer);
+    public void addRecentlyAccount(RecentlyAccountForTransfer recentAccount) {
+        recentlyAccount.add(recentAccount);
     }
 
-    public ArrayList<Contact> getMyContacts() {
-        return (ArrayList<Contact>) myContacts;
+    public List<Contact> getMyContacts() {
+        return myContacts;
     }
 
     public int getCardPassword() {
@@ -65,19 +65,19 @@ public class UserAccount extends User {
     }
 
     public boolean getIsActingContactKeyword() {
-        return isActingContactKeyword;
+        return isActingContact;
     }
 
-    public void setIsActingContactKeyword(boolean actingContactKeyword) {
-        isActingContactKeyword = actingContactKeyword;
+    public void setIsActingContactKeyword(boolean actingContact) {
+        isActingContact = actingContact;
     }
 
-    public LinkedList<Transfer> getTransfers() {
-        return (LinkedList<Transfer>) transfers;
+    public List<Transfer> getTransfers() {
+        return transfers;
     }
 
-    public LinkedList<ChargeAccount> getChargeAccounts() {
-        return (LinkedList<ChargeAccount>) chargeAccounts;
+    public List<ChargeAccount> getChargeAccounts() {
+        return chargeAccounts;
     }
 
     public void addChargeAccount(ChargeAccount charge) {
@@ -87,4 +87,5 @@ public class UserAccount extends User {
     public void addTransfer(Transfer transfer) {
         transfers.add(transfer);
     }
+
 }

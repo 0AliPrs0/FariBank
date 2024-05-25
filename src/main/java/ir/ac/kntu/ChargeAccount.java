@@ -2,14 +2,14 @@ package ir.ac.kntu;
 
 public class ChargeAccount {
     private int chargeAmount;
-    private String dateOfChargeAccount;
+    private String dateOfCharge;
 
     public ChargeAccount() {
     }
 
-    public ChargeAccount(int chargeAmount, String dateOfChargeAccount) {
+    public ChargeAccount(int chargeAmount, String dateOfCharge) {
         this.chargeAmount = chargeAmount;
-        this.dateOfChargeAccount = dateOfChargeAccount;
+        this.dateOfCharge = dateOfCharge;
     }
 
     public int getChargeAmount() {
@@ -21,16 +21,16 @@ public class ChargeAccount {
     }
 
     public String getDateOfChargeAccount() {
-        return dateOfChargeAccount;
+        return dateOfCharge;
     }
 
-    public void setDateOfChargeAccount(String dateOfChargeAccount) {
-        this.dateOfChargeAccount = dateOfChargeAccount;
+    public void setDateOfChargeAccount(String dateOfCharge) {
+        this.dateOfCharge = dateOfCharge;
     }
 
     @Override
     public String toString() {
         return "chargeAmount=" + chargeAmount +
-                ", dateOfChargeAccount='" + dateOfChargeAccount + '\'';
+                ", dateOfChargeAccount='" + dateOfCharge + '\'';
     }
 }

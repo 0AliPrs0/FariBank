@@ -60,7 +60,6 @@ public class MainMenu implements MenuProperty {
 
     public void handleTheMenu(MenuMainField option, Bank myBank) {
         UserLoginMenu userLoginMenu = new UserLoginMenu();
-        SupportHandler supportHandler = new SupportHandler();
         switch (option) {
             case USER -> userLoginMenu.implementMenu(myBank);
             case SUPPORT -> SupportHandler.implementTheSupportMenu(myBank);

@@ -9,8 +9,8 @@ public class Authentication extends User {
 
     }
 
-    public Authentication(String firstName, String lastName, String phoneNumber, String id, String password, String supportOpinion, boolean isAcceptRequest, boolean isCheckSupport) {
-        super(firstName, lastName, phoneNumber, id, password);
+    public Authentication(String firstName, String lastName, String phoneNumber, String nationalId, String password, String supportOpinion, boolean isAcceptRequest, boolean isCheckSupport) {
+        super(firstName, lastName, phoneNumber, nationalId, password);
         this.supportOpinion = supportOpinion;
         this.isAcceptRequest = isAcceptRequest;
         this.isCheckSupport = isCheckSupport;
@@ -46,7 +46,7 @@ public class Authentication extends User {
                 "firstName='" + getFirstName() + '\'' +
                 ", lastName='" + getLastName() + '\'' +
                 ", phoneNumber='" + getPhoneNumber() + '\'' +
-                ", id='" + getId() + '\'' +
+                ", id='" + getNationalId() + '\'' +
                 ", password='" + getPassword() + '\'' +
                 '}';
     }

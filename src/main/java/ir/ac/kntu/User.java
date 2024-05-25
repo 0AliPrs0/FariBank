@@ -4,18 +4,18 @@ public class User {
     private String firstName;
     private String lastName;
     private String phoneNumber;
-    private String id;
+    private String nationalId;
     private String password;
 
     public User() {
 
     }
 
-    public User(String firstName, String lastName, String phoneNumber, String id, String password) {
+    public User(String firstName, String lastName, String phoneNumber, String nationalId, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
-        this.id = id;
+        this.nationalId = nationalId;
         this.password = password;
     }
 
@@ -51,12 +51,12 @@ public class User {
         this.password = password;
     }
 
-    public String getId() {
-        return id;
+    public String getNationalId() {
+        return nationalId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setNatinoalId(String nationalId) {
+        this.nationalId = nationalId;
     }
 
 }

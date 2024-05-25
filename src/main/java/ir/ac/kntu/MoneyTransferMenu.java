@@ -3,9 +3,6 @@ package ir.ac.kntu;
 public class MoneyTransferMenu implements MenuProperty {
     private static MoneyTransferMenu instance = new MoneyTransferMenu();
 
-    public MoneyTransferMenu() {
-    }
-
     public static MoneyTransferMenu getInstance() {
         return instance;
     }
@@ -17,19 +14,19 @@ public class MoneyTransferMenu implements MenuProperty {
         UNDEFINED
     }
 
-    public void implementMoneyTransfer(UserAccount me, Bank myBank) {
+    public void implementMoneyTransfer(UserAccount myAccount, Bank myBank) {
         ChoseAccountsForTransfer option;
         printTheMenu();
         option = getOption();
-        handleTransfer(me, option, myBank);
+        handleTransfer(myAccount, option, myBank);
     }
 
-    public void handleTransfer(UserAccount me, ChoseAccountsForTransfer option, Bank myBank) {
+    public void handleTransfer(UserAccount myAccount, ChoseAccountsForTransfer option, Bank myBank) {
         UserOptions userOptions = new UserOptions();
         switch (option) {
-            case SELECT_MANUALLY -> userOptions.handleSelectManually(me, myBank);
-            case SELECT_FROM_RESENT_ACCOUNTS -> userOptions.handleSelectFromResentAccount(me, myBank);
-            case SELECT_FROM_CONTACTS -> userOptions.handleSelectFromContacts(me, myBank);
+            case SELECT_MANUALLY -> userOptions.handleSelectManually(myAccount, myBank);
+            case SELECT_FROM_RESENT_ACCOUNTS -> userOptions.handleSelectFromResentAccount(myAccount, myBank);
+            case SELECT_FROM_CONTACTS -> userOptions.handleSelectFromContacts(myAccount, myBank);
             default -> System.out.println(Color.RED + "Invalid Input!");
         }
     }
