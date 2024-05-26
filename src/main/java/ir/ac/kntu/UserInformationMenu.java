@@ -3,7 +3,7 @@ package ir.ac.kntu;
 public class UserInformationMenu implements MenuProperty {
 
 
-    public void implementUsersInformation(Bank myBank) {
+public void implementUsersInformation(Bank myBank) {
         UserInformationField option;
         do {
             printTheMenu();

@@ -27,11 +27,11 @@ public class SupportMenu implements MenuProperty {
     }
 
     public void handleTheSupportMenu(MenuSupportField options, Bank myBank) {
-        SupportOptions supportOptions = new SupportOptions();
+        ImplementAuthentication authentication = new ImplementAuthentication();
         RequestSupportMenu requestSupport = new RequestSupportMenu();
         UserInformationMenu userInformation = new UserInformationMenu();
         switch (options) {
-            case AUTHENTICATION -> supportOptions.authentication(myBank);
+            case AUTHENTICATION -> authentication.manageAuthentication(myBank);
             case REQUESTS -> requestSupport.implementRequestSupport(myBank);
             case USERS -> userInformation.implementUsersInformation(myBank);
             case RETURN -> System.out.println();

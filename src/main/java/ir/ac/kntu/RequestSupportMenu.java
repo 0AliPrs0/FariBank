@@ -26,12 +26,12 @@ public class RequestSupportMenu implements MenuProperty {
     }
 
     public void handleRequestSupport(RequestSupportField option, Bank myBank) {
-        SupportOptions supportOptions = new SupportOptions();
+        ImplementRequest implementRequest = new ImplementRequest();
         switch (option) {
-            case ALL_REQUEST -> supportOptions.showRequest(myBank, myBank.getRequest());
-            case REQUEST_ACCORDING_TO_REQUEST_TYPE -> supportOptions.requestAccordingToRequestType(myBank);
-            case REQUEST_ACCORDING_TO_APPLICATION_STATUS -> supportOptions.requestAccordingToApplicationStatus(myBank);
-            case REQUEST_ACCORDING_TO_USER -> supportOptions.requestAccordingToUser(myBank);
+            case ALL_REQUEST -> implementRequest.showRequest(myBank, myBank.getRequest());
+            case REQUEST_ACCORDING_TO_REQUEST_TYPE -> implementRequest.requestAccordingToRequestType(myBank);
+            case REQUEST_ACCORDING_TO_APPLICATION_STATUS -> implementRequest.requestAccordingToApplicationStatus(myBank);
+            case REQUEST_ACCORDING_TO_USER -> implementRequest.requestAccordingToUser(myBank);
             case RETURN -> System.out.println();
             default -> System.out.println(Color.RED + "Invalid Input!");
         }
