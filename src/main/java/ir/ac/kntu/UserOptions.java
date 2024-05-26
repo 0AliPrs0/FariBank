@@ -25,14 +25,7 @@ public class UserOptions {
 
 
 
-    public boolean checkPhoneNumber(UserAccount myAccount, String phoneNumber) {
-        for (Contact entry : myAccount.getMyContacts()) {
-            if (entry.getPhoneNumber().equals(phoneNumber)) {
-                return true;
-            }
-        }
-        return false;
-    }
+
 
 
 

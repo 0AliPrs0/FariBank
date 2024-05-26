@@ -24,10 +24,10 @@ public class ContactInformationContact implements MenuProperty {
     }
 
     public void handleContactsOption(UserAccount myAccount, int numberOfContact, ContactOption option) {
-        UserOptions userOptions = new UserOptions();
+        ImplementContactUser userContacts = new ImplementContactUser();
         switch (option) {
-            case EDIT_INFORMATION -> userOptions.editContact(myAccount, numberOfContact);
-            case VIEW_INFORMATION -> userOptions.viewInformation(myAccount, numberOfContact);
+            case EDIT_INFORMATION -> userContacts.editContact(myAccount, numberOfContact);
+            case VIEW_INFORMATION -> userContacts.viewInformation(myAccount, numberOfContact);
             case RETURN -> System.out.println();
             default -> System.out.println(Color.RED + "Invalid Input!");
         }
