@@ -17,13 +17,13 @@ public class SettingMenu implements MenuProperty {
     }
 
     public void handleSettingsOption(UserAccount myAccount, SettingOptions option) {
-        UserOptions userOptions = new UserOptions();
+        ImplementSetting setting = new ImplementSetting();
         switch (option) {
-            case CHANGE_PASSWORD -> userOptions.handleChangePassword(myAccount);
-            case REGISTER_CARD_PASSWORD -> userOptions.handleRegisterCardPassword(myAccount);
-            case CHANGE_CARD_PASSWORD -> userOptions.handleChangeCardPassword(myAccount);
-            case ACTIVATION_CONTACT_KEYWORD -> userOptions.handleActivationContactKeyword(myAccount);
-            case INACTIVATION_CONTACT_KEYWORD -> userOptions.handleInactivationContactKeyword(myAccount);
+            case CHANGE_PASSWORD -> setting.handleChangePassword(myAccount);
+            case REGISTER_CARD_PASSWORD -> setting.handleRegisterCardPassword(myAccount);
+            case CHANGE_CARD_PASSWORD -> setting.handleChangeCardPassword(myAccount);
+            case ACTIVATION_CONTACT_KEYWORD -> setting.handleActivationContactKeyword(myAccount);
+            case INACTIVATION_CONTACT_KEYWORD -> setting.handleInactivationContactKeyword(myAccount);
             case SHOW_ACCOUNT_NUMBER -> System.out.println(myAccount.getAccountNumber());
             case RETURN -> System.out.println();
             default -> System.out.println(Color.RED + "Invalid Input!");

@@ -1,36 +1,9 @@
 package ir.ac.kntu;
 
-
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class UserOptions {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+public class ImplementSetting {
     public void handleChangePassword(UserAccount myAccount) {
         System.out.println(Color.YELLOW + "Enter new password: ");
         String password = ScannerWrapper.getInstance().nextLine();
@@ -117,5 +90,4 @@ public class UserOptions {
         }
     }
 
-
-    }
+}
