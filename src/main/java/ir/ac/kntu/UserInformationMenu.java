@@ -13,18 +13,18 @@ public void implementUsersInformation(Bank myBank) {
     }
 
     public void handleUserInformation(UserInformationField option, Bank myBank) {
-        SupportOptions supportOptions = new SupportOptions();
+        ImplementUserInformation userInformation = new ImplementUserInformation();
         switch (option) {
-            case ALL_USER -> supportOptions.showAllUser(myBank.getUserAccounts());
-            case SEARCH_ACCORDING_TO_FIRST_NAME -> supportOptions.searchAccordingToFirstName(myBank);
-            case SEARCH_ACCORDING_TO_LAST_NAME -> supportOptions.searchAccordingToLastName(myBank);
-            case SEARCH_ACCORDING_TO_PHONE_NUMBER -> supportOptions.searchAccordingToPhoneNumber(myBank);
+            case ALL_USER -> userInformation.showAllUser(myBank.getUserAccounts());
+            case SEARCH_ACCORDING_TO_FIRST_NAME -> userInformation.searchAccordingToFirstName(myBank);
+            case SEARCH_ACCORDING_TO_LAST_NAME -> userInformation.searchAccordingToLastName(myBank);
+            case SEARCH_ACCORDING_TO_PHONE_NUMBER -> userInformation.searchAccordingToPhoneNumber(myBank);
             case SEARCH_ACCORDING_TO_FIRST_NAME_AND_LAST_NAME ->
-                    supportOptions.searchAccordingToFirstNameAndLastName(myBank);
+                    userInformation.searchAccordingToFirstNameAndLastName(myBank);
             case SEARCH_ACCORDING_TO_FIRST_NAME_AND_PHONE_NUMBER ->
-                    supportOptions.searchAccordingToFirstNameAndPhoneNumber(myBank);
+                    userInformation.searchAccordingToFirstNameAndPhoneNumber(myBank);
             case SEARCH_ACCORDING_TO_LAST_NAME_AND_PHONE_NUMBER ->
-                    supportOptions.searchAccordingToLastNameAndPhoneNumber(myBank);
+                    userInformation.searchAccordingToLastNameAndPhoneNumber(myBank);
             case RETURN -> System.out.println();
             default -> System.out.println(Color.RED + "Invalid Input!");
         }
