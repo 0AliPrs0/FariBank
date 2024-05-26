@@ -26,11 +26,11 @@ public class SupportUserMenu implements MenuProperty {
     }
 
     public void handleSupportUser(Bank myBank, UserAccount myAccount, SupportUserField option) {
-        UserOptions userOptions = new UserOptions();
+        ImplementSupportUser supportUser = new ImplementSupportUser();
         RegisterSupportUserMenu registerSupport = new RegisterSupportUserMenu();
         switch (option) {
             case REGISTER_MASSAGE -> registerSupport.implementRegisterSupportUser(myAccount, myBank);
-            case SHOW_MASSAGE -> userOptions.showSupportUser(myAccount, myBank);
+            case SHOW_MASSAGE -> supportUser.showSupportUser(myAccount, myBank);
             case RETURN -> System.out.println();
             default -> System.out.println(Color.RED + "Invalid Input!");
         }
