@@ -34,7 +34,7 @@ public class ImplementSetting {
         }
     }
 
-    public int convertStrToInt(String input){
+    public int convertStrToInt(String input) {
         int cardPassword;
         try {
             cardPassword = Integer.parseInt(input);

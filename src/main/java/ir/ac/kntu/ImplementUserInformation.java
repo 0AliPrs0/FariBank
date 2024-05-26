@@ -27,13 +27,18 @@ public class ImplementUserInformation {
         printTheInformationUser(user);
     }
 
+    public boolean similaritySearch(String str1, String str2) {
+        return SearchSimilarity.similarity(str1, str2) >= 0.5;
+    }
+
     public void searchAccordingToFirstName(Bank myBank) {
         List<UserAccount> userAccounts = new ArrayList<>();
         System.out.println(Color.YELLOW + "Enter the first name of user: ");
         String firstNameOfUser = ScannerWrapper.getInstance().nextLine();
 
         for (UserAccount entry : myBank.getUserAccounts()) {
-            if (entry.getFirstName().equals(firstNameOfUser)) {
+            boolean isSameSearch = similaritySearch(entry.getFirstName(), firstNameOfUser);
+            if (isSameSearch) {
                 userAccounts.add(entry);
             }
         }
@@ -46,7 +51,8 @@ public class ImplementUserInformation {
         String lastNameOfUser = ScannerWrapper.getInstance().nextLine();
 
         for (UserAccount entry : myBank.getUserAccounts()) {
-            if (entry.getLastName().equals(lastNameOfUser)) {
+            boolean isSameSearch = similaritySearch(entry.getLastName(), lastNameOfUser);
+            if (isSameSearch) {
                 userAccounts.add(entry);
             }
         }
@@ -59,7 +65,8 @@ public class ImplementUserInformation {
         String phoneNumberOfUser = ScannerWrapper.getInstance().nextLine();
 
         for (UserAccount entry : myBank.getUserAccounts()) {
-            if (entry.getPhoneNumber().equals(phoneNumberOfUser)) {
+            boolean isSameSearch = similaritySearch(entry.getPhoneNumber(), phoneNumberOfUser);
+            if (isSameSearch) {
                 userAccounts.add(entry);
             }
         }
@@ -74,7 +81,10 @@ public class ImplementUserInformation {
         String lastNameOfUser = ScannerWrapper.getInstance().nextLine();
 
         for (UserAccount entry : myBank.getUserAccounts()) {
-            if (entry.getFirstName().equals(firstNameOfUser) && entry.getLastName().equals(lastNameOfUser)) {
+            boolean isSameSearch1 = similaritySearch(entry.getFirstName(), firstNameOfUser);
+            boolean isSameSearch2 = similaritySearch(entry.getLastName(), lastNameOfUser);
+
+            if (isSameSearch1 && isSameSearch2) {
                 userAccounts.add(entry);
             }
         }
@@ -89,7 +99,10 @@ public class ImplementUserInformation {
         String phoneNumberOfUser = ScannerWrapper.getInstance().nextLine();
 
         for (UserAccount entry : myBank.getUserAccounts()) {
-            if (entry.getFirstName().equals(firstNameOfUser) && entry.getPhoneNumber().equals(phoneNumberOfUser)) {
+            boolean isSameSearch1 = similaritySearch(entry.getFirstName(), firstNameOfUser);
+            boolean isSameSearch2 = similaritySearch(entry.getPhoneNumber(), phoneNumberOfUser);
+
+            if (isSameSearch1 && isSameSearch2) {
                 userAccounts.add(entry);
             }
         }
@@ -104,7 +117,10 @@ public class ImplementUserInformation {
         String phoneNumberOfUser = ScannerWrapper.getInstance().nextLine();
 
         for (UserAccount entry : myBank.getUserAccounts()) {
-            if (entry.getLastName().equals(lastNameOfUser) && entry.getPhoneNumber().equals(phoneNumberOfUser)) {
+            boolean isSameSearch2 = similaritySearch(entry.getLastName(), lastNameOfUser);
+            boolean isSameSearch1 = similaritySearch(entry.getPhoneNumber(), phoneNumberOfUser);
+
+            if (isSameSearch1 && isSameSearch2) {
                 userAccounts.add(entry);
             }
         }
