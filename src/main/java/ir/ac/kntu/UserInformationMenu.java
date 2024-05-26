@@ -3,7 +3,7 @@ package ir.ac.kntu;
 public class UserInformationMenu implements MenuProperty {
 
 
-public void implementUsersInformation(Bank myBank) {
+    public void implementUsersInformation(Bank myBank) {
         UserInformationField option;
         do {
             printTheMenu();
@@ -28,18 +28,6 @@ public void implementUsersInformation(Bank myBank) {
             case RETURN -> System.out.println();
             default -> System.out.println(Color.RED + "Invalid Input!");
         }
-    }
-
-    public enum UserInformationField {
-        ALL_USER,
-        SEARCH_ACCORDING_TO_FIRST_NAME,
-        SEARCH_ACCORDING_TO_LAST_NAME,
-        SEARCH_ACCORDING_TO_PHONE_NUMBER,
-        SEARCH_ACCORDING_TO_FIRST_NAME_AND_LAST_NAME,
-        SEARCH_ACCORDING_TO_FIRST_NAME_AND_PHONE_NUMBER,
-        SEARCH_ACCORDING_TO_LAST_NAME_AND_PHONE_NUMBER,
-        RETURN,
-        UNDEFINED
     }
 
     @Override
@@ -74,5 +62,17 @@ public void implementUsersInformation(Bank myBank) {
             return options[input];
         }
         return UserInformationField.UNDEFINED;
+    }
+
+    public enum UserInformationField {
+        ALL_USER,
+        SEARCH_ACCORDING_TO_FIRST_NAME,
+        SEARCH_ACCORDING_TO_LAST_NAME,
+        SEARCH_ACCORDING_TO_PHONE_NUMBER,
+        SEARCH_ACCORDING_TO_FIRST_NAME_AND_LAST_NAME,
+        SEARCH_ACCORDING_TO_FIRST_NAME_AND_PHONE_NUMBER,
+        SEARCH_ACCORDING_TO_LAST_NAME_AND_PHONE_NUMBER,
+        RETURN,
+        UNDEFINED
     }
 }
