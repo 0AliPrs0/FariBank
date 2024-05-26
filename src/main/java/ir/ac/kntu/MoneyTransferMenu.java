@@ -22,11 +22,11 @@ public class MoneyTransferMenu implements MenuProperty {
     }
 
     public void handleTransfer(UserAccount myAccount, ChoseAccountsForTransfer option, Bank myBank) {
-        UserOptions userOptions = new UserOptions();
+        ImplementTransfer transfer = new ImplementTransfer();
         switch (option) {
-            case SELECT_MANUALLY -> userOptions.handleSelectManually(myAccount, myBank);
-            case SELECT_FROM_RESENT_ACCOUNTS -> userOptions.handleSelectFromResentAccount(myAccount, myBank);
-            case SELECT_FROM_CONTACTS -> userOptions.handleSelectFromContacts(myAccount, myBank);
+            case SELECT_MANUALLY -> transfer.handleSelectManually(myAccount, myBank);
+            case SELECT_FROM_RESENT_ACCOUNTS -> transfer.handleSelectFromResentAccount(myAccount, myBank);
+            case SELECT_FROM_CONTACTS -> transfer.handleSelectFromContacts(myAccount, myBank);
             default -> System.out.println(Color.RED + "Invalid Input!");
         }
     }
