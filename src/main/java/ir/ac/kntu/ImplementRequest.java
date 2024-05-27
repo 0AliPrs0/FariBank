@@ -148,8 +148,12 @@ public class ImplementRequest {
 
         String phoneNumber = phoneNumbers.get(number - 1);
         Requests request = requestsMap.get(number);
+        if (!request.getApplicationStatus().equals(ApplicationStatus.IN_CLOSED)) {
         request.setApplicationStatus(ApplicationStatus.IN_PROGRESS);
         sendSupportMassage(myBank, phoneNumber, request);
+        } else {
+            System.out.println(Color.BLUE + request.toString() + "supportMassage: " + request.getSupportMassage());
+        }
     }
 
     public void sendSupportMassage(Bank myBank, String phoneNumber, Requests request) {

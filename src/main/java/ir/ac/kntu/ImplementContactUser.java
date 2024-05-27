@@ -31,7 +31,7 @@ public class ImplementContactUser {
         int numberOfContact = Integer.parseInt(input);
         numberOfContact--;
 
-        ContactInformationContact contactInf = new ContactInformationContact();
+        ContactInformationContactMenu contactInf = new ContactInformationContactMenu();
         contactInf.implementInformationContact(myAccount, numberOfContact);
     }
 

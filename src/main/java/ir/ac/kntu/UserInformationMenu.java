@@ -1,7 +1,18 @@
 package ir.ac.kntu;
 
 public class UserInformationMenu implements MenuProperty {
-
+    public enum UserInformationField {
+        ALL_USER,
+        SEARCH_ACCORDING_TO_FIRST_NAME,
+        SEARCH_ACCORDING_TO_LAST_NAME,
+        SEARCH_ACCORDING_TO_PHONE_NUMBER,
+        SEARCH_ACCORDING_TO_FIRST_NAME_AND_LAST_NAME,
+        SEARCH_ACCORDING_TO_FIRST_NAME_AND_PHONE_NUMBER,
+        SEARCH_ACCORDING_TO_LAST_NAME_AND_PHONE_NUMBER,
+        SEARCH_ACCORDING_TO_FIRST_NAME_AND_LAST_NAME_AND_PHONE_NUMBER,
+        RETURN,
+        UNDEFINED
+    }
 
     public void implementUsersInformation(Bank myBank) {
         UserInformationField option;
@@ -25,6 +36,8 @@ public class UserInformationMenu implements MenuProperty {
                     userInformation.searchAccordingToFirstNameAndPhoneNumber(myBank);
             case SEARCH_ACCORDING_TO_LAST_NAME_AND_PHONE_NUMBER ->
                     userInformation.searchAccordingToLastNameAndPhoneNumber(myBank);
+            case SEARCH_ACCORDING_TO_FIRST_NAME_AND_LAST_NAME_AND_PHONE_NUMBER ->
+                    userInformation.searchAccordingToFirstNameAndLastNameAndPhoneNumber(myBank);
             case RETURN -> System.out.println();
             default -> System.out.println(Color.RED + "Invalid Input!");
         }
@@ -41,7 +54,8 @@ public class UserInformationMenu implements MenuProperty {
         System.out.println(Color.BLUE + "5- Search according to first name and last name");
         System.out.println(Color.BLUE + "6- Search according to first name and phoneNumber");
         System.out.println(Color.BLUE + "7- Search according to last name and phoneNumber");
-        System.out.println(Color.BLUE + "8- Return");
+        System.out.println(Color.BLUE + "8- Search according to first name and last name and phoneNumber");
+        System.out.println(Color.BLUE + "9- Return");
         System.out.println(Color.YELLOW + "***********************");
         System.out.println();
         System.out.print(Color.PURPLE + "Select the option: ");
@@ -64,15 +78,4 @@ public class UserInformationMenu implements MenuProperty {
         return UserInformationField.UNDEFINED;
     }
 
-    public enum UserInformationField {
-        ALL_USER,
-        SEARCH_ACCORDING_TO_FIRST_NAME,
-        SEARCH_ACCORDING_TO_LAST_NAME,
-        SEARCH_ACCORDING_TO_PHONE_NUMBER,
-        SEARCH_ACCORDING_TO_FIRST_NAME_AND_LAST_NAME,
-        SEARCH_ACCORDING_TO_FIRST_NAME_AND_PHONE_NUMBER,
-        SEARCH_ACCORDING_TO_LAST_NAME_AND_PHONE_NUMBER,
-        RETURN,
-        UNDEFINED
-    }
 }

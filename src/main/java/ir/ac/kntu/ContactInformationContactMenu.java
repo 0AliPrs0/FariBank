@@ -1,9 +1,9 @@
 package ir.ac.kntu;
 
-public class ContactInformationContact implements MenuProperty {
-    private static ContactInformationContact instance = new ContactInformationContact();
+public class ContactInformationContactMenu implements MenuProperty {
+    private static ContactInformationContactMenu instance = new ContactInformationContactMenu();
 
-    public static ContactInformationContact getInstance() {
+    public static ContactInformationContactMenu getInstance() {
         return instance;
     }
 

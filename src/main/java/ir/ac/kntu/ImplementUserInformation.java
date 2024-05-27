@@ -127,6 +127,28 @@ public class ImplementUserInformation {
         searchResult(userAccounts);
     }
 
+    public void searchAccordingToFirstNameAndLastNameAndPhoneNumber(Bank myBank) {
+        List<UserAccount> userAccounts = new ArrayList<>();
+        System.out.println(Color.YELLOW + "Enter the first name of user: ");
+        String firstNameOfUser = ScannerWrapper.getInstance().nextLine();
+        System.out.println(Color.YELLOW + "Enter the last name of user: ");
+        String lastNameOfUser = ScannerWrapper.getInstance().nextLine();
+        System.out.println(Color.YELLOW + "Enter the phone number of user: ");
+        String phoneNumberOfUser = ScannerWrapper.getInstance().nextLine();
+
+        for (UserAccount entry : myBank.getUserAccounts()) {
+            boolean isSameSearch1 = similaritySearch(entry.getLastName(), lastNameOfUser);
+            boolean isSameSearch2 = similaritySearch(entry.getPhoneNumber(), phoneNumberOfUser);
+            boolean isSameSearch3 = similaritySearch(entry.getFirstName(), firstNameOfUser);
+
+            if (isSameSearch1 && isSameSearch2 && isSameSearch3) {
+                userAccounts.add(entry);
+            }
+        }
+        searchResult(userAccounts);
+    }
+
+
     public void searchResult(List<UserAccount> userAccounts) {
         if (userAccounts.isEmpty()) {
             System.out.println(Color.RED + "Not found user!");
