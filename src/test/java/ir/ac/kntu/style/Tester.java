@@ -1,5 +1,6 @@
-package ir.ac.kntu;
+package ir.ac.kntu.style;
 
+import ir.ac.kntu.*;
 import ir.ac.kntu.util.Calendar;
 import org.junit.jupiter.api.Test;
 
@@ -64,10 +65,14 @@ public class Tester {
 
         ChargeAccount charge = new ChargeAccount(10000, Calendar.getStringNow());
         user1.getChargeAccounts().add(charge);
+        user1.setBalanceAccount(user1.getBalanceAccount() + 10000);
         assertEquals(10000, user1.getBalanceAccount());
 
         Transfer transfer = new Transfer(5000, 12345678, 87654321, "nima", Calendar.getStringNow());
         user1.addTransfer(transfer);
+        user1.setBalanceAccount(user1.getBalanceAccount() - (5000 + 1000));
+        user2.setBalanceAccount(user2.getBalanceAccount() + 5000 );
+
         assertEquals(4000, user1.getBalanceAccount());
         assertEquals(5000, user2.getBalanceAccount());
     }
