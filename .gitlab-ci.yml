@@ -1,0 +1,11 @@
+java:
+  stage: test
+  tags:
+    - local 
+  script:
+    - ./gradlew clean test
+  artifacts:
+    reports:
+      junit:
+        - target/surefire-reports/TEST-*.xml
+        - target/failsafe-reports/TEST-*.xml
