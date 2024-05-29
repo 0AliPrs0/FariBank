@@ -40,6 +40,11 @@ public class ImplementTransfer {
         String input = ScannerWrapper.getInstance().nextLine();
         int index = Integer.parseInt(input);
 
+        if (index > myAccount.getRecentlyAccount().size()) {
+            System.out.println(Color.RED + "Enter index in the rage!");
+            return;
+        }
+
         int accountNumber = myAccount.getRecentlyAccount().get(index - 1).getAccountNumber();
         String nameOfDestination = myAccount.getRecentlyAccount().get(index - 1).getName();
         inputTheMoneyForTransaction(myAccount, myBank, accountNumber, nameOfDestination);
@@ -93,6 +98,10 @@ public class ImplementTransfer {
         System.out.print(Color.YELLOW + "Enter the number of account number: ");
         String input = ScannerWrapper.getInstance().nextLine();
         int indexOfContact = Integer.parseInt(input);
+        if (indexOfContact > accountNumbers.size()) {
+            System.out.println(Color.RED + "Enter index in the rage!");
+            return;
+        }
 
         int accountNumber = accountNumbers.get(indexOfContact);
         String nameOfDestination = contact.get(accountNumber).getFirstName() + contact.get(accountNumber).getLName();

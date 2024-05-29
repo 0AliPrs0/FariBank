@@ -23,6 +23,11 @@ public class ImplementUserInformation {
         } catch (Exception e) {
             return;
         }
+
+        if (number > userAccount.size()) {
+            System.out.println(Color.RED + "Enter index in the rage!");
+            return;
+        }
         UserAccount user = userAccount.get(number - 1);
         printTheInformationUser(user);
     }

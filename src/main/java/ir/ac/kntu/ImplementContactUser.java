@@ -29,8 +29,12 @@ public class ImplementContactUser {
         System.out.println(Color.YELLOW + "Chose the contact (Enter the number of contact) : ");
         String input = ScannerWrapper.getInstance().nextLine();
         int numberOfContact = Integer.parseInt(input);
-        numberOfContact--;
+        if (numberOfContact > myAccount.getMyContacts().size()) {
+            System.out.println(Color.RED + "Enter index in the rage!");
+            return;
+        }
 
+        numberOfContact--;
         ContactInformationContactMenu contactInf = new ContactInformationContactMenu();
         contactInf.implementInformationContact(myAccount, numberOfContact);
     }

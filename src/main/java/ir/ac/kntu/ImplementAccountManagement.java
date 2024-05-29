@@ -111,6 +111,10 @@ public class ImplementAccountManagement {
         String input = ScannerWrapper.getInstance().nextLine();
         int index = Integer.parseInt(input);
 
+        if (index > chargeAccounts.size() + transfers.size()) {
+            System.out.println(Color.RED + "Enter index in the rage!");
+            return;
+        }
         if (index <= chargeAccounts.size()) {
             System.out.println(Color.BLUE + chargeAccounts.get(index - 1).toString());
         } else {

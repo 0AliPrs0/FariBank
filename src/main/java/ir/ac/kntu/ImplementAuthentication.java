@@ -25,6 +25,12 @@ public class ImplementAuthentication {
         } catch (Exception e) {
             return;
         }
+
+        if (numAuthentication > authentications.size()) {
+            System.out.println(Color.RED + "Enter index in the rage!");
+            return;
+        }
+
         Authentication authentication = authentications.get(numAuthentication - 1);
         showUserForAuthentication(authentication, myBank);
     }
