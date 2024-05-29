@@ -41,7 +41,6 @@ public class ContactInformationContactMenu implements MenuProperty {
         System.out.println(Color.BLUE + "2- view information");
         System.out.println(Color.BLUE + "3- Return");
         System.out.println(Color.YELLOW + "***********************");
-        System.out.println();
         System.out.print(Color.PURPLE+ "Select the option: ");
     }
 

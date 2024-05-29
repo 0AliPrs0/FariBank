@@ -26,13 +26,14 @@ public class UserLoginMenu implements MenuProperty{
     @Override
     public void printTheMenu() {
         System.out.println();
+        System.out.println(Color.CYAN + "User login menu");
         System.out.println(Color.YELLOW + "***********************");
         System.out.println(Color.BLUE + "1- Log_in");
         System.out.println(Color.BLUE + "2- Sign_up");
         System.out.println(Color.BLUE + "3- Return");
         System.out.println(Color.YELLOW + "***********************");
         System.out.println();
-        System.out.print(Color.PURPLE + "Select the option: ");
+        System.out.print(Color.PURPLE + "Select (1 - 3): ");
     }
 
     @Override

@@ -40,14 +40,13 @@ public class ContactMenu implements MenuProperty {
     @Override
     public void printTheMenu() {
         System.out.println();
+        System.out.println(Color.CYAN + "Contact menu");
         System.out.println(Color.YELLOW + "***********************");
         System.out.println(Color.BLUE + "1- Add contact");
         System.out.println(Color.BLUE + "2- view information contact");
         System.out.println(Color.BLUE + "3- Return");
         System.out.println(Color.YELLOW + "***********************");
-        System.out.println();
-        System.out.print(Color.PURPLE + "Select the option: ");
-    }
+        System.out.print(Color.PURPLE + "Select (1 - 3): ");    }
 
     @Override
     public MenuContactField getOption() {

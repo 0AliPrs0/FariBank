@@ -46,6 +46,7 @@ public class UserInformationMenu implements MenuProperty {
     @Override
     public void printTheMenu() {
         System.out.println();
+        System.out.println(Color.CYAN + "User information menu");
         System.out.println(Color.YELLOW + "***********************");
         System.out.println(Color.BLUE + "1- All User");
         System.out.println(Color.BLUE + "2- Search according to first name");
@@ -58,7 +59,7 @@ public class UserInformationMenu implements MenuProperty {
         System.out.println(Color.BLUE + "9- Return");
         System.out.println(Color.YELLOW + "***********************");
         System.out.println();
-        System.out.print(Color.PURPLE + "Select the option: ");
+        System.out.print(Color.PURPLE + "Select (1 - 9): ");
     }
 
     @Override

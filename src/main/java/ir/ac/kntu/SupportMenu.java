@@ -42,6 +42,7 @@ public class SupportMenu implements MenuProperty {
     @Override
     public void printTheMenu() {
         System.out.println();
+        System.out.println(Color.CYAN + "Support menu");
         System.out.println(Color.YELLOW + "***********************");
         System.out.println(Color.BLUE + "1- Authentication");
         System.out.println(Color.BLUE + "2- Requests");
@@ -49,7 +50,7 @@ public class SupportMenu implements MenuProperty {
         System.out.println(Color.BLUE + "4- Return");
         System.out.println(Color.YELLOW + "***********************");
         System.out.println();
-        System.out.print(Color.PURPLE + "Select the option: ");
+        System.out.print(Color.PURPLE + "Select (1 - 5): ");
     }
 
     @Override

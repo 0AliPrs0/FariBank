@@ -7,13 +7,6 @@ public class MoneyTransferMenu implements MenuProperty {
         return instance;
     }
 
-    public enum ChoseAccountsForTransfer {
-        SELECT_MANUALLY,
-        SELECT_FROM_RESENT_ACCOUNTS,
-        SELECT_FROM_CONTACTS,
-        UNDEFINED
-    }
-
     public void implementMoneyTransfer(UserAccount myAccount, Bank myBank) {
         ChoseAccountsForTransfer option;
         printTheMenu();
@@ -39,8 +32,7 @@ public class MoneyTransferMenu implements MenuProperty {
         System.out.println(Color.BLUE + "2- Select from recent accounts");
         System.out.println(Color.BLUE + "3- Select from contacts");
         System.out.println(Color.YELLOW + "***********************");
-        System.out.println();
-        System.out.print(Color.PURPLE + "Select the option: ");
+        System.out.print(Color.PURPLE + "Select (1 - 3): ");
     }
 
     @Override
@@ -58,6 +50,13 @@ public class MoneyTransferMenu implements MenuProperty {
             return options[input];
         }
         return ChoseAccountsForTransfer.UNDEFINED;
+    }
+
+    public enum ChoseAccountsForTransfer {
+        SELECT_MANUALLY,
+        SELECT_FROM_RESENT_ACCOUNTS,
+        SELECT_FROM_CONTACTS,
+        UNDEFINED
     }
 
 }

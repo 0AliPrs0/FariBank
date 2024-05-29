@@ -41,6 +41,7 @@ public class RegisterSupportUserMenu implements MenuProperty {
     @Override
     public void printTheMenu() {
         System.out.println();
+
         System.out.println(Color.YELLOW + "***********************");
         System.out.println(Color.BLUE + "1- Report");
         System.out.println(Color.BLUE + "2- Contacts");
@@ -48,8 +49,7 @@ public class RegisterSupportUserMenu implements MenuProperty {
         System.out.println(Color.BLUE + "4- Setting");
         System.out.println(Color.BLUE + "5- Return");
         System.out.println(Color.YELLOW + "***********************");
-        System.out.println();
-        System.out.print(Color.PURPLE + "Select the option: ");
+        System.out.print(Color.PURPLE + "Select (1 - 5): ");
     }
 
     @Override

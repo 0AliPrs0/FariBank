@@ -33,6 +33,7 @@ public class SettingMenu implements MenuProperty {
     @Override
     public void printTheMenu() {
         System.out.println();
+        System.out.println(Color.CYAN + "Setting menu");
         System.out.println(Color.YELLOW + "***********************");
         System.out.println(Color.BLUE + "1- Change password");
         System.out.println(Color.BLUE + "2- Register card password");
@@ -42,8 +43,7 @@ public class SettingMenu implements MenuProperty {
         System.out.println(Color.BLUE + "6- Show account number");
         System.out.println(Color.BLUE + "7- Return");
         System.out.println(Color.YELLOW + "***********************");
-        System.out.println();
-        System.out.print(Color.PURPLE + "Select the option: ");
+        System.out.print(Color.PURPLE + "Select (1 - 7): ");
     }
 
     @Override

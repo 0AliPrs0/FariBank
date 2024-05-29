@@ -36,6 +36,7 @@ public class AccountManagementMenu implements MenuProperty {
     @Override
     public void printTheMenu() {
         System.out.println();
+        System.out.println(Color.CYAN + "Account management menu");
         System.out.println(Color.YELLOW + "***********************");
         System.out.println(Color.BLUE + "1- Charge account");
         System.out.println(Color.BLUE + "2- Balance");
@@ -43,8 +44,7 @@ public class AccountManagementMenu implements MenuProperty {
         System.out.println(Color.BLUE + "4- Time filter transaction");
         System.out.println(Color.BLUE + "5- Return");
         System.out.println(Color.YELLOW + "***********************");
-        System.out.println();
-        System.out.print(Color.PURPLE + "Select the option: ");
+        System.out.print(Color.PURPLE + "Select (1 - 5): ");
     }
 
     @Override

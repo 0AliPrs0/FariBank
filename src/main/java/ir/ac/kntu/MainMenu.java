@@ -32,12 +32,12 @@ public class MainMenu implements MenuProperty {
     @Override
     public void printTheMenu() {
         System.out.println();
+        System.out.println(Color.CYAN + "Main menu");
         System.out.println(Color.YELLOW + "***********************");
         System.out.println(Color.BLUE + "1- User");
         System.out.println(Color.BLUE + "2- Support");
         System.out.println(Color.BLUE + "3- Exit");
         System.out.println(Color.YELLOW + "***********************");
-        System.out.println();
         System.out.print(Color.PURPLE + "Select your options: ");
     }
 
