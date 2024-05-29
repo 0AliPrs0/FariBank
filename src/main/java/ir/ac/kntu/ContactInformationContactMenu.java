@@ -14,6 +14,7 @@ public class ContactInformationContactMenu implements MenuProperty {
         UNDEFINED
     }
 
+
     public void implementInformationContact(UserAccount myAccount, int numberOfContact) {
         ContactOption option;
         do {
