@@ -108,7 +108,7 @@
     <rule ref="category/java/codestyle.xml/UnnecessaryModifier"/>
     <rule ref="category/java/codestyle.xml/UnnecessaryReturn"/>
     <!--<rule ref="category/java/codestyle.xml/UseDiamondOperator"/>-->
-    <rule ref="category/java/codestyle.xml/UselessParentheses"/>
+    <!-- <rule ref="category/java/codestyle.xml/UselessParentheses"/> -->
     <rule ref="category/java/codestyle.xml/UselessQualifiedThis"/>
     <!--<rule ref="category/java/design.xml/AbstractClassWithoutAnyMethod"/>-->
     <!--<rule ref="category/java/design.xml/AvoidCatchingGenericException"/>-->
@@ -130,7 +130,7 @@
     <!--<rule ref="category/java/design.xml/ExcessiveParameterList"/>-->
     <!--<rule ref="category/java/design.xml/ExcessivePublicCount"/>-->
     <!--<rule ref="category/java/design.xml/FinalFieldCouldBeStatic"/>-->
-    <rule ref="category/java/design.xml/GodClass"/>
+    <!--<rule ref="category/java/design.xml/GodClass"/>-->
     <!--<rule ref="category/java/design.xml/ImmutableField"/>-->
     <!--<rule ref="category/java/design.xml/InvalidJavaBean">-->
     <!--    <properties>-->
