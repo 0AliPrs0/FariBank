@@ -70,7 +70,7 @@ public class UserMenu implements MenuProperty {
         MoneyTransferMenu moneyTransferMenu = new MoneyTransferMenu();
         SettingMenu settingMenu = new SettingMenu();
         SupportUserMenu supportUserMenu = new SupportUserMenu();
-        SelectPhoneNumberToCharge select = new SelectPhoneNumberToCharge();
+        SelectPhoneNumberMenu select = new SelectPhoneNumberMenu();
         switch (options) {
             case ACCOUNT_MANAGEMENT -> accountManagement.implementAccountManagement(myAccount);
             case CONTACTS -> contactMenu.implementContacts(myAccount);
