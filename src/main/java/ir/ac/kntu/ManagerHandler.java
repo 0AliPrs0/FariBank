@@ -5,8 +5,8 @@ public class ManagerHandler {
         myBank.getManagers().add(new Manager("AliPrs", "@Ap84"));
         Manager manager = logInManager(myBank);
         if (manager != null) {
-//                SupportMenu supportMenu = new SupportMenu();
-//                supportMenu.handleSupportOptions(myBank);
+            ManagerMenu managerMenu = new ManagerMenu();
+            managerMenu.implementManagerOption(myBank);
         }
     }
 

@@ -19,10 +19,10 @@ public class ManagerMenu implements MenuProperty{
         ManagerOptionField option;
         printTheMenu();
         option = getOption();
-        handleTransfer(option, myBank);
+        handleManage(option, myBank);
     }
 
-    public void handleTransfer(ManagerOptionField option, Bank myBank) {
+    public void handleManage(ManagerOptionField option, Bank myBank) {
         ImplementTransfer transfer = new ImplementTransfer();
         switch (option) {
             case MAIN_SETTINGS -> transfer.handleSelectManually(myBank);
