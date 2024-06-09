@@ -14,6 +14,7 @@ public class UserAccount extends User {
     private int accountNumber;
     private int cardPassword;
     private boolean isActingContact;
+    private int SIMCardValidity;
 
 
     public UserAccount() {
@@ -26,6 +27,7 @@ public class UserAccount extends User {
         this.accountNumber = accountNumber;
         this.cardPassword = -1;
         this.isActingContact = true;
+        this.SIMCardValidity = 0;
     }
 
     public int getBalanceAccount() {
@@ -88,4 +90,11 @@ public class UserAccount extends User {
         transfers.add(transfer);
     }
 
+    public int getSIMCardValidity() {
+        return SIMCardValidity;
+    }
+
+    public void setSIMCardValidity(int SIMCardValidity) {
+        this.SIMCardValidity = SIMCardValidity;
+    }
 }
