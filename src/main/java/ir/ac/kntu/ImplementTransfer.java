@@ -63,10 +63,9 @@ public class ImplementTransfer {
                 List<Contact> contactsOfContact = myBank.getUserAccounts().get(j).getMyContacts();
 
                 for (Contact contact : contactsOfContact) {
-                    String otherPhoneNumber = contact.getPhoneNumber();
-                    String myPhoneNumber = newContact.getPhoneNumber();
+                    String myPhoneNumber = myAccount.getPhoneNumber();
 
-                    if (newContact.getPhoneNumber().equals(myPhoneNumber) && contact.getPhoneNumber().equals(otherPhoneNumber) && !myPhoneNumber.equals(otherPhoneNumber)) {
+                    if (contact.getPhoneNumber().equals(myPhoneNumber) && newContact.getPhoneNumber().equals(myBank.getUserAccounts().get(j).getPhoneNumber())) {
                         int accountNumber = myBank.getUserAccounts().get(j).getAccountNumber();
                         contacts.put(accountNumber, newContact);
                     }
@@ -176,7 +175,16 @@ public class ImplementTransfer {
         destinAccount.addTransfer(newTransfer2);
 
         RecentlyAccountForTransfer account = new RecentlyAccountForTransfer(nameOfDestination, accountNumber2);
+
+        boolean isResentAcc = false;
+        for (int i = 0; i < myAccount.getRecentlyAccount().size(); i++) {
+            if (myAccount.getRecentlyAccount().get(i).getAccountNumber() == destinAccount.getAccountNumber()) {
+                isResentAcc = true;
+            }
+        }
+        if (!isResentAcc) {
         myAccount.addRecentlyAccount(account);
+        }
     }
 
 }

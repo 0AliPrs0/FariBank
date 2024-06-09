@@ -4,5 +4,6 @@ public enum RequestType {
     REPORTS,
     CONTACTS,
     TRANSFER,
-    SETTINGS
+    SETTINGS,
+    AUTHENTICATION
 }

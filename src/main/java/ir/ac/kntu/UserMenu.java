@@ -13,6 +13,8 @@ public class UserMenu implements MenuProperty {
         MONEY_TRANSFER,
         SUPPORT,
         SETTINGS,
+        CAPITAL_FUND,
+        SIM_CARD_CHARGE,
         RETURN,
         UNDEFINED
     }
@@ -37,10 +39,12 @@ public class UserMenu implements MenuProperty {
         System.out.println(Color.BLUE + "3- Money transfer");
         System.out.println(Color.BLUE + "4- Support");
         System.out.println(Color.BLUE + "5- Settings");
-        System.out.println(Color.BLUE + "6- Return");
+        System.out.println(Color.BLUE + "6- Capital fund");
+        System.out.println(Color.BLUE + "7- SIM card charge");
+        System.out.println(Color.BLUE + "8- Return");
         System.out.println(Color.YELLOW + "***********************");
         System.out.println();
-        System.out.print(Color.PURPLE + "Select (1 - 6): ");
+        System.out.print(Color.PURPLE + "Select (1 - 8): ");
     }
 
     @Override
@@ -72,6 +76,8 @@ public class UserMenu implements MenuProperty {
             case MONEY_TRANSFER -> moneyTransferMenu.implementMoneyTransfer(myAccount, myBank);
             case SUPPORT -> supportUserMenu.implementSupportUser(myAccount, myBank);
             case SETTINGS -> settingMenu.implementSettings(myAccount);
+//            case CAPITAL_FUND ->
+//            case SIM_CARD_CHARGE ->
             case RETURN -> System.out.println();
             default -> System.out.println(Color.RED + "Invalid Input!");
         }

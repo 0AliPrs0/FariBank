@@ -1,5 +1,8 @@
 package ir.ac.kntu;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,7 +19,7 @@ public class UserHandler {
 
         UserAccount newUser = lookForUser(myBank, phoneNumber, password);
         if (newUser == null) {
-            Authentication newAuthentication = checkInformationAsRequest(phoneNumber, password, myBank);
+            Requests newAuthentication = checkInformationAsRequest(phoneNumber, password, myBank);
             firstLogin(newAuthentication, myBank);
         } else {
             UserMenu userMenu = new UserMenu();
@@ -33,9 +36,9 @@ public class UserHandler {
         return null;
     }
 
-    public Authentication checkInformationAsRequest(String phoneNumber, String password, Bank myBank) {
-        for (Authentication entry : myBank.getAuthentications()) {
-            if (entry.getPhoneNumber().equals(phoneNumber) && entry.getPassword().equals(password)) {
+    public Requests checkInformationAsRequest(String phoneNumber, String password, Bank myBank) {
+        for (Requests entry : myBank.getRequest().get(phoneNumber)) {
+            if (entry.getRequestType().equals(RequestType.AUTHENTICATION) && entry.getPassword().equals(password)) {
                 return entry;
             }
         }
@@ -44,19 +47,16 @@ public class UserHandler {
     }
 
 
-    public void firstLogin(Authentication newAuthentication, Bank myBank) {
+    public void firstLogin(Requests newAuthentication, Bank myBank) {
         if (newAuthentication == null) {
             return;
         }
 
-        boolean checkedSupport = newAuthentication.isCheckSupport();
-        boolean acceptInformation = newAuthentication.isAcceptRequest();
-
-        if (!checkedSupport) {
+        if (newAuthentication.getApplicationStatus().equals(ApplicationStatus.IN_PROGRESS)) {
             System.out.println(Color.RED + "The support has not yet checked the information!");
-        } else if (!acceptInformation) {
+        } else if (newAuthentication.getApplicationStatus().equals(ApplicationStatus.IN_CLOSED)) {
             System.out.println(Color.RED + "The support has not verified your information");
-            System.out.println(Color.BLUE + "Support massage: " + Color.GREEN + newAuthentication.getSupportOpinion());
+            System.out.println(Color.BLUE + "Support massage: " + Color.GREEN + newAuthentication.getSupportMassage());
         } else {
             UserAccount newUser = addUser(myBank, newAuthentication);
             UserMenu userMenu = new UserMenu();
@@ -64,7 +64,7 @@ public class UserHandler {
         }
     }
 
-    public UserAccount addUser(Bank myBank, Authentication newAuthentication) {
+    public UserAccount addUser(Bank myBank, Requests newAuthentication) {
         String fName = newAuthentication.getFirstName();
         String lName = newAuthentication.getLastName();
         String phoneNumber = newAuthentication.getPhoneNumber();
@@ -98,9 +98,22 @@ public class UserHandler {
 
         boolean isTrueCondition = checkCondition(myBank, phoneNumber, nationalId, password);
         if (isTrueCondition) {
-            Authentication newAuthentication = new Authentication(fName, lName, phoneNumber, nationalId, password, "", false, false);
-            myBank.getAuthentications().add(newAuthentication);
+            List<Requests> requests = userRequest(myBank.getRequest(), phoneNumber);
+            User user = new User(fName, lName, phoneNumber, nationalId, password);
+            Requests newAuthentication = new Requests(user, RequestType.AUTHENTICATION, ApplicationStatus.IN_PROGRESS, "", "");
+            requests.add(newAuthentication);
+            myBank.addRequest(phoneNumber, requests);
         }
+    }
+
+    public List<Requests> userRequest(Map<String, List<Requests>> requests, String phoneNumber) {
+        List<Requests> requestsList = new ArrayList<>();
+        for (Map.Entry<String, List<Requests>> entry : requests.entrySet()) {
+            if (entry.getKey().equals(phoneNumber)) {
+                requestsList = entry.getValue();
+            }
+        }
+        return requestsList;
     }
 
     public boolean checkCondition(Bank myBank, String phoneNumber, String nationalId, String password) {
@@ -118,6 +131,11 @@ public class UserHandler {
     }
 
     public boolean checkPhoneNumber(Bank myBank, String phoneNumber) {
+        boolean isTruePhone = checkPhoneNumberFormat(phoneNumber);
+        if (isTruePhone) {
+            System.out.println("The format of phone number is not correct");
+            return true;
+        }
         for (UserAccount entry : myBank.getUserAccounts()) {
             if (entry.getPhoneNumber().equals(phoneNumber)) {
                 System.out.println(Color.RED + "There is a same phone number in system!");
@@ -128,7 +146,19 @@ public class UserHandler {
         return false;
     }
 
+    public boolean checkPhoneNumberFormat(String phoneNumber) {
+        String patternStr = "\\d{11}";
+        Pattern pattern = Pattern.compile(patternStr);
+        Matcher matcher = pattern.matcher(phoneNumber);
+        return matcher.matches();
+    }
+
     public boolean checkId(Bank myBank, String nationalId) {
+        boolean isTrueId = checkNationalIdFormat(nationalId);
+        if (isTrueId) {
+            System.out.println("The format of id is not correct");
+            return true;
+        }
         for (UserAccount entry : myBank.getUserAccounts()) {
             if (entry.getNationalId().equals(nationalId)) {
                 System.out.println(Color.RED + "There is a same id in system!");
@@ -137,6 +167,13 @@ public class UserHandler {
             }
         }
         return false;
+    }
+
+    public boolean checkNationalIdFormat(String nationalId) {
+        String patternStr = "\\d{10}";
+        Pattern pattern = Pattern.compile(patternStr);
+        Matcher matcher = pattern.matcher(nationalId);
+        return matcher.matches();
     }
 
     public boolean checkPassword(String password) {

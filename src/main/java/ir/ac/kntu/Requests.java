@@ -9,8 +9,8 @@ public class Requests extends User {
     public Requests() {
     }
 
-    public Requests(RequestType requestType, ApplicationStatus applicationStatus, String userMassage, String supportMassage) {
-        super();
+    public Requests(User user, RequestType requestType, ApplicationStatus applicationStatus, String userMassage, String supportMassage) {
+        super(user);
         this.requestType = requestType;
         this.applicationStatus = applicationStatus;
         this.userMassage = userMassage;

@@ -19,6 +19,10 @@ public class User {
         this.password = password;
     }
 
+    public User(User user){
+        this(user.firstName, user.lastName, user.phoneNumber, user.nationalId, user.password);
+    }
+
     public String getFirstName() {
         return firstName;
     }

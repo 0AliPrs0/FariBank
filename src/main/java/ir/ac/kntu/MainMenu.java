@@ -13,6 +13,7 @@ public class MainMenu implements MenuProperty {
     public enum MenuMainField {
         USER,
         SUPPORT,
+        MANAGE,
         EXIT,
         UNDEFINED
     }
@@ -36,7 +37,8 @@ public class MainMenu implements MenuProperty {
         System.out.println(Color.YELLOW + "***********************");
         System.out.println(Color.BLUE + "1- User");
         System.out.println(Color.BLUE + "2- Support");
-        System.out.println(Color.BLUE + "3- Exit");
+        System.out.println(Color.BLUE + "3- Manage");
+        System.out.println(Color.BLUE + "4- Exit");
         System.out.println(Color.YELLOW + "***********************");
         System.out.print(Color.PURPLE + "Select your options: ");
     }
@@ -63,6 +65,7 @@ public class MainMenu implements MenuProperty {
         switch (option) {
             case USER -> userLoginMenu.implementMenu(myBank);
             case SUPPORT -> SupportHandler.implementTheSupportMenu(myBank);
+//            case MANAGE ->
             case EXIT -> System.out.println(Color.RED + "Exiting the program ...");
             default -> System.out.println(Color.RED + "Invalid Input!");
         }

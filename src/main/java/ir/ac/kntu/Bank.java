@@ -8,16 +8,16 @@ import java.util.Map;
 public class Bank {
     private List<UserAccount> userAccounts = new ArrayList<>();
     private List<Support> supports = new ArrayList<>();
-    private List<Authentication> authentications = new ArrayList<>();
+//    private List<Authentication> authentications = new ArrayList<>();
     private Map<String, List<Requests>> requests = new HashMap<>();
 
     public List<UserAccount> getUserAccounts() {
         return userAccounts;
     }
 
-    public List<Authentication> getAuthentications() {
-        return authentications;
-    }
+//    public List<Authentication> getAuthentications() {
+//        return authentications;
+//    }
 
     public List<Support> getSupports() {
         return supports;

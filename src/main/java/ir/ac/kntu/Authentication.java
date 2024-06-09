@@ -9,7 +9,7 @@ public class Authentication extends User {
 
     }
 
-    public Authentication(String firstName, String lastName, String phoneNumber, String nationalId, String password, String supportOpinion, boolean isAcceptRequest, boolean isCheckSupport) {
+//    public Authentication(String firstName, String lastName, String phoneNumber, String nationalId, String password, String supportOpinion, boolean isAcceptRequest, boolean isCheckSupport) {
         super(firstName, lastName, phoneNumber, nationalId, password);
         this.supportOpinion = supportOpinion;
         this.isAcceptRequest = isAcceptRequest;
