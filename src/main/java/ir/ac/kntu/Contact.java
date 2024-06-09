@@ -41,10 +41,8 @@ public class Contact {
 
     @Override
     public String toString() {
-        return "Contact { " +
-                "firstName = '" + firstName + "\'  " +
+        return  "firstName = '" + firstName + "\'  " +
                 "lastName = '" + lastName + "\'  " +
-                ", phoneNumber = '" + phoneNumber + '\'' +
-                " }";
+                ", phoneNumber = '" + phoneNumber + '\'';
     }
 }
