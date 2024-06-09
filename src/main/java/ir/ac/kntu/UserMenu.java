@@ -70,6 +70,7 @@ public class UserMenu implements MenuProperty {
         MoneyTransferMenu moneyTransferMenu = new MoneyTransferMenu();
         SettingMenu settingMenu = new SettingMenu();
         SupportUserMenu supportUserMenu = new SupportUserMenu();
+        ImplementSIMCardCharge chargeSIM = new ImplementSIMCardCharge();
         switch (options) {
             case ACCOUNT_MANAGEMENT -> accountManagement.implementAccountManagement(myAccount);
             case CONTACTS -> contactMenu.implementContacts(myAccount);
@@ -77,7 +78,7 @@ public class UserMenu implements MenuProperty {
             case SUPPORT -> supportUserMenu.implementSupportUser(myAccount, myBank);
             case SETTINGS -> settingMenu.implementSettings(myAccount);
 //            case CAPITAL_FUND ->
-//            case SIM_CARD_CHARGE ->
+            case SIM_CARD_CHARGE -> chargeSIM.handleChargeSIMCard(myBank, myAccount);
             case RETURN -> System.out.println();
             default -> System.out.println(Color.RED + "Invalid Input!");
         }
