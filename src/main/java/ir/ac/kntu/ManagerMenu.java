@@ -23,8 +23,9 @@ public class ManagerMenu implements MenuProperty{
     }
 
     public void handleManage(ManagerOptionField option, Bank myBank) {
+        ImplementMainSettings mainSettings = new ImplementMainSettings();
         switch (option) {
-//            case MAIN_SETTINGS -> transfer.handleSelectManually(myBank);
+            case MAIN_SETTINGS -> mainSettings.handleMainSettings(myBank);
 //            case USER_MANAGEMENT -> transfer.handleSelectFromResentAccount(myBank);
 //            case AUTO_TRANSACTION -> transfer.handleSelectFromContacts(myBank);
             case RETURN -> System.out.println();
