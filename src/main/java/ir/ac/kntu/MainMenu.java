@@ -1,5 +1,7 @@
 package ir.ac.kntu;
 
+import java.util.List;
+
 public class MainMenu implements MenuProperty {
     private static MainMenu instance = new MainMenu();
 
@@ -19,8 +21,10 @@ public class MainMenu implements MenuProperty {
     }
 
     public void implementMenu(Bank myBank) {
-        MenuMainField option;
+        addFewMockAccount(myBank);
+        myBank.setInterests(new InterestRatesAndFees("2%", "300", "2%", "2000", "0"));
 
+        MenuMainField option;
         do {
             printTheMenu();
             option = getOption();
@@ -30,6 +34,13 @@ public class MainMenu implements MenuProperty {
         ScannerWrapper.getInstance().close();
     }
 
+    public void addFewMockAccount(Bank myBank){
+        MockAccount mockAccount1 = new MockAccount("nima", "09032969853", 1234567);
+        myBank.addMockAccounts(mockAccount1);
+
+        MockAccount mockAccount2 = new MockAccount("mahdi", "09147458951", 7654321);
+        myBank.addMockAccounts(mockAccount2);
+    }
     @Override
     public void printTheMenu() {
         System.out.println();

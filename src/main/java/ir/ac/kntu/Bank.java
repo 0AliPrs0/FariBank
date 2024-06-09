@@ -10,6 +10,7 @@ public class Bank {
     private List<Support> supports = new ArrayList<>();
     private List<Manager> managers = new ArrayList<>();
     private InterestRatesAndFees interests = new InterestRatesAndFees();
+    private List<MockAccount> mockAccounts = new ArrayList<>();
     private Map<String, List<Requests>> requests = new HashMap<>();
 
     public List<UserAccount> getUserAccounts() {
@@ -34,6 +35,14 @@ public class Bank {
 
     public Map<String, List<Requests>> getRequest() {
         return requests;
+    }
+
+    public List<MockAccount> getMockAccounts() {
+        return mockAccounts;
+    }
+
+    public void addMockAccounts(MockAccount mockAccount){
+        mockAccounts.add(mockAccount);
     }
 
     public void addRequest(String phoneNumber, List<Requests> newRequest) {
