@@ -1,7 +1,5 @@
 package ir.ac.kntu;
 
-import java.util.Objects;
-
 public class ImplementMainSettings {
     public void handleMainSettings(Bank myBank){
         String option;
@@ -10,7 +8,7 @@ public class ImplementMainSettings {
             printTheMenu();
             option = ScannerWrapper.getInstance().nextLine();
             handleTheMenu(option, myBank);
-        } while (!option.equals("6"));
+        } while (!"6".equals(option));
     }
 
     public void printTheMenu(){
