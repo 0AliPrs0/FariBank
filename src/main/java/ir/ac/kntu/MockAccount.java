@@ -1,21 +1,21 @@
 package ir.ac.kntu;
 
-public class mockAccount {
+public class MockAccount {
     private String name;
     private String phoneNumber;
     private int accountNumber;
     private int balanceAccount;
-    private int SIMCardValidity;
+    private int simCardValidity;
 
-    public mockAccount() {
+    public MockAccount() {
     }
 
-    public mockAccount(String name, String phoneNumber, int accountNumber) {
+    public MockAccount(String name, String phoneNumber, int accountNumber) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.accountNumber = accountNumber;
         this.balanceAccount = 0;
-        this.SIMCardValidity = 0;
+        this.simCardValidity = 0;
     }
 
     public String getName() {
@@ -50,11 +50,11 @@ public class mockAccount {
         this.balanceAccount = balanceAccount;
     }
 
-    public int getSIMCardValidity() {
-        return SIMCardValidity;
+    public int getSimCardValidity() {
+        return simCardValidity;
     }
 
-    public void setSIMCardValidity(int SIMCardValidity) {
-        this.SIMCardValidity = SIMCardValidity;
+    public void setSimCardValidity(int simCardValidity) {
+        this.simCardValidity = simCardValidity;
     }
 }
