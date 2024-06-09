@@ -122,5 +122,9 @@ public class ImplementAccountManagement {
         }
     }
 
+    public void showSIMCardValidity(UserAccount userAccount){
+        System.out.println(Color.GREEN + "Your SIM card validity is : " + Color.BLUE + userAccount.getSimCardValidity());
+    }
+
 
 }

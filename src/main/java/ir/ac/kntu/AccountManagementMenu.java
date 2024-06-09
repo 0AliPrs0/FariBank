@@ -7,6 +7,7 @@ public class AccountManagementMenu implements MenuProperty {
         BALANCE,
         TRANSACTION,
         TIME_FILTER_TRANSACTION,
+        SIM_CARD_VALIDITY,
         RETURN,
         UNDEFINED
     }
@@ -27,6 +28,7 @@ public class AccountManagementMenu implements MenuProperty {
             case BALANCE -> manageAccount.balance(myAccount);
             case TRANSACTION -> manageAccount.transaction(myAccount.getChargeAccounts(), myAccount.getTransfers());
             case TIME_FILTER_TRANSACTION -> manageAccount.timeFilterTransaction(myAccount);
+            case SIM_CARD_VALIDITY -> manageAccount.showSIMCardValidity(myAccount);
             case RETURN -> System.out.println();
             default -> System.out.println(Color.RED + "Invalid Input!");
         }
@@ -42,9 +44,10 @@ public class AccountManagementMenu implements MenuProperty {
         System.out.println(Color.BLUE + "2- Balance");
         System.out.println(Color.BLUE + "3- Transaction");
         System.out.println(Color.BLUE + "4- Time filter transaction");
-        System.out.println(Color.BLUE + "5- Return");
+        System.out.println(Color.BLUE + "5- SIM card validity");
+        System.out.println(Color.BLUE + "6- Return");
         System.out.println(Color.YELLOW + "***********************");
-        System.out.print(Color.PURPLE + "Select (1 - 5): ");
+        System.out.print(Color.PURPLE + "Select (1 - 6): ");
     }
 
     @Override
