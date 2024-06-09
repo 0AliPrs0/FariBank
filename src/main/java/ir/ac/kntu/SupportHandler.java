@@ -1,7 +1,7 @@
 package ir.ac.kntu;
 
 public class SupportHandler {
-    public static void implementTheSupportMenu(Bank myBank) {
+    public void implementTheSupportMenu(Bank myBank) {
         addSupports(myBank);
         Support support = logInSupport(myBank);
         if (support != null) {
@@ -10,13 +10,13 @@ public class SupportHandler {
         }
     }
 
-    public static void addSupports(Bank myBank) {
+    public void addSupports(Bank myBank) {
         myBank.getSupports().add(new Support("ali", "aliprs", "@Ap84"));
         myBank.getSupports().add(new Support("nima", "nimadan", "#Nd83"));
         myBank.getSupports().add(new Support("amir", "amirmkh", "&Am85"));
     }
 
-    public static Support logInSupport(Bank myBank) {
+    public Support logInSupport(Bank myBank) {
         Support support = new Support();
 
         System.out.print(Color.YELLOW + "Enter your user name: ");
@@ -35,7 +35,7 @@ public class SupportHandler {
         return null;
     }
 
-    public static boolean checkInformation(Bank myBank, String userName, String password) {
+    public boolean checkInformation(Bank myBank, String userName, String password) {
         for (Support entry : myBank.getSupports()) {
             if (entry.getUserName().equals(userName) && entry.getPassword().equals(password)) {
                 return true;
