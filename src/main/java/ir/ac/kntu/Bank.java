@@ -9,6 +9,7 @@ public class Bank {
     private List<UserAccount> userAccounts = new ArrayList<>();
     private List<Support> supports = new ArrayList<>();
     private List<Manager> managers = new ArrayList<>();
+    private InterestRatesAndFees interests = new InterestRatesAndFees();
     private Map<String, List<Requests>> requests = new HashMap<>();
 
     public List<UserAccount> getUserAccounts() {
@@ -21,6 +22,14 @@ public class Bank {
 
     public List<Manager> getManagers() {
         return managers;
+    }
+
+    public InterestRatesAndFees getInterests() {
+        return interests;
+    }
+
+    public void setInterests(InterestRatesAndFees interests) {
+        this.interests = interests;
     }
 
     public Map<String, List<Requests>> getRequest() {

@@ -1,57 +1,60 @@
 package ir.ac.kntu;
 
 public class InterestRatesAndFees {
-    private String bonusFundInterestRate;
-    private String wadgeCardByCard;
-    private String wadgeInterBankBridge;
-    private String wadgeInterBankPaya;
-    private String wadgeFariByFari;
+    private String fundInterestRate;
+    private String cardByCard;
+    private String interBankBridge;
+    private String interBankPaya;
+    private String fariByFari;
 
-    public InterestRatesAndFees(String bonusFundInterestRate, String wadgeCardByCard, String wadgeInterBankBridge, String wadgeInterBankPaya, String wadgeFariByFari) {
-        this.bonusFundInterestRate = bonusFundInterestRate;
-        this.wadgeCardByCard = wadgeCardByCard;
-        this.wadgeInterBankBridge = wadgeInterBankBridge;
-        this.wadgeInterBankPaya = wadgeInterBankPaya;
-        this.wadgeFariByFari = wadgeFariByFari;
+    public InterestRatesAndFees() {
     }
 
-    public String getBonusFundInterestRate() {
-        return bonusFundInterestRate;
+    public InterestRatesAndFees(String fundInterestRate, String cardByCard, String interBankBridge, String interBankPaya, String fariByFari) {
+        this.fundInterestRate = fundInterestRate;
+        this.cardByCard = cardByCard;
+        this.interBankBridge = interBankBridge;
+        this.interBankPaya = interBankPaya;
+        this.fariByFari = fariByFari;
     }
 
-    public void setBonusFundInterestRate(String bonusFundInterestRate) {
-        this.bonusFundInterestRate = bonusFundInterestRate;
+    public String getFundInterestRate() {
+        return fundInterestRate;
     }
 
-    public String getWadgeCardByCard() {
-        return wadgeCardByCard;
+    public void setFundInterestRate(String fundInterestRate) {
+        this.fundInterestRate = fundInterestRate;
     }
 
-    public void setWadgeCardByCard(String wadgeCardByCard) {
-        this.wadgeCardByCard = wadgeCardByCard;
+    public String getCardByCard() {
+        return cardByCard;
     }
 
-    public String getWadgeInterBankBridge() {
-        return wadgeInterBankBridge;
+    public void setCardByCard(String cardByCard) {
+        this.cardByCard = cardByCard;
     }
 
-    public void setWadgeInterBankBridge(String wadgeInterBankBridge) {
-        this.wadgeInterBankBridge = wadgeInterBankBridge;
+    public String getInterBankBridge() {
+        return interBankBridge;
     }
 
-    public String getWadgeInterBankPaya() {
-        return wadgeInterBankPaya;
+    public void setInterBankBridge(String interBankBridge) {
+        this.interBankBridge = interBankBridge;
     }
 
-    public void setWadgeInterBankPaya(String wadgeInterBankPaya) {
-        this.wadgeInterBankPaya = wadgeInterBankPaya;
+    public String getInterBankPaya() {
+        return interBankPaya;
     }
 
-    public String getWadgeFariByFari() {
-        return wadgeFariByFari;
+    public void setInterBankPaya(String interBankPaya) {
+        this.interBankPaya = interBankPaya;
     }
 
-    public void setWadgeFariByFari(String wadgeFariByFari) {
-        this.wadgeFariByFari = wadgeFariByFari;
+    public String getFariByFari() {
+        return fariByFari;
+    }
+
+    public void setFariByFari(String fariByFari) {
+        this.fariByFari = fariByFari;
     }
 }

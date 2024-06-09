@@ -163,7 +163,8 @@ public class ImplementRequest {
             System.out.println(Color.BLUE + request.toString() + "supportMassage: " + request.getSupportMassage());
         }
     }
-    public void setAuthentication(Bank myBank, Requests requests){
+
+    public void setAuthentication(Bank myBank, Requests requests) {
         System.out.println("firstName='" + requests.getFirstName() + '\'' +
                 ", lastName='" + requests.getLastName() + '\'' +
                 ", phoneNumber='" + requests.getPhoneNumber() + '\'' +
@@ -182,15 +183,15 @@ public class ImplementRequest {
 
         if (number == 1) {
             setApplicationStatus(myBank, requests, ApplicationStatus.REGISTERED, "");
-        } else if(number == 2) {
+        } else if (number == 2) {
             System.out.println(Color.YELLOW + "Enter the reason for rejecting this user's authentication");
             String supportOpinion = ScannerWrapper.getInstance().nextLine();
             setApplicationStatus(myBank, requests, ApplicationStatus.IN_CLOSED, supportOpinion);
         }
     }
 
-    public void setApplicationStatus(Bank myBank, Requests requests, ApplicationStatus applicationStatus, String supportMassage){
-        for (int i = 0; i < myBank.getRequest().get(requests.getPhoneNumber()).size(); i++){
+    public void setApplicationStatus(Bank myBank, Requests requests, ApplicationStatus applicationStatus, String supportMassage) {
+        for (int i = 0; i < myBank.getRequest().get(requests.getPhoneNumber()).size(); i++) {
             if (myBank.getRequest().get(requests.getPhoneNumber()).get(i).getRequestType().equals(RequestType.AUTHENTICATION)) {
                 myBank.getRequest().get(requests.getPhoneNumber()).get(i).setApplicationStatus(applicationStatus);
                 myBank.getRequest().get(requests.getPhoneNumber()).get(i).setSupportMassage(supportMassage);

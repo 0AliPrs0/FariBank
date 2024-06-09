@@ -23,11 +23,10 @@ public class ManagerMenu implements MenuProperty{
     }
 
     public void handleManage(ManagerOptionField option, Bank myBank) {
-        ImplementTransfer transfer = new ImplementTransfer();
         switch (option) {
-            case MAIN_SETTINGS -> transfer.handleSelectManually(myBank);
-            case USER_MANAGEMENT -> transfer.handleSelectFromResentAccount(myBank);
-            case AUTO_TRANSACTION -> transfer.handleSelectFromContacts(myBank);
+//            case MAIN_SETTINGS -> transfer.handleSelectManually(myBank);
+//            case USER_MANAGEMENT -> transfer.handleSelectFromResentAccount(myBank);
+//            case AUTO_TRANSACTION -> transfer.handleSelectFromContacts(myBank);
             case RETURN -> System.out.println();
             default -> System.out.println(Color.RED + "Invalid Input!");
         }

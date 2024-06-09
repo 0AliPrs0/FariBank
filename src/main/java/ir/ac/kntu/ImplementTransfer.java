@@ -183,7 +183,7 @@ public class ImplementTransfer {
             }
         }
         if (!isResentAcc) {
-        myAccount.addRecentlyAccount(account);
+            myAccount.addRecentlyAccount(account);
         }
     }
 
