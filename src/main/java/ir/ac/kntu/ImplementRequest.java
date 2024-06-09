@@ -33,6 +33,7 @@ public class ImplementRequest {
         System.out.println(Color.BLUE + "2- Contacts");
         System.out.println(Color.BLUE + "3- Transfer");
         System.out.println(Color.BLUE + "4- Setting");
+        System.out.println(Color.BLUE + "5- Authentication");
         System.out.print(Color.YELLOW + "Enter the request type: ");
         String input = ScannerWrapper.getInstance().nextLine();
 
@@ -48,6 +49,9 @@ public class ImplementRequest {
             }
             case "4" -> {
                 return RequestType.SETTINGS;
+            }
+            case "5" -> {
+                return RequestType.AUTHENTICATION;
             }
             default -> System.out.println(Color.RED + "Invalid input!");
         }
@@ -126,7 +130,7 @@ public class ImplementRequest {
             for (Requests entry : requestList.getValue()) {
                 phoneNumbers.add(requestList.getKey());
                 requestsMap.put(index, entry);
-                System.out.println(Color.GREEN + index + "- " + Color.BLUE + entry.toString());
+                System.out.println(Color.GREEN + index + "- " + "requestType=" + entry.getRequestType() + ", applicationStatus=" + entry.getApplicationStatus());
                 index++;
             }
         }
@@ -148,16 +152,54 @@ public class ImplementRequest {
 
         String phoneNumber = phoneNumbers.get(number - 1);
         Requests request = requestsMap.get(number);
-        if (!request.getApplicationStatus().equals(ApplicationStatus.IN_CLOSED)) {
-            request.setApplicationStatus(ApplicationStatus.IN_PROGRESS);
+        if (request.getRequestType().equals(RequestType.AUTHENTICATION)) {
+            setAuthentication(myBank, request);
+            return;
+        }
+        if (request.getApplicationStatus().equals(ApplicationStatus.IN_PROGRESS)) {
+            request.setApplicationStatus(ApplicationStatus.IN_CLOSED);
             sendSupportMassage(myBank, phoneNumber, request);
         } else {
             System.out.println(Color.BLUE + request.toString() + "supportMassage: " + request.getSupportMassage());
         }
     }
+    public void setAuthentication(Bank myBank, Requests requests){
+        System.out.println("firstName='" + requests.getFirstName() + '\'' +
+                ", lastName='" + requests.getLastName() + '\'' +
+                ", phoneNumber='" + requests.getPhoneNumber() + '\'' +
+                ", nationalId='" + requests.getNationalId() + '\'' +
+                ", password='" + requests.getPassword());
+        System.out.println(Color.YELLOW + "Do you confirm this user ?");
+        System.out.println(Color.BLUE + "1- Yes");
+        System.out.println(Color.BLUE + "2- No");
+        String input = ScannerWrapper.getInstance().nextLine();
+        int number;
+        try {
+            number = Integer.parseInt(input);
+        } catch (Exception e) {
+            return;
+        }
+
+        if (number == 1) {
+            setApplicationStatus(myBank, requests, ApplicationStatus.REGISTERED, "");
+        } else if(number == 2) {
+            System.out.println(Color.YELLOW + "Enter the reason for rejecting this user's authentication");
+            String supportOpinion = ScannerWrapper.getInstance().nextLine();
+            setApplicationStatus(myBank, requests, ApplicationStatus.IN_CLOSED, supportOpinion);
+        }
+    }
+
+    public void setApplicationStatus(Bank myBank, Requests requests, ApplicationStatus applicationStatus, String supportMassage){
+        for (int i = 0; i < myBank.getRequest().get(requests.getPhoneNumber()).size(); i++){
+            if (myBank.getRequest().get(requests.getPhoneNumber()).get(i).getRequestType().equals(RequestType.AUTHENTICATION)) {
+                myBank.getRequest().get(requests.getPhoneNumber()).get(i).setApplicationStatus(applicationStatus);
+                myBank.getRequest().get(requests.getPhoneNumber()).get(i).setSupportMassage(supportMassage);
+            }
+        }
+    }
 
     public void sendSupportMassage(Bank myBank, String phoneNumber, Requests request) {
-        System.out.println(Color.YELLOW + "If you want fix this problem");
+        System.out.println(Color.YELLOW + "If you want fix this problem?");
         System.out.println(Color.BLUE + "1- Yes");
         System.out.println(Color.BLUE + "2- No");
         String input = ScannerWrapper.getInstance().nextLine();
@@ -174,7 +216,7 @@ public class ImplementRequest {
         System.out.print(Color.YELLOW + "Enter your massage to user for this problem: ");
         String massageSupport = ScannerWrapper.getInstance().nextLine();
         String userMassage = request.getUserMassage();
-        request.setApplicationStatus(ApplicationStatus.IN_CLOSED);
+        request.setApplicationStatus(ApplicationStatus.REGISTERED);
 
         for (Map.Entry<String, List<Requests>> requestList : myBank.getRequest().entrySet()) {
             for (Requests entry : requestList.getValue()) {

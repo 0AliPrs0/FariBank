@@ -36,7 +36,7 @@ public class ImplementSupportUser {
         String massageUser = inputTheMassage();
         List<Requests> requests = userRequest(myBank.getRequest(), myAccount.getPhoneNumber());
         User user = new User(myAccount.getFirstName(), myAccount.getLastName(), myAccount.getPhoneNumber(), myAccount.getNationalId(), myAccount.getPassword());
-        requests.add(new Requests(user, requestType, ApplicationStatus.REGISTERED, massageUser, " "));
+        requests.add(new Requests(user, requestType, ApplicationStatus.IN_PROGRESS, massageUser, " "));
         myBank.addRequest(myAccount.getPhoneNumber(), requests);
     }
 
