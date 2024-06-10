@@ -19,8 +19,6 @@ public class UserAccount extends User {
     private List<ProfitFund> profitFunds = new ArrayList<>();
     private List<BonusFund> bonusFunds = new ArrayList<>();
 
-
-
     public UserAccount() {
     }
 
@@ -127,11 +125,19 @@ public class UserAccount extends User {
         return bonusFunds;
     }
 
-    private void addProfitFund(ProfitFund profitFund){
+    public void addProfitFund(ProfitFund profitFund){
         profitFunds.add(profitFund);
     }
 
-    private void addBonusFund(BonusFund bonusFund){
+    public void addBonusFund(BonusFund bonusFund){
         bonusFunds.add(bonusFund);
+    }
+
+    public void removeProfitFund(ProfitFund profitFund){
+        profitFunds.remove(profitFund);
+    }
+
+    public void removeBonusFund(BonusFund bonusFund){
+        bonusFunds.remove(bonusFund);
     }
 }
