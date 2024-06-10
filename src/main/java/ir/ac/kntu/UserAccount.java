@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class UserAccount extends User {
-    //    private String creditCard;
+    private String cardNumber;
     private final List<RecentlyAccountForTransfer> recentlyAccount = new ArrayList<>();
     private final List<Contact> myContacts = new ArrayList<>();
     private final List<Transfer> transfers = new LinkedList<>();
@@ -15,6 +15,7 @@ public class UserAccount extends User {
     private int cardPassword;
     private boolean isActingContact;
     private int simCardValidity;
+
 
 
     public UserAccount() {
@@ -28,6 +29,15 @@ public class UserAccount extends User {
         this.cardPassword = -1;
         this.isActingContact = true;
         this.simCardValidity = 0;
+        this.cardNumber = "60379" + phoneNumber;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
     }
 
     public int getBalanceAccount() {

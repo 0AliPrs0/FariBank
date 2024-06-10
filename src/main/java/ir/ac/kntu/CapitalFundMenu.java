@@ -26,7 +26,7 @@ public class CapitalFundMenu implements MenuProperty{
     }
 
     public void handleContactsOption(UserAccount myAccount, Bank myBank, CapitalFundOption option) {
-//        Implement userContacts = new ImplementContactUser();
+        ImplementCapitalFund capitalFund = new ImplementCapitalFund();
         switch (option) {
 //            case ADD_FUND -> userContacts.editContact(myAccount, numberOfContact);
 //            case REMOVE_FUND -> userContacts.viewInformation(myAccount, numberOfContact);
