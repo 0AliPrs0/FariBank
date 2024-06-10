@@ -28,9 +28,9 @@ public class CapitalFundMenu implements MenuProperty{
     public void handleContactsOption(UserAccount myAccount, Bank myBank, CapitalFundOption option) {
         ImplementCapitalFund capitalFund = new ImplementCapitalFund();
         switch (option) {
-//            case ADD_FUND -> userContacts.editContact(myAccount, numberOfContact);
-//            case REMOVE_FUND -> userContacts.viewInformation(myAccount, numberOfContact);
-//            case FUND_MANAGEMENT ->
+            case ADD_FUND -> capitalFund.addFund(myAccount, myBank);
+            case REMOVE_FUND -> capitalFund.removeFund(myAccount, myBank);
+            case FUND_MANAGEMENT -> capitalFund.fundManagement(myAccount, myBank);
             case RETURN -> System.out.println();
             default -> System.out.println(Color.RED + "Invalid Input!");
         }

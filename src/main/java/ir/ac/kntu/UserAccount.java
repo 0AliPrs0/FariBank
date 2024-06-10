@@ -15,6 +15,9 @@ public class UserAccount extends User {
     private int cardPassword;
     private boolean isActingContact;
     private int simCardValidity;
+    private RemainingFund remainingFund;
+    private List<ProfitFund> profitFunds = new ArrayList<>();
+    private List<BonusFund> bonusFunds = new ArrayList<>();
 
 
 
@@ -106,5 +109,29 @@ public class UserAccount extends User {
 
     public void setSimCardValidity(int simCardValidity) {
         this.simCardValidity = simCardValidity;
+    }
+
+    public RemainingFund getRemainingFund() {
+        return remainingFund;
+    }
+
+    public void setRemainingFund(RemainingFund remainingFund) {
+        this.remainingFund = remainingFund;
+    }
+
+    public List<ProfitFund> getProfitFunds() {
+        return profitFunds;
+    }
+
+    public List<BonusFund> getBonusFunds() {
+        return bonusFunds;
+    }
+
+    private void addProfitFund(ProfitFund profitFund){
+        profitFunds.add(profitFund);
+    }
+
+    private void addBonusFund(BonusFund bonusFund){
+        bonusFunds.add(bonusFund);
     }
 }
