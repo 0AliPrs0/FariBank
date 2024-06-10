@@ -12,6 +12,7 @@ public class Bank {
     private InterestRatesAndFees interests = new InterestRatesAndFees();
     private List<MockAccount> mockAccounts = new ArrayList<>();
     private Map<String, List<Requests>> requests = new HashMap<>();
+    private int depositPeriod;
 
     public List<UserAccount> getUserAccounts() {
         return userAccounts;
@@ -47,5 +48,13 @@ public class Bank {
 
     public void addRequest(String phoneNumber, List<Requests> newRequest) {
         requests.put(phoneNumber, newRequest);
+    }
+
+    public int getDepositPeriod() {
+        return depositPeriod;
+    }
+
+    public void setDepositPeriod(int depositPeriod) {
+        this.depositPeriod = depositPeriod;
     }
 }

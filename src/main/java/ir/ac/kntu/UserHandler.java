@@ -23,6 +23,7 @@ public class UserHandler {
             firstLogin(newAuthentication, myBank);
         } else {
             UserMenu userMenu = new UserMenu();
+            newUser.setRemainingFund(new RemainingFund());
             userMenu.implementMenu(myBank, newUser);
         }
     }

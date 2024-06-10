@@ -4,8 +4,8 @@ public class ProfitFund extends CapitalFund{
     public ProfitFund() {
     }
 
-    public ProfitFund(int fundBalance) {
-        super("profit fund", FundType.PROFIT_FUND, fundBalance);
+    public ProfitFund(String fundName) {
+        super(fundName, FundType.PROFIT_FUND, 0);
     }
 
 }

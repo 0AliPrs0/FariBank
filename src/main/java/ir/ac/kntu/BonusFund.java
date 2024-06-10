@@ -7,8 +7,8 @@ public class BonusFund extends CapitalFund{
     public BonusFund() {
     }
 
-    public BonusFund(String fundName, int fundBalance, String dataOfDeposit, int numberOfDeposit) {
-        super(fundName, FundType.BONUS_FUND, fundBalance);
+    public BonusFund(String fundName, String dataOfDeposit, int numberOfDeposit) {
+        super(fundName, FundType.BONUS_FUND, 0);
         this.dataOfDeposit = dataOfDeposit;
         this.numberOfDeposit = numberOfDeposit;
     }
@@ -28,4 +28,6 @@ public class BonusFund extends CapitalFund{
     public void setNumberOfDeposit(int numberOfDeposit) {
         this.numberOfDeposit = numberOfDeposit;
     }
+
+
 }

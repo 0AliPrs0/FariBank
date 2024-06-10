@@ -37,4 +37,11 @@ public class CapitalFund {
     public void setFundBalance(int fundBalance) {
         this.fundBalance = fundBalance;
     }
+
+    @Override
+    public String toString() {
+        return  "fundName='" + fundName + '\'' +
+                ", fundType=" + fundType +
+                ", fundBalance=" + fundBalance;
+    }
 }
