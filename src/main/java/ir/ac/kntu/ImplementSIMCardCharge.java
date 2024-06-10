@@ -4,8 +4,8 @@ public class ImplementSIMCardCharge {
     public void handleChargeManually(Bank myBank, UserAccount myAccount) {
         System.out.print("Enter the destination phone number: ");
         String phoneNumber = ScannerWrapper.getInstance().nextLine();
-        boolean isTherePhoneNumber = checkPhoneNumber(myBank, phoneNumber);
-        if (isTherePhoneNumber) {
+        boolean isTherePhone = checkPhoneNumber(myBank, phoneNumber);
+        if (isTherePhone) {
             inputAmountOfCharge(myBank, myAccount, phoneNumber);
         } else {
             System.out.println(Color.RED + "Not found the phone number!");

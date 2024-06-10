@@ -1,5 +1,8 @@
 package ir.ac.kntu;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class ImplementMainSettings {
     public void handleMainSettings(Bank myBank){
         String option;
@@ -30,6 +33,11 @@ public class ImplementMainSettings {
             if (Integer.parseInt(option) >= 1 && Integer.parseInt(option) <= 5) {
                 System.out.print("Enter the amount: ");
                 input = ScannerWrapper.getInstance().nextLine();
+                boolean isTrueForm = checkFormInterest(input);
+                if(!isTrueForm){
+                    System.out.println(Color.RED + "Enter the correct form!");
+                    return;
+                }
             }
         } catch (Exception e){
             System.out.println(Color.RED + "Invalid input!");
@@ -47,5 +55,12 @@ public class ImplementMainSettings {
             default -> System.out.println(Color.RED + "Invalid Input!");
         }
         myBank.setInterests(interest);
+    }
+
+    public boolean checkFormInterest(String input){
+        String patternStr = "\\d+.?\\d*%?";
+        Pattern pattern = Pattern.compile(patternStr);
+        Matcher matcher = pattern.matcher(input);
+        return matcher.matches();
     }
 }
