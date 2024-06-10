@@ -71,13 +71,14 @@ public class UserMenu implements MenuProperty {
         SettingMenu settingMenu = new SettingMenu();
         SupportUserMenu supportUserMenu = new SupportUserMenu();
         SelectPhoneNumberMenu select = new SelectPhoneNumberMenu();
+        CapitalFundMenu capitalFund = new CapitalFundMenu();
         switch (options) {
             case ACCOUNT_MANAGEMENT -> accountManagement.implementAccountManagement(myAccount);
             case CONTACTS -> contactMenu.implementContacts(myAccount);
             case MONEY_TRANSFER -> moneyTransferMenu.implementMoneyTransfer(myAccount, myBank);
             case SUPPORT -> supportUserMenu.implementSupportUser(myAccount, myBank);
             case SETTINGS -> settingMenu.implementSettings(myAccount);
-//            case CAPITAL_FUND ->
+            case CAPITAL_FUND -> capitalFund.implementCapitalFund(myAccount, myBank);
             case SIM_CARD_CHARGE -> select.implementSelectWay(myBank, myAccount);
             case RETURN -> System.out.println();
             default -> System.out.println(Color.RED + "Invalid Input!");
