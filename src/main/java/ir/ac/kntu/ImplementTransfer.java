@@ -278,7 +278,6 @@ public class ImplementTransfer {
         }
     }
 
-
     public int inputTheMoney() {
         System.out.print(Color.YELLOW + "Enter the amount money: ");
         String input = ScannerWrapper.getInstance().nextLine();
@@ -334,10 +333,9 @@ public class ImplementTransfer {
         if (!"1".equals(input) && !"2".equals(input)) {
             System.out.println(Color.RED + "Invalid input!");
             return false;
-        } else if ("1".equals(input)) {
-            return true;
+        } else {
+            return "1".equals(input);
         }
-        return false;
     }
 
     public void setTransactionForCardByCardAndInterestBridgeBAnk(int money, UserAccount myAccount, MockAccount mockAccount) {

@@ -36,7 +36,7 @@ public class ImplementCapitalFund {
             System.out.println(Color.RED + "This fund already exist!");
             return;
         }
-        System.out.println(Color.CYAN + "The duration of the deposit is " + myBank.getDepositPeriod() + " minutes. How long (How minute) do you want to deposit in this fund? ");
+        System.out.print(Color.CYAN + "The duration of the deposit is " + myBank.getDepositPeriod() + " minutes. How long (How minute) do you want to deposit in this fund? ");
         String input = ScannerWrapper.getInstance().nextLine();
 
         int numberOfDeposit = 0;
@@ -45,9 +45,22 @@ public class ImplementCapitalFund {
         } catch (Exception e) {
             System.out.println(Color.RED + "Invalid input");
         }
+        System.out.print(Color.CYAN + "Enter the amount of money for deposit: ");
+        String inputStr = ScannerWrapper.getInstance().nextLine();
 
-        Date currentDate = new Date();
-        myAccount.addBonusFund(new BonusFund(fundName, currentDate, numberOfDeposit));
+        int amountMoney = 0;
+        try {
+            amountMoney = Integer.parseInt(inputStr);
+        } catch (Exception e) {
+            System.out.println(Color.RED + "Invalid input");
+        }
+
+        if (amountMoney <= myAccount.getBalanceAccount()) {
+            Date currentDate = new Date();
+            myAccount.addBonusFund(new BonusFund(amountMoney, fundName, currentDate, numberOfDeposit));
+        } else {
+            System.out.println(Color.RED + "Your balance is not enough!");
+        }
     }
 
     public void removeFund(UserAccount myAccount) {
@@ -133,7 +146,7 @@ public class ImplementCapitalFund {
         }
 
         CapitalFund capitalFund = findFund(myAccount, indexOfFund);
-        if (isNotTimeTrue(myAccount, indexOfFund)){
+        if (isNotTimeTrue(myAccount, indexOfFund)) {
             return;
         }
 
@@ -156,10 +169,10 @@ public class ImplementCapitalFund {
         }
     }
 
-    public boolean isNotTimeTrue(UserAccount myAccount, int indexOfFund){
+    public boolean isNotTimeTrue(UserAccount myAccount, int indexOfFund) {
         CapitalFund capitalFund = findFund(myAccount, indexOfFund);
         if (capitalFund instanceof BonusFund other) {
-            if (other.getNumberOfDeposit() > 0){
+            if (other.getNumberOfDeposit() > 0) {
                 System.out.println(Color.RED + "You can not transfer by this fund. because the deposit time has not yet expired");
                 return true;
             }

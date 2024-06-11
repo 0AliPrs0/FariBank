@@ -75,10 +75,20 @@ public class UserHandler {
         int min = 10000000;
         int max = 99999999;
         int accountNumber = ThreadLocalRandom.current().nextInt(min, max + 1);
+        int simCardValidity = findMockAccount(myBank, phoneNumber);
 
-        UserAccount user = new UserAccount(fName, lName, phoneNumber, nationalId, password, 0, accountNumber);
+        UserAccount user = new UserAccount(fName, lName, phoneNumber, nationalId, password, 0, accountNumber, simCardValidity);
         myBank.getUserAccounts().add(user);
         return user;
+    }
+
+    public int findMockAccount(Bank myBank, String phoneNumber) {
+        for (MockAccount mockAccount : myBank.getMockAccounts()) {
+            if (mockAccount.getPhoneNumber().equals(phoneNumber)) {
+                return mockAccount.getSimCardValidity();
+            }
+        }
+        return 0;
     }
 
     public void handleSignUp(Bank myBank) {

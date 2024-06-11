@@ -18,8 +18,8 @@ public class Tester {
     @BeforeEach
     public void setUp() {
         bank = new Bank();
-        user1 = new UserAccount("ali", "prs", "09032948208", "1452006601", "#Ap84", 0, 12345678);
-        user2 = new UserAccount("nima", "dan", "09964430265", "1465713522", "#Nd83", 0, 87654321);
+        user1 = new UserAccount("ali", "prs", "09032948208", "1452006601", "#Ap84", 0, 12345678, 0);
+        user2 = new UserAccount("nima", "dan", "09964430265", "1465713522", "#Nd83", 0, 87654321, 0);
     }
 
     @Test

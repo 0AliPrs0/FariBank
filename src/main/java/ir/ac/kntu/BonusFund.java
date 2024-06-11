@@ -5,14 +5,18 @@ import java.util.Date;
 public class BonusFund extends CapitalFund{
     private Date dataOfDeposit;
     private int numberOfDeposit;
+    private int sumOfDeposit;
+    private int fixedFundBalance;
 
     public BonusFund() {
     }
 
-    public BonusFund(String fundName, Date dataOfDeposit, int numberOfDeposit) {
-        super(fundName, FundType.BONUS_FUND, 0);
+    public BonusFund(int fundBalance, String fundName, Date dataOfDeposit, int numberOfDeposit) {
+        super(fundName, FundType.BONUS_FUND, fundBalance);
         this.dataOfDeposit = dataOfDeposit;
         this.numberOfDeposit = numberOfDeposit;
+        this.sumOfDeposit = numberOfDeposit;
+        this.fixedFundBalance = fundBalance;
     }
 
     public Date getDataOfDeposit() {
@@ -31,5 +35,19 @@ public class BonusFund extends CapitalFund{
         this.numberOfDeposit = numberOfDeposit;
     }
 
+    public int getSumOfDeposit() {
+        return sumOfDeposit;
+    }
 
+    public void setSumOfDeposit(int sumOfDeposit) {
+        this.sumOfDeposit = sumOfDeposit;
+    }
+
+    public int getFixedFundBalance() {
+        return fixedFundBalance;
+    }
+
+    public void setFixedFundBalance(int fixedFundBalance) {
+        this.fixedFundBalance = fixedFundBalance;
+    }
 }

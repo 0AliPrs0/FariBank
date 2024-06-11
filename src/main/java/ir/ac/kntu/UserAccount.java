@@ -23,13 +23,13 @@ public class UserAccount extends User {
     }
 
 
-    public UserAccount(String firstName, String lastName, String phoneNumber, String nationalId, String password, int balanceAccount, int accountNumber) {
+    public UserAccount(String firstName, String lastName, String phoneNumber, String nationalId, String password, int balanceAccount, int accountNumber, int simCardValidity) {
         super(firstName, lastName, phoneNumber, nationalId, password);
         this.balanceAccount = balanceAccount;
         this.accountNumber = accountNumber;
         this.cardPassword = -1;
         this.isActingContact = true;
-        this.simCardValidity = 0;
+        this.simCardValidity = simCardValidity;
         this.cardNumber = "60379" + phoneNumber;
     }
 
