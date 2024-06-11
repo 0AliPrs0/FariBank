@@ -190,7 +190,7 @@ public class ImplementCapitalFund {
 
     }
 
-    public void transfer(UserAccount myAccount, int indexOfFund, int amountMoney){
+    public void transfer(UserAccount myAccount, int indexOfFund, int amountMoney) {
         myAccount.setBalanceAccount(myAccount.getBalanceAccount() - amountMoney);
 
         if (indexOfFund == 1) {

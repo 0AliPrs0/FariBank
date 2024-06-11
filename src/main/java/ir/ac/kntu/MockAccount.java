@@ -6,6 +6,7 @@ public class MockAccount {
     private int accountNumber;
     private int balanceAccount;
     private int simCardValidity;
+    private String cardNumber;
 
     public MockAccount() {
     }
@@ -16,6 +17,7 @@ public class MockAccount {
         this.accountNumber = accountNumber;
         this.balanceAccount = 0;
         this.simCardValidity = 0;
+        this.cardNumber = "58591" + phoneNumber;
     }
 
     public String getName() {
@@ -56,5 +58,13 @@ public class MockAccount {
 
     public void setSimCardValidity(int simCardValidity) {
         this.simCardValidity = simCardValidity;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
     }
 }

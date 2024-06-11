@@ -13,6 +13,7 @@ public class Bank {
     private List<MockAccount> mockAccounts = new ArrayList<>();
     private Map<String, List<Requests>> requests = new HashMap<>();
     private int depositPeriod;
+    private List<Transfer> transfers = new ArrayList<>();
 
     public List<UserAccount> getUserAccounts() {
         return userAccounts;
@@ -56,5 +57,17 @@ public class Bank {
 
     public void setDepositPeriod(int depositPeriod) {
         this.depositPeriod = depositPeriod;
+    }
+
+    public List<Transfer> getTransfers() {
+        return transfers;
+    }
+
+    public void addTransfer(Transfer transfer){
+        transfers.add(transfer);
+    }
+
+    public void removeTransfer(Transfer transfer){
+        transfers.remove(transfer);
     }
 }
