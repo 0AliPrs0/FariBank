@@ -1,6 +1,6 @@
 package ir.ac.kntu;
 
-import ir.ac.kntu.util.Calendar;
+import java.util.Date;
 
 public class ImplementCapitalFund {
     public void addFund(UserAccount myAccount, Bank myBank) {
@@ -46,7 +46,7 @@ public class ImplementCapitalFund {
             System.out.println(Color.RED + "Invalid input");
         }
 
-        String currentDate = Calendar.getStringNow();
+        Date currentDate = new Date();
         myAccount.addBonusFund(new BonusFund(fundName, currentDate, numberOfDeposit));
     }
 
@@ -58,7 +58,11 @@ public class ImplementCapitalFund {
         ProfitFund profitFund = searchProfitFund(myAccount, fundName);
 
         if (bonusFund != null) {
-            myAccount.removeBonusFund(bonusFund);
+            if (bonusFund.getNumberOfDeposit() <= 0) {
+                myAccount.removeBonusFund(bonusFund);
+            } else {
+                System.out.println(Color.RED + "You can not remove this fund. because the deposit time has not yet expired");
+            }
         } else if (profitFund != null) {
             myAccount.removeProfitFund(profitFund);
         } else {
@@ -129,6 +133,9 @@ public class ImplementCapitalFund {
         }
 
         CapitalFund capitalFund = findFund(myAccount, indexOfFund);
+        if (isNotTimeTrue(myAccount, indexOfFund)){
+            return;
+        }
 
         switch (indexOfFund) {
             case 1 -> {
@@ -147,6 +154,17 @@ public class ImplementCapitalFund {
             }
             default -> System.out.println();
         }
+    }
+
+    public boolean isNotTimeTrue(UserAccount myAccount, int indexOfFund){
+        CapitalFund capitalFund = findFund(myAccount, indexOfFund);
+        if (capitalFund instanceof BonusFund other) {
+            if (other.getNumberOfDeposit() > 0){
+                System.out.println(Color.RED + "You can not transfer by this fund. because the deposit time has not yet expired");
+                return true;
+            }
+        }
+        return false;
     }
 
     public CapitalFund findFund(UserAccount myAccount, int indexOfFund) {

@@ -1,23 +1,25 @@
 package ir.ac.kntu;
 
+import java.util.Date;
+
 public class BonusFund extends CapitalFund{
-    private String dataOfDeposit;
+    private Date dataOfDeposit;
     private int numberOfDeposit;
 
     public BonusFund() {
     }
 
-    public BonusFund(String fundName, String dataOfDeposit, int numberOfDeposit) {
+    public BonusFund(String fundName, Date dataOfDeposit, int numberOfDeposit) {
         super(fundName, FundType.BONUS_FUND, 0);
         this.dataOfDeposit = dataOfDeposit;
         this.numberOfDeposit = numberOfDeposit;
     }
 
-    public String getDataOfDeposit() {
+    public Date getDataOfDeposit() {
         return dataOfDeposit;
     }
 
-    public void setDataOfDeposit(String dataOfDeposit) {
+    public void setDataOfDeposit(Date dataOfDeposit) {
         this.dataOfDeposit = dataOfDeposit;
     }
 
