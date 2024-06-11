@@ -3,21 +3,22 @@ package ir.ac.kntu;
 import java.util.Date;
 
 public class ImplementAutoTransaction {
-    public void handleAutoTransaction(Bank myBank){
+    public void handleAutoTransaction(Bank myBank) {
         System.out.println(Color.BLUE + "1- Making Transfers");
         System.out.println(Color.BLUE + "2- Interest deposit");
         System.out.print(Color.PURPLE + "Enter the option: ");
-        String input =  ScannerWrapper.getInstance().nextLine();
+        String input = ScannerWrapper.getInstance().nextLine();
 
-        switch (input){
+        switch (input) {
             case "1" -> handleTransfers(myBank);
             case "2" -> handleInterest(myBank);
             default -> System.out.println(Color.RED + "Invalid input!");
         }
     }
-    public void handleTransfers(Bank myBank){
+
+    public void handleTransfers(Bank myBank) {
         int index = 1;
-        for (Transfer transfer : myBank.getTransfers()){
+        for (Transfer transfer : myBank.getTransfers()) {
             UserAccount myAccount = findUserAccount(myBank, transfer);
             MockAccount mockAccount = findMockAccount(myBank, transfer);
 
@@ -34,30 +35,30 @@ public class ImplementAutoTransaction {
         }
     }
 
-    public UserAccount findUserAccount(Bank myBank, Transfer transfer){
+    public UserAccount findUserAccount(Bank myBank, Transfer transfer) {
         UserAccount myAccount = new UserAccount();
-        for (UserAccount entry : myBank.getUserAccounts()){
-            if (entry.getAccountNumber() == transfer.getBeginningAccountNumber()){
+        for (UserAccount entry : myBank.getUserAccounts()) {
+            if (entry.getAccountNumber() == transfer.getBeginningAccountNumber()) {
                 myAccount = entry;
             }
         }
         return myAccount;
     }
 
-    public MockAccount findMockAccount(Bank myBank, Transfer transfer){
+    public MockAccount findMockAccount(Bank myBank, Transfer transfer) {
         MockAccount mockAccount = new MockAccount();
-        for (MockAccount entry : myBank.getMockAccounts()){
-            if (entry.getAccountNumber() == transfer.getDestinationAccountNumber()){
+        for (MockAccount entry : myBank.getMockAccounts()) {
+            if (entry.getAccountNumber() == transfer.getDestinationAccountNumber()) {
                 mockAccount = entry;
             }
         }
         return mockAccount;
     }
 
-    public void handleInterest(Bank myBank){
+    public void handleInterest(Bank myBank) {
         int index = 0;
-        for (UserAccount user : myBank.getUserAccounts()){
-            for (BonusFund bonus : user.getBonusFunds()){
+        for (UserAccount user : myBank.getUserAccounts()) {
+            for (BonusFund bonus : user.getBonusFunds()) {
                 Date currentDate = new Date();
                 long elapsedTime = (long) (bonus.getSumOfDeposit() - bonus.getNumberOfDeposit() + 1) * myBank.getDepositPeriod() * 60 * 1000;
                 if (bonus.getDataOfDeposit().getTime() + elapsedTime < currentDate.getTime()) {
@@ -68,9 +69,9 @@ public class ImplementAutoTransaction {
         }
     }
 
-    public void makeInterest(Bank myBank, UserAccount user, BonusFund bonus){
-        for (BonusFund entry : user.getBonusFunds()){
-            if (entry.getFundName().equals(bonus.getFundName())){
+    public void makeInterest(Bank myBank, UserAccount user, BonusFund bonus) {
+        for (BonusFund entry : user.getBonusFunds()) {
+            if (entry.getFundName().equals(bonus.getFundName())) {
                 entry.setNumberOfDeposit(entry.getNumberOfDeposit() - 1);
 
                 ImplementTransfer transfer = new ImplementTransfer();

@@ -25,9 +25,10 @@ public class ManagerMenu implements MenuProperty{
     public void handleManage(ManagerOptionField option, Bank myBank) {
         ImplementMainSettings mainSettings = new ImplementMainSettings();
         ImplementAutoTransaction autoTransaction = new ImplementAutoTransaction();
+        ManageManagerMenu managerMenu = new ManageManagerMenu();
         switch (option) {
             case MAIN_SETTINGS -> mainSettings.handleMainSettings(myBank);
-//            case USER_MANAGEMENT -> transfer.handleSelectFromResentAccount(myBank);
+            case USER_MANAGEMENT -> managerMenu.implementManageOption(myBank);
             case AUTO_TRANSACTION -> autoTransaction.handleAutoTransaction(myBank);
             case RETURN -> System.out.println();
             default -> System.out.println(Color.RED + "Invalid Input!");
