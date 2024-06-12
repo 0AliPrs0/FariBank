@@ -56,11 +56,12 @@ public class ImplementAccountManagement {
 
     public void handleTimeFilterTransaction(UserAccount myAccount, Date startDate, Date endDate) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
-        List<ChargeAccount> newChargeAccount = new LinkedList<ChargeAccount>();
-        List<Transfer> newTransfer = new LinkedList<Transfer>();
+        List<ChargeAccount> newChargeAccount = new LinkedList<>();
+        List<Transfer> newTransfer = new LinkedList<>();
+        List<SIMCardCharge> simCardCharges = new LinkedList<>();
+        Date date;
 
         for (int i = myAccount.getChargeAccounts().size() - 1; i >= 0; i--) {
-            Date date;
             try {
                 date = simpleDateFormat.parse(myAccount.getChargeAccounts().get(i).getDateOfChargeAccount());
             } catch (ParseException e) {
@@ -72,7 +73,6 @@ public class ImplementAccountManagement {
         }
 
         for (int i = myAccount.getTransfers().size() - 1; i >= 0; i--) {
-            Date date;
             try {
                 date = simpleDateFormat.parse(myAccount.getTransfers().get(i).getDateOfTransfer());
             } catch (ParseException e) {
@@ -82,10 +82,21 @@ public class ImplementAccountManagement {
                 newTransfer.add(myAccount.getTransfers().get(i));
             }
         }
-        transaction(newChargeAccount, newTransfer);
+
+        for (int i = myAccount.getChargeSIMCard().size() - 1; i >= 0; i--) {
+            try {
+                date = simpleDateFormat.parse(myAccount.getChargeSIMCard().get(i).getDateOfCharge());
+            } catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
+            if (startDate.getTime() <= date.getTime() && endDate.getTime() >= date.getTime()) {
+                simCardCharges.add(myAccount.getChargeSIMCard().get(i));
+            }
+        }
+        transaction(newChargeAccount, newTransfer, simCardCharges);
     }
 
-    public void transaction(List<ChargeAccount> chargeAccounts, List<Transfer> transfers) {
+    public void transaction(List<ChargeAccount> chargeAccounts, List<Transfer> transfers, List<SIMCardCharge> simCardCharges) {
         int index = 1;
         System.out.println(Color.YELLOW + "List of charge account: ");
         for (int i = chargeAccounts.size() - 1; i >= 0; i--) {
@@ -100,10 +111,18 @@ public class ImplementAccountManagement {
             System.out.println(Color.GREEN + index + "- " + Color.BLUE + amountTransfer);
             index++;
         }
-        showTransactionDetail(chargeAccounts, transfers);
+
+        System.out.println(Color.RED + "-------------------------------------");
+        System.out.println(Color.YELLOW + "List of SIM card charges: ");
+        for (int i = simCardCharges.size() - 1; i >= 0; i--) {
+            int amountTransfer = simCardCharges.get(i).getChargeAmount();
+            System.out.println(Color.GREEN + index + "- " + Color.BLUE + amountTransfer);
+            index++;
+        }
+        showTransactionDetail(chargeAccounts, transfers, simCardCharges);
     }
 
-    public void showTransactionDetail(List<ChargeAccount> chargeAccounts, List<Transfer> transfers) {
+    public void showTransactionDetail(List<ChargeAccount> chargeAccounts, List<Transfer> transfers, List<SIMCardCharge> simCardCharges) {
         if (chargeAccounts.isEmpty() && transfers.isEmpty()) {
             return;
         }
@@ -111,14 +130,16 @@ public class ImplementAccountManagement {
         String input = ScannerWrapper.getInstance().nextLine();
         int index = Integer.parseInt(input);
 
-        if (index > chargeAccounts.size() + transfers.size()) {
+        if (index > chargeAccounts.size() + transfers.size() || index <= 0) {
             System.out.println(Color.RED + "Enter index in the rage!");
             return;
         }
         if (index <= chargeAccounts.size()) {
             System.out.println(Color.BLUE + chargeAccounts.get(index - 1).toString());
-        } else {
+        } else if(index <= chargeAccounts.size() + transfers.size()) {
             System.out.println(Color.BLUE + transfers.get(index - chargeAccounts.size() - 1).toString());
+        } else {
+            System.out.println(Color.BLUE + simCardCharges.get(index - chargeAccounts.size() - transfers.size() - 1).toString());
         }
     }
 

@@ -10,12 +10,12 @@ public class UserAccount extends User {
     private final List<Contact> myContacts = new ArrayList<>();
     private final List<Transfer> transfers = new LinkedList<>();
     private final List<ChargeAccount> chargeAccounts = new LinkedList<>();
+    private final List<SIMCardCharge> chargeSIMCard = new LinkedList<>();
     private int balanceAccount;
     private int accountNumber;
     private int cardPassword;
     private boolean isActingContact;
     private int simCardValidity;
-    private List<SIMCardCharge> chargeSIMCard;
     private RemainingFund remainingFund;
     private List<ProfitFund> profitFunds = new ArrayList<>();
     private List<BonusFund> bonusFunds = new ArrayList<>();
@@ -114,8 +114,8 @@ public class UserAccount extends User {
         return chargeSIMCard;
     }
 
-    public void setChargeSIMCard(List<SIMCardCharge> chargeSIMCard) {
-        this.chargeSIMCard = chargeSIMCard;
+    public void addChargeSIMCard(SIMCardCharge chargeSIM) {
+        chargeSIMCard.add(chargeSIM);
     }
 
     public RemainingFund getRemainingFund() {

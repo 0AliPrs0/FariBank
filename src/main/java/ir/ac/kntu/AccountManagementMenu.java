@@ -26,7 +26,7 @@ public class AccountManagementMenu implements MenuProperty {
         switch (option) {
             case CHARGED_ACCOUNT -> manageAccount.chargeAccount(myAccount);
             case BALANCE -> manageAccount.balance(myAccount);
-            case TRANSACTION -> manageAccount.transaction(myAccount.getChargeAccounts(), myAccount.getTransfers());
+            case TRANSACTION -> manageAccount.transaction(myAccount.getChargeAccounts(), myAccount.getTransfers(), myAccount.getChargeSIMCard());
             case TIME_FILTER_TRANSACTION -> manageAccount.timeFilterTransaction(myAccount);
             case SIM_CARD_VALIDITY -> manageAccount.showSIMCardValidity(myAccount);
             case RETURN -> System.out.println();

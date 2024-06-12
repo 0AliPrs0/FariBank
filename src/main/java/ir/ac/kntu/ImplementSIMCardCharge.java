@@ -1,5 +1,7 @@
 package ir.ac.kntu;
 
+import ir.ac.kntu.util.Calendar;
+
 public class ImplementSIMCardCharge {
     public void handleChargeManually(Bank myBank, UserAccount myAccount) {
         System.out.print("Enter the destination phone number: ");
@@ -69,17 +71,22 @@ public class ImplementSIMCardCharge {
     }
 
     public void setCharge(Bank myBank, UserAccount myAccount, String phoneNumber, int amount) {
-        for (UserAccount userAccount : myBank.getUserAccounts()){
+        for (UserAccount userAccount : myBank.getUserAccounts()) {
             if (userAccount.getPhoneNumber().equals(phoneNumber)) {
                 userAccount.setSimCardValidity(userAccount.getSimCardValidity() + amount);
+                if (!phoneNumber.equals(myAccount.getPhoneNumber())) {
+                    userAccount.addChargeSIMCard(new SIMCardCharge(phoneNumber, amount, Calendar.getStringNow()));
+                }
             }
         }
 
-        for (MockAccount mockAccount : myBank.getMockAccounts()){
+        for (MockAccount mockAccount : myBank.getMockAccounts()) {
             if (mockAccount.getPhoneNumber().equals(phoneNumber)) {
                 mockAccount.setSimCardValidity(mockAccount.getSimCardValidity() + amount);
             }
         }
+
+        myAccount.addChargeSIMCard(new SIMCardCharge(phoneNumber, amount, Calendar.getStringNow()));
 
         myAccount.setBalanceAccount(myAccount.getBalanceAccount() - amount);
     }

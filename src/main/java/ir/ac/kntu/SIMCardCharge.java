@@ -5,7 +5,10 @@ public class SIMCardCharge {
     private int chargeAmount;
     private String dateOfCharge;
 
-    public SIMCardCharge() {
+    public SIMCardCharge(String phoneNumber, int chargeAmount, String dateOfCharge) {
+        this.phoneNumber = phoneNumber;
+        this.chargeAmount = chargeAmount;
+        this.dateOfCharge = dateOfCharge;
     }
 
     public String getPhoneNumber() {
