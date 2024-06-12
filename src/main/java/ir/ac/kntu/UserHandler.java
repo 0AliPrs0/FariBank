@@ -143,7 +143,7 @@ public class UserHandler {
 
     public boolean checkPhoneNumber(Bank myBank, String phoneNumber) {
         boolean isTruePhone = checkPhoneNumberFormat(phoneNumber);
-        if (isTruePhone) {
+        if (!isTruePhone) {
             System.out.println("The format of phone number is not correct");
             return true;
         }
@@ -166,7 +166,7 @@ public class UserHandler {
 
     public boolean checkId(Bank myBank, String nationalId) {
         boolean isTrueId = checkNationalIdFormat(nationalId);
-        if (isTrueId) {
+        if (!isTrueId) {
             System.out.println("The format of id is not correct");
             return true;
         }

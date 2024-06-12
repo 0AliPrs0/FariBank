@@ -17,9 +17,12 @@ public class ManagerMenu implements MenuProperty{
 
     public void implementManagerOption(Bank myBank) {
         ManagerOptionField option;
+
+        do {
         printTheMenu();
         option = getOption();
         handleManage(option, myBank);
+        } while (option != ManagerOptionField.RETURN);
     }
 
     public void handleManage(ManagerOptionField option, Bank myBank) {
@@ -38,6 +41,7 @@ public class ManagerMenu implements MenuProperty{
     @Override
     public void printTheMenu() {
         System.out.println();
+        System.out.println(Color.CYAN + "Manager menu");
         System.out.println(Color.YELLOW + "***********************");
         System.out.println(Color.BLUE + "1- Main settings");
         System.out.println(Color.BLUE + "2- User management");

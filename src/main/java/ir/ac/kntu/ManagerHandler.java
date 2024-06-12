@@ -30,7 +30,7 @@ public class ManagerHandler {
     }
 
     public boolean checkInformation(Bank myBank, String userName, String password) {
-        for (Support entry : myBank.getSupports()) {
+        for (Manager entry : myBank.getManagers()) {
             if (entry.getUserName().equals(userName) && entry.getPassword().equals(password)) {
                 return true;
             }

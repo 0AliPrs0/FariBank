@@ -17,18 +17,21 @@ public class ManageManagerMenu implements MenuProperty {
     }
     public void implementManageOption(Bank myBank) {
         ManageOption option;
+
+        do {
         printTheMenu();
         option = getOption();
         handleManage(option, myBank);
+        } while (option != ManageOption.RETURN);
     }
 
     public void handleManage(ManageOption option, Bank myBank) {
-//        ImplementUserManagement userManage = new ImplementUserManagement();
+        ImplementUserManagement userManage = new ImplementUserManagement();
         switch (option) {
 //            case SHOW_USERS -> userManage.handleMainSettings(myBank);
-//            case ADD_USERS -> userManage.handleSelectFromResentAccount(myBank);
-//            case BLOCKING_USERS -> userManage.handleAutoTransaction(myBank);
-//            case EDIT_USERS -> userManage.handleAutoTransaction(myBank);
+            case ADD_USERS -> userManage.handleAddUsers(myBank);
+            case BLOCKING_USERS -> userManage.handleBlockingUsers(myBank);
+            case EDIT_USERS -> userManage.handleEditUsers(myBank);
             case RETURN -> System.out.println();
             default -> System.out.println(Color.RED + "Invalid Input!");
         }
