@@ -19,6 +19,7 @@ public class UserAccount extends User {
     private RemainingFund remainingFund;
     private List<ProfitFund> profitFunds = new ArrayList<>();
     private List<BonusFund> bonusFunds = new ArrayList<>();
+    private boolean isBlocked;
 
     public UserAccount() {
     }
@@ -32,6 +33,7 @@ public class UserAccount extends User {
         this.isActingContact = true;
         this.simCardValidity = simCardValidity;
         this.cardNumber = "60379" + phoneNumber;
+        this.isBlocked = false;
     }
 
     public String getCardNumber() {
@@ -148,5 +150,13 @@ public class UserAccount extends User {
 
     public void removeBonusFund(BonusFund bonusFund){
         bonusFunds.remove(bonusFund);
+    }
+
+    public boolean getIsBlocked() {
+        return isBlocked;
+    }
+
+    public void setIsBlocked(boolean blocked) {
+        isBlocked = blocked;
     }
 }

@@ -4,6 +4,7 @@ public class Support {
     private String name;
     private String userName;
     private String password;
+    private boolean isBlocked;
 
     public Support() {
     }
@@ -12,6 +13,7 @@ public class Support {
         this.name = name;
         this.userName = userName;
         this.password = password;
+        this.isBlocked = false;
     }
 
     public String getName() {
@@ -36,5 +38,13 @@ public class Support {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean getIsBlocked() {
+        return isBlocked;
+    }
+
+    public void setIsBlocked(boolean blocked) {
+        isBlocked = blocked;
     }
 }

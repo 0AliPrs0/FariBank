@@ -2,11 +2,14 @@ package ir.ac.kntu;
 
 public class ManagerHandler {
     public void implementTheManagerMenu(Bank myBank) {
-        myBank.getManagers().add(new Manager("AliPrs", "@Ap84"));
         Manager manager = logInManager(myBank);
         if (manager != null) {
             ManagerMenu managerMenu = new ManagerMenu();
-            managerMenu.implementManagerOption(myBank);
+            if (!manager.getIsBlocked()) {
+                managerMenu.implementManagerOption(myBank, manager);
+            } else {
+                System.out.println(Color.RED + "You are blocked!!!");
+            }
         }
     }
 

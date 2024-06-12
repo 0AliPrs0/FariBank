@@ -24,7 +24,11 @@ public class UserHandler {
         } else {
             UserMenu userMenu = new UserMenu();
             newUser.setRemainingFund(new RemainingFund());
-            userMenu.implementMenu(myBank, newUser);
+            if (!newUser.getIsBlocked()) {
+                userMenu.implementMenu(myBank, newUser);
+            } else {
+                System.out.println(Color.RED + "You are blocked!!!!");
+            }
         }
     }
 
@@ -61,7 +65,11 @@ public class UserHandler {
         } else {
             UserAccount newUser = addUser(myBank, newAuthentication);
             UserMenu userMenu = new UserMenu();
-            userMenu.implementMenu(myBank, newUser);
+            if (!newUser.getIsBlocked()) {
+                userMenu.implementMenu(myBank, newUser);
+            } else {
+                System.out.println(Color.RED + "You are blocked!!!!");
+            }
         }
     }
 

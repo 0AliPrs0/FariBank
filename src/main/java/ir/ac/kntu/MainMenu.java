@@ -22,6 +22,7 @@ public class MainMenu implements MenuProperty {
         addFewMockAccount(myBank);
         myBank.setInterests(new InterestRatesAndFees("2%", "300", "2%", "2000", "0"));
         myBank.setDepositPeriod(2);
+        myBank.getManagers().add(new Manager("AliPrs", "@Ap84", null));
 
         MenuMainField option;
         do {

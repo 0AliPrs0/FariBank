@@ -173,20 +173,20 @@ public class ImplementUserManagement {
     }
 
 
-    public void handleAddUsers(Bank myBank) {
+    public void handleAddUsers(Bank myBank, Manager manager) {
         System.out.println(Color.BLUE + "1- Manager");
         System.out.println(Color.BLUE + "2- Support");
         System.out.print(Color.CYAN + "Which one do you want add? ");
         String input = ScannerWrapper.getInstance().nextLine();
 
         switch (input) {
-            case "1" -> addManager(myBank);
+            case "1" -> addManager(myBank, manager);
             case "2" -> addSupport(myBank);
             default -> System.out.println(Color.RED + "Invalid input!");
         }
     }
 
-    public void addManager(Bank myBank) {
+    public void addManager(Bank myBank, Manager manager) {
         System.out.print(Color.YELLOW + "Enter the user name of manager: ");
         String userName = ScannerWrapper.getInstance().nextLine();
         System.out.print(Color.YELLOW + "Enter the password of manager: ");
@@ -194,7 +194,9 @@ public class ImplementUserManagement {
 
         UserHandler userHandler = new UserHandler();
         if (userHandler.checkPassword(password)) {
-            myBank.addManager(new Manager(userName, password));
+            List<Manager> fathersManager = manager.getFathersManager();
+            fathersManager.add(manager);
+            myBank.addManager(new Manager(userName, password, fathersManager));
         } else {
             System.out.println(Color.RED + "Password is unsafe");
         }
@@ -218,8 +220,126 @@ public class ImplementUserManagement {
     }
 
 
-    public void handleBlockingUsers(Bank myBank) {
+    public void handleBlockingUsers(Bank myBank, Manager manager) {
+        int index = 1;
+        for (UserAccount entry : myBank.getUserAccounts()) {
+            System.out.print(Color.PURPLE + index + "- " + Color.BLUE + entry.getFirstName() + " " + entry.getLastName() + " ");
+            if (entry.getIsBlocked()) {
+                System.out.println(Color.RED + "blocked");
+            } else {
+                System.out.println(Color.GREEN + "unblocked");
+            }
+            index++;
+        }
 
+        for (Support entry : myBank.getSupports()) {
+            System.out.print(Color.PURPLE + index + "- " + Color.BLUE + entry.getName() + " ");
+            if (entry.getIsBlocked()) {
+                System.out.println(Color.RED + "blocked");
+            } else {
+                System.out.println(Color.GREEN + "unblocked");
+            }
+            index++;
+        }
+
+        for (Manager entry : myBank.getManagers()) {
+            System.out.print(Color.PURPLE + index + "- " + Color.BLUE + entry.getUserName() + " ");
+            if (entry.getIsBlocked()) {
+                System.out.println(Color.RED + "blocked");
+            } else {
+                System.out.println(Color.GREEN + "unblocked");
+            }
+            index++;
+        }
+        inputIndex(myBank, manager);
+    }
+
+    public void inputIndex(Bank myBank, Manager manager) {
+        System.out.println(Color.YELLOW + "Enter the index of user: ");
+        String input = ScannerWrapper.getInstance().nextLine();
+        int number;
+        try {
+            number = Integer.parseInt(input);
+        } catch (Exception e) {
+            return;
+        }
+
+        if (number > myBank.getManagers().size() + myBank.getSupports().size() + myBank.getUserAccounts().size() && number <= 0) {
+            System.out.println(Color.RED + "Enter index in the rage!");
+            return;
+        }
+
+        if (number <= myBank.getUserAccounts().size()) {
+            blockUser(myBank.getUserAccounts().get(number - 1));
+        } else if (number <= myBank.getUserAccounts().size() + myBank.getSupports().size()) {
+            blockSupport(myBank.getSupports().get(number - myBank.getUserAccounts().size() - 1));
+        } else {
+            blockManager(manager, myBank.getManagers().get(number - myBank.getUserAccounts().size() - myBank.getSupports().size() - 1));
+        }
+    }
+
+    public void blockUser(UserAccount user) {
+        if (user.getIsBlocked()) {
+            System.out.println(Color.CYAN + "If you want unblock this user?");
+            System.out.println(Color.BLUE + "1- yes");
+            System.out.println(Color.BLUE + "2- no");
+            String input = ScannerWrapper.getInstance().nextLine();
+            if ("1".equals(input)) {
+                user.setIsBlocked(false);
+            }
+        } else {
+            System.out.println(Color.CYAN + "If you want block this user?");
+            System.out.println(Color.BLUE + "1- yes");
+            System.out.println(Color.BLUE + "2- no");
+            String input = ScannerWrapper.getInstance().nextLine();
+            if ("1".equals(input)) {
+                user.setIsBlocked(true);
+            }
+        }
+    }
+
+    public void blockSupport(Support support) {
+        if (support.getIsBlocked()) {
+            System.out.println(Color.CYAN + "If you want unblock this user?");
+            System.out.println(Color.BLUE + "1- yes");
+            System.out.println(Color.BLUE + "2- no");
+            String input = ScannerWrapper.getInstance().nextLine();
+            if ("1".equals(input)) {
+                support.setIsBlocked(false);
+            }
+        } else {
+            System.out.println(Color.CYAN + "If you want block this user?");
+            System.out.println(Color.BLUE + "1- yes");
+            System.out.println(Color.BLUE + "2- no");
+            String input = ScannerWrapper.getInstance().nextLine();
+            if ("1".equals(input)) {
+                support.setIsBlocked(true);
+            }
+        }
+    }
+
+    public void blockManager(Manager manager, Manager blockedManager) {
+        if (manager.getFathersManager().contains(blockedManager)) {
+            System.out.println(Color.RED + "You can not block your boss!!!!!!");
+            return;
+        }
+        if (blockedManager.getIsBlocked()) {
+            System.out.println(Color.CYAN + "If you want unblock this user?");
+            System.out.println(Color.BLUE + "1- yes");
+            System.out.println(Color.BLUE + "2- no");
+            String input = ScannerWrapper.getInstance().nextLine();
+            if ("1".equals(input)) {
+                blockedManager.setIsBlocked(false);
+            }
+        } else {
+            System.out.println(Color.CYAN + "If you want block this user?");
+            System.out.println(Color.BLUE + "1- yes");
+            System.out.println(Color.BLUE + "2- no");
+            String input = ScannerWrapper.getInstance().nextLine();
+            if ("1".equals(input)) {
+                blockedManager.setIsBlocked(true);
+            }
+        }
     }
 
     public void handleEditUsers(Bank myBank) {

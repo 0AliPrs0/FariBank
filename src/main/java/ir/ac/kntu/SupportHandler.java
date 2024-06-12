@@ -6,7 +6,11 @@ public class SupportHandler {
         Support support = logInSupport(myBank);
         if (support != null) {
             SupportMenu supportMenu = new SupportMenu();
-            supportMenu.handleSupportOptions(myBank);
+            if (!support.getIsBlocked()) {
+                supportMenu.handleSupportOptions(myBank);
+            } else {
+                System.out.println(Color.RED + "You are blocked!!!!");
+            }
         }
     }
 
