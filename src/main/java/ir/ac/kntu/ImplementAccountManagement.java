@@ -55,10 +55,18 @@ public class ImplementAccountManagement {
     }
 
     public void handleTimeFilterTransaction(UserAccount myAccount, Date startDate, Date endDate) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
         List<ChargeAccount> newChargeAccount = new LinkedList<>();
         List<Transfer> newTransfer = new LinkedList<>();
         List<SIMCardCharge> simCardCharges = new LinkedList<>();
+
+        addChargeAccounts(myAccount, startDate, endDate, newChargeAccount);
+        addTransfers(myAccount, startDate, endDate, newTransfer);
+        addSIMCardCharges(myAccount, startDate, endDate, simCardCharges);
+        transaction(newChargeAccount, newTransfer, simCardCharges);
+    }
+
+    public void addChargeAccounts(UserAccount myAccount, Date startDate, Date endDate, List<ChargeAccount> newChargeAccount){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
         Date date;
 
         for (int i = myAccount.getChargeAccounts().size() - 1; i >= 0; i--) {
@@ -71,6 +79,11 @@ public class ImplementAccountManagement {
                 newChargeAccount.add(myAccount.getChargeAccounts().get(i));
             }
         }
+    }
+
+    public void addTransfers(UserAccount myAccount, Date startDate, Date endDate, List<Transfer> newTransfer){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
+        Date date;
 
         for (int i = myAccount.getTransfers().size() - 1; i >= 0; i--) {
             try {
@@ -82,6 +95,11 @@ public class ImplementAccountManagement {
                 newTransfer.add(myAccount.getTransfers().get(i));
             }
         }
+    }
+
+    public void addSIMCardCharges(UserAccount myAccount, Date startDate, Date endDate, List<SIMCardCharge> simCardCharges){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss");
+        Date date;
 
         for (int i = myAccount.getChargeSIMCard().size() - 1; i >= 0; i--) {
             try {
@@ -93,7 +111,6 @@ public class ImplementAccountManagement {
                 simCardCharges.add(myAccount.getChargeSIMCard().get(i));
             }
         }
-        transaction(newChargeAccount, newTransfer, simCardCharges);
     }
 
     public void transaction(List<ChargeAccount> chargeAccounts, List<Transfer> transfers, List<SIMCardCharge> simCardCharges) {

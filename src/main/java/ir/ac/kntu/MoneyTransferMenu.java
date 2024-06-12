@@ -11,9 +11,9 @@ public class MoneyTransferMenu implements MenuProperty {
         ChoseAccountsForTransfer option;
 
         do {
-        printTheMenu();
-        option = getOption();
-        handleTransfer(myAccount, option, myBank);
+            printTheMenu();
+            option = getOption();
+            handleTransfer(myAccount, option, myBank);
         } while (option != ChoseAccountsForTransfer.RETURN);
     }
 

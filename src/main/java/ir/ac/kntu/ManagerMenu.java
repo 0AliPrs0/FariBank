@@ -1,27 +1,19 @@
 package ir.ac.kntu;
 
-public class ManagerMenu implements MenuProperty{
+public class ManagerMenu implements MenuProperty {
     private static ManagerMenu instance = new ManagerMenu();
 
     public static ManagerMenu getInstance() {
         return instance;
     }
 
-    public enum ManagerOptionField {
-        MAIN_SETTINGS,
-        USER_MANAGEMENT,
-        AUTO_TRANSACTION,
-        RETURN,
-        UNDEFINED
-    }
-
     public void implementManagerOption(Bank myBank) {
         ManagerOptionField option;
 
         do {
-        printTheMenu();
-        option = getOption();
-        handleManage(option, myBank);
+            printTheMenu();
+            option = getOption();
+            handleManage(option, myBank);
         } while (option != ManagerOptionField.RETURN);
     }
 
@@ -66,6 +58,14 @@ public class ManagerMenu implements MenuProperty{
             return options[input];
         }
         return ManagerOptionField.UNDEFINED;
+    }
+
+    public enum ManagerOptionField {
+        MAIN_SETTINGS,
+        USER_MANAGEMENT,
+        AUTO_TRANSACTION,
+        RETURN,
+        UNDEFINED
     }
 
 }

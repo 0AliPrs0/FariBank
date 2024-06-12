@@ -23,8 +23,16 @@ public class Bank {
         return supports;
     }
 
+    public void addSupport(Support support){
+        supports.add(support);
+    }
+
     public List<Manager> getManagers() {
         return managers;
+    }
+
+    public void addManager(Manager manager){
+        managers.add(manager);
     }
 
     public InterestRatesAndFees getInterests() {
