@@ -9,7 +9,9 @@ import ir.ac.kntu.user.info.BonusFund;
 import ir.ac.kntu.user.info.Transfer;
 import ir.ac.kntu.user.info.UserAccount;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ImplementAutoTransaction {
     public void handleAutoTransaction(Bank myBank) {
@@ -27,6 +29,7 @@ public class ImplementAutoTransaction {
 
     public void handleTransfers(Bank myBank) {
         int index = 1;
+        List<Transfer> transfers = new ArrayList<>();
         for (Transfer transfer : myBank.getTransfers()) {
             UserAccount myAccount = findUserAccount(myBank, transfer);
             MockAccount mockAccount = findMockAccount(myBank, transfer);
@@ -41,8 +44,9 @@ public class ImplementAutoTransaction {
             makeTransfer.setTransactionForCardByCardAndInterestBridgeBAnk(money, myAccount, mockAccount);
             System.out.println(Color.PURPLE + index + "- " + transfer.toString());
             index++;
-            myBank.removeTransfer(transfer);
+            transfers.add(transfer);
         }
+        myBank.getTransfers().removeAll(transfers);
     }
 
     public UserAccount findUserAccount(Bank myBank, Transfer transfer) {
