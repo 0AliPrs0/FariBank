@@ -7,7 +7,7 @@ public class SupportHandler {
         if (support != null) {
             SupportMenu supportMenu = new SupportMenu();
             if (!support.getIsBlocked()) {
-                supportMenu.handleSupportOptions(myBank);
+                supportMenu.handleSupportOptions(myBank, support);
             } else {
                 System.out.println(Color.RED + "You are blocked!!!!");
             }

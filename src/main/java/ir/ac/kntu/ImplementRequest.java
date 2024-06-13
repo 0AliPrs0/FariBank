@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ImplementRequest {
-    public void requestAccordingToRequestType(Bank myBank) {
-        RequestType requestType = findRequestType();
+    public void requestAccordingToRequestType(Bank myBank, Support support) {
+        RequestType requestType = findRequestType(support);
         if (requestType == null) {
             System.out.println(Color.RED + "Invalid input!");
             return;
@@ -25,41 +25,85 @@ public class ImplementRequest {
             requests.put(requestsList.getKey(), list);
         }
 
-        showRequest(myBank, requests);
+        RequestSupportMenu supportMenu = new RequestSupportMenu();
+        supportMenu.implementRequestSupport(myBank, requests);
     }
 
-    public RequestType findRequestType() {
-        System.out.println(Color.BLUE + "1- Reports");
-        System.out.println(Color.BLUE + "2- Contacts");
-        System.out.println(Color.BLUE + "3- Transfer");
-        System.out.println(Color.BLUE + "4- Setting");
-        System.out.println(Color.BLUE + "5- Authentication");
-        System.out.print(Color.YELLOW + "Enter the request type: ");
-        String input = ScannerWrapper.getInstance().nextLine();
+    public RequestType findRequestType(Support support) {
+        int input = printMenu(support);
+        if (input > 8 || input < 1) {
+            System.out.println(Color.RED + "Invalid input!");
+            return null;
+        }
 
+        if (support.getIsLockField()[input]) {
+            System.out.println(Color.RED + "This field inactive for you!!");
+            return null;
+        }
+
+        return findType(input);
+    }
+
+    public RequestType findType(int input){
         switch (input) {
-            case "1" -> {
+            case 1 -> {
                 return RequestType.REPORTS;
             }
-            case "2" -> {
+            case 2 -> {
                 return RequestType.CONTACTS;
             }
-            case "3" -> {
+            case 3 -> {
                 return RequestType.TRANSFER;
             }
-            case "4" -> {
+            case 4 -> {
                 return RequestType.SETTINGS;
             }
-            case "5" -> {
+            case 5 -> {
                 return RequestType.AUTHENTICATION;
+            }
+            case 6 -> {
+                return RequestType.FUND;
+            }
+            case 7 -> {
+                return RequestType.CHARGE;
+            }
+            case 8 -> {
+                return RequestType.CARD;
             }
             default -> System.out.println(Color.RED + "Invalid input!");
         }
-
         return null;
     }
 
-    public void requestAccordingToApplicationStatus(Bank myBank) {
+    public int printMenu(Support support) {
+        System.out.println(color(1, support.getIsLockField()) + "1- Reports");
+        System.out.println(color(2, support.getIsLockField()) + "2- Contacts");
+        System.out.println(color(3, support.getIsLockField()) + "3- Transfer");
+        System.out.println(color(4, support.getIsLockField()) + "4- Setting");
+        System.out.println(color(5, support.getIsLockField()) + "5- Authentication");
+        System.out.println(color(6, support.getIsLockField()) + "6- Fund");
+        System.out.println(color(7, support.getIsLockField()) + "7- Charge");
+        System.out.println(color(8, support.getIsLockField()) + "8- Card");
+        System.out.print(Color.YELLOW + "Enter the request type: ");
+        String input = ScannerWrapper.getInstance().nextLine();
+        int index = 0;
+        try {
+            index = Integer.parseInt(input);
+        } catch (Exception e) {
+            System.out.println(Color.RED + "Invalid input!");
+        }
+
+        return index;
+    }
+
+    public String color(int number, boolean[] isLock) {
+        if (isLock[number]) {
+            return Color.RED;
+        }
+        return Color.GREEN;
+    }
+
+    public void requestAccordingToApplicationStatus(Bank myBank, Map<String, List<Requests>> request) {
         ApplicationStatus applicationStatus = findApplicationStatus();
         if (applicationStatus == null) {
             System.out.println(Color.RED + "Invalid input!");
@@ -67,7 +111,7 @@ public class ImplementRequest {
         }
 
         Map<String, List<Requests>> requests = new HashMap<>();
-        for (Map.Entry<String, List<Requests>> requestsList : myBank.getRequest().entrySet()) {
+        for (Map.Entry<String, List<Requests>> requestsList : request.entrySet()) {
             List<Requests> list = new ArrayList<>();
 
             for (Requests entry : requestsList.getValue()) {
@@ -104,12 +148,12 @@ public class ImplementRequest {
         return null;
     }
 
-    public void requestAccordingToUser(Bank myBank) {
+    public void requestAccordingToUser(Bank myBank, Map<String, List<Requests>> request) {
         System.out.print(Color.YELLOW + "Enter the phoneNumber of user: ");
         String phoneNumberOfUser = ScannerWrapper.getInstance().nextLine();
         Map<String, List<Requests>> requests = new HashMap<>();
 
-        for (Map.Entry<String, List<Requests>> entry : myBank.getRequest().entrySet()) {
+        for (Map.Entry<String, List<Requests>> entry : request.entrySet()) {
             if (entry.getKey().equals(phoneNumberOfUser)) {
                 requests.put(entry.getKey(), entry.getValue());
 

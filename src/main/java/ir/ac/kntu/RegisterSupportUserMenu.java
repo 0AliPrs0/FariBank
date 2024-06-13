@@ -13,6 +13,9 @@ public class RegisterSupportUserMenu implements MenuProperty {
         CONTACTS,
         TRANSFER,
         SETTING,
+        FUND,
+        CHARGE,
+        CARD,
         RETURN,
         UNDEFINED
     }
@@ -33,6 +36,9 @@ public class RegisterSupportUserMenu implements MenuProperty {
             case CONTACTS -> supportUser.handleSupportUser(myBank, myAccount, RequestType.CONTACTS);
             case TRANSFER -> supportUser.handleSupportUser(myBank, myAccount, RequestType.TRANSFER);
             case SETTING -> supportUser.handleSupportUser(myBank, myAccount, RequestType.SETTINGS);
+            case FUND -> supportUser.handleSupportUser(myBank, myAccount, RequestType.FUND);
+            case CHARGE -> supportUser.handleSupportUser(myBank, myAccount, RequestType.CHARGE);
+            case CARD -> supportUser.handleSupportUser(myBank, myAccount, RequestType.CARD);
             case RETURN -> System.out.println();
             default -> System.out.println(Color.RED + "Invalid Input!");
         }
@@ -41,15 +47,17 @@ public class RegisterSupportUserMenu implements MenuProperty {
     @Override
     public void printTheMenu() {
         System.out.println();
-
         System.out.println(Color.YELLOW + "***********************");
         System.out.println(Color.BLUE + "1- Report");
         System.out.println(Color.BLUE + "2- Contacts");
         System.out.println(Color.BLUE + "3- Transfer");
         System.out.println(Color.BLUE + "4- Setting");
-        System.out.println(Color.BLUE + "5- Return");
+        System.out.println(Color.BLUE + "5- Funds");
+        System.out.println(Color.BLUE + "6- Charge");
+        System.out.println(Color.BLUE + "7- Card");
+        System.out.println(Color.BLUE + "8- Return");
         System.out.println(Color.YELLOW + "***********************");
-        System.out.print(Color.PURPLE + "Select (1 - 5): ");
+        System.out.print(Color.PURPLE + "Select (1 - 8): ");
     }
 
     @Override

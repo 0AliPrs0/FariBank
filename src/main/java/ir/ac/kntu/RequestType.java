@@ -5,5 +5,8 @@ public enum RequestType {
     CONTACTS,
     TRANSFER,
     SETTINGS,
+    FUND,
+    CHARGE,
+    CARD,
     AUTHENTICATION
 }

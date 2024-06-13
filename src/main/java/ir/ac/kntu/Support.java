@@ -5,6 +5,7 @@ public class Support {
     private String userName;
     private String password;
     private boolean isBlocked;
+    private boolean[] isLockField = new boolean[9];
 
     public Support() {
     }
@@ -14,6 +15,9 @@ public class Support {
         this.userName = userName;
         this.password = password;
         this.isBlocked = false;
+        for (int i = 0; i < 9; i++) {
+            isLockField[i] = false;
+        }
     }
 
     public String getName() {
@@ -46,5 +50,13 @@ public class Support {
 
     public void setIsBlocked(boolean blocked) {
         isBlocked = blocked;
+    }
+
+    public boolean[] getIsLockField() {
+        return isLockField;
+    }
+
+    public void setIsLockField(boolean[] isLockField) {
+        this.isLockField = isLockField;
     }
 }

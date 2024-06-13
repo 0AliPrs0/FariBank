@@ -14,7 +14,11 @@ public class UserInformationMenu implements MenuProperty {
         UNDEFINED
     }
 
-    public void implementUsersInformation(Bank myBank) {
+    public void implementUsersInformation(Bank myBank, Support support) {
+        if (support.getIsLockField()[0]) {
+            System.out.println(Color.RED + "This field is inactive for you!!");
+            return;
+        }
         UserInformationField option;
         do {
             printTheMenu();

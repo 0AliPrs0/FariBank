@@ -222,39 +222,10 @@ public class ImplementUserManagement {
 
     public void handleBlockingUsers(Bank myBank, Manager manager) {
         int index = 1;
-        for (UserAccount entry : myBank.getUserAccounts()) {
-            System.out.print(Color.PURPLE + index + "- " + Color.BLUE + entry.getFirstName() + " " + entry.getLastName() + " ");
-            if (entry.getIsBlocked()) {
-                System.out.println(Color.RED + "blocked");
-            } else {
-                System.out.println(Color.GREEN + "unblocked");
-            }
-            index++;
-        }
+        index = printUsers(myBank, index);
+        index = printSupports(myBank, index);
+        printManagers(myBank, index);
 
-        for (Support entry : myBank.getSupports()) {
-            System.out.print(Color.PURPLE + index + "- " + Color.BLUE + entry.getName() + " ");
-            if (entry.getIsBlocked()) {
-                System.out.println(Color.RED + "blocked");
-            } else {
-                System.out.println(Color.GREEN + "unblocked");
-            }
-            index++;
-        }
-
-        for (Manager entry : myBank.getManagers()) {
-            System.out.print(Color.PURPLE + index + "- " + Color.BLUE + entry.getUserName() + " ");
-            if (entry.getIsBlocked()) {
-                System.out.println(Color.RED + "blocked");
-            } else {
-                System.out.println(Color.GREEN + "unblocked");
-            }
-            index++;
-        }
-        inputIndex(myBank, manager);
-    }
-
-    public void inputIndex(Bank myBank, Manager manager) {
         System.out.println(Color.YELLOW + "Enter the index of user: ");
         String input = ScannerWrapper.getInstance().nextLine();
         int number;
@@ -277,6 +248,45 @@ public class ImplementUserManagement {
             blockManager(manager, myBank.getManagers().get(number - myBank.getUserAccounts().size() - myBank.getSupports().size() - 1));
         }
     }
+
+    public int printUsers(Bank myBank, int index) {
+        for (UserAccount entry : myBank.getUserAccounts()) {
+            System.out.print(Color.PURPLE + index + "- " + Color.BLUE + entry.getFirstName() + " " + entry.getLastName() + " ");
+            if (entry.getIsBlocked()) {
+                System.out.println(Color.RED + "blocked");
+            } else {
+                System.out.println(Color.GREEN + "unblocked");
+            }
+            index++;
+        }
+        return index;
+    }
+
+    public int printSupports(Bank myBank, int index) {
+        for (Support entry : myBank.getSupports()) {
+            System.out.print(Color.PURPLE + index + "- " + Color.BLUE + entry.getName() + " ");
+            if (entry.getIsBlocked()) {
+                System.out.println(Color.RED + "blocked");
+            } else {
+                System.out.println(Color.GREEN + "unblocked");
+            }
+            index++;
+        }
+        return index;
+    }
+
+    public void printManagers(Bank myBank, int index) {
+        for (Manager entry : myBank.getManagers()) {
+            System.out.print(Color.PURPLE + index + "- " + Color.BLUE + entry.getUserName() + " ");
+            if (entry.getIsBlocked()) {
+                System.out.println(Color.RED + "blocked");
+            } else {
+                System.out.println(Color.GREEN + "unblocked");
+            }
+            index++;
+        }
+    }
+
 
     public void blockUser(UserAccount user) {
         if (user.getIsBlocked()) {

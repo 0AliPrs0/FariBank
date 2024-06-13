@@ -1,5 +1,8 @@
 package ir.ac.kntu;
 
+import java.util.List;
+import java.util.Map;
+
 public class RequestSupportMenu implements MenuProperty {
     private static RequestSupportMenu instance = new RequestSupportMenu();
 
@@ -9,29 +12,27 @@ public class RequestSupportMenu implements MenuProperty {
 
     public enum RequestSupportField {
         ALL_REQUEST,
-        REQUEST_ACCORDING_TO_REQUEST_TYPE,
         REQUEST_ACCORDING_TO_APPLICATION_STATUS,
         REQUEST_ACCORDING_TO_USER,
         RETURN,
         UNDEFINED
     }
 
-    public void implementRequestSupport(Bank myBank) {
+    public void implementRequestSupport(Bank myBank, Map<String, List<Requests>> requests) {
         RequestSupportField option;
         do {
             printTheMenu();
             option = getOption();
-            handleRequestSupport(option, myBank);
+            handleRequestSupport(option, myBank, requests);
         } while (option != RequestSupportField.RETURN);
     }
 
-    public void handleRequestSupport(RequestSupportField option, Bank myBank) {
+    public void handleRequestSupport(RequestSupportField option, Bank myBank, Map<String, List<Requests>> requests) {
         ImplementRequest implementRequest = new ImplementRequest();
         switch (option) {
-            case ALL_REQUEST -> implementRequest.showRequest(myBank, myBank.getRequest());
-            case REQUEST_ACCORDING_TO_REQUEST_TYPE -> implementRequest.requestAccordingToRequestType(myBank);
-            case REQUEST_ACCORDING_TO_APPLICATION_STATUS -> implementRequest.requestAccordingToApplicationStatus(myBank);
-            case REQUEST_ACCORDING_TO_USER -> implementRequest.requestAccordingToUser(myBank);
+            case ALL_REQUEST -> implementRequest.showRequest(myBank, requests);
+            case REQUEST_ACCORDING_TO_APPLICATION_STATUS -> implementRequest.requestAccordingToApplicationStatus(myBank, requests);
+            case REQUEST_ACCORDING_TO_USER -> implementRequest.requestAccordingToUser(myBank, requests);
             case RETURN -> System.out.println();
             default -> System.out.println(Color.RED + "Invalid Input!");
         }

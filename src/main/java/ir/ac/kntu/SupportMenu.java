@@ -14,23 +14,23 @@ public class SupportMenu implements MenuProperty {
         UNDEFINED
     }
 
-    public void handleSupportOptions(Bank myBank) {
+    public void handleSupportOptions(Bank myBank, Support support) {
         MenuSupportField option;
 
         do {
             printTheMenu();
             option = getOption();
-            handleTheSupportMenu(option, myBank);
+            handleTheSupportMenu(option, myBank, support);
         } while (option != MenuSupportField.RETURN);
 
     }
 
-    public void handleTheSupportMenu(MenuSupportField options, Bank myBank) {
-        RequestSupportMenu requestSupport = new RequestSupportMenu();
+    public void handleTheSupportMenu(MenuSupportField options, Bank myBank, Support support) {
+        ImplementRequest requestSupport = new ImplementRequest();
         UserInformationMenu userInformation = new UserInformationMenu();
         switch (options) {
-            case REQUESTS -> requestSupport.implementRequestSupport(myBank);
-            case USERS -> userInformation.implementUsersInformation(myBank);
+            case REQUESTS -> requestSupport.requestAccordingToRequestType(myBank, support);
+            case USERS -> userInformation.implementUsersInformation(myBank, support);
             case RETURN -> System.out.println();
             default -> System.out.println(Color.RED + "Invalid Input!");
         }
