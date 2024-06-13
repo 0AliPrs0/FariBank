@@ -126,7 +126,7 @@ public class ImplementCapitalFund {
 
         System.out.print(Color.CYAN + "Enter the number of fund: ");
         String input = ScannerWrapper.getInstance().nextLine();
-        int indexOfFund = 0;
+        int indexOfFund;
 
         try {
             indexOfFund = Integer.parseInt(input);
@@ -135,7 +135,7 @@ public class ImplementCapitalFund {
             return;
         }
 
-        if (indexOfFund > myAccount.getBonusFunds().size() + myAccount.getProfitFunds().size() + 1) {
+        if (indexOfFund <= 0 || indexOfFund > myAccount.getBonusFunds().size() + myAccount.getProfitFunds().size() + 1) {
             System.out.println(Color.RED + "Invalid input!");
             return;
         }
@@ -158,7 +158,7 @@ public class ImplementCapitalFund {
             return;
         }
 
-        switch (inputOperation()) {
+        switch (indexOfFund) {
             case 1 -> {
                 if (amountOfMoney > myAccount.getBalanceAccount()) {
                     System.out.println(Color.RED + "Your balance is not enough!");
@@ -226,7 +226,6 @@ public class ImplementCapitalFund {
             System.out.println(Color.RED + "Invalid input!");
         }
         return index;
-
     }
 
     public void transfer(UserAccount myAccount, int indexOfFund, int amountMoney) {
@@ -240,7 +239,7 @@ public class ImplementCapitalFund {
             int balanceOfFund = myAccount.getProfitFunds().get(indexOfFund - 2).getFundBalance();
             myAccount.getProfitFunds().get(indexOfFund - 2).setFundBalance(balanceOfFund + amountMoney);
 
-        } else if (indexOfFund <= myAccount.getBonusFunds().size() + myAccount.getProfitFunds().size() + 1) {
+        } else if (indexOfFund > myAccount.getProfitFunds().size() + 1 && indexOfFund <= myAccount.getBonusFunds().size() + myAccount.getProfitFunds().size() + 1) {
             int balanceOfFund = myAccount.getBonusFunds().get(indexOfFund - myAccount.getProfitFunds().size() - 2).getFundBalance();
             myAccount.getBonusFunds().get(indexOfFund - myAccount.getProfitFunds().size() - 2).setFundBalance(balanceOfFund + amountMoney);
         }

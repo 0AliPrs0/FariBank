@@ -204,6 +204,7 @@ public class ImplementUserManagement {
         if (userHandler.checkPassword(password)) {
             List<String> fathersManager = manager.getFathersManager();
             fathersManager.add(manager.getPassword());
+
             myBank.addManager(new Manager(userName, password, fathersManager));
             System.out.println(Color.GREEN + "Manager added");
         } else {
@@ -472,7 +473,7 @@ public class ImplementUserManagement {
             System.out.println(Color.BLUE + "2- no");
             String input = ScannerWrapper.getInstance().nextLine();
             if ("1".equals(input)) {
-                keyword[index] = true;
+                keyword[index] = false;
                 System.out.println(Color.GREEN + "Information changed");
             }
         } else {
@@ -481,7 +482,7 @@ public class ImplementUserManagement {
             System.out.println(Color.BLUE + "2- no");
             String input = ScannerWrapper.getInstance().nextLine();
             if ("1".equals(input)) {
-                keyword[index] = false;
+                keyword[index] = true;
                 System.out.println(Color.GREEN + "Information changed");
             }
         }

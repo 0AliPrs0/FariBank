@@ -34,6 +34,7 @@ public class UserAccount extends User {
         this.simCardValidity = simCardValidity;
         this.cardNumber = "60379" + phoneNumber;
         this.isBlocked = false;
+        this.remainingFund = new RemainingFund();
     }
 
     public String getCardNumber() {

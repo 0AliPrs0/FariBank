@@ -66,7 +66,7 @@ public class ImplementAutoTransaction {
     }
 
     public void handleInterest(Bank myBank) {
-        int index = 0;
+        int index = 1;
         for (UserAccount user : myBank.getUserAccounts()) {
             for (BonusFund bonus : user.getBonusFunds()) {
                 Date currentDate = new Date();

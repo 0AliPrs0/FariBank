@@ -27,31 +27,23 @@ public class SupportHandler {
     }
 
     public Support logInSupport(Bank myBank) {
-        Support support = new Support();
-
         System.out.print(Color.YELLOW + "Enter your user name: ");
         String userName = ScannerWrapper.getInstance().nextLine();
 
         System.out.print(Color.YELLOW + "Enter your password: ");
         String password = ScannerWrapper.getInstance().nextLine();
 
-        boolean isTrueInformation = checkInformation(myBank, userName, password);
-        if (isTrueInformation) {
-            support.setUserName(userName);
-            support.setPassword(password);
-            return support;
+        return checkInformation(myBank, userName, password);
+    }
+
+    public Support checkInformation(Bank myBank, String userName, String password) {
+        for (Support entry : myBank.getSupports()) {
+            if (entry.getUserName().equals(userName) && entry.getPassword().equals(password)) {
+                return entry;
+            }
         }
         System.out.println(Color.RED + "There is not Admin with this information!");
         return null;
-    }
-
-    public boolean checkInformation(Bank myBank, String userName, String password) {
-        for (Support entry : myBank.getSupports()) {
-            if (entry.getUserName().equals(userName) && entry.getPassword().equals(password)) {
-                return true;
-            }
-        }
-        return false;
 
     }
 }

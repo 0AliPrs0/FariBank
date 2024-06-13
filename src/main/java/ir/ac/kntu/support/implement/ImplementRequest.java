@@ -18,7 +18,6 @@ public class ImplementRequest {
     public void requestAccordingToRequestType(Bank myBank, Support support) {
         RequestType requestType = findRequestType(support);
         if (requestType == null) {
-            System.out.println(Color.RED + "Invalid input!");
             return;
         }
 

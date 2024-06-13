@@ -14,7 +14,6 @@ import ir.ac.kntu.user.login.UserLoginMenu;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.LongSummaryStatistics;
 
 public class MainMenu implements MenuProperty {
     private static MainMenu instance = new MainMenu();
@@ -39,8 +38,8 @@ public class MainMenu implements MenuProperty {
         myBank.setInterests(new InterestRatesAndFees("2%", "300", "2%", "2000", "0"));
         myBank.setDepositPeriod(2);
         List<String> fathers = new ArrayList<>();
-        fathers.add("");
-        myBank.getManagers().add(new Manager("AliPrs", "@Ap84", fathers));
+        fathers.add("1");
+        myBank.addManager(new Manager("AliPrs", "@Ap84", fathers));
         myBank.getUserAccounts().add(new UserAccount("ali", "prs", "09032948208", "1452006601", "@Ap84", 0, 12345678, 0));
 
         MenuMainField option;
