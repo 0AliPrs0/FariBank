@@ -1,6 +1,9 @@
 package ir.ac.kntu.style;
 
-import ir.ac.kntu.*;
+import ir.ac.kntu.main.database.Bank;
+import ir.ac.kntu.support.implement.ImplementUserInformation;
+import ir.ac.kntu.support.info.Support;
+import ir.ac.kntu.user.info.*;
 import ir.ac.kntu.util.Calendar;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
