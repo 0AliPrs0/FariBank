@@ -194,8 +194,8 @@ public class ImplementUserManagement {
 
         UserHandler userHandler = new UserHandler();
         if (userHandler.checkPassword(password)) {
-            List<Manager> fathersManager = manager.getFathersManager();
-            fathersManager.add(manager);
+            List<String> fathersManager = manager.getFathersManager();
+            fathersManager.add(manager.getPassword());
             myBank.addManager(new Manager(userName, password, fathersManager));
         } else {
             System.out.println(Color.RED + "Password is unsafe");
@@ -219,8 +219,7 @@ public class ImplementUserManagement {
         }
     }
 
-
-    public void handleBlockingUsers(Bank myBank, Manager manager) {
+    public int findUser(Bank myBank) {
         int index = 1;
         index = printUsers(myBank, index);
         index = printSupports(myBank, index);
@@ -232,11 +231,19 @@ public class ImplementUserManagement {
         try {
             number = Integer.parseInt(input);
         } catch (Exception e) {
-            return;
+            return 0;
         }
 
         if (number > myBank.getManagers().size() + myBank.getSupports().size() + myBank.getUserAccounts().size() && number <= 0) {
             System.out.println(Color.RED + "Enter index in the rage!");
+            return 0;
+        }
+        return number;
+    }
+
+    public void handleBlockingUsers(Bank myBank, Manager manager) {
+        int number = findUser(myBank);
+        if (number == 0) {
             return;
         }
 
@@ -251,12 +258,11 @@ public class ImplementUserManagement {
 
     public int printUsers(Bank myBank, int index) {
         for (UserAccount entry : myBank.getUserAccounts()) {
-            System.out.print(Color.PURPLE + index + "- " + Color.BLUE + entry.getFirstName() + " " + entry.getLastName() + " ");
+            String color = Color.GREEN;
             if (entry.getIsBlocked()) {
-                System.out.println(Color.RED + "blocked");
-            } else {
-                System.out.println(Color.GREEN + "unblocked");
+                color = Color.RED;
             }
+            System.out.print(Color.PURPLE + index + "- " + color + entry.getFirstName() + " " + entry.getLastName() + " ");
             index++;
         }
         return index;
@@ -329,7 +335,7 @@ public class ImplementUserManagement {
     }
 
     public void blockManager(Manager manager, Manager blockedManager) {
-        if (manager.getFathersManager().contains(blockedManager)) {
+        if (manager.getFathersManager().contains(blockedManager.getPassword())) {
             System.out.println(Color.RED + "You can not block your boss!!!!!!");
             return;
         }
@@ -353,6 +359,115 @@ public class ImplementUserManagement {
     }
 
     public void handleEditUsers(Bank myBank) {
+        int number = findUser(myBank);
+        if (number == 0) {
+            return;
+        }
 
+        if (number <= myBank.getUserAccounts().size()) {
+            editUser(myBank.getUserAccounts().get(number - 1));
+        } else if (number <= myBank.getUserAccounts().size() + myBank.getSupports().size()) {
+            editSupport(myBank.getSupports().get(number - myBank.getUserAccounts().size() - 1));
+        } else {
+            editManager(myBank.getManagers().get(number - myBank.getUserAccounts().size() - myBank.getSupports().size() - 1));
+        }
+    }
+
+    public void editUser(UserAccount user) {
+        System.out.print(Color.CYAN + "Enter the new firs name: ");
+        String fName = ScannerWrapper.getInstance().nextLine();
+        System.out.print(Color.CYAN + "Enter the new last name: ");
+        String lName = ScannerWrapper.getInstance().nextLine();
+        if (confirmEdit()) {
+            user.setFirstName(fName);
+            user.setLastName(lName);
+        }
+    }
+
+    public void editManager(Manager manager) {
+        System.out.print(Color.CYAN + "Enter the new user name: ");
+        String userName = ScannerWrapper.getInstance().nextLine();
+        if (confirmEdit()) {
+            manager.setUserName(userName);
+        }
+    }
+
+    public boolean confirmEdit() {
+        System.out.println(Color.BLUE + "1-yse");
+        System.out.println(Color.BLUE + "1-no");
+        System.out.print(Color.YELLOW + "Do you want to change this user's information? ");
+        String input = ScannerWrapper.getInstance().nextLine();
+        return "1".equals(input);
+    }
+
+    public void editSupport(Support support) {
+        int index = printSupportMenu();
+        if (index == 0) {
+            return;
+        } else if (index == 1) {
+            changeUserNameOfSupport(support);
+        } else {
+            changeAccessKeyword(support, index - 2);
+        }
+
+    }
+
+    public int printSupportMenu() {
+        System.out.println(Color.BLUE + "1- Change information");
+        System.out.println(Color.BLUE + "2- Access to show user keyword");
+        System.out.println(Color.BLUE + "3- Access to report keyword");
+        System.out.println(Color.BLUE + "4- Access to contact keyword");
+        System.out.println(Color.BLUE + "5- Access to transfer keyword");
+        System.out.println(Color.BLUE + "6- Access to setting keyword");
+        System.out.println(Color.BLUE + "7- Access to fund keyword");
+        System.out.println(Color.BLUE + "8- Access to charge keyword");
+        System.out.println(Color.BLUE + "9- Access to card keyword");
+        System.out.println(Color.BLUE + "10- Access to authentication keyword");
+        System.out.println(Color.PURPLE + "Select option(1 - 10)");
+        String input = ScannerWrapper.getInstance().nextLine();
+        int index = 0;
+        try {
+            index = Integer.parseInt(input);
+        } catch (Exception e) {
+            System.out.println(Color.RED + "Invalid input!");
+        }
+        if (index < 1 || index > 10) {
+            System.out.println(Color.RED + "Invalid input!");
+            index = 0;
+        }
+        return index;
+    }
+
+    public void changeUserNameOfSupport(Support support) {
+        System.out.print(Color.CYAN + "Enter the new name: ");
+        String name = ScannerWrapper.getInstance().nextLine();
+        System.out.print(Color.CYAN + "Enter the new last name: ");
+        String userName = ScannerWrapper.getInstance().nextLine();
+        if (confirmEdit()) {
+            support.setName(name);
+            support.setUserName(userName);
+        }
+    }
+
+    public void changeAccessKeyword(Support support, int index) {
+        boolean[] keyword = support.getIsLockField();
+        if (support.getIsLockField()[index]) {
+            System.out.println(Color.CYAN + "This keyword is inactive for this support. Do you want to active this keyword?");
+            System.out.println(Color.BLUE + "1- yes");
+            System.out.println(Color.BLUE + "2- no");
+            String input = ScannerWrapper.getInstance().nextLine();
+            if ("1".equals(input)) {
+                keyword[index] = true;
+            }
+        } else {
+            System.out.println(Color.CYAN + "This keyword is active for this support. Do you want to active this keyword?");
+            System.out.println(Color.BLUE + "1- yes");
+            System.out.println(Color.BLUE + "2- no");
+            String input = ScannerWrapper.getInstance().nextLine();
+            if ("1".equals(input)) {
+                keyword[index] = false;
+            }
+        }
+        support.setIsLockField(keyword);
     }
 }

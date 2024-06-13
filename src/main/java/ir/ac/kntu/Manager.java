@@ -5,13 +5,13 @@ import java.util.List;
 public class Manager {
     private String userName;
     private String password;
-    private List<Manager> fathersManager;
+    private List<String> fathersManager;
     private boolean isBlocked;
 
     public Manager() {
     }
 
-    public Manager(String userName, String password, List<Manager> fathersManager) {
+    public Manager(String userName, String password, List<String> fathersManager) {
         this.userName = userName;
         this.password = password;
         this.fathersManager = fathersManager;
@@ -34,12 +34,12 @@ public class Manager {
         this.password = password;
     }
 
-    public List<Manager> getFathersManager() {
+    public List<String> getFathersManager() {
         return fathersManager;
     }
 
-    public void addFathersManager(Manager fatherManager) {
-        fathersManager.add(fatherManager);
+    public void setFathersManager(List<String> fathersManager) {
+        this.fathersManager = fathersManager;
     }
 
     public boolean getIsBlocked() {
