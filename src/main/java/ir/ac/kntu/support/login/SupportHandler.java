@@ -21,9 +21,9 @@ public class SupportHandler {
     }
 
     public void addSupports(Bank myBank) {
-        myBank.getSupports().add(new Support("ali", "aliprs", "@Ap84"));
-        myBank.getSupports().add(new Support("nima", "nimadan", "#Nd83"));
-        myBank.getSupports().add(new Support("amir", "amirmkh", "&Am85"));
+//        myBank.getSupports().add(new Support("ali", "aliprs", "@Ap84"));
+//        myBank.getSupports().add(new Support("nima", "nimadan", "#Nd83"));
+//        myBank.getSupports().add(new Support("amir", "amirmkh", "&Am85"));
     }
 
     public Support logInSupport(Bank myBank) {

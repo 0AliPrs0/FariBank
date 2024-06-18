@@ -136,7 +136,7 @@ public class Tester {
         bank.addTransfer(transfer);
 
         ImplementAutoTransaction autoTransaction = new ImplementAutoTransaction();
-        autoTransaction.handleTransfers(bank);
+        autoTransaction.handleTransfers(bank, true);
         assertEquals(5000, user1.getBalanceAccount());
         assertEquals(920, user1.getRemainingFund().getFundBalance());
     }

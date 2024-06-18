@@ -110,36 +110,64 @@ public class ImplementCapitalFund {
     }
 
     public void fundManagement(UserAccount myAccount) {
-        int index = 1;
-        System.out.println(Color.YELLOW + index + "- " + myAccount.getRemainingFund().toString());
-        index++;
+        String input;
+        int indexOfFund = 0;
+        int firstIndex = 1;
+        do {
+            printFunds(firstIndex, myAccount);
+            input = ScannerWrapper.getInstance().nextLine();
+            try {
+                indexOfFund = Integer.parseInt(input);
+            } catch (Exception ignored) {
+            }
 
-        for (ProfitFund entry : myAccount.getProfitFunds()) {
-            System.out.println(Color.YELLOW + index + "- " + entry.toString());
+            printErrors(input, firstIndex, myAccount);
+            if (indexOfFund >= 1 && indexOfFund <= myAccount.getBonusFunds().size() + myAccount.getProfitFunds().size() + 1) {
+                break;
+            } else if ("n".equals(input) && firstIndex <= myAccount.getBonusFunds().size() + myAccount.getProfitFunds().size() - 1) {
+                firstIndex += 2;
+            } else if ("p".equals(input) && firstIndex != 1) {
+                firstIndex -= 2;
+            } else if (!"q".equals(input) && indexOfFund != 0) {
+                System.out.println(Color.RED + "Invalid input!");
+            }
+            System.out.println();
+        } while (!"q".equals(input));
+        if (!"q".equals(input)) {
+            manageFund(indexOfFund, myAccount);
+        }
+    }
+
+    public void printFunds(int firstIndex, UserAccount myAccount){
+        int index = firstIndex;
+        if (index == 1) {
+            System.out.println(Color.YELLOW + index + "- " + myAccount.getRemainingFund().toString());
             index++;
         }
 
-        for (BonusFund entry : myAccount.getBonusFunds()) {
-            System.out.println(Color.YELLOW + index + "- " + entry.toString());
-            index++;
+        for (int i = 0; i < 2; i++) {
+            if (index > 1 && index <= myAccount.getProfitFunds().size() + 1 && index - firstIndex < 2) {
+                System.out.println(Color.YELLOW + index + "- " + myAccount.getProfitFunds().get(index - 2).toString());
+                index++;
+            }
         }
 
-        System.out.print(Color.CYAN + "Enter the number of fund: ");
-        String input = ScannerWrapper.getInstance().nextLine();
-        int indexOfFund;
+        for (int i = 0; i < 2; i++) {
+            if (index > myAccount.getProfitFunds().size() + 1 && index <= myAccount.getBonusFunds().size() + myAccount.getProfitFunds().size() + 1 && index - firstIndex < 2) {
+                System.out.println(Color.YELLOW + index + "- " + myAccount.getBonusFunds().get(index - myAccount.getProfitFunds().size() - 2).toString());
+                index++;
+            }
+        }
 
-        try {
-            indexOfFund = Integer.parseInt(input);
-        } catch (Exception e) {
+        System.out.print(Color.CYAN + "Enter the number of fund or Commands[n (next), p (previous), q (quit)]: ");
+    }
+
+    public void printErrors(String input, int firstIndex, UserAccount myAccount){
+        if ("n".equals(input) && firstIndex > myAccount.getBonusFunds().size() + myAccount.getProfitFunds().size() - 1) {
+            System.out.println(Color.RED + "End of list!");
+        } else if ("p".equals(input) && firstIndex == 1) {
             System.out.println(Color.RED + "Invalid input!");
-            return;
         }
-
-        if (indexOfFund <= 0 || indexOfFund > myAccount.getBonusFunds().size() + myAccount.getProfitFunds().size() + 1) {
-            System.out.println(Color.RED + "Invalid input!");
-            return;
-        }
-        manageFund(indexOfFund, myAccount);
     }
 
     public void manageFund(int indexOfFund, UserAccount myAccount) {
@@ -158,7 +186,7 @@ public class ImplementCapitalFund {
             return;
         }
 
-        switch (indexOfFund) {
+        switch (indexOfOperation) {
             case 1 -> {
                 if (amountOfMoney > myAccount.getBalanceAccount()) {
                     System.out.println(Color.RED + "Your balance is not enough!");

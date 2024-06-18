@@ -38,9 +38,15 @@ public class ImplementRequest {
     }
 
     public RequestType findRequestType(Support support) {
-        int input = printMenu(support);
+        List<String> fieldName = new ArrayList<>();
+        fillFieldName(fieldName);
+        List<Integer> fieldNumber = new ArrayList<>();
+        for (int i = 1; i <= 8; i++) {
+            fieldNumber.add(i);
+        }
+
+        int input = printMenu(support, fieldNumber, fieldName);
         if (input > 8 || input < 1) {
-            System.out.println(Color.RED + "Invalid input!");
             return null;
         }
 
@@ -52,7 +58,18 @@ public class ImplementRequest {
         return findType(input);
     }
 
-    public RequestType findType(int input){
+    public void fillFieldName(List<String> fieldName){
+        fieldName.add("Reports");
+        fieldName.add("Contacts");
+        fieldName.add("Transfer");
+        fieldName.add("Setting");
+        fieldName.add("Authentication");
+        fieldName.add("Fund");
+        fieldName.add("Charge");
+        fieldName.add("Card");
+    }
+
+    public RequestType findType(int input) {
         switch (input) {
             case 1 -> {
                 return RequestType.REPORTS;
@@ -83,25 +100,35 @@ public class ImplementRequest {
         return null;
     }
 
-    public int printMenu(Support support) {
-        System.out.println(color(1, support.getIsLockField()) + "1- Reports");
-        System.out.println(color(2, support.getIsLockField()) + "2- Contacts");
-        System.out.println(color(3, support.getIsLockField()) + "3- Transfer");
-        System.out.println(color(4, support.getIsLockField()) + "4- Setting");
-        System.out.println(color(5, support.getIsLockField()) + "5- Authentication");
-        System.out.println(color(6, support.getIsLockField()) + "6- Fund");
-        System.out.println(color(7, support.getIsLockField()) + "7- Charge");
-        System.out.println(color(8, support.getIsLockField()) + "8- Card");
-        System.out.print(Color.YELLOW + "Enter the request type: ");
-        String input = ScannerWrapper.getInstance().nextLine();
-        int index = 0;
-        try {
-            index = Integer.parseInt(input);
-        } catch (Exception e) {
-            System.out.println(Color.RED + "Invalid input!");
-        }
+    public int printMenu(Support support, List<Integer> fieldNumber, List<String> fieldName) {
+        String input;
+        int indexOfField = 0;
+        int index = 1;
+        do {
 
-        return index;
+            for (int i = index; i < index + 4; i++) {
+                System.out.println(color(i, support.getIsLockField()) + i + "- " + fieldName.get(i - 1));
+            }
+
+            System.out.print(Color.YELLOW + "Enter the request type or Commands[n (next), p (previous), q (quit)]: ");
+            input = ScannerWrapper.getInstance().nextLine();
+            try {
+                indexOfField = Integer.parseInt(input);
+            } catch (Exception ignored) {
+            }
+
+            if (fieldNumber.contains(indexOfField)) {
+                break;
+            } else if ("n".equals(input) && index == 1) {
+                index += 4;
+            } else if ("p".equals(input) && index == 5) {
+                index -= 4;
+            } else if (!"q".equals(input) && !fieldNumber.contains(indexOfField)) {
+                System.out.println(Color.RED + "Invalid input!");
+            }
+            System.out.println();
+        } while (!"q".equals(input));
+        return indexOfField;
     }
 
     public String color(int number, boolean[] isLock) {

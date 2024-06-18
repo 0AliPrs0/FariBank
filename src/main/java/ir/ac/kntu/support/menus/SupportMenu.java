@@ -52,7 +52,6 @@ public class SupportMenu implements MenuProperty {
         System.out.println(Color.BLUE + "2- Users");
         System.out.println(Color.BLUE + "3- Return");
         System.out.println(Color.YELLOW + "***********************");
-        System.out.println();
         System.out.print(Color.PURPLE + "Select (1 - 3): ");
     }
 

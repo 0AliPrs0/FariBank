@@ -1,8 +1,8 @@
 package ir.ac.kntu.manager.implement;
 
+import ir.ac.kntu.main.baseclass.MockAccount;
 import ir.ac.kntu.main.database.Bank;
 import ir.ac.kntu.main.help.Color;
-import ir.ac.kntu.main.baseclass.MockAccount;
 import ir.ac.kntu.main.help.ScannerWrapper;
 import ir.ac.kntu.user.implement.ImplementTransfer;
 import ir.ac.kntu.user.info.BonusFund;
@@ -21,13 +21,13 @@ public class ImplementAutoTransaction {
         String input = ScannerWrapper.getInstance().nextLine();
 
         switch (input) {
-            case "1" -> handleTransfers(myBank);
-            case "2" -> handleInterest(myBank);
+            case "1" -> handleTransfers(myBank, false);
+            case "2" -> handleInterest(myBank, false);
             default -> System.out.println(Color.RED + "Invalid input!");
         }
     }
 
-    public void handleTransfers(Bank myBank) {
+    public void handleTransfers(Bank myBank, boolean isThread) {
         int index = 1;
         List<Transfer> transfers = new ArrayList<>();
         for (Transfer transfer : myBank.getTransfers()) {
@@ -42,7 +42,9 @@ public class ImplementAutoTransaction {
             mockAccount.setBalanceAccount(mockAccount.getBalanceAccount() + money);
 
             makeTransfer.setTransactionForCardByCardAndInterestBridgeBAnk(money, myAccount, mockAccount);
-            System.out.println(Color.PURPLE + index + "- " + transfer.toString());
+            if (!isThread) {
+                System.out.println(Color.PURPLE + index + "- " + transfer.toString());
+            }
             index++;
             transfers.add(transfer);
         }
@@ -69,7 +71,7 @@ public class ImplementAutoTransaction {
         return mockAccount;
     }
 
-    public void handleInterest(Bank myBank) {
+    public void handleInterest(Bank myBank, boolean isThread) {
         int index = 1;
         for (UserAccount user : myBank.getUserAccounts()) {
             for (BonusFund bonus : user.getBonusFunds()) {
@@ -77,7 +79,9 @@ public class ImplementAutoTransaction {
                 long elapsedTime = (long) (bonus.getSumOfDeposit() - bonus.getNumberOfDeposit() + 1) * myBank.getDepositPeriod() * 60 * 1000;
                 if (bonus.getDataOfDeposit().getTime() + elapsedTime < currentDate.getTime() && bonus.getNumberOfDeposit() > 0) {
                     makeInterest(myBank, user, bonus);
-                    System.out.println(Color.PURPLE + index + "- name: " + user.getFirstName() + " " + user.getLastName() + bonus.toString());
+                    if (!isThread) {
+                        System.out.println(Color.PURPLE + index + "- name: " + user.getFirstName() + " " + user.getLastName() + bonus.toString());
+                    }
                 }
             }
         }
