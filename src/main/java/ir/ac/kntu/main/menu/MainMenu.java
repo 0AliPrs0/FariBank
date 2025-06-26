@@ -42,7 +42,6 @@ public class MainMenu implements MenuProperty {
     }
 
     public void implementMenu(Bank myBank) {
-        addInformation(myBank);
 //        ImplementAutoTransaction autoTransaction = new ImplementAutoTransaction();
 //        ScheduledExecutorService scheduler1 = Executors.newScheduledThreadPool(1);
 //
@@ -68,27 +67,6 @@ public class MainMenu implements MenuProperty {
 //        scheduler1.shutdownNow();
 //        scheduler2.shutdownNow();
         ScannerWrapper.getInstance().close();
-    }
-
-    public void addInformation(Bank myBank){
-        MockAccount mockAccount1 = new MockAccount("nima", "09032969853", 1234567);
-        myBank.addMockAccounts(mockAccount1);
-
-        MockAccount mockAccount2 = new MockAccount("mahdi", "09147458951", 7654321);
-        myBank.addMockAccounts(mockAccount2);
-
-        myBank.setInterests(new InterestRatesAndFees("2%", "300", "2%", "2000", "0"));
-
-        myBank.setDepositPeriod(2);
-        List<String> fathers = new ArrayList<>();
-        fathers.add("1");
-        myBank.addManager(new Manager("AliPrs", "@Ap84", fathers));
-
-        myBank.getUserAccounts().add(new UserAccount("ali", "prs", "09032948208", "1452006601", "@Ap84", 0, 12345678, 0));
-    }
-
-    public void useThread(Bank myBank){
-
     }
 
     @Override
